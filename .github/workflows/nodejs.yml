@@ -32,3 +32,10 @@ jobs:
       working-directory: ./nativeApp
       env: 
         CI: true
+    - name: Test & publish code coverage
+      uses: paambaati/codeclimate-action@v2.5.5
+      env:
+        CC_TEST_REPORTER_ID:${{ CODE_CLIMATE_SECRET }}
+      with:
+        coverageCommand: npm run test
+        debug: true
