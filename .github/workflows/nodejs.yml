@@ -27,6 +27,8 @@ jobs:
     - run: npm ci
       working-directory: ./nativeApp
     - run: npm run build --if-present
-    - run: npm test
-      env: testing
+      working-directory: ./nativeApp
+    - run: yarn test -- --coverage --updateSnapshot
+      working-directory: ./nativeApp
+      env: 
         CI: true
