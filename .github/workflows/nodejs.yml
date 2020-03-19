@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: Build & Test Node CI
 
 on:
   push:
@@ -32,11 +32,3 @@ jobs:
       working-directory: ./nativeApp
       env: 
         CI: true
-    - name: Test & publish code coverage
-      uses: paambaati/codeclimate-action@v2.5.5
-      env:
-        CC_TEST_REPORTER_ID: secrets.CODE_CLIMATE_SECRET
-      with:
-        coverageCommand: yarn coverage
-        coverageLocations: ./nativeApp
-        debug: true
