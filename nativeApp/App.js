@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Care For Life</Text>
+      <Text>Care For Life - A New Hope</Text>
     </View>
   );
 }
