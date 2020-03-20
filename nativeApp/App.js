@@ -7,13 +7,6 @@ import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 
-const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  link: new HttpLink({
-    uri: 'Our GraphQL server endpoint goes here' // UPDATE OUR GQL SERVER ENDPOINT
-  })
-});
-
 export default class App extends Component {
   state = {
     isLoadingComplete: false
@@ -58,8 +51,8 @@ export default class App extends Component {
       );
     }
     return (
-      <ApolloProvider client={client}>
-        <ApolloHooksProvider client={client}>
+      <ApolloProvider client={apolloClient}>
+        <ApolloHooksProvider client={apolloClient}>
           <View style={styles.container}>
             <Text>Care For Life - A New Hope</Text>
           </View>
