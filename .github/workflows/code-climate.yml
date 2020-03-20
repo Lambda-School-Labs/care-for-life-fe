@@ -1,18 +1,10 @@
 name: Code Climate Test Coverage - React Native App
 on:
   push:
-    branches:
-      - master
-    tags:
-      - '!*' # Do not execute on tags
-    paths:
-      - src/*
-      - test/*
-      - '*.json'
-      - yarn.lock
+    branches: [ master ]
   pull_request:
-    paths:
-      - '!*.MD'
+    branches: [ master ]
+
 jobs:
   test:
     strategy:
