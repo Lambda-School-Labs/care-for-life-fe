@@ -10,8 +10,23 @@
     "coverage": "yarn test --coverage --watchAll=false"
   },
   "jest": {
-    "preset": "react-native"
-  },
+    "preset": "react-native",
+		"coverageReporters": [
+			"json-summary",
+			"text",
+			"lcov"
+		],
+		"coveragePathIgnorePatterns": [
+			"/node_modules/",
+			"/__tests__/",
+			"/coverage/",
+			"/public/",
+			"/database/",
+			"/.github/",
+			"serviceWorker.js",
+			"index.js"
+		]
+	},
   "dependencies": {
     "@react-native-community/masked-view": "0.1.5",
     "@react-navigation/drawer": "^5.3.2",
