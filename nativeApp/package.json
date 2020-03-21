@@ -10,7 +10,10 @@
     "coverage": "yarn test --coverage --watchAll=false"
   },
    "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+     "transformIgnorePatterns": [
+    "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|sentry-expo|native-base)"
+  ]
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.5",
