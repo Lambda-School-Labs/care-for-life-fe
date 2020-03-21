@@ -7,3 +7,7 @@ import renderer from 'react-test-renderer';
 test('Tests Running Correctly', () => {
   expect(1).toBe(1);
 });
+
+test('Basic Arithmetic', () => {
+  expect(2+2).toBe(4);
+});
