@@ -6,10 +6,14 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "cross-env NODE_ENV=testing jest"
+    "test": "cross-env NODE_ENV=testing node_modules/.bin/jest",
+    "test:debug": "node --inspect-brk node_modules/jest/bin/jest.js --runInBand"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|unimodules-permissions-interface|react-clone-referenced-element|@react-native-community|expo(nent)|expo|react-navigation|@react-navigation/.*|@unimodules/.*|sentry-expo|native-base)"
+    ]
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.5",
@@ -39,7 +43,8 @@
     "@babel/core": "^7.0.0",
     "babel-preset-expo": "~8.0.0",
     "cross-env": "^7.0.2",
-    "jest": "^25.1.0"
+    "jest": "^25.1.0",
+    "jest-expo": "^36.0.1"
   },
   "private": true
 }
