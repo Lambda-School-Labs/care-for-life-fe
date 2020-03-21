@@ -1,46 +1,40 @@
-# name: Code Climate Test Coverage - React Native App
-# on:
-#   push:
-#     branches: [ master ]
-#   pull_request:
-#     branches: [ master ]
-# env:
-#   CC_TEST_REPORTER_URL: https://codeclimate.com/downloads/test-reporter/test-reporter-0.7.0-linux-amd64
-# jobs:
-#   test:
-#     strategy:
-#       matrix:
-#         platform: [ ubuntu-latest, macOS-latest ]
-#         node: [ '12', '10' ]
-#     name: test/node ${{ matrix.node }}/${{ matrix.platform }}
-#     runs-on: ${{ matrix.platform }}
-#     steps:
-#     - uses: actions/checkout@master
-#     - uses: actions/setup-node@master
-#       with:
-#         node-version: ${{ matrix.node }}
-#     - run: npm install -g yarn
-#       working-directory: ./nativeApp
-#     - run: yarn install
-#       working-directory: ./nativeApp
-#     - run: yarn build
-#       working-directory: ./nativeApp
-#     - run: yarn test ./tmp/cc-test-reporter format-coverag --debug 
-#       working-directory: ./nativeApp
-#   coverage:
-#     needs: [ test ]
-#     name: coverage
-#     runs-on: ubuntu-latest
-#     steps:
-#     - uses: actions/checkout@master
-#     - uses: actions/setup-node@master
-#       with:
-#         node-version: '12'
-#     - run: npm install -g yarn
-#     - run: yarn install
-#     - run: yarn build
-#     - uses: paambaati/codeclimate-action@v2.2.4
-#       env:
-#         CC_TEST_REPORTER_ID: secrets.CODE_CLIMATE_SECRET
-#       with:
-#         coverageCommand: yarn coverage
+# The name of the workflow
+name: build
+
+# What conditions trigger the workflow
+#  In this case, all pushes and pull requests
+on: [push, pull_request]
+
+# The jobs that will be run, usually in parallel
+jobs:
+  # A job to generate and publish code coverage
+  coverage:
+    # A more descriptive name of the job
+    name: Test and publish test coverage
+
+    # The OS on which the job will run
+    runs-on:
+      ubuntu-latest
+      # The steps for the job, executed in sequence
+    steps:
+      # A GitHub action for checking out the current branch
+      - uses: actions/checkout@master
+
+      # A GitHub action to setup Node.js
+      - uses: actions/setup-node@master
+        with:
+          node-version:
+            "12"
+            # Run the NPM install command before proceeding
+      - run:
+          npm install
+        working-directory: ./nativeApp
+          # A GitHub action for running tests and publishing coverage
+      - uses: paambaati/codeclimate-action@v2.4.0
+        env:
+          # An environment variable, the value is a GitHub repo secret
+          CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_SECRET }}
+        with:
+          # Run our `coverage` command from our `package.json`
+          coverageCommand: npm run coverage
+          working-directory: ./nativeApp 
