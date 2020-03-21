@@ -36,5 +36,5 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_SECRET }}
         with:
           # Run our `coverage` command from our `package.json`
-          coverageCommand: npm run coverage
+          run: npm run coverage
           working-directory: ./nativeApp 
