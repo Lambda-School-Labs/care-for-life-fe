@@ -34,11 +34,12 @@ export default function AppNavigator() {
         <Stack.Screen
           name="SurveyHome"
           component={SurveyHomeScreen}
-          options={({ navigation }) => {
-            return {
-                headerTitle: () => <Header navigation={navigation} title='Surveys'/>
-            }
-          }}
+          // options={({ navigation }) => {
+          //   return {
+          //       headerTitle: () => <Header navigation={navigation} title='Surveys'/>
+          //   }
+          // }}
+          options={{ title: 'Survey Home'}}
         />
         <Stack.Screen
         name="Survey"
@@ -59,11 +60,12 @@ export default function AppNavigator() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={({ navigation }) => {
-            return {
-                headerTitle: () => <Header navigation={navigation} title='Home'/>
-            }
-          }}
+          // options={({ navigation }) => {
+          //   return {
+          //       headerTitle: () => <Header navigation={navigation} title='Home'/>
+          //   }
+          // }}
+          options={{ title: 'Home'}}
         />
       </Stack.Navigator>
     )
