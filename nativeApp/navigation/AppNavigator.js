@@ -10,3 +10,50 @@
 //     Main: MainTabNavigator
 //   })
 // );
+import React from 'react';
+
+// Navigation imports
+import { NavigationContainer}  from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+import HomeScreen from '../screens/HomeScreen';
+import SurveyScreen from '../screens/SurveyScreen';
+import SurveyCompletedScreen from '../screens/SurveyCompletedScreen';
+import SurveyHomeScreen from '../screens/SurveyHomeScreen';
+
+const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
+
+export default function AppNavigator() {
+
+  const SurveyStack = () => {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen
+        name="SurveyHome"
+        component={SurveyHomeScreen}
+        options={{ title: 'Surveys' }}
+        />
+        <Stack.Screen
+        name="Survey"
+        component={SurveyScreen}
+        options={{ title: 'Annual Survey' }}
+        />
+        <Stack.Screen
+        name="SurveyCompleted"
+        component={SurveyCompletedScreen}
+        options={{ title: 'Survey Review'}}
+        />
+      </Stack.Navigator>
+    )
+  }
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator>
+        <Drawer.Screen name="Home" component={HomeScreen}/>
+        <Drawer.Screen name="Surveys" children={SurveyStack}/>
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+}
