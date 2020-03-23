@@ -1,28 +1,20 @@
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline, feel free to add your own flare to it.
+# Care For Life - Native App/FrontEnd
 
-🚫 The numbers 1️⃣ through 5️⃣ next to each item represent the week that part of the docs needs to be comepleted by.  Make sure to delete the numbers by the end of Labs.
+You can find the deployed project at (URL Goes Here).
 
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric. Contributing to docs does NOT count as a PR to meet your weekly requirements.
+## Contributors
 
-# 1️⃣ Title of project goes here
 
-1️⃣ You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
-
-## 4️⃣ Contributors
-
-🚫Add contributor info below, make sure add images and edit the social links for each member. Add to or delete these place-holders as needed
-
-|                                       [Student 1](https://github.com/)                                        |                                       [Student 2](https://github.com/)                                        |                                       [Student 3](https://github.com/)                                        |                                       [Student 4](https://github.com/)                                        |                                       [Student 5](https://github.com/)                                        |
+|                                       [KJ Magill](https://github.com/kjmagill)                                        |                                       [Cameron Hawley](http://github.com/CAM603)                                        |                                       [Alexis Davalos](http://github.com/alexisdavalos)                                        |                                       [Peter Gambino](http://github.com/pgambino5851)                                        |                                       [Nicholas Sandomeno](https://github.com/Nsandomeno)                                        |
 | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: |
-|                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/)                       |
+|                      [<img src="https://ca.slack-edge.com/T4JUEB3ME-UPM929W22-a8cb9d582257-512" width = "200" />](https://github.com/kjmagill)                       |                      [<img src="https://ca.slack-edge.com/T4JUEB3ME-UPHFADC8Y-1cca48daa16c-512" width = "200" />](http://github.com/CAM603)                       |                      [<img src="https://ca.slack-edge.com/T4JUEB3ME-UPM91TRD4-af6c8226aab7-512" width = "200" />](http://github.com/alexisdavalos)                       |                      [<img src="https://avatars1.githubusercontent.com/u/47569831?s=460&u=ba7010553423361c0adc0a320b665e609470ac28&v=4" width = "200" />](https://github.com/pgambino5851)                       |                      [<img src="https://ca.slack-edge.com/T4JUEB3ME-UPQKBKN7R-21f115c828af-512" width = "200" />](https://github.com/Nsandomeno)                       |
 |                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/)                 |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/honda0306)             |           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Mister-Corn)            |          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/NandoTheessen)           |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/wvandolah)             |
 | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) |
 
 <br>
 <br>
 
-🚫 4️⃣ Optional examples of using images with links for your tech stack, make sure to change these to fit your project
-
+[![Maintainability](https://api.codeclimate.com/v1/badges/ad7ff8fa08379149e254/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/care-for-life-fe/maintainability)  
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
 ![React](https://img.shields.io/badge/react-v16.7.0--alpha.2-blue.svg)
 ![Typescript](https://img.shields.io/npm/types/typescript.svg?style=flat)
@@ -33,53 +25,54 @@
 
 ## Project Overview
 
-1️⃣ [Trello Board](🚫add link to trello board here)
+1️⃣ [Trello Board](https://trello.com/b/96rlq0MN/labs-22-care-for-life)
 
-1️⃣ [Product Canvas](🚫add link to product canvas here)
+1️⃣ [Product Canvas](https://www.notion.so/Care-for-Life-ffb9e5e681ed4834b0c2125b25bcafea)
 
-1️⃣ [UX Design files](🚫add link to design files here) - 🚫 delete if not applicable
+1️⃣ [UX Design files](add link to design files here)
 
-🚫 Replace lorem ipsum with a description of your project
+## Current State of Project
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+In our first release for our survey app, we will be using React Native to create a simple survey app for Android based tablets, with the ability to store survey data offline via async-storage. 
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+We know that async-storage has a baseline limit of 6mb for storage. That however, can be overwritten and pushed towards the 10mb range. This limitation might change how we decide to design data schemas and how the app communicates with the back-end via apollo/graphql. 
 
+Figuring out the architecture of the survey and getting that in the hands of the stakeholder asap will allow us to get feedback faster, as opposed to figuring out how to store the data locally and not being able to show the stakeholder any progress that they can physically interact with. This will support our UX designer and allow her to be involved with engineering progress.  
 
-### 4️⃣ Key Features
+### Key Features 
 
--    feature one
--    feature two
--    feature three
--    feature four
+-    Access surveys offline
+-    Reliably store survey results offline
+-    Send survey results to database once connected to internet
+-    View data for each family
 -    feature five
 
-## 1️⃣ Tech Stack
+## Tech Stack
 
 ### Front end built using:
 
-#### _Front end framework goes here_
+#### React Native + Expo
 
-🚫 Why did you choose this framework?
+-    React Native is familiar to React
+-    Apollo integrates well with GraphQL
+-    Can access device local storage
+-    Expo has many built in libraries and is easy to stage with
 
--    point one
--    point two
--    point three
--    point four
+#### Apollo
 
-🚫List the rest of the front end features and libraries in the same format as the framework above.
+-    Apollo integrates well with GraphQL(Back End)
+-    Similar to Context API
+
 
 #### Front end deployed to `🚫insert service here`
 
 #### [Back end](🚫link to back end repo here) built using:
 
-#### 🚫 back end framework goes here
+#### GraphQL/Apollo
 
--    point one
--    point two
--    point three
-
-🚫 List the rest of the back end end features and libraries in the same format as the framework above
+-    Consider having an auto-appointment generation when a new interview/entry is added
+-    Itegrates well with Apollo on Front-End
+-    More efficient data loading for mobile usage 
 
 # APIs
 
