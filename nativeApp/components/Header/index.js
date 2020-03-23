@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions, Image, ImageBackground } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { StyleSheet, Text, View, Dimensions, Image, ImageBackground, Button } from 'react-native';
 
 
 const Header = ({ navigation, title }) => {
@@ -11,12 +10,10 @@ const Header = ({ navigation, title }) => {
 
   return (
     <View style={styles.header}>
-      <MaterialIcons 
-            name='menu' 
-            size={28}
-            onPress={openMenu}
-            style={styles.icon}
-            />
+      <Button
+      title="OPEN"
+        onPress={openMenu}
+      />
       <View style={styles.headerTitle}>
         <Text style={styles.headerText}>{title}</Text>
       </View>
