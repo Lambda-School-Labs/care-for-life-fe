@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import apolloClient from './apollo';
@@ -6,6 +7,8 @@ import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
 import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
+
+import AppNavigator from './navigation/AppNavigator';
 
 export default class App extends Component {
   state = {
@@ -53,9 +56,7 @@ export default class App extends Component {
     return (
       <ApolloProvider client={apolloClient}>
         <ApolloHooksProvider client={apolloClient}>
-          <View style={styles.container}>
-            <Text>Care For Life - A New Hope</Text>
-          </View>
+          <AppNavigator/>
         </ApolloHooksProvider>
       </ApolloProvider>
     );
