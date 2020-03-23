@@ -21,6 +21,7 @@ import HomeScreen from '../screens/HomeScreen';
 import SurveyScreen from '../screens/SurveyScreen';
 import SurveyCompletedScreen from '../screens/SurveyCompletedScreen';
 import SurveyHomeScreen from '../screens/SurveyHomeScreen';
+import Header from '../components/Header/index';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -31,9 +32,13 @@ export default function AppNavigator() {
     return (
       <Stack.Navigator>
         <Stack.Screen
-        name="SurveyHome"
-        component={SurveyHomeScreen}
-        options={{ title: 'Surveys' }}
+          name="SurveyHome"
+          component={SurveyHomeScreen}
+          options={({ navigation }) => {
+            return {
+                headerTitle: () => <Header navigation={navigation} title='Surveys'/>
+            }
+          }}
         />
         <Stack.Screen
         name="Survey"
@@ -48,10 +53,25 @@ export default function AppNavigator() {
       </Stack.Navigator>
     )
   }
+  const HomeStack = () => {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={({ navigation }) => {
+            return {
+                headerTitle: () => <Header navigation={navigation} title='Home'/>
+            }
+          }}
+        />
+      </Stack.Navigator>
+    )
+  }
   return (
     <NavigationContainer>
       <Drawer.Navigator>
-        <Drawer.Screen name="Home" component={HomeScreen}/>
+        <Drawer.Screen name="Home" children={HomeStack}/>
         <Drawer.Screen name="Surveys" children={SurveyStack}/>
       </Drawer.Navigator>
     </NavigationContainer>
