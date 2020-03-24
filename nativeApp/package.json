@@ -6,7 +6,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "coverage": "CI=true npm test -- --coverage --watchAll=false || true",
+    "coverage": "npm test -- --coverage --watchAll=false || true",
     "test": "cross-env NODE_ENV=testing node_modules/.bin/jest",
     "test -CI": "jest --watch=all",
     "test:debug": "node --inspect-brk node_modules/jest/bin/jest.js --runInBand"
