@@ -22,6 +22,7 @@ import SurveyScreen from '../screens/SurveyScreen';
 import SurveyCompletedScreen from '../screens/SurveyCompletedScreen';
 import SurveyHomeScreen from '../screens/SurveyHomeScreen';
 import Header from '../components/Header/index';
+import Survey from '../screens/Survey';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -39,7 +40,7 @@ export default function AppNavigator() {
           //       headerTitle: () => <Header navigation={navigation} title='Surveys'/>
           //   }
           // }}
-          options={{ title: 'Survey Home'}}
+          options={{ title: 'Annual Survey'}}
         />
         <Stack.Screen
         name="Survey"
@@ -49,6 +50,11 @@ export default function AppNavigator() {
         <Stack.Screen
         name="SurveyCompleted"
         component={SurveyCompletedScreen}
+        options={{ title: 'Survey Review'}}
+        />
+        <Stack.Screen
+        name="oneSurvey"
+        component={Survey}
         options={{ title: 'Survey Review'}}
         />
       </Stack.Navigator>
