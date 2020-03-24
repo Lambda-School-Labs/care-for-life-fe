@@ -20,11 +20,15 @@ const SurveyHomeScreen = ({navigation, route}) => {
       />
       <FlatList
         data={surveys}
-        renderItem={({item}) => <Button 
-                                  title='survey' 
-                                  onPress={() => navigation.navigate('oneSurvey', {survey: item})}
-                                  />}
-        // keyExtractor={item => item.id}
+        keyExtractor={item => item.id}
+        renderItem={({item}) => {
+          return (
+            <Button 
+              title='survey' 
+              onPress={() => navigation.navigate('oneSurvey', {survey: item})}
+            />
+          )}
+        }
       />
     </View>
   )
