@@ -35,5 +35,5 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_SECRET }}
         with:
           coverageCommand: ./nativeApp/npm run coverage
-          coverageLocations: './coverage/lcov.info:lcov' 
+          coverageLocations: './nativeApp/coverage/lcov.info:lcov' 
           debug: true
