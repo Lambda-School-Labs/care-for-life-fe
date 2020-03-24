@@ -29,8 +29,11 @@ jobs:
       - run: npm install
         working-directory: ./nativeApp
           # A GitHub action for running tests and publishing coverage
-      - name: Code Climate Test Reporter
-        uses: aktions/codeclimate-test-reporter@v1
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v2.5.5
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_SECRET }}
         with:
-          codeclimate-test-reporter-id: ${{ secrets.CODE_CLIMATE_SECRET }}
-          command: after-build
+          coverageCommand: npm run coverage --prefix nativeApp
+          coverageLocations: 'nativeApp/coverage/lcov.info:lcov' 
+          debug: true
