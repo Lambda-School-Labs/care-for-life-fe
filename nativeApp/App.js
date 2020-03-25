@@ -1,62 +1,62 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import apolloClient from './apollo';
+import { StyleSheet, AsyncStorage } from 'react-native';
 import { ApolloProvider } from 'react-apollo';
 import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
-import { AppLoading } from 'expo';
-import { Asset } from 'expo-asset';
-import * as Font from 'expo-font';
+import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-boost';
+import { persistCache } from 'apollo-cache-persist';
 
+import SplashScreen from './screens/SpashScreen';
 import AppNavigator from './navigation/AppNavigator';
 
 export default class App extends Component {
   state = {
-    isLoadingComplete: false
+    client: null,
+    loaded: false
   };
 
-  loadResourcesAsync = async () => {
-    await Promise.all([
-      Asset.loadAsync([
-        // load assets here
-      ]),
-      Font.loadAsync({
-        // load fonts here
-      })
-    ]);
-  };
+  // On mount, the app creates new Apollo server and restores Apollo cache
+  // Note that an authorization header of 'Bearer <token>' is required in production
+  async componentDidMount() {
+    const cache = new InMemoryCache();
+    const link = new HttpLink({
+      uri: 'GraphQL endpoint here'
+      // headers: {
+      //   authorization: 'Bearer token'
+      // }
+    });
+    const client = new ApolloClient({
+      cache,
+      link
+    });
 
-  handleLoadingError = () => {
-    // Any error handling can be done here
-  };
+    try {
+      await persistCache({
+        cache,
+        storage: AsyncStorage,
+        trigger: 'background'
+      });
+    } catch (error) {
+      console.error('Error restoring Apollo cache', error);
+    }
 
-  handleFinishLoading = () => {
-    this.setState({ isLoadingComplete: true });
-  };
-
-  componentDidMount() {
-    const client = apolloClient();
     this.setState({
-      client
+      client,
+      loaded: true
     });
   }
 
   render() {
-    const { isLoadingComplete } = this.state;
-    const { skipLoadingScreen } = this.props;
-    if (!isLoadingComplete && !skipLoadingScreen) {
-      return (
-        <AppLoading
-          startAsync={this.loadResourcesAsync}
-          onError={this.handleLoadingError}
-          onFinish={this.handleFinishLoading}
-        />
-      );
+    const { client, loaded } = this.state;
+
+    if (!loaded) {
+      return <SplashScreen />;
     }
+
     return (
-      <ApolloProvider client={apolloClient}>
-        <ApolloHooksProvider client={apolloClient}>
-          <AppNavigator/>
+      <ApolloProvider client={client}>
+        <ApolloHooksProvider client={client}>
+          <AppNavigator style={styles.container} />
         </ApolloHooksProvider>
       </ApolloProvider>
     );
