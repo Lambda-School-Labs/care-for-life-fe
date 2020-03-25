@@ -29,8 +29,8 @@ jobs:
       - run: npm install
         working-directory: ./nativeApp
           # A GitHub action for running tests and publishing coverage
-      - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v2.4.0
+      - name: Run Tests & Publish Code Coverage
+        uses: marsam/codeclimate-action@master
         env:
           CI: true
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_SECRET }}
