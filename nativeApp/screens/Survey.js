@@ -3,13 +3,14 @@ import {StyleSheet, View, Text, ScrollView, Button} from 'react-native';
 
 const Survey = ({route}) => {
 
-//   console.log(route.params.survey)
+  // Here, answers is just the survey object we passed to this screen
   const answers = route.params.survey;
   return (
     <View style={styles.background}>
       <View style={styles.container}>
         <ScrollView>
           {answers.map(el => (
+            // Here, I just used JavaScript to display the questionId and answer value
             <Text key={Math.random()}>{el.questionId.replace(/_/g, ' ')}: {el.value.value ? el.value.value : el.value}</Text>
             )
           )}

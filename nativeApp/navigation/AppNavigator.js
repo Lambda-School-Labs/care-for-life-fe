@@ -23,6 +23,7 @@ export default function AppNavigator() {
         <Stack.Screen
           name="SurveyHome"
           component={SurveyHomeScreen}
+          // We can use this to make a custom header to navigate between drawers
           // options={({ navigation }) => {
           //   return {
           //       headerTitle: () => <Header navigation={navigation} title='Surveys'/>
@@ -54,6 +55,7 @@ export default function AppNavigator() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
+          // We can use this to make a custom header to navigate between drawers
           // options={({ navigation }) => {
           //   return {
           //       headerTitle: () => <Header navigation={navigation} title='Home'/>

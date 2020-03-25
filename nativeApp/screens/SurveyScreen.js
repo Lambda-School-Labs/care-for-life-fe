@@ -44,6 +44,7 @@ export default class SurveyScreen extends Component {
     const answersAsObj = {};
     for (const elem of infoQuestionsRemoved) { answersAsObj[elem.questionId] = elem.value; }
     
+    // Here we can manipulate the survey results to send them as an array (infoQuestionsRemoved) or an object (answersAsObj)
     this.props.navigation.navigate('SurveyCompleted', { surveyAnswers: infoQuestionsRemoved });
     }
     /**

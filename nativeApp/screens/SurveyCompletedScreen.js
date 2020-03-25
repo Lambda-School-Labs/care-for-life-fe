@@ -11,6 +11,7 @@ export default class SurveyCompletedScreen extends Component {
         <View style={styles.container}>
           <ScrollView>
             {answers.map(el => (
+              // Here, I just used JavaScript to display the questionId and answer value
               <Text key={Math.random()}>{el.questionId.replace(/_/g, ' ')}: {el.value.value ? el.value.value : el.value}</Text>
             ))}
             {/* <Text>Raw JSON: {JSON.stringify(this.props.route.params.surveyAnswers)}</Text> */}

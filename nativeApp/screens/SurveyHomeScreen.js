@@ -19,13 +19,15 @@ const SurveyHomeScreen = ({navigation, route}) => {
         title="START"
         onPress={() => navigation.navigate('Survey')}
       />
+      {/* This is just a FlatList to show we added the survey to state. Will be deleted later */}
       <FlatList
         data={surveys}
         keyExtractor={item => Math.random().toString()}
         renderItem={({item}) => {
           return (
               <Button 
-                title='survey' 
+                title='survey'
+                // Here we are passing the survey object to another screen 
                 onPress={() => navigation.navigate('oneSurvey', {survey: item})}
               />
           )}
