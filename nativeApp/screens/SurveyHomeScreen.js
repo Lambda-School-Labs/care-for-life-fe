@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View, Text, Button, FlatList} from 'react-native';
-import Card from '../components/Card';
 
 const SurveyHomeScreen = ({navigation, route}) => {
 

@@ -5,6 +5,9 @@ export default class SurveyCompletedScreen extends Component {
 
   render() {
     const answers = this.props.route.params.surveyAnswers;
+    const family = this.props.route.params.family;
+
+    console.log(family)
     
     return (
       <View style={styles.background}>
@@ -14,11 +17,10 @@ export default class SurveyCompletedScreen extends Component {
               // Here, I just used JavaScript to display the questionId and answer value
               <Text key={Math.random()}>{el.questionId.replace(/_/g, ' ')}: {el.value.value ? el.value.value : el.value}</Text>
             ))}
-            {/* <Text>Raw JSON: {JSON.stringify(this.props.route.params.surveyAnswers)}</Text> */}
           </ScrollView>
           <Button
           title="Go Home"
-          onPress={() => this.props.navigation.navigate('SurveyHome', { survey: answers })}
+          onPress={() => this.props.navigation.navigate('Family', { survey: answers, name: family })}
           />
         </View>
       </View>

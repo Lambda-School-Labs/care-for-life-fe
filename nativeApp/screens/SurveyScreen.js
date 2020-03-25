@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Button, ScrollView, Text, TextInput, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { SimpleSurvey } from 'react-native-simple-survey';
-import {familySurvey} from '../surveys/familySurvey';
 import Card from '../components/Card';
 
 export default class SurveyScreen extends Component {
@@ -12,46 +11,24 @@ export default class SurveyScreen extends Component {
   }
 
   onSurveyFinished(answers) {
-        /** 
-         *  By using the spread operator, array entries with no values, such as info questions, are removed.
-         *  This is also where a final cleanup of values, making them ready to insert into your DB or pass along
-         *  to the rest of your code, can be done.
-         * 
-         *  Answers are returned in an array, of the form 
-         *  [
-         *  {questionId: string, value: any},
-         *  {questionId: string, value: any},
-         *  ...
-         *  ]
-         *  Questions of type selection group are more flexible, the entirity of the 'options' object is returned
-         *  to you.
-         *  
-         *  As an example
-         *  { 
-         *      questionId: "favoritePet", 
-         *      value: { 
-         *          optionText: "Dogs",
-         *          value: "dog"
-         *      }
-         *  }
-         *  This flexibility makes SelectionGroup an incredibly powerful component on its own. If needed it is a 
-         *  separate NPM package, react-native-selection-group, which has additional features such as multi-selection.
-         */
 
     const infoQuestionsRemoved = [...answers];
 
-        // Convert from an array to a proper object. This won't work if you have duplicate questionIds
+    // Convert from an array to a proper object. This won't work if you have duplicate questionIds
     const answersAsObj = {};
     for (const elem of infoQuestionsRemoved) { answersAsObj[elem.questionId] = elem.value; }
     
     // Here we can manipulate the survey results to send them as an array (infoQuestionsRemoved) or an object (answersAsObj)
-    this.props.navigation.navigate('SurveyCompleted', { surveyAnswers: infoQuestionsRemoved });
+    if (this.props.route.params.type === 'Family') {this.props.navigation.navigate('SurveyCompleted', { surveyAnswers: infoQuestionsRemoved, family: this.props.route.params.name});
+    } else if (this.props.route.params.type === 'Person') {
+      console.log('Shit')
     }
-    /**
-     *  After each answer is submitted this function is called. Here you can take additional steps in response to the 
-     *  user's answers. From updating a 'correct answers' counter to exiting out of an onboarding flow if the user is 
-     *  is restricted (age, geo-fencing) from your app.
-     */
+  }
+    
+    //  After each answer is submitted this function is called. Here you can take additional steps in response to the 
+    //  user's answers. From updating a 'correct answers' counter to exiting out of an onboarding flow if the user is 
+    //  is restricted (age, geo-fencing) from your app.
+    
   onAnswerSubmitted(answer) {
     this.setState({ answersSoFar: JSON.stringify(this.surveyRef.getAnswers(), 2) });
     switch (answer.questionId) {
@@ -170,15 +147,15 @@ export default class SurveyScreen extends Component {
       </View>
       );
     }
+    render() {
 
-  render() {
     return (
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.background}>
           <Card style={styles.container}>
             <SimpleSurvey
               ref={(s) => { this.surveyRef = s; }}
-              survey={familySurvey}
+              survey={this.props.route.params.survey}
               renderSelector={this.renderButton.bind(this)}
               containerStyle={styles.surveyContainer}
               selectionGroupContainerStyle={styles.selectionGroupContainer}
@@ -194,10 +171,6 @@ export default class SurveyScreen extends Component {
               renderInfo={this.renderInfoText}
             />
           </Card>
-          {/* <ScrollView style={styles.answersContainer}>
-              <Text style={{textAlign:'center'}}>JSON output</Text>
-              <Text>{this.state.answersSoFar}</Text>
-          </ScrollView> */}
         </View>
       </TouchableWithoutFeedback>
     );
