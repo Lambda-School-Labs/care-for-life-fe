@@ -18,6 +18,7 @@
     ]
   },
   "dependencies": {
+    "@kcodev/react-native-progress-bar": "^1.0.1",
     "@react-native-community/masked-view": "0.1.5",
     "@react-navigation/drawer": "^5.3.2",
     "@react-navigation/native": "^5.1.1",
