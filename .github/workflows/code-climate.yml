@@ -33,9 +33,9 @@ jobs:
         uses: marsam/codeclimate-action@master
         env:
           CI: true
-          CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_SECRET }}
         with:
           prefix: nativeApp
           command: npm run coverage --prefix nativeApp
           coverageLocations: "nativeApp/coverage/lcov.info:lcov" 
           debug: true
+          reporter-id: ${{ secrets.CODE_CLIMATE_SECRET }}
