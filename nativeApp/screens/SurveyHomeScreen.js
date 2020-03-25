@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View, Text, Button, FlatList} from 'react-native';
+import Card from '../components/Card';
 
 const SurveyHomeScreen = ({navigation, route}) => {
 
@@ -20,13 +21,13 @@ const SurveyHomeScreen = ({navigation, route}) => {
       />
       <FlatList
         data={surveys}
-        keyExtractor={item => item.id}
+        keyExtractor={item => Math.random().toString()}
         renderItem={({item}) => {
           return (
-            <Button 
-              title='survey' 
-              onPress={() => navigation.navigate('oneSurvey', {survey: item})}
-            />
+              <Button 
+                title='survey' 
+                onPress={() => navigation.navigate('oneSurvey', {survey: item})}
+              />
           )}
         }
       />

@@ -1,28 +1,14 @@
 import React, { Component } from 'react';
-import { StyleSheet, Button, ScrollView, Text, TextInput, View } from 'react-native';
+import { StyleSheet, Button, ScrollView, Text, TextInput, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { SimpleSurvey } from 'react-native-simple-survey';
 import {familySurvey} from '../surveys/familySurvey';
 import Card from '../components/Card';
 
 export default class SurveyScreen extends Component {
-  static navigationOptions = () => {
-    return {
-      headerStyle: {
-        backgroundColor: 'black',
-        height: 40,
-        elevation: 5,
-      },
-      headerTintColor: '#fff',
-      headerTitle: 'Sample Survey',
-      headerTitleStyle: {
-        flex: 1,
-      }
-    };
-  }
 
   constructor(props) {
     super(props);
-    this.state = { backgroundColor: 'orange', answersSoFar: '' };
+    this.state = { answersSoFar: '' };
   }
 
   onSurveyFinished(answers) {
@@ -71,6 +57,7 @@ export default class SurveyScreen extends Component {
       default:
         break;
     }
+    Keyboard.dismiss()
   }
 
   renderPreviousButton(onPress, enabled) {
@@ -185,31 +172,33 @@ export default class SurveyScreen extends Component {
 
   render() {
     return (
-      <View style={styles.background}>
-        <Card style={styles.container}>
-          <SimpleSurvey
-            ref={(s) => { this.surveyRef = s; }}
-            survey={familySurvey}
-            renderSelector={this.renderButton.bind(this)}
-            containerStyle={styles.surveyContainer}
-            selectionGroupContainerStyle={styles.selectionGroupContainer}
-            navButtonContainerStyle={{ flexDirection: 'row', justifyContent: 'space-around' }}
-            renderPrevious={this.renderPreviousButton.bind(this)}
-            renderNext={this.renderNextButton.bind(this)}
-            renderFinished={this.renderFinishedButton.bind(this)}
-            renderQuestionText={this.renderQuestionText}
-            onSurveyFinished={(answers) => this.onSurveyFinished(answers)}
-            onAnswerSubmitted={(answer) => this.onAnswerSubmitted(answer)}
-            renderTextInput={this.renderTextBox}
-            renderNumericInput={this.renderNumericInput}
-            renderInfo={this.renderInfoText}
-          />
-        </Card>
-        {/* <ScrollView style={styles.answersContainer}>
-            <Text style={{textAlign:'center'}}>JSON output</Text>
-            <Text>{this.state.answersSoFar}</Text>
-        </ScrollView> */}
-      </View>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <View style={styles.background}>
+          <Card style={styles.container}>
+            <SimpleSurvey
+              ref={(s) => { this.surveyRef = s; }}
+              survey={familySurvey}
+              renderSelector={this.renderButton.bind(this)}
+              containerStyle={styles.surveyContainer}
+              selectionGroupContainerStyle={styles.selectionGroupContainer}
+              navButtonContainerStyle={{ flexDirection: 'row', justifyContent: 'space-around' }}
+              renderPrevious={this.renderPreviousButton.bind(this)}
+              renderNext={this.renderNextButton.bind(this)}
+              renderFinished={this.renderFinishedButton.bind(this)}
+              renderQuestionText={this.renderQuestionText}
+              onSurveyFinished={(answers) => this.onSurveyFinished(answers)}
+              onAnswerSubmitted={(answer) => this.onAnswerSubmitted(answer)}
+              renderTextInput={this.renderTextBox}
+              renderNumericInput={this.renderNumericInput}
+              renderInfo={this.renderInfoText}
+            />
+          </Card>
+          {/* <ScrollView style={styles.answersContainer}>
+              <Text style={{textAlign:'center'}}>JSON output</Text>
+              <Text>{this.state.answersSoFar}</Text>
+          </ScrollView> */}
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }

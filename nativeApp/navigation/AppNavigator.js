@@ -1,15 +1,3 @@
-// import {
-//   createAppContainer,
-//   createSwitchNavigator
-// } from '@react-navigation/native';
-
-// import MainTabNavigator from './MainTabNavigator';
-
-// export default createAppContainer(
-//   createSwitchNavigator({
-//     Main: MainTabNavigator
-//   })
-// );
 import React from 'react';
 
 // Navigation imports
@@ -40,12 +28,12 @@ export default function AppNavigator() {
           //       headerTitle: () => <Header navigation={navigation} title='Surveys'/>
           //   }
           // }}
-          options={{ title: 'Annual Survey'}}
+          options={{ title: 'Survey Home'}}
         />
         <Stack.Screen
         name="Survey"
         component={SurveyScreen}
-        options={{ title: 'Annual Survey' }}
+        // options={{ title: 'Annual Survey' }}
         />
         <Stack.Screen
         name="SurveyCompleted"
@@ -80,7 +68,7 @@ export default function AppNavigator() {
     <NavigationContainer>
       <Drawer.Navigator>
         <Drawer.Screen name="Home" children={HomeStack}/>
-        <Drawer.Screen name="Surveys" children={SurveyStack}/>
+        <Drawer.Screen name="Annual Survey" children={SurveyStack}/>
       </Drawer.Navigator>
     </NavigationContainer>
   );
