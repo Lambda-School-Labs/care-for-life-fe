@@ -4,7 +4,7 @@ import {StyleSheet, View, Text} from 'react-native';
 const HomeScreen = (props) => {
   return (
     <View style={styles.container}>
-      <Text>Care for Life: A New Hope</Text>
+      <Text style={styles.text}>Care for Life: A New Hope</Text>
     </View>
   )
 }
@@ -14,6 +14,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  text: {
+    fontWeight: 'bold',
+    fontSize: 24
   }
 })
 

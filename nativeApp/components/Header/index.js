@@ -11,7 +11,7 @@ const Header = ({ navigation, title }) => {
   return (
     <View style={styles.header}>
       <Button
-      title="OPEN"
+        title="OPEN"
         onPress={openMenu}
       />
       <View style={styles.headerTitle}>

@@ -1,68 +1,53 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
-import { Bar } from "react-native-progress";
-import ProgressBar from "@kcodev/react-native-progress-bar";
+import React, { Component } from "react";
+import { ScrollView, StyleSheet, Text, View, Button } from "react-native";
+export default class SurveyCompletedScreen extends Component {
+  render() {
+    const answers = this.props.route.params.surveyAnswers;
 
-const SurveyCompletedScreen = ({ navigation }) => {
-  const [progress, setProgress] = useState(0.55);
-
-  useEffect(() => {}, [progress]);
-
-  return (
-    <View style={styles.container}>
-      <Text>Survey completed</Text>
-      <Bar
-        style={styles.bar}
-        progress={progress}
-        width={400}
-        color={"#333"}
-        borderWidth={2}
-        borderColor={"black"}
-        useNativeDriver={true}
-      />
-      <ProgressBar
-        value={70}
-        maxValue={100}
-        backgroundColorOnComplete="#333"
-        backgroundColor="#333"
-      />
-      {/* Buttons */}
-      <Text>Progress: {progress * 100} %</Text>
-      <View style={styles.button}>
-        <Button title="Set To 100%" onPress={() => setProgress(1.0)} />
+    return (
+      <View style={styles.background}>
+        <View style={styles.container}>
+          <ScrollView>
+            {answers.map(el => (
+              // Here, I just used JavaScript to display the questionId and answer value
+              <Text key={Math.random()}>
+                {el.questionId.replace(/_/g, " ")}:{" "}
+                {el.value.value ? el.value.value : el.value}
+              </Text>
+            ))}
+            {/* <Text>Raw JSON: {JSON.stringify(this.props.route.params.surveyAnswers)}</Text> */}
+          </ScrollView>
+          <Button
+            title="Go Home"
+            onPress={() =>
+              this.props.navigation.navigate("SurveyHome", { survey: answers })
+            }
+          />
+        </View>
       </View>
-      <View style={styles.button}>
-        <Button title="Set To 75%" onPress={() => setProgress(0.75)} />
-      </View>
-      <View style={styles.button}>
-        <Button title="Set To 50%" onPress={() => setProgress(0.5)} />
-      </View>
-      <View style={styles.button}>
-        <Button title="Set To 25%" onPress={() => setProgress(0.25)} />
-      </View>
-      <View style={styles.button}>
-        <Button
-          title="Go home"
-          onPress={() => navigation.navigate("SurveyHome")}
-        />
-      </View>
-    </View>
-  );
-};
+    );
+  }
+}
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: "white"
   },
-  bar: {
-    margin: 20,
+  container: {
+    minWidth: "70%",
+    maxWidth: "90%",
+    alignItems: "stretch",
+    justifyContent: "center",
+    backgroundColor: "white",
+    elevation: 20,
+    borderRadius: 10,
+    maxHeight: "80%"
   },
-  button: {
-    width: "80%",
-    margin: 10
+  questionText: {
+    marginBottom: 20,
+    fontSize: 20
   }
 });
-
-export default SurveyCompletedScreen;

@@ -1,15 +1,3 @@
-// import {
-//   createAppContainer,
-//   createSwitchNavigator
-// } from '@react-navigation/native';
-
-// import MainTabNavigator from './MainTabNavigator';
-
-// export default createAppContainer(
-//   createSwitchNavigator({
-//     Main: MainTabNavigator
-//   })
-// );
 import React from 'react';
 
 // Navigation imports
@@ -22,6 +10,7 @@ import SurveyScreen from '../screens/SurveyScreen';
 import SurveyCompletedScreen from '../screens/SurveyCompletedScreen';
 import SurveyHomeScreen from '../screens/SurveyHomeScreen';
 import Header from '../components/Header/index';
+import Survey from '../screens/Survey';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -34,20 +23,27 @@ export default function AppNavigator() {
         <Stack.Screen
           name="SurveyHome"
           component={SurveyHomeScreen}
-          options={({ navigation }) => {
-            return {
-                headerTitle: () => <Header navigation={navigation} title='Surveys'/>
-            }
-          }}
+          // We can use this to make a custom header to navigate between drawers
+          // options={({ navigation }) => {
+          //   return {
+          //       headerTitle: () => <Header navigation={navigation} title='Surveys'/>
+          //   }
+          // }}
+          options={{ title: 'Survey Home'}}
         />
         <Stack.Screen
         name="Survey"
         component={SurveyScreen}
-        options={{ title: 'Annual Survey' }}
+        // options={{ title: 'Annual Survey' }}
         />
         <Stack.Screen
         name="SurveyCompleted"
         component={SurveyCompletedScreen}
+        options={{ title: 'Survey Review'}}
+        />
+        <Stack.Screen
+        name="oneSurvey"
+        component={Survey}
         options={{ title: 'Survey Review'}}
         />
       </Stack.Navigator>
@@ -59,11 +55,13 @@ export default function AppNavigator() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={({ navigation }) => {
-            return {
-                headerTitle: () => <Header navigation={navigation} title='Home'/>
-            }
-          }}
+          // We can use this to make a custom header to navigate between drawers
+          // options={({ navigation }) => {
+          //   return {
+          //       headerTitle: () => <Header navigation={navigation} title='Home'/>
+          //   }
+          // }}
+          options={{ title: 'Home'}}
         />
       </Stack.Navigator>
     )
@@ -72,7 +70,7 @@ export default function AppNavigator() {
     <NavigationContainer>
       <Drawer.Navigator>
         <Drawer.Screen name="Home" children={HomeStack}/>
-        <Drawer.Screen name="Surveys" children={SurveyStack}/>
+        <Drawer.Screen name="Annual Survey" children={SurveyStack}/>
       </Drawer.Navigator>
     </NavigationContainer>
   );
