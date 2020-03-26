@@ -21,7 +21,7 @@ const AllFamiliesScreen = ({navigation}) => {
       renderItem={data => {
         return (
           <TouchableOpacity 
-            onPress={() => navigation.navigate('Family', {name: data.item.name})} activeOpacity={0.7}
+            onPress={() => navigation.navigate('Family', {familyName: data.item.name})} activeOpacity={0.7}
             style={styles.container}
           >
             <Card style={styles.card}>

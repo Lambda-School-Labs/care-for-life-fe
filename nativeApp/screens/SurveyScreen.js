@@ -19,10 +19,14 @@ export default class SurveyScreen extends Component {
     for (const elem of infoQuestionsRemoved) { answersAsObj[elem.questionId] = elem.value; }
     
     // Here we can manipulate the survey results to send them as an array (infoQuestionsRemoved) or an object (answersAsObj)
-    if (this.props.route.params.type === 'Family') {this.props.navigation.navigate('SurveyCompleted', { surveyAnswers: infoQuestionsRemoved, family: this.props.route.params.name});
-    } else if (this.props.route.params.type === 'Person') {
-      console.log('Shit')
-    }
+
+    // Send to SurveyCompletedScreen with the survey answers, name (of family or person), and the survey type
+    this.props.navigation.navigate('SurveyCompleted', { 
+      surveyAnswers: infoQuestionsRemoved, 
+      familyName: this.props.route.params.familyName,
+      personName: this.props.route.params.personName,
+      type: this.props.route.params.type 
+    });
   }
     
     //  After each answer is submitted this function is called. Here you can take additional steps in response to the 

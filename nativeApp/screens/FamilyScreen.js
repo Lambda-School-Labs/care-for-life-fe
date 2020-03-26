@@ -11,7 +11,7 @@ const FamilyScreen = ({route, navigation}) => {
       <View style={styles.buttonContainer}>
         <Button
           title="Annual Survey"
-          onPress={() => navigation.navigate('Survey', {name: route.params.name, survey: familySurvey, type: 'Family'})}
+          onPress={() => navigation.navigate('Survey', {familyName: route.params.familyName, survey: familySurvey, type: 'Family'})}
         />
         <Button
           title="Another Survey"
@@ -26,7 +26,7 @@ const FamilyScreen = ({route, navigation}) => {
         <Button
           color="green"
           title="Individual Survey"
-          onPress={() => navigation.navigate('FamilyMembers', {name: route.params.name})}
+          onPress={() => navigation.navigate('FamilyMembers', {familyName: route.params.familyName})}
         />
       </View>
     </View>

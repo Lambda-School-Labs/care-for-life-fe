@@ -4,7 +4,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import Card from '../components/Card';
 import { personSurvey } from '../surveys/personSurvey';
 
-const FamilyMembers = ({navigation}) => {
+const FamilyMembers = ({navigation, route}) => {
   // Display all family members for the respective family
   const [members, setMembers] = useState([
     {id: '0', name: 'Kyle'},
@@ -20,7 +20,7 @@ const FamilyMembers = ({navigation}) => {
       renderItem={data => {
         return (
           <TouchableOpacity 
-            onPress={() => navigation.navigate('Survey', {name: data.item.name, survey: personSurvey, type: 'Person'})} 
+            onPress={() => navigation.navigate('Survey', {personName: data.item.name, survey: personSurvey, type: 'Person', familyName: route.params.familyName})} 
             activeOpacity={0.7}
             style={styles.container}
           >

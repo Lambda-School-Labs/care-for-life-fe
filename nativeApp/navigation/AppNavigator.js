@@ -29,12 +29,12 @@ export default function AppNavigator() {
         <Stack.Screen
           name="Family"
           component={FamilyScreen}
-          options={({ route }) => ({ title: `${route.params.name} Family` })}
+          options={({ route }) => ({ title: `${route.params.familyName} Family` })}
         />
         <Stack.Screen
           name="FamilyMembers"
           component={FamilyMembers}
-          options={({ route }) => ({ title: `${route.params.name} Family Members` })}
+          options={({ route }) => ({ title: `${route.params.familyName} Family Members` })}
         />
         <Stack.Screen
         name="Survey"
@@ -44,7 +44,7 @@ export default function AppNavigator() {
         <Stack.Screen
         name="SurveyCompleted"
         component={SurveyCompletedScreen}
-        options={{ title: 'Survey Completed'}}
+        options={({ route }) => ({ title: `${route.params.type} Survey Results` })}
         />
       </Stack.Navigator>
     )
