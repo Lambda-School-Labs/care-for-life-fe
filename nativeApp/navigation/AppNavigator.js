@@ -37,14 +37,14 @@ export default function AppNavigator() {
           options={({ route }) => ({ title: `${route.params.familyName} Family Members` })}
         />
         <Stack.Screen
-        name="Survey"
-        component={SurveyScreen}
-        options={({ route }) => ({ title: `${route.params.type} Survey` })}
+          name="Survey"
+          component={SurveyScreen}
+          options={({ route }) => ({ title: `${route.params.type} Survey` })}
         />
         <Stack.Screen
-        name="SurveyCompleted"
-        component={SurveyCompletedScreen}
-        options={({ route }) => ({ title: `${route.params.type} Survey Results` })}
+          name="SurveyCompleted"
+          component={SurveyCompletedScreen}
+          options={({ route }) => ({ title: `${route.params.type} Survey Results` })}
         />
       </Stack.Navigator>
     )
