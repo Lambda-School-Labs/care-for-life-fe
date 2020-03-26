@@ -10,14 +10,17 @@ const FamilyScreen = ({route, navigation}) => {
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
         <Button
+          color="black"
           title="Annual Survey"
           onPress={() => navigation.navigate('Survey', {familyName: route.params.familyName, survey: familySurvey, type: 'Family'})}
         />
         <Button
+          color="black"
           title="Another Survey"
           onPress={() => console.log('Nothing here yet')}
         />
         <Button
+          color="black"
           title="Another Survey"
           onPress={() => console.log('Nothing here yet')}
         />

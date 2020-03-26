@@ -31,7 +31,7 @@ const AllFamiliesScreen = ({navigation}) => {
         )
       }}
       />
-      <View style={styles.button}>
+      <View>
         <Button
           title="Add Family"
           onPress={() => console.log("HI")}

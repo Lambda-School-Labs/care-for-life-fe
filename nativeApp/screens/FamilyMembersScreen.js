@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, Button} from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import Card from '../components/Card';
 import { personSurvey } from '../surveys/personSurvey';
@@ -31,6 +31,12 @@ const FamilyMembers = ({navigation, route}) => {
         )
       }}
       />
+      <View>
+        <Button
+          title="Add Family Member"
+          onPress={() => console.log("HI")}
+        />
+      </View>
     </View>
   )
 }

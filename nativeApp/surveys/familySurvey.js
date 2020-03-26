@@ -21,24 +21,24 @@ export const familySurvey = [
       }
     ]
   },
-  // {
-  //   questionType: 'SelectionGroup',
-  //   questionText: 'Is it a family with vulnerable children?',
-  //   questionId: 'vulnerable_children',
-  //   questionSettings: {
-  //     autoAdvance: true,
-  //   },
-  //   options: [
-  //     {
-  //       optionText: 'Yes',
-  //       value: 'Yes'
-  //     },
-  //     {
-  //       optionText: 'No',
-  //       value: 'No'
-  //     }
-  //   ]
-  // },
+  {
+    questionType: 'SelectionGroup',
+    questionText: 'Is it a family with vulnerable children?',
+    questionId: 'vulnerable_children',
+    questionSettings: {
+      autoAdvance: true,
+    },
+    options: [
+      {
+        optionText: 'Yes',
+        value: 'Yes'
+      },
+      {
+        optionText: 'No',
+        value: 'No'
+      }
+    ]
+  },
   // {
   //   questionType: 'SelectionGroup',
   //   questionText: 'Is it a family led by children?\n(without adults)',

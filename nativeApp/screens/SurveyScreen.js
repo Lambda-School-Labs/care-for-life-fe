@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Button, ScrollView, Text, TextInput, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { SimpleSurvey } from 'react-native-simple-survey';
 import Card from '../components/Card';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default class SurveyScreen extends Component {
 
@@ -45,13 +46,15 @@ export default class SurveyScreen extends Component {
   renderPreviousButton(onPress, enabled) {
     return (
       <View style={{ flexGrow: 1, maxWidth: 100, marginTop: 10, marginBottom: 10 }}>
-        <Button
-          color="black"
-          onPress={onPress}
-          disabled={!enabled}
-          backgroundColor="black"
-          title={'Previous'}
-        />
+        <TouchableOpacity onPress={() => console.log('Poop')}>
+          <Button
+            color="black"
+            onPress={onPress}
+            disabled={!enabled}
+            backgroundColor="black"
+            title={'Previous'}
+          />
+        </TouchableOpacity>
       </View>
     );
   }
