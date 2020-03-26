@@ -4,8 +4,30 @@ export default class SurveyCompletedScreen extends Component {
   render() {
     const answers = this.props.route.params.surveyAnswers;
 
+    const familyName = this.props.route.params.familyName;
+    const personName = this.props.route.params.personName;
+    const type = this.props.route.params.type;
+
+    let button;
+    let text;
+
+    if (type === 'Family') {
+      button = <Button
+      title="Go Home"
+      onPress={() => this.props.navigation.navigate('Family', { survey: answers, familyName: familyName })}
+      />
+      text = <Text>{familyName} Family</Text>
+    } else if (type === 'Person') {
+      button = <Button
+      title="Go Home"
+      onPress={() => this.props.navigation.navigate('FamilyMembers', { survey: answers, familyName: familyName, personName: personName })}
+      />
+      text = <Text>{personName}</Text>
+    }
+
     return (
       <View style={styles.background}>
+        {text}
         <View style={styles.container}>
           <ScrollView>
             {answers.map(el => (
@@ -15,14 +37,10 @@ export default class SurveyCompletedScreen extends Component {
                 {el.value.value ? el.value.value : el.value}
               </Text>
             ))}
-            {/* <Text>Raw JSON: {JSON.stringify(this.props.route.params.surveyAnswers)}</Text> */}
           </ScrollView>
-          <Button
-            title="Go Home"
-            onPress={() =>
-              this.props.navigation.navigate("SurveyHome", { survey: answers })
-            }
-          />
+
+          {button}
+
         </View>
       </View>
     );
