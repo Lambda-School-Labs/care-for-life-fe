@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { StyleSheet, Button, ScrollView, Text, TextInput, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import { SimpleSurvey } from 'react-native-simple-survey';
-import {familySurvey} from '../surveys/familySurvey';
 import Card from '../components/Card';
+
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
 import { Bar }  from 'react-native-progress';
+
 
 export default class SurveyScreen extends Component {
 
@@ -13,47 +16,28 @@ export default class SurveyScreen extends Component {
     this.state = { answersSoFar: '', answerCount: 0, count: 0, progress: 0};
   }
   onSurveyFinished(answers) {
-        /** 
-         *  By using the spread operator, array entries with no values, such as info questions, are removed.
-         *  This is also where a final cleanup of values, making them ready to insert into your DB or pass along
-         *  to the rest of your code, can be done.
-         * 
-         *  Answers are returned in an array, of the form 
-         *  [
-         *  {questionId: string, value: any},
-         *  {questionId: string, value: any},
-         *  ...
-         *  ]
-         *  Questions of type selection group are more flexible, the entirity of the 'options' object is returned
-         *  to you.
-         *  
-         *  As an example
-         *  { 
-         *      questionId: "favoritePet", 
-         *      value: { 
-         *          optionText: "Dogs",
-         *          value: "dog"
-         *      }
-         *  }
-         *  This flexibility makes SelectionGroup an incredibly powerful component on its own. If needed it is a 
-         *  separate NPM package, react-native-selection-group, which has additional features such as multi-selection.
-         */
 
     const infoQuestionsRemoved = [...answers];
 
-        // Convert from an array to a proper object. This won't work if you have duplicate questionIds
+    // Convert from an array to a proper object. This won't work if you have duplicate questionIds
     const answersAsObj = {};
     for (const elem of infoQuestionsRemoved) { answersAsObj[elem.questionId] = elem.value; }
     
     // Here we can manipulate the survey results to send them as an array (infoQuestionsRemoved) or an object (answersAsObj)
-    this.props.navigation.navigate('SurveyCompleted', { surveyAnswers: infoQuestionsRemoved });
-    }
-    /**
-     *  After each answer is submitted this function is called. Here you can take additional steps in response to the 
-     *  user's answers. From updating a 'correct answers' counter to exiting out of an onboarding flow if the user is 
-     *  is restricted (age, geo-fencing) from your app.
-     */
-  
+
+    // Send to SurveyCompletedScreen with the survey answers, name (of family or person), and the survey type
+    this.props.navigation.navigate('SurveyCompleted', { 
+      surveyAnswers: infoQuestionsRemoved, 
+      familyName: this.props.route.params.familyName,
+      personName: this.props.route.params.personName,
+      type: this.props.route.params.type 
+    });
+  }
+    
+    //  After each answer is submitted this function is called. Here you can take additional steps in response to the 
+    //  user's answers. From updating a 'correct answers' counter to exiting out of an onboarding flow if the user is 
+    //  is restricted (age, geo-fencing) from your app.
+
   onAnswerSubmitted(answer) {
     this.setState({ answersSoFar: JSON.stringify(this.surveyRef.getAnswers(), 2), answerCount: (this.surveyRef.getAnswers()).length, count: (this.state.count + 1), progress: (this.state.count/familySurvey.length) });
     switch (answer.questionId) {
@@ -184,15 +168,15 @@ export default class SurveyScreen extends Component {
       </View>
       );
     }
+    render() {
 
-  render() {
     return (
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.background}>
           <Card style={styles.container}>
             <SimpleSurvey
               ref={(s) => { this.surveyRef = s; }}
-              survey={familySurvey}
+              survey={this.props.route.params.survey}
               renderSelector={this.renderButton.bind(this)}
               containerStyle={styles.surveyContainer}
               selectionGroupContainerStyle={styles.selectionGroupContainer}
@@ -208,6 +192,7 @@ export default class SurveyScreen extends Component {
               renderInfo={this.renderInfoText}
             />
           </Card>
+
           <View style={styles.barContiner}>
             <Text>Progress: {Math.round(this.state.progress * 100)} %</Text>
             <Bar progress={this.state.progress} width={400} color={'#333'} borderWidth={2} borderColor={'black'} />

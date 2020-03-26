@@ -4,11 +4,6 @@ export const familySurvey = [
     questionText: 'Welcome! to get started press next.'
   },
   {
-    questionType: 'NumericInput',
-    questionText: 'Enter the Family ID',
-    questionId: 'family_id'
-  },
-  {
     questionType: 'SelectionGroup',
     questionText: 'Is it a family of orphans?',
     questionId: 'orphans',

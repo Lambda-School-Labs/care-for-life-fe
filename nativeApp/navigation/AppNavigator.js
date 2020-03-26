@@ -8,43 +8,43 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeScreen from '../screens/HomeScreen';
 import SurveyScreen from '../screens/SurveyScreen';
 import SurveyCompletedScreen from '../screens/SurveyCompletedScreen';
-import SurveyHomeScreen from '../screens/SurveyHomeScreen';
 import Header from '../components/Header/index';
-import Survey from '../screens/Survey';
+import AllFamiliesScreen from '../screens/AllFamiliesScreen';
+import FamilyScreen from '../screens/FamilyScreen';
+import FamilyMembers from '../screens/FamilyMembersScreen';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 export default function AppNavigator() {
 
-  const SurveyStack = () => {
+  const FamilyStack = () => {
     return (
       <Stack.Navigator>
         <Stack.Screen
-          name="SurveyHome"
-          component={SurveyHomeScreen}
-          // We can use this to make a custom header to navigate between drawers
-          // options={({ navigation }) => {
-          //   return {
-          //       headerTitle: () => <Header navigation={navigation} title='Surveys'/>
-          //   }
-          // }}
-          options={{ title: 'Survey Home'}}
+          name="Families"
+          component={AllFamiliesScreen}
+          options={{ title: 'Families' }}
         />
         <Stack.Screen
-        name="Survey"
-        component={SurveyScreen}
-        // options={{ title: 'Annual Survey' }}
+          name="Family"
+          component={FamilyScreen}
+          options={({ route }) => ({ title: `${route.params.familyName} Family` })}
         />
         <Stack.Screen
-        name="SurveyCompleted"
-        component={SurveyCompletedScreen}
-        options={{ title: 'Survey Review'}}
+          name="FamilyMembers"
+          component={FamilyMembers}
+          options={({ route }) => ({ title: `${route.params.familyName} Family Members` })}
         />
         <Stack.Screen
-        name="oneSurvey"
-        component={Survey}
-        options={{ title: 'Survey Review'}}
+          name="Survey"
+          component={SurveyScreen}
+          options={({ route }) => ({ title: `${route.params.type} Survey` })}
+        />
+        <Stack.Screen
+          name="SurveyCompleted"
+          component={SurveyCompletedScreen}
+          options={({ route }) => ({ title: `${route.params.type} Survey Results` })}
         />
       </Stack.Navigator>
     )
@@ -55,12 +55,6 @@ export default function AppNavigator() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          // We can use this to make a custom header to navigate between drawers
-          // options={({ navigation }) => {
-          //   return {
-          //       headerTitle: () => <Header navigation={navigation} title='Home'/>
-          //   }
-          // }}
           options={{ title: 'Home'}}
         />
       </Stack.Navigator>
@@ -70,7 +64,7 @@ export default function AppNavigator() {
     <NavigationContainer>
       <Drawer.Navigator>
         <Drawer.Screen name="Home" children={HomeStack}/>
-        <Drawer.Screen name="Annual Survey" children={SurveyStack}/>
+        <Drawer.Screen name="Familys" children={FamilyStack}/>
       </Drawer.Navigator>
     </NavigationContainer>
   );
