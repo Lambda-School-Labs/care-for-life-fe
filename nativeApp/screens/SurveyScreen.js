@@ -3,9 +3,6 @@ import { StyleSheet, Button, ScrollView, Text, TextInput, View, TouchableWithout
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { SimpleSurvey } from 'react-native-simple-survey';
 import Card from '../components/Card';
-
-import { TouchableOpacity } from 'react-native-gesture-handler';
-
 import { Bar }  from 'react-native-progress';
 
 
