@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Button, ScrollView, Text, TextInput, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import { SimpleSurvey } from 'react-native-simple-survey';
 import Card from '../components/Card';
-
-import { TouchableOpacity } from 'react-native-gesture-handler';
-
 import { Bar }  from 'react-native-progress';
 
 
@@ -12,7 +10,7 @@ export default class SurveyScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { answersSoFar: '', count: 1, progress: 0};
+    this.state = { answersSoFar: '', answerCount: 0, count: 0, progress: 0};
   }
   onSurveyFinished(answers) {
 
@@ -38,33 +36,36 @@ export default class SurveyScreen extends Component {
     //  is restricted (age, geo-fencing) from your app.
 
   onAnswerSubmitted(answer) {
-    this.setState({ answersSoFar: JSON.stringify(this.surveyRef.getAnswers(), 2), count: this.state.count + 1, progress: (this.state.count/familySurvey.length) });
+    this.setState({ answersSoFar: JSON.stringify(this.surveyRef.getAnswers(), 2), answerCount: (this.surveyRef.getAnswers()).length, count: (this.state.count + 1), progress: (this.state.count/familySurvey.length) });
     switch (answer.questionId) {
       default:
         break;
     }
     Keyboard.dismiss()
-    console.log(familySurvey.length)
-    console.log(this.state.count)
+    console.log('Size of Survey', familySurvey.length)
+    console.log('Count:',this.state.count)
+    console.log('Answers So Far Length:', this.state.answerCount)
     //progress bar function here
   }
   onPreviousButtonPress(){
     if(this.state.count > 0){
-      this.setState({ ...this.state, count: this.state.count - 1, progress: (this.state.count/familySurvey.length) });
+      this.setState({ ...this.state, count: this.state.count -1, progress: (this.state.count/familySurvey.length) });
     }else{
       console.log('count is 0')
     }
   }
   renderPreviousButton(onPress, enabled,) {
     return (
-      <View style={{ flexGrow: 1, maxWidth: 100, marginTop: 10, marginBottom: 10 }}>
-        <Button
-          color="black"
-          onPress={onPress}
-          disabled={!enabled}
-          backgroundColor="black"
-          title={'Previous'}
-        />
+      <View style={{ flexGrow: 1, maxWidth: 100, marginTop: 10, marginBottom  : 10 }}>
+        <TouchableOpacity onPress={()=> this.onPreviousButtonPress()}>
+          <Button
+            color="black"
+            onPress={onPress}
+            disabled={!enabled}
+            backgroundColor="black"
+            title={'Previous'}
+          />
+        </TouchableOpacity>
       </View>
     );
   }
