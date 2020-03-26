@@ -36,28 +36,28 @@ export default class SurveyScreen extends Component {
     //  is restricted (age, geo-fencing) from your app.
 
   onAnswerSubmitted(answer) {
-    this.setState({ answersSoFar: JSON.stringify(this.surveyRef.getAnswers(), 2), answerCount: (this.surveyRef.getAnswers()).length, count: (this.state.count + 1), progress: (this.state.count/familySurvey.length) });
+    this.setState({ answersSoFar: JSON.stringify(this.surveyRef.getAnswers(), 2)});
     switch (answer.questionId) {
       default:
         break;
     }
     Keyboard.dismiss()
-    console.log('Size of Survey', familySurvey.length)
+    console.log('Size of Survey', this.props.route.params.survey)
     console.log('Count:',this.state.count)
     console.log('Answers So Far Length:', this.state.answerCount)
     //progress bar function here
   }
-  onPreviousButtonPress(){
-    if(this.state.count > 0){
-      this.setState({ ...this.state, count: this.state.count -1, progress: (this.state.count/familySurvey.length) });
-    }else{
-      console.log('count is 0')
-    }
-  }
+  // onPreviousButtonPress(){
+  //   if(this.state.count > 0){
+  //     this.setState({ ...this.state, count: this.state.count -1, progress: (this.state.count/familySurvey.length) });
+  //   }else{
+  //     console.log('count is 0')
+  //   }
+  // }
   renderPreviousButton(onPress, enabled,) {
     return (
       <View style={{ flexGrow: 1, maxWidth: 100, marginTop: 10, marginBottom  : 10 }}>
-        <TouchableOpacity onPress={()=> this.onPreviousButtonPress()}>
+        <TouchableOpacity onPress={()=> console.log('previous')}>
           <Button
             color="black"
             onPress={onPress}
