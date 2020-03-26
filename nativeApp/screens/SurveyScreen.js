@@ -2,15 +2,18 @@ import React, { Component } from 'react';
 import { StyleSheet, Button, ScrollView, Text, TextInput, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { SimpleSurvey } from 'react-native-simple-survey';
 import Card from '../components/Card';
+
 import { TouchableOpacity } from 'react-native-gesture-handler';
+
+import { Bar }  from 'react-native-progress';
+
 
 export default class SurveyScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { answersSoFar: '' };
+    this.state = { answersSoFar: '', count: 1, progress: 0};
   }
-
   onSurveyFinished(answers) {
 
     const infoQuestionsRemoved = [...answers];
@@ -33,28 +36,38 @@ export default class SurveyScreen extends Component {
     //  After each answer is submitted this function is called. Here you can take additional steps in response to the 
     //  user's answers. From updating a 'correct answers' counter to exiting out of an onboarding flow if the user is 
     //  is restricted (age, geo-fencing) from your app.
-    
+
   onAnswerSubmitted(answer) {
-    this.setState({ answersSoFar: JSON.stringify(this.surveyRef.getAnswers(), 2) });
+    this.setState({ answersSoFar: JSON.stringify(this.surveyRef.getAnswers(), 2), count: this.state.count + 1, progress: (this.state.count/familySurvey.length) });
     switch (answer.questionId) {
       default:
         break;
     }
     Keyboard.dismiss()
+    console.log(familySurvey.length)
+    console.log(this.state.count)
+    //progress bar function here
   }
-
-  renderPreviousButton(onPress, enabled) {
+  onPreviousButtonPress(){
+    if(this.state.count > 0){
+      this.setState({ ...this.state, count: this.state.count - 1, progress: (this.state.count/familySurvey.length) });
+    }else{
+      console.log('count is 0')
+    }
+  }
+  renderPreviousButton(onPress, enabled,) {
     return (
       <View style={{ flexGrow: 1, maxWidth: 100, marginTop: 10, marginBottom: 10 }}>
-        <TouchableOpacity onPress={() => console.log('Poop')}>
-          <Button
-            color="black"
-            onPress={onPress}
-            disabled={!enabled}
-            backgroundColor="black"
-            title={'Previous'}
-          />
-        </TouchableOpacity>
+
+        <Button
+          color="black"
+          onPress={onPress,()=> {
+            this.onPreviousButtonPress()
+          }}
+          disabled={!enabled}
+          backgroundColor="black"
+          title={'Previous'}
+        />
       </View>
     );
   }
@@ -178,6 +191,11 @@ export default class SurveyScreen extends Component {
               renderInfo={this.renderInfoText}
             />
           </Card>
+
+          <View style={styles.barContiner}>
+            <Text>Progress: {Math.round(this.state.progress * 100)} %</Text>
+            <Bar progress={this.state.progress} width={400} color={'#333'} borderWidth={2} borderColor={'black'} />
+          </View>
         </View>
       </TouchableWithoutFeedback>
     );
@@ -185,6 +203,11 @@ export default class SurveyScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+    barContiner: {
+      width: '100%',
+      padding: 30,
+      alignItems: 'center'
+    },
     container: {
         minWidth: '70%',
         maxWidth: '90%',
