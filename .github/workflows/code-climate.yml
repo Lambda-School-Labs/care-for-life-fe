@@ -35,7 +35,6 @@ jobs:
           CI: true
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_SECRET }}
         with:
-          prefix: nativeApp
           coverageCommand: npm run coverage --prefix nativeApp
           coverageLocations: "./nativeApp/coverage/lcov.info:lcov" 
           debug: true
