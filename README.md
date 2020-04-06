@@ -13,7 +13,8 @@ You can find the deployed project at (URL Goes Here).
 <br>
 <br>
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/ad7ff8fa08379149e254/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/care-for-life-fe/maintainability)  
+[![Maintainability](https://api.codeclimate.com/v1/badges/ad7ff8fa08379149e254/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/care-for-life-fe/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/ad7ff8fa08379149e254/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/care-for-life-fe/test_coverage) 
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
 ![React](https://img.shields.io/badge/react-v16.7.0--alpha.2-blue.svg)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
