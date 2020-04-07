@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Text, Button} from 'react-native';
-import { familySurvey } from '../surveys/familySurvey';
+import { annualSurvey } from '../surveys/annualSurvey.js';
 
 const FamilyScreen = ({route, navigation}) => {
   // Displays the family name
@@ -12,7 +12,7 @@ const FamilyScreen = ({route, navigation}) => {
         <Button
           color="black"
           title="Annual Survey"
-          onPress={() => navigation.navigate('Survey', {familyName: route.params.familyName, survey: familySurvey, type: 'Family'})}
+          onPress={() => navigation.navigate('Survey', {familyName: route.params.familyName, survey: annualSurvey, type: 'Family'})}
         />
         <Button
           color="black"
