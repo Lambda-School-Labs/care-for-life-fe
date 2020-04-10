@@ -31,12 +31,6 @@ const FamilyMembers = ({navigation, route}) => {
         )
       }}
       />
-      <View>
-        <Button
-          title="Add Family Member"
-          onPress={() => console.log("HI")}
-        />
-      </View>
     </View>
   )
 }
