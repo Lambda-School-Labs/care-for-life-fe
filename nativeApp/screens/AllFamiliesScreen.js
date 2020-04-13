@@ -41,6 +41,7 @@ const AllFamiliesScreen = ({ navigation }) => {
     <View style={{ flex: 1 }}>
       <FlatList
         data={families}
+        keyExtractor={(item, index) => index.toString()}
         renderItem={(data) => {
           return (
             <TouchableOpacity
@@ -57,7 +58,7 @@ const AllFamiliesScreen = ({ navigation }) => {
           );
         }}
       />
-      <View style={{ flex: 1, justifyContent: "flex-end" }}>
+      <View style={styles.modalContainer}>
         <Button title="ADD FAMILY" onPress={toggleModal} />
         <Modal isVisible={isModalVisible} backdropOpacity={0.8}>
           <View style={styles.modal}>
@@ -71,10 +72,10 @@ const AllFamiliesScreen = ({ navigation }) => {
             />
             <View style={styles.buttonContainer}>
               <View style={styles.button}>
-                <Button title="Submit" onPress={handleSubmit} />
+                <Button color="red" title="Cancel" onPress={toggleModal} />
               </View>
               <View style={styles.button}>
-                <Button title="Cancel" onPress={toggleModal} />
+                <Button title="Submit" onPress={handleSubmit} />
               </View>
             </View>
           </View>
@@ -91,6 +92,10 @@ const styles = StyleSheet.create({
   card: {
     marginVertical: 10,
     width: "80%",
+  },
+  modalContainer: {
+    justifyContent: "flex-end",
+    backgroundColor: "#BADA22",
   },
   modal: {
     flex: 1,
