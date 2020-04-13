@@ -14,16 +14,19 @@ import Modal from "react-native-modal";
 const AllFamiliesScreen = ({ navigation }) => {
   // Pull all families from the database and display them.
   // Selecting a family will take you to the family screen
-  // Button to add a family to database
+
   const [families, setFamilies] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [familyName, setFamilyName] = useState({ name: "" });
+
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
   };
+
   const handleChange = (text) => {
     setFamilyName({ ...familyName, name: text });
   };
+
   const handleSubmit = () => {
     if (!familyName.name) {
       toggleModal();
@@ -33,8 +36,7 @@ const AllFamiliesScreen = ({ navigation }) => {
     setFamilyName({ name: "" });
     toggleModal();
   };
-  console.log(families);
-  console.log(familyName);
+
   return (
     <View style={{ flex: 1 }}>
       <FlatList
@@ -46,7 +48,7 @@ const AllFamiliesScreen = ({ navigation }) => {
                 navigation.navigate("Family", { familyName: data.item.name })
               }
               activeOpacity={0.7}
-              style={styles.container}
+              style={styles.cardContainer}
             >
               <Card style={styles.card}>
                 <Text>{data.item.name}</Text>
@@ -55,25 +57,26 @@ const AllFamiliesScreen = ({ navigation }) => {
           );
         }}
       />
-      <View style={{ flex: 1 }}>
-        <Button title="Show modal" onPress={toggleModal} />
-        <Modal isVisible={isModalVisible}>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "cyan",
-            }}
-          >
-            <Text>Add a Family</Text>
+      <View style={{ flex: 1, justifyContent: "flex-end" }}>
+        <Button title="ADD FAMILY" onPress={toggleModal} />
+        <Modal isVisible={isModalVisible} backdropOpacity={0.8}>
+          <View style={styles.modal}>
+            <Text style={styles.modalTitle}>Add Family</Text>
             <TextInput
+              placeholder="name"
               value={familyName.name}
               onChangeText={(text) => handleChange(text)}
               name="name"
-              style={{ backgroundColor: "white", width: "80%" }}
+              style={styles.input}
             />
-            <Button title="Hide modal" onPress={handleSubmit} />
+            <View style={styles.buttonContainer}>
+              <View style={styles.button}>
+                <Button title="Submit" onPress={handleSubmit} />
+              </View>
+              <View style={styles.button}>
+                <Button title="Cancel" onPress={toggleModal} />
+              </View>
+            </View>
           </View>
         </Modal>
       </View>
@@ -82,12 +85,38 @@ const AllFamiliesScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  cardContainer: {
     alignItems: "center",
   },
   card: {
     marginVertical: 10,
     width: "80%",
+  },
+  modal: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalTitle: {
+    fontSize: 22,
+    color: "white",
+  },
+  input: {
+    borderBottomColor: "white",
+    borderBottomWidth: 1,
+    padding: 10,
+    width: "80%",
+    marginBottom: 10,
+    color: "white",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    width: "80%",
+    justifyContent: "space-between",
+  },
+  button: {
+    width: 100,
+    backgroundColor: "white",
   },
 });
 
