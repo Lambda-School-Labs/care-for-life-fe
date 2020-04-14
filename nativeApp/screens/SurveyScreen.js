@@ -45,11 +45,13 @@ export default class SurveyScreen extends Component {
 
   //Function That decrements the question count and progress state.
   onPreviousButtonPress() {
-    this.setState({
-      ...this.state,
-      count: (this.state.count -= 1),
-      progress: this.state.count / this.state.survey.length
-    });
+    if(this.state.count > 0){
+      this.setState({
+        ...this.state,
+        count: (this.state.count -= 1),
+        progress: this.state.count / this.state.survey.length
+      });
+    }
     console.log("Previous Button Pressed! New Count:", this.state.count);
   }
   //Function That increments the question count and progress state.
@@ -93,8 +95,8 @@ export default class SurveyScreen extends Component {
             color="black"
             onPress={onPress}
             disabled={!enabled}
-            backgroundColor="black"
             title={"Previous"}
+            style={styles.button}
           />
         </TouchableOpacity>
       </View>
@@ -111,8 +113,8 @@ export default class SurveyScreen extends Component {
           color="black"
           onPress={onPress}
           disabled={!enabled}
-          backgroundColor="black"
           title={"Next"}
+          style={styles.button}
         />
       </View>
     );
@@ -236,12 +238,13 @@ export default class SurveyScreen extends Component {
           </Card>
 
           <View style={styles.barContiner}>
-            <Text>Progress: {Math.round(this.state.progress * 100)} %</Text>
+            <Text style={styles.barContinerText}>Progress: {Math.round(this.state.progress * 100)} %</Text>
             <Bar
               progress={this.state.progress}
               width={400}
+              height={20}
               color={"#333"}
-              borderWidth={2}
+              borderWidth={3}
               borderColor={"black"}
             />
           </View>
@@ -255,15 +258,23 @@ const styles = StyleSheet.create({
   barContiner: {
     width: "100%",
     padding: 30,
-    alignItems: "center"
+    alignItems: "center",
+  },
+  barContinerText:{
+    fontSize: 25,
+    padding: 5
   },
   container: {
     minWidth: "70%",
     maxWidth: "90%",
+    width: 400,
+    height: 250,
     alignItems: "center",
     justifyContent: "center",
     elevation: 20,
-    borderRadius: 10
+    borderRadius: 10,
+    margin: "5%",
+    backgroundColor: "#333"
     // flex: 1,
   },
   answersContainer: {
@@ -291,7 +302,6 @@ const styles = StyleSheet.create({
   // },
   selectionGroupContainer: {
     flexDirection: "column",
-    backgroundColor: "white",
     alignContent: "flex-end"
   },
   background: {
@@ -299,22 +309,28 @@ const styles = StyleSheet.create({
     // minHeight: 800,
     // maxHeight: 800,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   questionText: {
     marginBottom: 20,
-    fontSize: 20
+    fontSize: 20,
+    textAlign: "center",
+    color: "white",
+    fontWeight: "bold"
   },
   textBox: {
     borderWidth: 1,
     borderColor: "rgba(204,204,204,1)",
     backgroundColor: "white",
-    borderRadius: 10,
-
-    padding: 10,
-    textAlignVertical: "top",
+    borderRadius: 5,
+    width: 250,
+    padding: 5,
+    textAlignVertical: "center",
     marginLeft: 10,
-    marginRight: 10
+    marginRight: 10,
+    marginBottom: 10,
+    color:"black",
+    fontSize: 20
   },
   numericInput: {
     borderWidth: 1,
@@ -329,6 +345,7 @@ const styles = StyleSheet.create({
   infoText: {
     marginBottom: 20,
     fontSize: 20,
-    marginLeft: 10
+    marginLeft: 10,
+    color: "white"
   }
 });
