@@ -110,7 +110,7 @@ export default class SurveyScreen extends Component {
         style={{ flexGrow: 1, maxWidth: 100, marginTop: 10, marginBottom: 10 }}
       >
         <Button
-          color="black"
+          color="blue"
           onPress={onPress}
           disabled={!enabled}
           title={"Next"}
