@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
-import { annualSurvey } from "../surveys/annualSurvey.js";
+import React, { useState } from 'react';
+import { StyleSheet, View, Text, Button } from 'react-native';
+import { annualSurvey } from '../surveys/annualSurvey.js';
 
 const FamilyScreen = ({ route, navigation }) => {
   // Displays the family name
@@ -10,33 +10,38 @@ const FamilyScreen = ({ route, navigation }) => {
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
         <Button
+          style={styles.button}
           color="black"
           title="Annual Survey"
           onPress={() =>
-            navigation.navigate("Survey", {
+            navigation.navigate('Survey', {
               familyName: route.params.familyName,
               survey: annualSurvey,
-              type: "Family",
+              type: 'Family',
             })
           }
         />
-        {/* <Button
+        <Button
+          style={styles.button}
           color="black"
           title="Another Survey"
           onPress={() => console.log('Nothing here yet')}
         />
         <Button
+          style={styles.button}
           color="black"
           title="Another Survey"
           onPress={() => console.log('Nothing here yet')}
-        /> */}
+        />
       </View>
-      <View style={{ flex: 1, width: "80%", justifyContent: "center" }}>
+
+      <View style={{ flex: 1, width: '80%', justifyContent: 'center' }}>
         <Button
+          style={styles.button}
           color="green"
           title="Individual Survey"
           onPress={() =>
-            navigation.navigate("FamilyMembers", {
+            navigation.navigate('FamilyMembers', {
               familyName: route.params.familyName,
             })
           }
@@ -53,9 +58,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonContainer: {
-    width: "80%",
-    justifyContent: "space-around",
+    width: '80%',
+    justifyContent: 'space-around',
     flex: 1,
+  },
+  button: {
+    width: '95%',
+    justifyContent: 'center',
+    padding: '5px',
   },
 });
 

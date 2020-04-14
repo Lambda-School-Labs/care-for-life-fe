@@ -10,7 +10,7 @@ const UploadData = ({ mutate }) => {
 const uploadDataMutation = gql`
   mutation uploadData($family_id: Integer!) {
     uploadData(family_id: $family_id) {
-      // survey results for families destructered here
+      // create mutations here
     }
   }
 `;
