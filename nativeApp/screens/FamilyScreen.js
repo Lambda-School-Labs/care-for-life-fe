@@ -34,6 +34,7 @@ const FamilyScreen = ({ route, navigation }) => {
           onPress={() => console.log('Nothing here yet')}
         />
       </View>
+
       <View style={{ flex: 1, width: '80%', justifyContent: 'center' }}>
         <Button
           style={styles.button}
@@ -53,8 +54,8 @@ const FamilyScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   buttonContainer: {
     width: '80%',
