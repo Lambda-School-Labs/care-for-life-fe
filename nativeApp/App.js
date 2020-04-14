@@ -12,7 +12,7 @@ import AppNavigator from './navigation/AppNavigator';
 export default class App extends Component {
   state = {
     client: null,
-    loaded: false
+    loaded: false,
   };
 
   // On mount, the app creates new Apollo server and restores Apollo cache
@@ -20,21 +20,21 @@ export default class App extends Component {
   async componentDidMount() {
     const cache = new InMemoryCache();
     const link = new HttpLink({
-      uri: 'GraphQL endpoint here'
-      // headers: {
-      //   authorization: 'Bearer token'
-      // }
+      uri: 'https://apollo.careforlife.dev',
+      headers: {
+        authorization: 'Bearer token',
+      },
     });
     const client = new ApolloClient({
       cache,
-      link
+      link,
     });
 
     try {
       await persistCache({
         cache,
         storage: AsyncStorage,
-        trigger: 'background'
+        trigger: 'background',
       });
     } catch (error) {
       console.error('Error restoring Apollo cache', error);
@@ -42,7 +42,7 @@ export default class App extends Component {
 
     this.setState({
       client,
-      loaded: true
+      loaded: true,
     });
   }
 
@@ -68,6 +68,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 });

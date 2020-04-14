@@ -8,10 +8,73 @@ const UploadData = ({ mutate }) => {
 };
 
 const uploadDataMutation = gql`
-  mutation uploadData($family_id: Integer!) {
-    uploadData(family_id: $family_id) {
-      // create mutations here
+  mutation ($familyName: String!){
+    createFamily(data:{
+      family_name: $familyName
+    }){
+      id
+      family_name
     }
+  }
+  mutation(
+    $personName: String!
+    $familyId: ID!
+  ){
+    createPerson(data: {
+      person_name: $personName
+      family: {
+        connect:{
+          id: $familyId
+        }
+      }
+    }){
+      person_name
+      id
+      family{
+        id
+        family_name
+      }
+    }
+  }
+  mutation(
+    $surveyName: String!
+    $employeeId: ID!
+    $familyId: ID!
+  ){
+    createSurvey(data: {
+      survey_name: $surveyName
+      employee: {connect: {
+        id: $employeeId
+      }}
+      family: {connect:{
+        id: $familyId
+      }}
+    }){
+      id
+      survey_name
+    }
+  }
+  
+  // mutation($name: String!) {
+  //   family1: createFamily(data:{
+  //     family_name:$name
+  //   }) 
+  //   {
+  //     id
+  //   }
+  //   family2: createFamily(data:{
+  //     family_name:"another"
+  //   }) 
+  //   {
+  //     id
+  //   }
+  //   family3: createFamily(data:{
+  //     family_name:"another3"
+  //   }) 
+  //   {
+  //     id
+  //   }
+  // }
   }
 `;
 
