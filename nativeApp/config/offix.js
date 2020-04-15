@@ -3,7 +3,6 @@ import { HttpLink } from 'apollo-link-http';
 import { AsyncStorage } from 'react-native';
 import { ApolloOfflineClient } from 'offix-client';
 import { NetworkStatus } from './NetworkStatus';
-// import fetch from 'node-fetch';
 import 'cross-fetch/polyfill';
 
 const cacheStorage = {
@@ -31,16 +30,19 @@ const cacheStorage = {
 
 const networkStatus = new NetworkStatus();
 
-const token = 'IMPLEMENT BACKEND TOKEN HERE'; // TODO
+const token = 'IMPLEMENT BACKEND AUTHORIZATION TOKEN HERE'; // TODO
 
 export const offlineClient = new ApolloOfflineClient({
   cache: new InMemoryCache(),
   link: new HttpLink({
     uri: 'https://apollo.careforlife.dev',
-    headers: {
-      authorization: `Bearer ${token}`,
-      fetch: fetch,
-    }, // Note that an authorization header of 'Bearer <token>' is required in production
+    request: (operation) => {
+      operation.setContext({
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+    },
   }),
   offlineStorage: cacheStorage,
   cacheStorage,

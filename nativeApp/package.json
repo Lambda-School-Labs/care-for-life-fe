@@ -30,7 +30,6 @@
     "cross-fetch": "^3.0.4",
     "expo": "~36.0.0",
     "graphql": "^14.6.0",
-    "node-fetch": "^2.6.0",
     "offix-client": "^0.15.0",
     "react": "~16.9.0",
     "react-apollo": "^3.1.3",
