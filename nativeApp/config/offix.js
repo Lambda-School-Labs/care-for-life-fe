@@ -3,6 +3,7 @@ import { HttpLink } from 'apollo-link-http';
 import { AsyncStorage } from 'react-native';
 import { ApolloOfflineClient } from 'offix-client';
 import { NetworkStatus } from './NetworkStatus';
+import fetch from 'node-fetch';
 
 const cacheStorage = {
   getItem: async (key) => {
@@ -37,6 +38,7 @@ export const offlineClient = new ApolloOfflineClient({
     uri: 'https://apollo.careforlife.dev',
     headers: {
       authorization: `Bearer ${token}`,
+      fetch: fetch,
     }, // Note that an authorization header of 'Bearer <token>' is required in production
   }),
   offlineStorage: cacheStorage,
