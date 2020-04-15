@@ -1,8 +1,7 @@
 export const annualSurvey = [
   {
     questionType: 'Info',
-    questionText: 'Welcome! To get started press next.',
-    questionId: 'section'
+    questionText: 'Welcome! To get started press next.'
   },
   {
     questionType: 'TextInput',
@@ -16,8 +15,95 @@ export const annualSurvey = [
   },
   {
     questionType: 'TextInput',
-    questionText: 'Field Officer:',
-    questionId: 'field_officer'
+    questionText: 'Interviewer',
+    questionId: 'interviewer'
+  },
+  {
+    questionType: 'NumericInput',
+    questionText: 'Survey Number',
+    questionId: 'survey_number'
+  },
+  {
+    questionType: 'TextInput',
+    questionText: 'Zone',
+    questionId: 'zone'
+  },
+  {
+    questionType: 'SelectionGroup',
+    questionText: 'New Family or Previously Surveyed?',
+    questionId: 'check_new_family',
+    questionSettings: {
+      autoAdvance: true,
+    },
+    options: [
+      {
+        optionText: 'New Family',
+        value: 'true'
+      },
+      {
+        optionText: 'Previously Surveyed',
+        value: 'false'
+      }
+    ]
+  },
+  {
+    questionType: 'SelectionGroup',
+    questionText: 'Own Home?',
+    questionId: 'own_home',
+    questionSettings: {
+      autoAdvance: true,
+    },
+    options: [
+      {
+        optionText: 'Yes',
+        value: 'true'
+      },
+      {
+        optionText: 'No',
+        value: 'false'
+      }
+    ]
+  },
+  {
+    questionType: 'SelectionGroup',
+    questionText: 'Rent?',
+    questionId: 'rent',
+    questionSettings: {
+      autoAdvance: true,
+    },
+    options: [
+      {
+        optionText: 'Yes',
+        value: 'true'
+      },
+      {
+        optionText: 'No',
+        value: 'false'
+      }
+    ]
+  },
+  {
+    questionType: 'SelectionGroup',
+    questionText: 'Guest?',
+    questionId: 'guest',
+    questionSettings: {
+      autoAdvance: true,
+    },
+    options: [
+      {
+        optionText: 'Yes',
+        value: 'true'
+      },
+      {
+        optionText: 'No',
+        value: 'false'
+      }
+    ]
+  },
+  {
+    questionType: 'NumericInput',
+    questionText: 'FPP Identity Number',
+    questionId: 'fpp_id'
   },
   {
     questionType: 'TextInput',
@@ -26,13 +112,37 @@ export const annualSurvey = [
   },
   {
     questionType: 'TextInput',
-    questionText: 'Zone:',
-    questionId: 'zone'
+    questionText: 'Head of Household Name',
+    questionId: 'head_of_household_name'
+  },
+  {
+    questionType: 'NumericInput',
+    questionText: 'Head of Household Age',
+    questionId: 'head_of_household_age'
+  },
+  {
+    questionType: 'SelectionGroup',
+    questionText: 'Head of Household M or F',
+    questionId: 'head_of_household_sex',
+    options: [
+      {
+        optionText: 'Male',
+        value: 'male'
+      },
+      {
+        optionText: 'Female',
+        value: 'female'
+      }
+    ]
+  },
+  {
+    questionType: 'NumericInput',
+    questionText: 'Total Number of People That Live In The House',
+    questionId: 'people_in_household'
   },
   {
     questionType: 'Info',
-    questionText: 'New Section: Family Profile',
-    questionId: 'section'
+    questionText: 'New Section: Family Profile'
   },
   {
     questionType: 'SelectionGroup',
@@ -156,8 +266,7 @@ export const annualSurvey = [
   },
   {
     questionType: 'Info',
-    questionText: 'New Section: \n\n Housing Improvement and Sanitation',
-    questionId: 'section'
+    questionText: 'New Section: \n\n Housing Improvement and Sanitation'
   },
   {
     questionType: 'SelectionGroup',
@@ -413,8 +522,7 @@ export const annualSurvey = [
   },
   {
     questionType: 'Info',
-    questionText: 'New Section: Income Generation',
-    questionId: 'section'
+    questionText: 'New Section: Income Generation'
   },
   {
     questionType: 'SelectionGroup',
@@ -472,8 +580,7 @@ export const annualSurvey = [
   },
   {
     questionType: 'Info',
-    questionText: 'New Section: Food Security and Nutrition',
-    questionId: 'section'
+    questionText: 'New Section: Food Security and Nutrition'
   },
   {
     questionType: 'SelectionGroup',
@@ -541,8 +648,7 @@ export const annualSurvey = [
   },
   {
     questionType: 'Info',
-    questionText:'New Section: Psycho-Social-Spiritual',
-    questionId: 'section'
+    questionText:'New Section: Psycho-Social-Spiritual'
   },
   {
     questionType: 'SelectionGroup',
