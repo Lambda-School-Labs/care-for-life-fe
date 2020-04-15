@@ -1,67 +1,32 @@
 import 'react-native-gesture-handler';
-import React, { Component } from 'react';
-import { StyleSheet, AsyncStorage } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet } from 'react-native';
 import { ApolloProvider } from 'react-apollo';
-import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
-import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-boost';
-import { persistCache } from 'apollo-cache-persist';
-
+import { ApolloOfflineProvider } from 'react-offix-hooks';
+import { offlineClient } from './config/offix';
 import SplashScreen from './screens/SpashScreen';
 import AppNavigator from './navigation/AppNavigator';
 
-export default class App extends Component {
-  state = {
-    client: null,
-    loaded: false,
-  };
+const App = () => {
+  const [initialized, setInitialized] = useState(false);
 
-  // On mount, the app creates new Apollo server and restores Apollo cache
-  // Note that an authorization header of 'Bearer <token>' is required in production
-  async componentDidMount() {
-    const cache = new InMemoryCache();
-    const link = new HttpLink({
-      uri: 'https://apollo.careforlife.dev',
-      headers: {
-        authorization: 'Bearer token',
-      },
-    });
-    const client = new ApolloClient({
-      cache,
-      link,
-    });
+  // initialize the offix client and set the apollo client
+  useEffect(() => {
+    offlineClient.init().then(() => setInitialized(true));
+  }, []);
 
-    try {
-      await persistCache({
-        cache,
-        storage: AsyncStorage,
-        trigger: 'background',
-      });
-    } catch (error) {
-      console.error('Error restoring Apollo cache', error);
-    }
-
-    this.setState({
-      client,
-      loaded: true,
-    });
-  }
-
-  render() {
-    const { client, loaded } = this.state;
-
-    if (!loaded) {
-      return <SplashScreen />;
-    }
-
+  // load the app if the apolloClient is there, otherwise load the splash screen
+  if (initialized) {
     return (
-      <ApolloProvider client={client}>
-        <ApolloHooksProvider client={client}>
+      <ApolloOfflineProvider client={offlineClient}>
+        <ApolloProvider client={offlineClient}>
           <AppNavigator style={styles.container} />
-        </ApolloHooksProvider>
-      </ApolloProvider>
+        </ApolloProvider>
+      </ApolloOfflineProvider>
     );
   }
-}
+  return <SplashScreen />;
+};
 
 const styles = StyleSheet.create({
   container: {
