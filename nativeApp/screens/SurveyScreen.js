@@ -15,6 +15,7 @@ import { Bar } from "react-native-progress";
 
 export default class SurveyScreen extends Component {
   constructor(props) {
+    //Initialize Filtered Questions Variable
     super(props);
     this.state = {
       answersSoFar: "",
@@ -22,10 +23,32 @@ export default class SurveyScreen extends Component {
       progress: 0,
       survey: this.props.route.params.survey
     };
+  };
+  //Filters "Info" questions out of survey
+  //Allows for accurate Survey progress count
+  filterSurvey = async (survey) =>{
+    //loops through survey and assigns questions that are not marked as "Info" type
+    console.log('Running Filter!')
+    let filteredSurvey = [];
+    await survey.forEach(question =>{
+      if(question.questionType !== 'Info'){
+        // console.log('Object:', question.questionType)
+        filteredSurvey = [...filteredSurvey, question]
+      }
+    })
+    //sets filtered survey to component state
+    this.setState({
+      ...this.state,
+      survey: filteredSurvey
+    })
+  }
+  componentDidMount = async () =>{
+    //runs filterSurvey function on component mount
+    await this.filterSurvey(this.state.survey)
+    console.log('Survey State Length:', this.state.survey.length)
   }
   onSurveyFinished(answers) {
     const infoQuestionsRemoved = [...answers];
-
     // Convert from an array to a proper object. This won't work if you have duplicate questionIds
     const answersAsObj = {};
     for (const elem of infoQuestionsRemoved) {
@@ -52,7 +75,7 @@ export default class SurveyScreen extends Component {
         progress: this.state.count / this.state.survey.length
       });
     }
-    console.log("Previous Button Pressed! New Count:", this.state.count);
+    // console.log("Previous Button Pressed! New Count:", this.state.count);
   }
   //Function That increments the question count and progress state.
   onNextButtonPress(answer) {
@@ -65,13 +88,14 @@ export default class SurveyScreen extends Component {
         });
 
     console.log("Next Button Pressed! New Count:", this.state.count);
+    console.log('Survey Length',this.state.survey.length)
   }
   //  After each answer is submitted this function is called. Here you can take additional steps in response to the
   //  user's answers. From updating a 'correct answers' counter to exiting out of an onboarding flow if the user is
   //  is restricted (age, geo-fencing) from your app.
   onAnswerSubmitted(answer) {
     answer = { ...answer, answered: true };
-    console.log("Answer Submitted", answer);
+    // console.log("Answer Submitted", answer);
     this.onNextButtonPress(answer);
     this.setState({
       answersSoFar: JSON.stringify(this.surveyRef.getAnswers(), 2)
@@ -81,7 +105,7 @@ export default class SurveyScreen extends Component {
         break;
     }
     Keyboard.dismiss();
-    console.log("Size of Survey", this.props.route.params.survey.length);
+    // console.log("Size of Survey", this.props.route.params.survey.length);
   }
   //Function That Renders The Previous Button and wrapps the button with an onPress handler
   //Button onPress handler sends you back 1 question
@@ -92,7 +116,7 @@ export default class SurveyScreen extends Component {
       >
         <TouchableOpacity onPress={() => this.onPreviousButtonPress()}>
           <Button
-            color="black"
+            color="crimson"
             onPress={onPress}
             disabled={!enabled}
             title={"Previous"}
@@ -110,11 +134,10 @@ export default class SurveyScreen extends Component {
         style={{ flexGrow: 1, maxWidth: 100, marginTop: 10, marginBottom: 10 }}
       >
         <Button
-          color="blue"
           onPress={onPress}
           disabled={!enabled}
           title={"Next"}
-          style={styles.button}
+          color="deepskyblue"
         />
       </View>
     );
@@ -145,7 +168,7 @@ export default class SurveyScreen extends Component {
         <Button
           title={data.optionText}
           onPress={onPress}
-          color={isSelected ? "black" : "blue"}
+          color={isSelected ? "crimson" : "deepskyblue"}
           style={isSelected ? { fontWeight: "bold" } : {}}
           key={`button_${index}`}
         />
