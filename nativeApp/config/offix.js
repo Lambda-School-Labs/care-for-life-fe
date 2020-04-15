@@ -3,7 +3,8 @@ import { HttpLink } from 'apollo-link-http';
 import { AsyncStorage } from 'react-native';
 import { ApolloOfflineClient } from 'offix-client';
 import { NetworkStatus } from './NetworkStatus';
-import fetch from 'node-fetch';
+// import fetch from 'node-fetch';
+import 'cross-fetch/polyfill';
 
 const cacheStorage = {
   getItem: async (key) => {
