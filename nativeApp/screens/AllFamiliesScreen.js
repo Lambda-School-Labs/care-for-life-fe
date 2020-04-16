@@ -10,7 +10,18 @@ import {
 import { FlatList } from 'react-native-gesture-handler';
 import Card from '../components/Card';
 import Modal from 'react-native-modal';
-import { addFamilyMutation } from '../queries';
+// import { addFamilyMutation } from "../queries";
+import { useOfflineMutation } from 'react-offix-hooks';
+import gql from 'graphql-tag';
+
+const addFamilyMutation = gql`
+  mutation($familyName: String!) {
+    createFamily(data: { family_name: $familyName }) {
+      id
+      family_name
+    }
+  }
+`;
 
 const AllFamiliesScreen = ({ navigation }) => {
   // Pull all families from the database and display them.
@@ -19,7 +30,7 @@ const AllFamiliesScreen = ({ navigation }) => {
   const [families, setFamilies] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [familyName, setFamilyName] = useState({ name: '' });
-  const [addFamily, state] = useOfflineMutation(addFamilyMutation, {});
+  const [addFamily, state] = useOfflineMutation(addFamilyMutation);
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
@@ -29,14 +40,27 @@ const AllFamiliesScreen = ({ navigation }) => {
     setFamilyName({ ...familyName, name: text });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!familyName.name) {
       toggleModal();
       return;
     }
-    addFamily({ variables: { familyName: familyName.name } })
-      .then((family) => console.log(family))
-      .catch((err) => console.log('Error adding family to storage ', err));
+
+    try {
+      await addFamily({
+        variables: {
+          familyName: familyName.name,
+        },
+      });
+    } catch (error) {
+      if (error.offline) {
+        error
+          .watchOfflineChange()
+          .then((res) => console.log('Offline result', res));
+      }
+      console.log(error);
+    }
+
     setFamilyName({ name: '' });
     toggleModal();
   };
