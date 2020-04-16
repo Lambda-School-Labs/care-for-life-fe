@@ -9,7 +9,7 @@ import { persistCache } from 'apollo-cache-persist';
 import SplashScreen from './screens/SpashScreen';
 import AppNavigator from './navigation/AppNavigator';
 
-export default class App extends Component {
+class App extends Component {
   state = {
     client: null,
     loaded: false
@@ -71,3 +71,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 });
+
+export default App;

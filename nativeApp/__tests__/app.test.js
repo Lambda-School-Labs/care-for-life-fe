@@ -9,6 +9,6 @@ test('Tests Running Correctly', () => {
 });
 
 test('App.js Renders Correctly', () => {
-  const tree = renderer.create(<App />).toJSON();
+  const tree = renderer.create(<App/>).toJSON();
   expect(tree).toMatchSnapshot();
 });
