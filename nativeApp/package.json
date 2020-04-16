@@ -18,6 +18,7 @@
     ]
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.9.0",
     "@react-native-community/masked-view": "0.1.5",
     "@react-native-community/netinfo": "^5.7.1",
     "@react-navigation/drawer": "^5.3.2",
@@ -30,6 +31,7 @@
     "cross-fetch": "^3.0.4",
     "expo": "~36.0.0",
     "graphql": "^14.6.0",
+    "graphql-tag": "^2.10.3",
     "offix-client": "^0.15.0",
     "react": "~16.9.0",
     "react-apollo": "^3.1.3",
