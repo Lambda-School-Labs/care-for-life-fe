@@ -10,18 +10,8 @@ import {
 import { FlatList } from "react-native-gesture-handler";
 import Card from "../components/Card";
 import Modal from "react-native-modal";
-// import { addFamilyMutation } from "../queries";
+import { addFamilyMutation } from "../queries";
 import { useOfflineMutation } from "react-offix-hooks";
-import gql from "graphql-tag";
-
-const addFamilyMutation = gql`
-  mutation($familyName: String!) {
-    createFamily(data: { family_name: $familyName }) {
-      id
-      family_name
-    }
-  }
-`;
 
 const AllFamiliesScreen = ({ navigation }) => {
   // Pull all families from the database and display them.
