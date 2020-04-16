@@ -8,6 +8,7 @@ test('Tests Running Correctly', () => {
   expect(1).toBe(1);
 });
 
-test('Basic Arithmetic', () => {
-  expect(2+2).toBe(4);
+test('App.js Renders Correctly', () => {
+  const tree = renderer.create(<App />).toJSON();
+  expect(tree).toMatchSnapshot();
 });
