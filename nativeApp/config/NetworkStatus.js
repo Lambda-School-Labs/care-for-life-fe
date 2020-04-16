@@ -27,8 +27,8 @@ export class NetworkStatus {
     // return true;
     return new Promise((resolve) => {
       NetInfo.fetch().then((state) => {
-        resolve(!state.isInternetReachable);
-      });
+        resolve(!state.isInternetReachable)
+      }).catch(err => {console.log('isOffline Promise Error', err)})
     });
   }
 
