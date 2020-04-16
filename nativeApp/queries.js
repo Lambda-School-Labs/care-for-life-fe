@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 const addFamilyMutation = gql`
   mutation($familyName: String!) {
