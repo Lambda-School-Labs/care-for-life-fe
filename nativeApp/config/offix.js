@@ -1,6 +1,6 @@
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { ApolloOfflineClient } from 'offix-client';
 import { NetworkStatus } from './NetworkStatus';
 import 'cross-fetch/polyfill';
