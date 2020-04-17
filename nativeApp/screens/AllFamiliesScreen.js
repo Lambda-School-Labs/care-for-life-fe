@@ -20,7 +20,26 @@ const AllFamiliesScreen = ({ navigation }) => {
   const [families, setFamilies] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [familyName, setFamilyName] = useState({ name: '' });
+
   const [addFamily, state] = useOfflineMutation(addFamilyMutation);
+
+  useEffect(async () => {
+      try {
+        const value = await AsyncStorage.getItem('familyName');
+        if (value !== null) {
+          // We have data!!
+          console.log(value);
+        }
+      } catch (error) {
+        console.log('Error getting item from AsyncStorage ', error);
+      }
+      // familyName.map((result, i, store) => {
+      //   let key = store[i][0];
+      //   let val = store[i][1];
+      //   console.log(key, val);
+      // });
+    // });
+  }, [families])
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
@@ -34,6 +53,14 @@ const AllFamiliesScreen = ({ navigation }) => {
     if (!familyName.name) {
       toggleModal();
       return;
+    }
+
+    setFamilies([...families, familyName])
+
+    try {
+      await AsyncStorage.setItem('familyName', `${familyName.name}`);
+    } catch (error) {
+      console.log('Error saving families to AsyncStorage ', error);
     }
 
     try {
@@ -56,6 +83,7 @@ const AllFamiliesScreen = ({ navigation }) => {
   };
 
   return (
+    const 
     <View style={{ flex: 1 }}>
       <FlatList
         data={families}
