@@ -21,6 +21,7 @@ const AllFamiliesScreen = ({ navigation }) => {
   const [families, setFamilies] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [familyName, setFamilyName] = useState({ name: "" });
+
   const [addFamily, state] = useOfflineMutation(addFamilyMutation);
 
   // Gets data in async storage
