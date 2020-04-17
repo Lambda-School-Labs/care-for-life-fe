@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -6,12 +6,12 @@ import {
   TouchableOpacity,
   Button,
   TextInput,
-} from "react-native";
-import { FlatList } from "react-native-gesture-handler";
-import Card from "../components/Card";
-import Modal from "react-native-modal";
-import { addFamilyMutation } from "../queries";
-import { useOfflineMutation } from "react-offix-hooks";
+} from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
+import Card from '../components/Card';
+import Modal from 'react-native-modal';
+import { addFamilyMutation } from '../queries';
+import { useOfflineMutation } from 'react-offix-hooks';
 
 const AllFamiliesScreen = ({ navigation }) => {
   // Pull all families from the database and display them.
@@ -19,8 +19,27 @@ const AllFamiliesScreen = ({ navigation }) => {
 
   const [families, setFamilies] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [familyName, setFamilyName] = useState({ name: "" });
+  const [familyName, setFamilyName] = useState({ name: '' });
+
   const [addFamily, state] = useOfflineMutation(addFamilyMutation);
+
+  useEffect(async () => {
+    try {
+      const value = await AsyncStorage.getItem('familyName');
+      if (value !== null) {
+        // We have data!!
+        console.log(value);
+      }
+    } catch (error) {
+      console.log('Error getting item from AsyncStorage ', error);
+    }
+    // familyName.map((result, i, store) => {
+    //   let key = store[i][0];
+    //   let val = store[i][1];
+    //   console.log(key, val);
+    // });
+    // });
+  }, [families]);
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
@@ -36,6 +55,14 @@ const AllFamiliesScreen = ({ navigation }) => {
       return;
     }
 
+    setFamilies([...families, familyName]);
+
+    try {
+      await AsyncStorage.setItem('familyName', `${familyName.name}`);
+    } catch (error) {
+      console.log('Error saving families to AsyncStorage ', error);
+    }
+
     try {
       await addFamily({
         variables: {
@@ -46,12 +73,12 @@ const AllFamiliesScreen = ({ navigation }) => {
       if (error.offline) {
         error
           .watchOfflineChange()
-          .then((res) => console.log("Offline result", res));
+          .then((res) => console.log('Offline result', res));
       }
       console.log(error);
     }
 
-    setFamilyName({ name: "" });
+    setFamilyName({ name: '' });
     toggleModal();
   };
 
@@ -64,7 +91,7 @@ const AllFamiliesScreen = ({ navigation }) => {
           return (
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate("Family", { familyName: data.item.name })
+                navigation.navigate('Family', { familyName: data.item.name })
               }
               activeOpacity={0.7}
               style={styles.cardContainer}
@@ -105,41 +132,41 @@ const AllFamiliesScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   cardContainer: {
-    alignItems: "center",
+    alignItems: 'center',
   },
   card: {
     marginVertical: 10,
-    width: "80%",
+    width: '80%',
   },
   modalContainer: {
-    justifyContent: "flex-end",
-    backgroundColor: "#BADA22",
+    justifyContent: 'flex-end',
+    backgroundColor: '#BADA22',
   },
   modal: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   modalTitle: {
     fontSize: 22,
-    color: "white",
+    color: 'white',
   },
   input: {
-    borderBottomColor: "white",
+    borderBottomColor: 'white',
     borderBottomWidth: 1,
     padding: 10,
-    width: "80%",
+    width: '80%',
     marginBottom: 10,
-    color: "white",
+    color: 'white',
   },
   buttonContainer: {
-    flexDirection: "row",
-    width: "80%",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    width: '80%',
+    justifyContent: 'space-between',
   },
   button: {
     width: 100,
-    backgroundColor: "white",
+    backgroundColor: 'white',
   },
 });
 
