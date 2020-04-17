@@ -24,22 +24,22 @@ const AllFamiliesScreen = ({ navigation }) => {
   const [addFamily, state] = useOfflineMutation(addFamilyMutation);
 
   useEffect(async () => {
-      try {
-        const value = await AsyncStorage.getItem('familyName');
-        if (value !== null) {
-          // We have data!!
-          console.log(value);
-        }
-      } catch (error) {
-        console.log('Error getting item from AsyncStorage ', error);
+    try {
+      const value = await AsyncStorage.getItem('familyName');
+      if (value !== null) {
+        // We have data!!
+        console.log(value);
       }
-      // familyName.map((result, i, store) => {
-      //   let key = store[i][0];
-      //   let val = store[i][1];
-      //   console.log(key, val);
-      // });
+    } catch (error) {
+      console.log('Error getting item from AsyncStorage ', error);
+    }
+    // familyName.map((result, i, store) => {
+    //   let key = store[i][0];
+    //   let val = store[i][1];
+    //   console.log(key, val);
     // });
-  }, [families])
+    // });
+  }, [families]);
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
@@ -55,7 +55,7 @@ const AllFamiliesScreen = ({ navigation }) => {
       return;
     }
 
-    setFamilies([...families, familyName])
+    setFamilies([...families, familyName]);
 
     try {
       await AsyncStorage.setItem('familyName', `${familyName.name}`);
@@ -83,7 +83,6 @@ const AllFamiliesScreen = ({ navigation }) => {
   };
 
   return (
-    const 
     <View style={{ flex: 1 }}>
       <FlatList
         data={families}
