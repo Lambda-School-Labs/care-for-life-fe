@@ -6,7 +6,7 @@ import {
   TextInput,
   View,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { SimpleSurvey } from "react-native-simple-survey";
@@ -21,32 +21,32 @@ export default class SurveyScreen extends Component {
       answersSoFar: "",
       count: 0,
       progress: 0,
-      survey: this.props.route.params.survey
+      survey: this.props.route.params.survey,
     };
-  };
+  }
   //Filters "Info" questions out of survey
   //Allows for accurate Survey progress count
-  filterSurvey = async (survey) =>{
+  filterSurvey = async (survey) => {
     //loops through survey and assigns questions that are not marked as "Info" type
-    console.log('Running Filter!')
+    console.log("Running Filter!");
     let filteredSurvey = [];
-    await survey.forEach(question =>{
-      if(question.questionType !== 'Info'){
+    await survey.forEach((question) => {
+      if (question.questionType !== "Info") {
         // console.log('Object:', question.questionType)
-        filteredSurvey = [...filteredSurvey, question]
+        filteredSurvey = [...filteredSurvey, question];
       }
-    })
+    });
     //sets filtered survey to component state
     this.setState({
       ...this.state,
-      survey: filteredSurvey
-    })
-  }
-  componentDidMount = async () =>{
+      survey: filteredSurvey,
+    });
+  };
+  componentDidMount = async () => {
     //runs filterSurvey function on component mount
-    await this.filterSurvey(this.state.survey)
-    console.log('Survey State Length:', this.state.survey.length)
-  }
+    await this.filterSurvey(this.state.survey);
+    console.log("Survey State Length:", this.state.survey.length);
+  };
   onSurveyFinished(answers) {
     const infoQuestionsRemoved = [...answers];
     // Convert from an array to a proper object. This won't work if you have duplicate questionIds
@@ -62,17 +62,17 @@ export default class SurveyScreen extends Component {
       surveyAnswers: infoQuestionsRemoved,
       familyName: this.props.route.params.familyName,
       personName: this.props.route.params.personName,
-      type: this.props.route.params.type
+      type: this.props.route.params.type,
     });
   }
 
   //Function That decrements the question count and progress state.
   onPreviousButtonPress() {
-    if(this.state.count > 0){
+    if (this.state.count > 0) {
       this.setState({
         ...this.state,
         count: (this.state.count -= 1),
-        progress: this.state.count / this.state.survey.length
+        progress: this.state.count / this.state.survey.length,
       });
     }
     // console.log("Previous Button Pressed! New Count:", this.state.count);
@@ -84,11 +84,11 @@ export default class SurveyScreen extends Component {
       : this.setState({
           ...this.state,
           count: (this.state.count += 1),
-          progress: this.state.count / this.state.survey.length
+          progress: this.state.count / this.state.survey.length,
         });
 
     console.log("Next Button Pressed! New Count:", this.state.count);
-    console.log('Survey Length',this.state.survey.length)
+    console.log("Survey Length", this.state.survey.length);
   }
   //  After each answer is submitted this function is called. Here you can take additional steps in response to the
   //  user's answers. From updating a 'correct answers' counter to exiting out of an onboarding flow if the user is
@@ -98,7 +98,7 @@ export default class SurveyScreen extends Component {
     // console.log("Answer Submitted", answer);
     this.onNextButtonPress(answer);
     this.setState({
-      answersSoFar: JSON.stringify(this.surveyRef.getAnswers(), 2)
+      answersSoFar: JSON.stringify(this.surveyRef.getAnswers(), 2),
     });
     switch (answer.questionId) {
       default:
@@ -191,7 +191,7 @@ export default class SurveyScreen extends Component {
       <View>
         <TextInput
           style={styles.textBox}
-          onChangeText={text => onChange(text)}
+          onChangeText={(text) => onChange(text)}
           numberOfLines={1}
           underlineColorAndroid={"white"}
           placeholder={placeholder}
@@ -210,7 +210,7 @@ export default class SurveyScreen extends Component {
     return (
       <TextInput
         style={styles.numericInput}
-        onChangeText={text => {
+        onChangeText={(text) => {
           onChange(text);
         }}
         underlineColorAndroid={"white"}
@@ -237,7 +237,7 @@ export default class SurveyScreen extends Component {
         <View style={styles.background}>
           <Card style={styles.container}>
             <SimpleSurvey
-              ref={s => {
+              ref={(s) => {
                 this.surveyRef = s;
               }}
               survey={this.props.route.params.survey}
@@ -246,14 +246,14 @@ export default class SurveyScreen extends Component {
               selectionGroupContainerStyle={styles.selectionGroupContainer}
               navButtonContainerStyle={{
                 flexDirection: "row",
-                justifyContent: "space-around"
+                justifyContent: "space-around",
               }}
               renderPrevious={this.renderPreviousButton.bind(this)}
               renderNext={this.renderNextButton.bind(this)}
               renderFinished={this.renderFinishedButton.bind(this)}
               renderQuestionText={this.renderQuestionText}
-              onSurveyFinished={answers => this.onSurveyFinished(answers)}
-              onAnswerSubmitted={answer => this.onAnswerSubmitted(answer)}
+              onSurveyFinished={(answers) => this.onSurveyFinished(answers)}
+              onAnswerSubmitted={(answer) => this.onAnswerSubmitted(answer)}
               renderTextInput={this.renderTextBox}
               renderNumericInput={this.renderNumericInput}
               renderInfo={this.renderInfoText}
@@ -261,7 +261,9 @@ export default class SurveyScreen extends Component {
           </Card>
 
           <View style={styles.barContiner}>
-            <Text style={styles.barContinerText}>Progress: {Math.round(this.state.progress * 100)} %</Text>
+            <Text style={styles.barContinerText}>
+              Progress: {Math.round(this.state.progress * 100)} %
+            </Text>
             <Bar
               progress={this.state.progress}
               width={400}
@@ -283,9 +285,9 @@ const styles = StyleSheet.create({
     padding: 30,
     alignItems: "center",
   },
-  barContinerText:{
+  barContinerText: {
     fontSize: 25,
-    padding: 5
+    padding: 5,
   },
   container: {
     minWidth: "70%",
@@ -297,7 +299,7 @@ const styles = StyleSheet.create({
     elevation: 20,
     borderRadius: 10,
     margin: "5%",
-    backgroundColor: "#333"
+    backgroundColor: "#333",
     // flex: 1,
   },
   answersContainer: {
@@ -309,7 +311,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     backgroundColor: "white",
     elevation: 20,
-    borderRadius: 10
+    borderRadius: 10,
   },
   // surveyContainer: {
   //     width: 'auto',
@@ -325,7 +327,7 @@ const styles = StyleSheet.create({
   // },
   selectionGroupContainer: {
     flexDirection: "column",
-    alignContent: "flex-end"
+    alignContent: "flex-end",
   },
   background: {
     flex: 1,
@@ -339,7 +341,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
     color: "white",
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   textBox: {
     borderWidth: 1,
@@ -352,8 +354,8 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     marginBottom: 10,
-    color:"black",
-    fontSize: 20
+    color: "black",
+    fontSize: 20,
   },
   numericInput: {
     borderWidth: 1,
@@ -363,12 +365,12 @@ const styles = StyleSheet.create({
     padding: 10,
     textAlignVertical: "top",
     marginLeft: 10,
-    marginRight: 10
+    marginRight: 10,
   },
   infoText: {
     marginBottom: 20,
     fontSize: 20,
     marginLeft: 10,
-    color: "white"
-  }
+    color: "white",
+  },
 });

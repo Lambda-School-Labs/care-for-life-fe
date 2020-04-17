@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Button,
   TextInput,
+  AsyncStorage,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import Card from "../components/Card";
@@ -22,6 +23,41 @@ const AllFamiliesScreen = ({ navigation }) => {
   const [familyName, setFamilyName] = useState({ name: "" });
   const [addFamily, state] = useOfflineMutation(addFamilyMutation);
 
+  // Gets data in async storage
+  const retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("FAMILIES");
+      if (value === null || value.length === 0) {
+        // No data, initialize families to an empty array
+        setFamilies([]);
+        return;
+      } else {
+        // There is data, set it to state
+        console.log("You have families", value);
+        setFamilies(JSON.parse(value));
+      }
+    } catch (error) {
+      // Error retrieving data
+      console.log(error);
+    }
+  };
+
+  // Sets data to async storage, expects an array
+  const setData = async (familyArr) => {
+    try {
+      await AsyncStorage.setItem("FAMILIES", JSON.stringify(familyArr));
+      console.log("saved fam");
+    } catch (error) {
+      // Error saving data
+      console.log(error);
+    }
+  };
+
+  // Runs when the app first starts and will add any families in storage to state so they will be displayed
+  useEffect(() => {
+    retrieveData();
+  }, []);
+
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
   };
@@ -35,21 +71,25 @@ const AllFamiliesScreen = ({ navigation }) => {
       toggleModal();
       return;
     }
+    // Set async storage to the families already in state including the the family being added
+    setData([...families, familyName]);
+    // We
+    retrieveData();
 
-    try {
-      await addFamily({
-        variables: {
-          familyName: familyName.name,
-        },
-      });
-    } catch (error) {
-      if (error.offline) {
-        error
-          .watchOfflineChange()
-          .then((res) => console.log("Offline result", res));
-      }
-      console.log(error);
-    }
+    // try {
+    //   await addFamily({
+    //     variables: {
+    //       familyName: familyName.name,
+    //     },
+    //   });
+    // } catch (error) {
+    //   if (error.offline) {
+    //     error
+    //       .watchOfflineChange()
+    //       .then((res) => console.log("Offline result", res));
+    //   }
+    //   console.log(error);
+    // }
 
     setFamilyName({ name: "" });
     toggleModal();
@@ -78,6 +118,19 @@ const AllFamiliesScreen = ({ navigation }) => {
       />
       <View style={styles.modalContainer}>
         <Button title="ADD FAMILY" onPress={toggleModal} />
+        <Button
+          title="remove all"
+          color="red"
+          onPress={async () => {
+            try {
+              await AsyncStorage.removeItem("FAMILIES");
+              retrieveData();
+              console.log("removed");
+            } catch (err) {
+              console.log(err);
+            }
+          }}
+        />
         <Modal isVisible={isModalVisible} backdropOpacity={0.8}>
           <View style={styles.modal}>
             <Text style={styles.modalTitle}>Add Family</Text>
