@@ -11,7 +11,7 @@ import {
 import { FlatList } from "react-native-gesture-handler";
 import Card from "../components/Card";
 import Modal from "react-native-modal";
-import { addFamilyMutation } from "../queries";
+import { addFamilyMutation } from "../Queries/queries";
 import { useOfflineMutation } from "react-offix-hooks";
 
 const AllFamiliesScreen = ({ navigation }) => {
