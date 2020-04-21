@@ -6,7 +6,9 @@ import { ApolloOfflineProvider } from "react-offix-hooks";
 import { offlineClient } from "./config/offix";
 import SplashScreen from "./screens/SpashScreen";
 import AppNavigator from "./navigation/AppNavigator";
+
 import AuthNavigator from "./navigation/AuthNavigator";
+
 
 const App = () => {
   const [initialized, setInitialized] = useState(false);

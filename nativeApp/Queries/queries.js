@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 const addFamilyMutation = gql`
   mutation($familyName: String!) {
@@ -8,19 +8,21 @@ const addFamilyMutation = gql`
     }
   }
 `;
-const addFamilyAnswers = gql`
-  mutation($surveyName: String!, $employeeId: ID!, $familyId: ID!) {
-    createSurvey(
+const addAnswersMutation = gql`
+  mutation($answer: String!, $questionId: ID!, $familyId: ID!, $surveyId: ID!) {
+    createAnswer(
       data: {
-        survey_name: $surveyName
-        employee: { connect: { id: $employeeId } }
+        answer: $answer
+        question: { connect: { id: $questionId } }
         family: { connect: { id: $familyId } }
+        survey: { connect: { id: $surveyId } }
       }
     ) {
+      answer
+      dateTaken
       id
-      survey_name
     }
   }
 `;
 
-export { addFamilyMutation, addFamilyAnswers };
+export { addFamilyMutation, addAnswersMutation };
