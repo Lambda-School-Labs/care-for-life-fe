@@ -1,11 +1,11 @@
-import 'react-native-gesture-handler';
-import React, { useState, useEffect } from 'react';
-import { StyleSheet } from 'react-native';
-import { ApolloProvider } from 'react-apollo';
-import { ApolloOfflineProvider } from 'react-offix-hooks';
-import { offlineClient } from './config/offix';
-import SplashScreen from './screens/SpashScreen';
-import AppNavigator from './navigation/AppNavigator';
+import "react-native-gesture-handler";
+import React, { useState, useEffect } from "react";
+import { StyleSheet } from "react-native";
+import { ApolloProvider } from "react-apollo";
+import { ApolloOfflineProvider } from "react-offix-hooks";
+import { offlineClient } from "./config/offix";
+import SplashScreen from "./screens/SpashScreen";
+import AppNavigator from "./navigation/AppNavigator";
 
 const App = () => {
   const [initialized, setInitialized] = useState(false);
@@ -31,9 +31,9 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

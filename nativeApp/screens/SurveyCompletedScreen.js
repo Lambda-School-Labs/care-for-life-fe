@@ -20,9 +20,11 @@ const SurveyCompletedScreen = (props) => {
       try {
         addAnswers({
           variables: {
-            answer: answer.value.value ? answer.value.value : answer.value,
+            answer: answer.value.value
+              ? answer.value.value.toString()
+              : answer.value.toString(),
             questionId: fullSurvey[index].backend_id,
-            familyId: "ck906465v3s860874bvimqpc9",
+            familyId: "ck9a3uqh384530874p5ws4zo8",
             surveyId: "ck98pnlc17hmd0874rfdsxug0",
           },
         });

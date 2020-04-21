@@ -295,7 +295,7 @@ const styles = StyleSheet.create({
     minWidth: "70%",
     maxWidth: "90%",
     width: 400,
-    height: 250,
+    minHeight: 250,
     alignItems: "center",
     justifyContent: "center",
     elevation: 20,
