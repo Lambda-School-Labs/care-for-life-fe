@@ -9,7 +9,6 @@ import AppNavigator from "./navigation/AppNavigator";
 
 import AuthNavigator from "./navigation/AuthNavigator";
 
-
 const App = () => {
   const [initialized, setInitialized] = useState(false);
   const [token, setToken] = useState(null);
