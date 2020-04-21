@@ -1,31 +1,52 @@
 import React, { useState, useEffect } from "react";
 import { ScrollView, StyleSheet, Text, View, Button } from "react-native";
 import { useOfflineMutation } from "react-offix-hooks";
-import { addFamilyAnswers } from "../Queries/queries";
+import { addAnswersMutation } from "../Queries/queries";
 
 const SurveyCompletedScreen = (props) => {
-  const [addAnswers, state] = useOfflineMutation(addFamilyAnswers);
+  const [addAnswers, state] = useOfflineMutation(addAnswersMutation);
 
   const answers = props.route.params.surveyAnswers;
+  const fullSurvey = props.route.params.fullSurvey;
   const familyName = props.route.params.familyName;
   const personName = props.route.params.personName;
   const type = props.route.params.type;
+  const handleSubmit = async (props) => {
+    console.log("Submitting Answers....", fullSurvey);
 
-  // console.log("Survey Answers:", answers);
+    await answers.forEach((answer, index) => {
+      console.log("answer being mutated", answer.value);
+      console.log("answers backendID", fullSurvey[index].backend_id);
+      try {
+        addAnswers({
+          variables: {
+            answer: answer.value.value ? answer.value.value : answer.value,
+            questionId: fullSurvey[index].backend_id,
+            familyId: "ck906465v3s860874bvimqpc9",
+            surveyId: "ck98pnlc17hmd0874rfdsxug0",
+          },
+        });
+      } catch (error) {
+        if (error.offline) {
+          error
+            .watchOfflineChange()
+            .then((res) => console.log("Offline result", res));
+        }
+        console.log(error);
+      }
+    });
+
+    props.navigation.navigate("Family", {
+      survey: answers,
+      familyName: familyName,
+    });
+  };
+
   let button;
   let text;
+
   if (type === "Family") {
-    button = (
-      <Button
-        title="Go Home"
-        onPress={() =>
-          props.navigation.navigate("Family", {
-            survey: answers,
-            familyName: familyName,
-          })
-        }
-      />
-    );
+    button = <Button title="Go Home" onPress={() => handleSubmit(props)} />;
     text = <Text>{familyName} Family</Text>;
   } else if (type === "Person") {
     button = (

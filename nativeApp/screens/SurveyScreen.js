@@ -45,7 +45,7 @@ export default class SurveyScreen extends Component {
   componentDidMount = async () => {
     //runs filterSurvey function on component mount
     await this.filterSurvey(this.state.survey);
-    console.log("Survey State Length:", this.state.survey.length);
+    console.log("Survey State Length:", this.state.survey);
   };
   onSurveyFinished(answers) {
     const infoQuestionsRemoved = [...answers];
@@ -61,6 +61,7 @@ export default class SurveyScreen extends Component {
     this.props.navigation.navigate("SurveyCompleted", {
       surveyAnswers: infoQuestionsRemoved,
       familyName: this.props.route.params.familyName,
+      fullSurvey: this.state.survey,
       personName: this.props.route.params.personName,
       type: this.props.route.params.type,
     });
@@ -95,6 +96,7 @@ export default class SurveyScreen extends Component {
   //  is restricted (age, geo-fencing) from your app.
   onAnswerSubmitted(answer) {
     answer = { ...answer, answered: true };
+    console.log(answer);
     // console.log("Answer Submitted", answer);
     this.onNextButtonPress(answer);
     this.setState({

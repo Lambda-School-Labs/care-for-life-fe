@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -7,12 +7,12 @@ import {
   Button,
   TextInput,
   AsyncStorage,
-} from "react-native";
-import { FlatList } from "react-native-gesture-handler";
-import Card from "../components/Card";
-import Modal from "react-native-modal";
-import { addFamilyMutation } from "../Queries/queries";
-import { useOfflineMutation } from "react-offix-hooks";
+} from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
+import Card from '../components/Card';
+import Modal from 'react-native-modal';
+import { addFamilyMutation } from '../Queries/queries';
+import { useOfflineMutation } from 'react-offix-hooks';
 
 const AllFamiliesScreen = ({ navigation }) => {
   // Pull all families from the database and display them.
@@ -20,21 +20,21 @@ const AllFamiliesScreen = ({ navigation }) => {
 
   const [families, setFamilies] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [familyName, setFamilyName] = useState({ name: "" });
+  const [familyName, setFamilyName] = useState({ name: '' });
 
   const [addFamily, state] = useOfflineMutation(addFamilyMutation);
 
   // Gets data in async storage
   const retrieveData = async () => {
     try {
-      const value = await AsyncStorage.getItem("FAMILIES");
+      const value = await AsyncStorage.getItem('FAMILIES');
       if (value === null || value.length === 0) {
         // No data, initialize families to an empty array
         setFamilies([]);
         return;
       } else {
         // There is data, set it to state
-        console.log("You have families", value);
+        console.log('You have families', value);
         setFamilies(JSON.parse(value));
       }
     } catch (error) {
@@ -46,8 +46,8 @@ const AllFamiliesScreen = ({ navigation }) => {
   // Sets data to async storage, expects an array
   const setData = async (familyArr) => {
     try {
-      await AsyncStorage.setItem("FAMILIES", JSON.stringify(familyArr));
-      console.log("saved fam");
+      await AsyncStorage.setItem('FAMILIES', JSON.stringify(familyArr));
+      console.log('saved fam');
     } catch (error) {
       // Error saving data
       console.log(error);
@@ -77,22 +77,22 @@ const AllFamiliesScreen = ({ navigation }) => {
     // We
     retrieveData();
 
-    // try {
-    //   await addFamily({
-    //     variables: {
-    //       familyName: familyName.name,
-    //     },
-    //   });
-    // } catch (error) {
-    //   if (error.offline) {
-    //     error
-    //       .watchOfflineChange()
-    //       .then((res) => console.log("Offline result", res));
-    //   }
-    //   console.log(error);
-    // }
+    try {
+      await addFamily({
+        variables: {
+          familyName: familyName.name,
+        },
+      });
+    } catch (error) {
+      if (error.offline) {
+        error
+          .watchOfflineChange()
+          .then((res) => console.log('Offline result', res));
+      }
+      console.log(error);
+    }
 
-    setFamilyName({ name: "" });
+    setFamilyName({ name: '' });
     toggleModal();
   };
 
@@ -105,7 +105,7 @@ const AllFamiliesScreen = ({ navigation }) => {
           return (
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate("Family", { familyName: data.item.name })
+                navigation.navigate('Family', { familyName: data.item.name })
               }
               activeOpacity={0.7}
               style={styles.cardContainer}
@@ -124,9 +124,9 @@ const AllFamiliesScreen = ({ navigation }) => {
           color="red"
           onPress={async () => {
             try {
-              await AsyncStorage.removeItem("FAMILIES");
+              await AsyncStorage.removeItem('FAMILIES');
               retrieveData();
-              console.log("removed");
+              console.log('removed');
             } catch (err) {
               console.log(err);
             }
@@ -159,41 +159,41 @@ const AllFamiliesScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   cardContainer: {
-    alignItems: "center",
+    alignItems: 'center',
   },
   card: {
     marginVertical: 10,
-    width: "80%",
+    width: '80%',
   },
   modalContainer: {
-    justifyContent: "flex-end",
-    backgroundColor: "#BADA22",
+    justifyContent: 'flex-end',
+    backgroundColor: '#BADA22',
   },
   modal: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   modalTitle: {
     fontSize: 22,
-    color: "white",
+    color: 'white',
   },
   input: {
-    borderBottomColor: "white",
+    borderBottomColor: 'white',
     borderBottomWidth: 1,
     padding: 10,
-    width: "80%",
+    width: '80%',
     marginBottom: 10,
-    color: "white",
+    color: 'white',
   },
   buttonContainer: {
-    flexDirection: "row",
-    width: "80%",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    width: '80%',
+    justifyContent: 'space-between',
   },
   button: {
     width: 100,
-    backgroundColor: "white",
+    backgroundColor: 'white',
   },
 });
 

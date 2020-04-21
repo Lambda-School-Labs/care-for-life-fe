@@ -30,7 +30,9 @@ const cacheStorage = {
 
 const networkStatus = new NetworkStatus();
 
-const token = process.env.APOLLO_TOKEN;
+// const token = process.env.APOLLO_TOKEN;
+const token =
+  "eyJraWQiOiI0dFJQSzU1STVkaW9TYi1la2xEQW9Ba0Zpb0piNWlCSjJsU3k0Z0J0OHpvIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULjItNHQ1NGRXWV9WM0xpcjdmSTFrZFlKSVl5TXI3WEdUd1lhbDhydkx6NUUiLCJpc3MiOiJodHRwczovL29rdGEuY2FyZWZvcmxpZmUuZGV2L29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTU4NzQxODY1OSwiZXhwIjoxNTg3NDIyMjU5LCJjaWQiOiIwb2E1aXhoaDJKODl3V0F6ZDR4NiIsInVpZCI6IjAwdTVpdzR2YXo2UldTbjk5NHg2Iiwic2NwIjpbIm9wZW5pZCJdLCJzdWIiOiJ0ZXN0QGV4YW1wbGUuY29tIn0.dI_ouHh9fqnSt-LnQwMMx0NFUrso_dgzhv97t9EwgVSdi4ueTBvmzLD_WYNQ6xDXV4wKdx4pn8r9TKbJHHxcNhrP6D8KZ1EqZhTOuPEr72C1g7Tr45AQtdeZ5seJ2rphRNMNlJ0dL5enrHGOQth-_NYC8b94T-Xb-ukuXyzcnvAEfG7uy6ZdkH5s3FFpwV9q8hAl1o3mwsuSx8Xei8XMm4p5vWn2-UzFUhBs2prOWe8FFZjykz7TxB3JHGf1-NBaTAxls6WH-t2QKL91TStUl3ejYBU8sqkPUz3pTScmVUc9wKQvGULHj-uzIsF5wwp9vfkZnwStmEVkKxCb4-CsPA";
 
 export const offlineClient = new ApolloOfflineClient({
   cache: new InMemoryCache(),
@@ -39,40 +41,33 @@ export const offlineClient = new ApolloOfflineClient({
     headers: {
       authorization: `Bearer ${token}`,
     },
-    // request: (operation) => {
-    //   operation.setContext({
-    //     headers: {
-    //       authorization: `Bearer ${token}`,
-    //     },
-    //   });
-    // },
   }),
   offlineStorage: cacheStorage,
   cacheStorage,
   networkStatus,
 });
 
-// offlineClient.registerOfflineEventListener({
-//   onOperationEnqueued(operation) {
-//     // called when operation was placed on the queue
-//     // console.log("onOperationEnqueued", operation);
-//   },
-//   onOperationFailure: (operation, error) => {
-//     // called when the operation failed
-//     console.log("onOperationFailure", error);
-//     return;
-//   },
-//   onOperationSuccess: (operation) => {
-//     // called when the operation was fulfilled
-//     // console.log("onOperationSuccess", operation);
-//   },
-//   onOperationRequeued: (operation) => {
-//     // called when an operation was loaded in from storage and placed back on the queue
-//     // This would happen across app restarts
-//     // console.log("onOperationRequeued", operation);
-//   },
-//   queueCleared() {
-//     // called when all operations are fulfilled and the queue is cleared
-//     // console.log("queuecleared");
-//   },
-// });
+offlineClient.registerOfflineEventListener({
+  onOperationEnqueued(operation) {
+    // called when operation was placed on the queue
+    // console.log("onOperationEnqueued", operation);
+  },
+  onOperationFailure: (operation, error) => {
+    // called when the operation failed
+    console.log("onOperationFailure", error);
+    return;
+  },
+  onOperationSuccess: (operation) => {
+    // called when the operation was fulfilled
+    // console.log("onOperationSuccess", operation);
+  },
+  onOperationRequeued: (operation) => {
+    // called when an operation was loaded in from storage and placed back on the queue
+    // This would happen across app restarts
+    // console.log("onOperationRequeued", operation);
+  },
+  queueCleared() {
+    // called when all operations are fulfilled and the queue is cleared
+    // console.log("queuecleared");
+  },
+});
