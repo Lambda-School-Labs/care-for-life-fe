@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import {
+  AsyncStorage,
+  Alert,
   View,
   Text,
   TextInput,
@@ -8,21 +10,45 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-
+import { useOfflineMutation } from 'react-offix-hooks';
+import { signUpMutation } from '../Queries/queries';
 import Card from "../components/Card";
 
 const RegisterScreen = (props) => {
+  const [fullName, setFullName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [signUp, state] = useOfflineMutation(signUpMutation);
 
   const handleSubmit = () => {
-    console.log("Registering");
+    await signUp({
+      variables: {
+        // may need to update "employee_name" to match backend
+        employee_name: fullName,
+        username: username,
+        password: password,
+      },
+    })
+      .then((res) => {
+        // may need to update token grab from response
+        const token = res.data.login.token;
+        AsyncStorage.setItem('token', token);
+      })
+      .catch((error) => {
+        Alert.alert('Error registering new user. Please check internet connection and credentials, then try again.');
+        console.log('Error registering user ', error);
+      });
   };
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
         <Card style={styles.card}>
+          <TextInput
+            placeholder="Full name"
+            value={fullName}
+            onChangeText={setFullName}
+          />
           <TextInput
             placeholder="Username"
             value={username}
