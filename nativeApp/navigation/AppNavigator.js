@@ -3,9 +3,7 @@ import React from "react";
 // Navigation imports
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { createDrawerNavigator } from "@react-navigation/drawer";
 
-import HomeScreen from "../screens/HomeScreen";
 import SurveyScreen from "../screens/SurveyScreen";
 import SurveyCompletedScreen from "../screens/SurveyCompletedScreen";
 import Header from "../components/Header/index";
@@ -14,7 +12,6 @@ import FamilyScreen from "../screens/FamilyScreen";
 import FamilyMembers from "../screens/FamilyMembersScreen";
 
 const Stack = createStackNavigator();
-const Drawer = createDrawerNavigator();
 
 export default function AppNavigator() {
   return (

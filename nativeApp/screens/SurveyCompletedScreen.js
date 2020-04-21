@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { ScrollView, StyleSheet, Text, View, Button } from "react-native";
 import { useOfflineMutation } from "react-offix-hooks";
-import { addAnswersMutation } from "../Queries/queries";
+import { addFamilyMutation } from "../Queries/queries";
 
 const SurveyCompletedScreen = (props) => {
-  const [addAnswers, state] = useOfflineMutation(addAnswersMutation);
+  const [addFamily, state] = useOfflineMutation(addFamilyMutation);
 
   const answers = props.route.params.surveyAnswers;
   const fullSurvey = props.route.params.fullSurvey;
   const familyName = props.route.params.familyName;
   const personName = props.route.params.personName;
   const type = props.route.params.type;
+
   const handleSubmit = async (props) => {
     console.log("Submitting Answers....", fullSurvey);
 
