@@ -7,8 +7,12 @@ import { offlineClient } from "./config/offix";
 import SplashScreen from "./screens/SpashScreen";
 import AppNavigator from "./navigation/AppNavigator";
 
+import AuthNavigator from "./navigation/AuthNavigator";
+
+
 const App = () => {
   const [initialized, setInitialized] = useState(false);
+  const [token, setToken] = useState(null);
 
   // initialize the offix client and set the apollo client
   useEffect(() => {
@@ -20,7 +24,11 @@ const App = () => {
     return (
       <ApolloOfflineProvider client={offlineClient}>
         <ApolloProvider client={offlineClient}>
-          <AppNavigator style={styles.container} />
+          {token === null ? (
+            <AuthNavigator />
+          ) : (
+            <AppNavigator style={styles.container} />
+          )}
         </ApolloProvider>
       </ApolloOfflineProvider>
     );
