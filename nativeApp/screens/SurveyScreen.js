@@ -113,9 +113,7 @@ export default class SurveyScreen extends Component {
   //Button onPress handler sends you back 1 question
   renderPreviousButton(onPress, enabled) {
     return (
-      <View
-        style={{ flexGrow: 1, maxWidth: 100, marginTop: 10, marginBottom: 10 }}
-      >
+      <View style={{ flexGrow: 1, width: "45%" }}>
         <TouchableOpacity onPress={() => this.onPreviousButtonPress()}>
           <Button
             color="crimson"
@@ -132,9 +130,7 @@ export default class SurveyScreen extends Component {
   //Button onPress handler sends you back 1 question
   renderNextButton(onPress, enabled) {
     return (
-      <View
-        style={{ flexGrow: 1, maxWidth: 100, marginTop: 10, marginBottom: 10 }}
-      >
+      <View style={{ flexGrow: 1, width: "45%" }}>
         <Button
           onPress={onPress}
           disabled={!enabled}
@@ -165,13 +161,17 @@ export default class SurveyScreen extends Component {
     return (
       <View
         key={`selection_button_view_${index}`}
-        style={{ marginTop: 5, marginBottom: 5, justifyContent: "flex-start" }}
+        style={{
+          padding: 20,
+        }}
       >
         <Button
           title={data.optionText}
           onPress={onPress}
           color={isSelected ? "crimson" : "deepskyblue"}
-          style={isSelected ? { fontWeight: "bold" } : {}}
+          style={
+            isSelected ? { fontWeight: "bold", width: 250 } : { width: 250 }
+          }
           key={`button_${index}`}
         />
       </View>
@@ -237,35 +237,7 @@ export default class SurveyScreen extends Component {
     return (
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.background}>
-          <Card style={styles.container}>
-            <SimpleSurvey
-              ref={(s) => {
-                this.surveyRef = s;
-              }}
-              survey={this.props.route.params.survey}
-              renderSelector={this.renderButton.bind(this)}
-              containerStyle={styles.surveyContainer}
-              selectionGroupContainerStyle={styles.selectionGroupContainer}
-              navButtonContainerStyle={{
-                flexDirection: "row",
-                justifyContent: "space-around",
-              }}
-              renderPrevious={this.renderPreviousButton.bind(this)}
-              renderNext={this.renderNextButton.bind(this)}
-              renderFinished={this.renderFinishedButton.bind(this)}
-              renderQuestionText={this.renderQuestionText}
-              onSurveyFinished={(answers) => this.onSurveyFinished(answers)}
-              onAnswerSubmitted={(answer) => this.onAnswerSubmitted(answer)}
-              renderTextInput={this.renderTextBox}
-              renderNumericInput={this.renderNumericInput}
-              renderInfo={this.renderInfoText}
-            />
-          </Card>
-
           <View style={styles.barContiner}>
-            <Text style={styles.barContinerText}>
-              Progress: {Math.round(this.state.progress * 100)} %
-            </Text>
             <Bar
               progress={this.state.progress}
               width={400}
@@ -275,6 +247,30 @@ export default class SurveyScreen extends Component {
               borderColor={"black"}
             />
           </View>
+          <SimpleSurvey
+            ref={(s) => {
+              this.surveyRef = s;
+            }}
+            survey={this.props.route.params.survey}
+            renderSelector={this.renderButton.bind(this)}
+            containerStyle={styles.surveyContainer}
+            selectionGroupContainerStyle={styles.selectionGroupContainer}
+            navButtonContainerStyle={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              flex: 1,
+              alignItems: "flex-end",
+            }}
+            renderPrevious={this.renderPreviousButton.bind(this)}
+            renderNext={this.renderNextButton.bind(this)}
+            renderFinished={this.renderFinishedButton.bind(this)}
+            renderQuestionText={this.renderQuestionText}
+            onSurveyFinished={(answers) => this.onSurveyFinished(answers)}
+            onAnswerSubmitted={(answer) => this.onAnswerSubmitted(answer)}
+            renderTextInput={this.renderTextBox}
+            renderNumericInput={this.renderNumericInput}
+            renderInfo={this.renderInfoText}
+          />
         </View>
       </TouchableWithoutFeedback>
     );
@@ -301,7 +297,6 @@ const styles = StyleSheet.create({
     elevation: 20,
     borderRadius: 10,
     margin: "5%",
-    backgroundColor: "#333",
     // flex: 1,
   },
   answersContainer: {
@@ -315,18 +310,19 @@ const styles = StyleSheet.create({
     elevation: 20,
     borderRadius: 10,
   },
-  // surveyContainer: {
-  //     width: 'auto',
-  //     alignSelf: 'center',
-  //     backgroundColor: 'white',
-  //     borderBottomLeftRadius: 5,
-  //     borderBottomRightRadius: 5,
-  //     borderTopLeftRadius: 5,
-  //     borderTopRightRadius: 5,
-  //     alignContent: 'center',
-  //     padding: 5,
-  //     flexGrow: 0,
-  // },
+  surveyContainer: {
+    width: "100%",
+    alignSelf: "center",
+    justifyContent: "flex-start",
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+    alignContent: "center",
+    padding: 5,
+    marginTop: 60,
+    flex: 1,
+  },
   selectionGroupContainer: {
     flexDirection: "column",
     alignContent: "flex-end",
@@ -335,22 +331,21 @@ const styles = StyleSheet.create({
     flex: 1,
     // minHeight: 800,
     // maxHeight: 800,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
   },
   questionText: {
     marginBottom: 20,
-    fontSize: 20,
+    fontSize: 30,
     textAlign: "center",
-    color: "white",
-    fontWeight: "bold",
+    color: "black",
   },
   textBox: {
     borderWidth: 1,
     borderColor: "rgba(204,204,204,1)",
     backgroundColor: "white",
     borderRadius: 5,
-    width: 250,
+    width: "auto",
     padding: 5,
     textAlignVertical: "center",
     marginLeft: 10,
@@ -363,16 +358,22 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "rgba(204,204,204,1)",
     backgroundColor: "white",
-    borderRadius: 10,
-    padding: 10,
-    textAlignVertical: "top",
+    borderRadius: 5,
+    width: "auto",
+    padding: 5,
+    textAlignVertical: "center",
     marginLeft: 10,
     marginRight: 10,
+    marginBottom: 10,
+    color: "black",
+    fontSize: 20,
   },
   infoText: {
     marginBottom: 20,
-    fontSize: 20,
+    fontSize: 40,
     marginLeft: 10,
-    color: "white",
+    color: "black",
+    textAlign: "center",
+    fontWeight: "bold",
   },
 });

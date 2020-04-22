@@ -17,12 +17,12 @@ export const annualSurvey = [
     backend_id: "ck98qh33z7hzq0874n5l6tw3q",
     questionId: "date",
   },
-  // {
-  //   questionType: "TextInput",
-  //   questionText: "Interviewer:",
-  //   backend_id: "", //blank
-  //   questionId: "interviewer",
-  // },
+  {
+    questionType: "TextInput",
+    questionText: "Interviewer:",
+    backend_id: "ck9bk8sof8s2h0874wxstfee8",
+    questionId: "interviewer",
+  },
   {
     questionType: "NumericInput",
     questionText: "Survey Number:",
@@ -129,12 +129,12 @@ export const annualSurvey = [
     backend_id: "ck98qomn57i4i0874stk16vz2",
     questionId: "head_of_household_name",
   },
-  // {
-  //   questionType: "NumericInput",
-  //   questionText: "Head of Household Age",
-  //   backend_id: "", //blank
-  //   questionId: "head_of_household_age",
-  // },
+  {
+    questionType: "NumericInput",
+    questionText: "Head of Household Age",
+    backend_id: "ck9bkdjgv8s4u0874bn52dl67",
+    questionId: "head_of_household_age",
+  },
   {
     questionType: "SelectionGroup",
     questionText: "Head of Household M or F",
@@ -254,12 +254,12 @@ export const annualSurvey = [
     backend_id: "ck98qvogc7i9e08748cf40v1y",
     questionId: "number_of_children_1_to_4",
   },
-  // {
-  //   questionType: "NumericInput",
-  //   questionText: "Number of deaths of Children older than 5?",
-  //   backend_id: "", //blank
-  //   questionId: "number_of_deaths_over_5yrs",
-  // },
+  {
+    questionType: "NumericInput",
+    questionText: "Number of deaths of Children older than 5?",
+    backend_id: "ck9bka8ps8s390874k1ys38tv",
+    questionId: "number_of_deaths_over_5yrs",
+  },
   {
     questionType: "SelectionGroup",
     questionText:
