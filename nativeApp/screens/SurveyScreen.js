@@ -6,9 +6,9 @@ import {
   TextInput,
   View,
   TouchableWithoutFeedback,
+  TouchableOpacity,
   Keyboard,
 } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { SimpleSurvey } from "react-native-simple-survey";
 import Card from "../components/Card";
 import { Bar } from "react-native-progress";
@@ -113,31 +113,50 @@ export default class SurveyScreen extends Component {
   //Button onPress handler sends you back 1 question
   renderPreviousButton(onPress, enabled) {
     return (
-      <View style={{ flexGrow: 1, width: "45%" }}>
-        <TouchableOpacity onPress={() => this.onPreviousButtonPress()}>
-          <Button
-            color="crimson"
-            onPress={onPress}
-            disabled={!enabled}
-            title={"Previous"}
-            style={styles.button}
-          />
-        </TouchableOpacity>
-      </View>
+      // <View style={{ flexGrow: 1, width: "45%" }}>
+      //   <TouchableOpacity onPress={() => this.onPreviousButtonPress()}>
+      //     <Button
+      //       color="crimson"
+      //       onPress={onPress}
+      //       disabled={!enabled}
+      //       title={"Previous"}
+      //       style={styles.button}
+      //     />
+      //   </TouchableOpacity>
+      // </View>
+
+      <TouchableOpacity
+        onPress={onPress}
+        title={"Previous"}
+        color="crimson"
+        style={styles.button}
+        disabled={!enabled}
+      >
+        <Text style={styles.buttonText}>Previous</Text>
+      </TouchableOpacity>
     );
   }
   //Function That Renders The Next Button
   //Button onPress handler sends you back 1 question
   renderNextButton(onPress, enabled) {
     return (
-      <View style={{ flexGrow: 1, width: "45%" }}>
-        <Button
-          onPress={onPress}
-          disabled={!enabled}
-          title={"Next"}
-          color="deepskyblue"
-        />
-      </View>
+      // <View style={{ flexGrow: 1, width: "45%" }}>
+      //   <Button
+      //     onPress={onPress}
+      //     disabled={!enabled}
+      //     title={"Next"}
+      //     color="deepskyblue"
+      //     style={styles.button}
+      //   />
+      // </View>
+      <TouchableOpacity
+        onPress={onPress}
+        title={"Next"}
+        color="deepskyblue"
+        style={styles.button}
+      >
+        <Text style={styles.buttonText}>Next</Text>
+      </TouchableOpacity>
     );
   }
   //Function That Renders The Finished Button
@@ -260,6 +279,7 @@ export default class SurveyScreen extends Component {
               justifyContent: "space-around",
               flex: 1,
               alignItems: "flex-end",
+              height: "auto",
             }}
             renderPrevious={this.renderPreviousButton.bind(this)}
             renderNext={this.renderNextButton.bind(this)}
@@ -282,6 +302,23 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 30,
     alignItems: "center",
+  },
+  button: {
+    height: "25%",
+    width: "45%",
+    backgroundColor: "aqua",
+    textAlign: "center",
+    flexGrow: 1,
+    flex: 1,
+    fontSize: 30,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonText: {
+    fontSize: 30,
+    textTransform: "uppercase",
+    fontWeight: "bold",
   },
   barContinerText: {
     fontSize: 25,
@@ -312,6 +349,7 @@ const styles = StyleSheet.create({
   },
   surveyContainer: {
     width: "100%",
+    backgroundColor: "yellow",
     alignSelf: "center",
     justifyContent: "flex-start",
     borderBottomLeftRadius: 5,
@@ -319,7 +357,8 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
     alignContent: "center",
-    padding: 5,
+    paddingRight: "10%",
+    paddingLeft: "10%",
     marginTop: 60,
     flex: 1,
   },
