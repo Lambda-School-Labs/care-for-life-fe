@@ -66,8 +66,4 @@ const styles = StyleSheet.create({
   },
 });
 
-<<<<<<< HEAD
 export default App;
-=======
-export default App;
->>>>>>> 9ed4b4d51507561685011ac63365387f8ec18889
