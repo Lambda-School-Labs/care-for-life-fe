@@ -3,9 +3,7 @@ import React from "react";
 // Navigation imports
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { createDrawerNavigator } from "@react-navigation/drawer";
 
-import HomeScreen from "../screens/HomeScreen";
 import SurveyScreen from "../screens/SurveyScreen";
 import SurveyCompletedScreen from "../screens/SurveyCompletedScreen";
 import Header from "../components/Header/index";
@@ -14,11 +12,10 @@ import FamilyScreen from "../screens/FamilyScreen";
 import FamilyMembers from "../screens/FamilyMembersScreen";
 
 const Stack = createStackNavigator();
-const Drawer = createDrawerNavigator();
 
 export default function AppNavigator() {
-  const FamilyStack = () => {
-    return (
+  return (
+    <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
           name="Families"
@@ -52,25 +49,6 @@ export default function AppNavigator() {
           })}
         />
       </Stack.Navigator>
-    );
-  };
-  // const HomeStack = () => {
-  //   return (
-  //     <Stack.Navigator>
-  //       <Stack.Screen
-  //         name="Home"
-  //         component={HomeScreen}
-  //         options={{ title: 'Home'}}
-  //       />
-  //     </Stack.Navigator>
-  //   )
-  // }
-  return (
-    <NavigationContainer>
-      <Drawer.Navigator>
-        {/* <Drawer.Screen name="Home" children={HomeStack}/> */}
-        <Drawer.Screen name="Familys" children={FamilyStack} />
-      </Drawer.Navigator>
     </NavigationContainer>
   );
 }

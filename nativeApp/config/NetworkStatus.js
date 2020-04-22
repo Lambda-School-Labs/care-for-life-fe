@@ -1,4 +1,4 @@
-import NetInfo from '@react-native-community/netinfo';
+import NetInfo from "@react-native-community/netinfo";
 
 /*
  * Web networks status implementation based on: Mozilla
@@ -24,10 +24,11 @@ export class NetworkStatus {
   }
 
   isOffline() {
+    // return true;
     return new Promise((resolve) => {
       NetInfo.fetch().then((state) => {
-        resolve(!state.isInternetReachable);
-      });
+        resolve(!state.isInternetReachable)
+      }).catch(err => {console.log('isOffline Promise Error', err)})
     });
   }
 

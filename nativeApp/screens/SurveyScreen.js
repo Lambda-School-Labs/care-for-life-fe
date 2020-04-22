@@ -6,7 +6,7 @@ import {
   TextInput,
   View,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { SimpleSurvey } from "react-native-simple-survey";
@@ -21,32 +21,32 @@ export default class SurveyScreen extends Component {
       answersSoFar: "",
       count: 0,
       progress: 0,
-      survey: this.props.route.params.survey
+      survey: this.props.route.params.survey,
     };
-  };
+  }
   //Filters "Info" questions out of survey
   //Allows for accurate Survey progress count
-  filterSurvey = async (survey) =>{
+  filterSurvey = async (survey) => {
     //loops through survey and assigns questions that are not marked as "Info" type
-    console.log('Running Filter!')
+    console.log("Running Filter!");
     let filteredSurvey = [];
-    await survey.forEach(question =>{
-      if(question.questionType !== 'Info'){
+    await survey.forEach((question) => {
+      if (question.questionType !== "Info") {
         // console.log('Object:', question.questionType)
-        filteredSurvey = [...filteredSurvey, question]
+        filteredSurvey = [...filteredSurvey, question];
       }
-    })
+    });
     //sets filtered survey to component state
     this.setState({
       ...this.state,
-      survey: filteredSurvey
-    })
-  }
-  componentDidMount = async () =>{
+      survey: filteredSurvey,
+    });
+  };
+  componentDidMount = async () => {
     //runs filterSurvey function on component mount
-    await this.filterSurvey(this.state.survey)
-    console.log('Survey State Length:', this.state.survey.length)
-  }
+    await this.filterSurvey(this.state.survey);
+    console.log("Survey State Length:", this.state.survey);
+  };
   onSurveyFinished(answers) {
     const infoQuestionsRemoved = [...answers];
     // Convert from an array to a proper object. This won't work if you have duplicate questionIds
@@ -61,18 +61,19 @@ export default class SurveyScreen extends Component {
     this.props.navigation.navigate("SurveyCompleted", {
       surveyAnswers: infoQuestionsRemoved,
       familyName: this.props.route.params.familyName,
+      fullSurvey: this.state.survey,
       personName: this.props.route.params.personName,
-      type: this.props.route.params.type
+      type: this.props.route.params.type,
     });
   }
 
   //Function That decrements the question count and progress state.
   onPreviousButtonPress() {
-    if(this.state.count > 0){
+    if (this.state.count > 0) {
       this.setState({
         ...this.state,
         count: (this.state.count -= 1),
-        progress: this.state.count / this.state.survey.length
+        progress: this.state.count / this.state.survey.length,
       });
     }
     // console.log("Previous Button Pressed! New Count:", this.state.count);
@@ -84,21 +85,22 @@ export default class SurveyScreen extends Component {
       : this.setState({
           ...this.state,
           count: (this.state.count += 1),
-          progress: this.state.count / this.state.survey.length
+          progress: this.state.count / this.state.survey.length,
         });
 
     console.log("Next Button Pressed! New Count:", this.state.count);
-    console.log('Survey Length',this.state.survey.length)
+    console.log("Survey Length", this.state.survey.length);
   }
   //  After each answer is submitted this function is called. Here you can take additional steps in response to the
   //  user's answers. From updating a 'correct answers' counter to exiting out of an onboarding flow if the user is
   //  is restricted (age, geo-fencing) from your app.
   onAnswerSubmitted(answer) {
     answer = { ...answer, answered: true };
+    console.log(answer);
     // console.log("Answer Submitted", answer);
     this.onNextButtonPress(answer);
     this.setState({
-      answersSoFar: JSON.stringify(this.surveyRef.getAnswers(), 2)
+      answersSoFar: JSON.stringify(this.surveyRef.getAnswers(), 2),
     });
     switch (answer.questionId) {
       default:
@@ -111,9 +113,7 @@ export default class SurveyScreen extends Component {
   //Button onPress handler sends you back 1 question
   renderPreviousButton(onPress, enabled) {
     return (
-      <View
-        style={{ flexGrow: 1, maxWidth: 100, marginTop: 10, marginBottom: 10 }}
-      >
+      <View style={{ flexGrow: 1, width: "45%" }}>
         <TouchableOpacity onPress={() => this.onPreviousButtonPress()}>
           <Button
             color="crimson"
@@ -130,9 +130,7 @@ export default class SurveyScreen extends Component {
   //Button onPress handler sends you back 1 question
   renderNextButton(onPress, enabled) {
     return (
-      <View
-        style={{ flexGrow: 1, maxWidth: 100, marginTop: 10, marginBottom: 10 }}
-      >
+      <View style={{ flexGrow: 1, width: "45%" }}>
         <Button
           onPress={onPress}
           disabled={!enabled}
@@ -163,13 +161,17 @@ export default class SurveyScreen extends Component {
     return (
       <View
         key={`selection_button_view_${index}`}
-        style={{ marginTop: 5, marginBottom: 5, justifyContent: "flex-start" }}
+        style={{
+          padding: 20,
+        }}
       >
         <Button
           title={data.optionText}
           onPress={onPress}
           color={isSelected ? "crimson" : "deepskyblue"}
-          style={isSelected ? { fontWeight: "bold" } : {}}
+          style={
+            isSelected ? { fontWeight: "bold", width: 250 } : { width: 250 }
+          }
           key={`button_${index}`}
         />
       </View>
@@ -191,7 +193,7 @@ export default class SurveyScreen extends Component {
       <View>
         <TextInput
           style={styles.textBox}
-          onChangeText={text => onChange(text)}
+          onChangeText={(text) => onChange(text)}
           numberOfLines={1}
           underlineColorAndroid={"white"}
           placeholder={placeholder}
@@ -210,7 +212,7 @@ export default class SurveyScreen extends Component {
     return (
       <TextInput
         style={styles.numericInput}
-        onChangeText={text => {
+        onChangeText={(text) => {
           onChange(text);
         }}
         underlineColorAndroid={"white"}
@@ -235,33 +237,7 @@ export default class SurveyScreen extends Component {
     return (
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.background}>
-          <Card style={styles.container}>
-            <SimpleSurvey
-              ref={s => {
-                this.surveyRef = s;
-              }}
-              survey={this.props.route.params.survey}
-              renderSelector={this.renderButton.bind(this)}
-              containerStyle={styles.surveyContainer}
-              selectionGroupContainerStyle={styles.selectionGroupContainer}
-              navButtonContainerStyle={{
-                flexDirection: "row",
-                justifyContent: "space-around"
-              }}
-              renderPrevious={this.renderPreviousButton.bind(this)}
-              renderNext={this.renderNextButton.bind(this)}
-              renderFinished={this.renderFinishedButton.bind(this)}
-              renderQuestionText={this.renderQuestionText}
-              onSurveyFinished={answers => this.onSurveyFinished(answers)}
-              onAnswerSubmitted={answer => this.onAnswerSubmitted(answer)}
-              renderTextInput={this.renderTextBox}
-              renderNumericInput={this.renderNumericInput}
-              renderInfo={this.renderInfoText}
-            />
-          </Card>
-
           <View style={styles.barContiner}>
-            <Text style={styles.barContinerText}>Progress: {Math.round(this.state.progress * 100)} %</Text>
             <Bar
               progress={this.state.progress}
               width={400}
@@ -271,6 +247,30 @@ export default class SurveyScreen extends Component {
               borderColor={"black"}
             />
           </View>
+          <SimpleSurvey
+            ref={(s) => {
+              this.surveyRef = s;
+            }}
+            survey={this.props.route.params.survey}
+            renderSelector={this.renderButton.bind(this)}
+            containerStyle={styles.surveyContainer}
+            selectionGroupContainerStyle={styles.selectionGroupContainer}
+            navButtonContainerStyle={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              flex: 1,
+              alignItems: "flex-end",
+            }}
+            renderPrevious={this.renderPreviousButton.bind(this)}
+            renderNext={this.renderNextButton.bind(this)}
+            renderFinished={this.renderFinishedButton.bind(this)}
+            renderQuestionText={this.renderQuestionText}
+            onSurveyFinished={(answers) => this.onSurveyFinished(answers)}
+            onAnswerSubmitted={(answer) => this.onAnswerSubmitted(answer)}
+            renderTextInput={this.renderTextBox}
+            renderNumericInput={this.renderNumericInput}
+            renderInfo={this.renderInfoText}
+          />
         </View>
       </TouchableWithoutFeedback>
     );
@@ -283,21 +283,20 @@ const styles = StyleSheet.create({
     padding: 30,
     alignItems: "center",
   },
-  barContinerText:{
+  barContinerText: {
     fontSize: 25,
-    padding: 5
+    padding: 5,
   },
   container: {
     minWidth: "70%",
     maxWidth: "90%",
     width: 400,
-    height: 250,
+    minHeight: 250,
     alignItems: "center",
     justifyContent: "center",
     elevation: 20,
     borderRadius: 10,
     margin: "5%",
-    backgroundColor: "#333"
     // flex: 1,
   },
   answersContainer: {
@@ -309,66 +308,72 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     backgroundColor: "white",
     elevation: 20,
-    borderRadius: 10
+    borderRadius: 10,
   },
-  // surveyContainer: {
-  //     width: 'auto',
-  //     alignSelf: 'center',
-  //     backgroundColor: 'white',
-  //     borderBottomLeftRadius: 5,
-  //     borderBottomRightRadius: 5,
-  //     borderTopLeftRadius: 5,
-  //     borderTopRightRadius: 5,
-  //     alignContent: 'center',
-  //     padding: 5,
-  //     flexGrow: 0,
-  // },
+  surveyContainer: {
+    width: "100%",
+    alignSelf: "center",
+    justifyContent: "flex-start",
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+    alignContent: "center",
+    padding: 5,
+    marginTop: 60,
+    flex: 1,
+  },
   selectionGroupContainer: {
     flexDirection: "column",
-    alignContent: "flex-end"
+    alignContent: "flex-end",
   },
   background: {
     flex: 1,
     // minHeight: 800,
     // maxHeight: 800,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
   },
   questionText: {
     marginBottom: 20,
-    fontSize: 20,
+    fontSize: 30,
     textAlign: "center",
-    color: "white",
-    fontWeight: "bold"
+    color: "black",
   },
   textBox: {
     borderWidth: 1,
     borderColor: "rgba(204,204,204,1)",
     backgroundColor: "white",
     borderRadius: 5,
-    width: 250,
+    width: "auto",
     padding: 5,
     textAlignVertical: "center",
     marginLeft: 10,
     marginRight: 10,
     marginBottom: 10,
-    color:"black",
-    fontSize: 20
+    color: "black",
+    fontSize: 20,
   },
   numericInput: {
     borderWidth: 1,
     borderColor: "rgba(204,204,204,1)",
     backgroundColor: "white",
-    borderRadius: 10,
-    padding: 10,
-    textAlignVertical: "top",
+    borderRadius: 5,
+    width: "auto",
+    padding: 5,
+    textAlignVertical: "center",
     marginLeft: 10,
-    marginRight: 10
+    marginRight: 10,
+    marginBottom: 10,
+    color: "black",
+    fontSize: 20,
   },
   infoText: {
     marginBottom: 20,
-    fontSize: 20,
+    fontSize: 40,
     marginLeft: 10,
-    color: "white"
-  }
+    color: "black",
+    textAlign: "center",
+    fontWeight: "bold",
+  },
 });
