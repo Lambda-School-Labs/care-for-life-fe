@@ -96,7 +96,7 @@ const SurveyCompletedScreen = (props) => {
               key={el.questionId}
             >
               <Text style={styles.question}>
-                {fullSurvey[index].questionText}
+                {index + 1}: {fullSurvey[index].questionText}
               </Text>
               <Text style={styles.answer}>
                 {el.value.value ? el.value.value : el.value}
@@ -104,8 +104,8 @@ const SurveyCompletedScreen = (props) => {
             </TouchableOpacity>
           ))}
         </ScrollView>
+        {button}
       </View>
-      {button}
     </View>
   );
 };
@@ -113,22 +113,20 @@ const SurveyCompletedScreen = (props) => {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white",
+    backgroundColor: "grey",
   },
   container: {
-    width: "100%",
+    width: "90%",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "white",
     elevation: 20,
-    height: "90%",
+    height: "95%",
   },
   scrollContainer: {
-    // width: "95%",
-    // borderRadius: 5,
-    // borderWidth: 3,
+    width: "95%",
   },
   title: {
     textAlign: "center",
@@ -143,30 +141,33 @@ const styles = StyleSheet.create({
     width: "100%",
     marginVertical: 5,
     padding: 5,
-    borderBottomColor: "black",
-    borderBottomWidth: 2,
+    // borderBottomColor: "black",
+    // borderBottomWidth: 2,
   },
   question: {
     fontWeight: "bold",
-    fontSize: 20,
-    textAlign: "center",
+    fontSize: 18,
+    textAlign: "left",
   },
   answer: {
-    fontSize: 20,
+    fontSize: 18,
     marginTop: 10,
-    textAlign: "center",
+    textAlign: "left",
     color: "green",
   },
   button: {
-    width: "100%",
-    backgroundColor: "deepskyblue",
-    height: "10%",
+    width: "95%",
+    backgroundColor: "black",
+    height: "9%",
     justifyContent: "center",
     alignItems: "center",
+    marginBottom: 5,
+    borderRadius: 5,
   },
   buttonText: {
     fontWeight: "bold",
     fontSize: 20,
+    color: "white",
   },
 });
 
