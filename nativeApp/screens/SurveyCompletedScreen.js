@@ -1,22 +1,20 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { useOfflineMutation } from 'react-offix-hooks';
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { useOfflineMutation } from "react-offix-hooks";
 import {
   addFamilyAndAnswersMutation,
   addIndividualAndAnswersMutation,
-} from '../Queries/queries';
-import SurveyReview from '../components/SurveyReview';
+} from "../Queries/queries";
+import SurveyReview from "../components/SurveyReview";
 
 const SurveyCompletedScreen = (props) => {
-  const [addFamilyAndAnswers, state] = useOfflineMutation(
-    addFamilyAndAnswersMutation
-  );
-  const [addFamilyIndividualAndAnswers, state] = useOfflineMutation(
+  const [addFamilyAndAnswers] = useOfflineMutation(addFamilyAndAnswersMutation);
+  const [addFamilyIndividualAndAnswers] = useOfflineMutation(
     addIndividualAndAnswersMutation
   );
 
   // need to store the backend ID returned during login/registration and set it to equal the userId variable on the line below
-  const userId = 'Insert ID of the logged in user';
+  const userId = "Insert ID of the logged in user";
   const answers = props.route.params.surveyAnswers;
   const fullSurvey = props.route.params.fullSurvey;
   const familyName = props.route.params.familyName;
@@ -24,16 +22,16 @@ const SurveyCompletedScreen = (props) => {
   const type = props.route.params.type;
 
   const annualSurveyHandler = async () => {
-    console.log('Submitting Answers....', fullSurvey);
+    console.log("Submitting Answers....", fullSurvey);
 
     await answers.forEach((answer, index) => {
-      console.log('answer being mutated', answer.value);
-      console.log('answers backendID', fullSurvey[index].backend_id);
+      console.log("answer being mutated", answer.value);
+      console.log("answers backendID", fullSurvey[index].backend_id);
       try {
         addFamilyAndAnswers({
           variables: {
             familyName: familyName,
-            surveyName: 'Family Annual Survey',
+            surveyName: "Family Annual Survey",
             employeeId: userId,
             answerText: answer.value.value
               ? answer.value.value.toString()
@@ -45,29 +43,29 @@ const SurveyCompletedScreen = (props) => {
         if (error.offline) {
           error
             .watchOfflineChange()
-            .then((res) => console.log('Offline result', res));
+            .then((res) => console.log("Offline result", res));
         }
         console.log(error);
       }
     });
 
-    props.navigation.navigate('Family', {
+    props.navigation.navigate("Family", {
       survey: answers,
       familyName: familyName,
     });
   };
 
   const individualSurveyHandler = async () => {
-    console.log('Submitting Answers....', fullSurvey);
+    console.log("Submitting Answers....", fullSurvey);
 
     await answers.forEach((answer, index) => {
-      console.log('answer being mutated', answer.value);
+      console.log("answer being mutated", answer.value);
       // console.log('answers backendID', fullSurvey[index].backend_id);
       try {
         addIndividualAndAnswers({
           variables: {
             personName: personName,
-            surveyName: 'Individual Annual Survey',
+            surveyName: "Individual Annual Survey",
             employeeId: userId,
             answerText: answer.value.value
               ? answer.value.value.toString()
@@ -79,13 +77,13 @@ const SurveyCompletedScreen = (props) => {
         if (error.offline) {
           error
             .watchOfflineChange()
-            .then((res) => console.log('Offline result', res));
+            .then((res) => console.log("Offline result", res));
         }
         console.log(error);
       }
     });
 
-    props.navigation.navigate('FamilyMembers', {
+    props.navigation.navigate("FamilyMembers", {
       survey: answers,
     });
   };
@@ -105,9 +103,9 @@ const SurveyCompletedScreen = (props) => {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'grey',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "grey",
   },
 });
 
