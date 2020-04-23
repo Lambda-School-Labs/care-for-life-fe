@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
-import { annualSurvey } from '../surveys/annualSurvey.js';
+import React, { useState } from "react";
+import { StyleSheet, View, Text, Button, TouchableOpacity } from "react-native";
+import { annualSurvey } from "../surveys/annualSurvey.js";
 
 const FamilyScreen = ({ route, navigation }) => {
   // Displays the family name
@@ -9,43 +9,42 @@ const FamilyScreen = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
-        <Button
+        <TouchableOpacity
           style={styles.button}
-          color="black"
-          title="Annual Survey"
           onPress={() =>
-            navigation.navigate('Survey', {
+            navigation.navigate("Survey", {
               familyName: route.params.familyName,
               survey: annualSurvey,
-              type: 'Family',
+              type: "Family",
             })
           }
-        />
-        <Button
-          style={styles.button}
-          color="black"
-          title="Another Survey"
-          onPress={() => console.log('Nothing here yet')}
-        />
-        <Button
-          style={styles.button}
-          color="black"
-          title="Another Survey"
-          onPress={() => console.log('Nothing here yet')}
-        />
+        >
+          <Text style={styles.buttonText}>Annual Survey</Text>
+        </TouchableOpacity>
       </View>
-
-      <View style={{ flex: 1, width: '80%', justifyContent: 'center' }}>
-        <Button
-          style={styles.button}
-          color="green"
-          title="Individual Survey"
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.buttonAlt}
           onPress={() =>
-            navigation.navigate('FamilyMembers', {
+            navigation.navigate("FamilyMembers", {
               familyName: route.params.familyName,
             })
           }
-        />
+        >
+          <Text style={styles.buttonText}>Some Other Survey</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.buttonAlt}
+          onPress={() =>
+            navigation.navigate("FamilyMembers", {
+              familyName: route.params.familyName,
+            })
+          }
+        >
+          <Text style={styles.buttonText}>Individual Survey</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -58,14 +57,26 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonContainer: {
-    width: '80%',
-    justifyContent: 'space-around',
+    width: "80%",
+    justifyContent: "space-around",
     flex: 1,
   },
   button: {
-    width: '95%',
-    justifyContent: 'center',
-    padding: '5px',
+    width: "100%",
+    justifyContent: "center",
+    height: 200,
+    backgroundColor: "black",
+  },
+  buttonAlt: {
+    width: "100%",
+    justifyContent: "center",
+    height: 200,
+    backgroundColor: "seagreen",
+  },
+  buttonText: {
+    textAlign: "center",
+    color: "white",
+    fontSize: 35,
   },
 });
 

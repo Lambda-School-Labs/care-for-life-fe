@@ -8,10 +8,13 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
   Keyboard,
+  Alert,
 } from "react-native";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { SimpleSurvey } from "react-native-simple-survey";
 import Card from "../components/Card";
 import { Bar } from "react-native-progress";
+import back from "../assets/images/back.png";
 
 export default class SurveyScreen extends Component {
   constructor(props) {
@@ -22,6 +25,7 @@ export default class SurveyScreen extends Component {
       count: 0,
       progress: 0,
       survey: this.props.route.params.survey,
+      info: true,
     };
   }
   //Filters "Info" questions out of survey
@@ -45,7 +49,7 @@ export default class SurveyScreen extends Component {
   componentDidMount = async () => {
     //runs filterSurvey function on component mount
     await this.filterSurvey(this.state.survey);
-    console.log("Survey State Length:", this.state.survey);
+    // console.log("Survey State Length:", this.state.survey);
   };
   onSurveyFinished(answers) {
     const infoQuestionsRemoved = [...answers];
@@ -68,7 +72,10 @@ export default class SurveyScreen extends Component {
   }
 
   //Function That decrements the question count and progress state.
-  onPreviousButtonPress() {
+  async onPreviousButtonPress(onPress) {
+    //performs onPress function from package
+    await onPress();
+    //then updates the progress
     if (this.state.count > 0) {
       this.setState({
         ...this.state,
@@ -96,7 +103,7 @@ export default class SurveyScreen extends Component {
   //  is restricted (age, geo-fencing) from your app.
   onAnswerSubmitted(answer) {
     answer = { ...answer, answered: true };
-    console.log(answer);
+
     // console.log("Answer Submitted", answer);
     this.onNextButtonPress(answer);
     this.setState({
@@ -114,7 +121,7 @@ export default class SurveyScreen extends Component {
   renderPreviousButton(onPress, enabled) {
     return (
       // <View style={{ flexGrow: 1, width: "45%" }}>
-      //   <TouchableOpacity onPress={() => this.onPreviousButtonPress()}>
+      //   <TouchableOpacity style={styles.button} onPress={() => this.onPreviousButtonPress()}>
       //     <Button
       //       color="crimson"
       //       onPress={onPress}
@@ -124,15 +131,17 @@ export default class SurveyScreen extends Component {
       //     />
       //   </TouchableOpacity>
       // </View>
-
       <TouchableOpacity
-        onPress={onPress}
+        onPress={() => this.onPreviousButtonPress(onPress)}
         title={"Previous"}
         color="crimson"
         style={styles.button}
         disabled={!enabled}
       >
-        <Text style={styles.buttonText}>Previous</Text>
+        <Text style={styles.buttonText}>
+          <FontAwesome5 name="arrow-left" size={30} color="white" />
+          Previous
+        </Text>
       </TouchableOpacity>
     );
   }
@@ -154,8 +163,12 @@ export default class SurveyScreen extends Component {
         title={"Next"}
         color="deepskyblue"
         style={styles.button}
+        disabled={!enabled}
       >
-        <Text style={styles.buttonText}>Next</Text>
+        <Text style={styles.buttonText}>
+          Next
+          <FontAwesome5 name="arrow-right" size={30} color="white" />
+        </Text>
       </TouchableOpacity>
     );
   }
@@ -180,26 +193,23 @@ export default class SurveyScreen extends Component {
     return (
       <View
         key={`selection_button_view_${index}`}
-        style={{
-          padding: 20,
-        }}
+        style={styles.answerButtonContainer}
       >
-        <Button
-          title={data.optionText}
+        {console.log("button index:", { data, index })}
+        <TouchableOpacity
           onPress={onPress}
-          color={isSelected ? "crimson" : "deepskyblue"}
-          style={
-            isSelected ? { fontWeight: "bold", width: 250 } : { width: 250 }
-          }
+          style={isSelected ? styles.answerButtonSelected : styles.answerButton}
           key={`button_${index}`}
-        />
+        >
+          <Text style={styles.answerButtonText}>{data.optionText}</Text>
+        </TouchableOpacity>
       </View>
     );
   }
 
   renderQuestionText(questionText) {
     return (
-      <View style={{ marginLeft: 10, marginRight: 10 }}>
+      <View style={styles.questionWrapper}>
         <Text numLines={1} style={styles.questionText}>
           {questionText}
         </Text>
@@ -247,7 +257,7 @@ export default class SurveyScreen extends Component {
 
   renderInfoText(infoText) {
     return (
-      <View style={{ marginLeft: 10, marginRight: 10 }}>
+      <View style={styles.infoTextWrapper}>
         <Text style={styles.infoText}>{infoText}</Text>
       </View>
     );
@@ -274,13 +284,7 @@ export default class SurveyScreen extends Component {
             renderSelector={this.renderButton.bind(this)}
             containerStyle={styles.surveyContainer}
             selectionGroupContainerStyle={styles.selectionGroupContainer}
-            navButtonContainerStyle={{
-              flexDirection: "row",
-              justifyContent: "space-around",
-              flex: 1,
-              alignItems: "flex-end",
-              height: "auto",
-            }}
+            navButtonContainerStyle={styles.navButtonContainerStyles}
             renderPrevious={this.renderPreviousButton.bind(this)}
             renderNext={this.renderNextButton.bind(this)}
             renderFinished={this.renderFinishedButton.bind(this)}
@@ -303,10 +307,35 @@ const styles = StyleSheet.create({
     padding: 30,
     alignItems: "center",
   },
-  button: {
-    height: "25%",
+  answerButtonContainer: {
+    width: "100%",
+  },
+  answerButton: {
+    width: "100%",
+    height: 200,
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "black",
+    borderWidth: 1,
+    backgroundColor: "#333",
+  },
+  answerButtonSelected: {
+    width: "100%",
+    height: 200,
+    backgroundColor: "forestgreen",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  answerButtonText: {
+    color: "white",
+    fontSize: 30,
+    textAlign: "center",
+    textAlignVertical: "center",
+  },
+  disabledButton: {
+    height: "15%",
     width: "45%",
-    backgroundColor: "aqua",
+    backgroundColor: "#333",
     textAlign: "center",
     flexGrow: 1,
     flex: 1,
@@ -314,11 +343,30 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    borderRadius: 10,
+    margin: 5,
+  },
+  button: {
+    height: 150,
+    width: "45%",
+    backgroundColor: "black",
+    textAlign: "center",
+    flexGrow: 1,
+    flex: 1,
+    fontSize: 30,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+    margin: 5,
   },
   buttonText: {
     fontSize: 30,
     textTransform: "uppercase",
     fontWeight: "bold",
+    color: "white",
+    display: "flex",
+    justifyContent: "space-around",
   },
   barContinerText: {
     fontSize: 25,
@@ -349,17 +397,11 @@ const styles = StyleSheet.create({
   },
   surveyContainer: {
     width: "100%",
-    backgroundColor: "yellow",
     alignSelf: "center",
-    justifyContent: "flex-start",
-    borderBottomLeftRadius: 5,
-    borderBottomRightRadius: 5,
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
+    justifyContent: "space-evenly",
     alignContent: "center",
-    paddingRight: "10%",
-    paddingLeft: "10%",
-    marginTop: 60,
+    paddingRight: "5%",
+    paddingLeft: "5%",
     flex: 1,
   },
   selectionGroupContainer: {
@@ -373,11 +415,18 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
   },
+  questionWrapper: {
+    height: 200,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "black",
+  },
   questionText: {
     marginBottom: 20,
     fontSize: 30,
     textAlign: "center",
-    color: "black",
+    textTransform: "uppercase",
+    color: "white",
   },
   textBox: {
     borderWidth: 1,
@@ -387,11 +436,8 @@ const styles = StyleSheet.create({
     width: "auto",
     padding: 5,
     textAlignVertical: "center",
-    marginLeft: 10,
-    marginRight: 10,
-    marginBottom: 10,
     color: "black",
-    fontSize: 20,
+    fontSize: 35,
   },
   numericInput: {
     borderWidth: 1,
@@ -401,18 +447,33 @@ const styles = StyleSheet.create({
     width: "auto",
     padding: 5,
     textAlignVertical: "center",
-    marginLeft: 10,
-    marginRight: 10,
-    marginBottom: 10,
     color: "black",
-    fontSize: 20,
+    fontSize: 35,
+  },
+  infoTextWrapper: {
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 25,
+    color: "white",
+    height: "80%",
   },
   infoText: {
     marginBottom: 20,
     fontSize: 40,
     marginLeft: 10,
-    color: "black",
+    width: "75%",
+    color: "white",
     textAlign: "center",
     fontWeight: "bold",
+    backgroundColor: "black",
+    padding: 20,
+    textTransform: "capitalize",
+  },
+  navButtonContainerStyles: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    flex: 1,
+    alignItems: "flex-end",
+    height: "10%",
   },
 });
