@@ -1,12 +1,16 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { useOfflineMutation } from "react-offix-hooks";
-import { addFamilyMutation } from "../Queries/queries";
-import SurveyReview from "../components/SurveyReview";
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { useOfflineMutation } from 'react-offix-hooks';
+import { addFamilyAndAnswersMutation } from '../Queries/queries';
+import SurveyReview from '../components/SurveyReview';
 
 const SurveyCompletedScreen = (props) => {
-  const [addFamily, state] = useOfflineMutation(addFamilyMutation);
+  const [addFamilyAndAnswers, state] = useOfflineMutation(
+    addFamilyAndAnswersMutation
+  );
 
+  // need to store the backend ID returned during login/registration and set it to equal the userId variable on the line below
+  const userId = 'Insert ID of the logged in user';
   const answers = props.route.params.surveyAnswers;
   const fullSurvey = props.route.params.fullSurvey;
   const familyName = props.route.params.familyName;
@@ -14,33 +18,34 @@ const SurveyCompletedScreen = (props) => {
   const type = props.route.params.type;
 
   const annualSurveyHandler = async () => {
-    console.log("Submitting Answers....", fullSurvey);
+    console.log('Submitting Answers....', fullSurvey);
 
     await answers.forEach((answer, index) => {
-      console.log("answer being mutated", answer.value);
-      console.log("answers backendID", fullSurvey[index].backend_id);
+      console.log('answer being mutated', answer.value);
+      console.log('answers backendID', fullSurvey[index].backend_id);
       try {
-        addAnswers({
+        addFamilyAndAnswers({
           variables: {
-            answer: answer.value.value
+            familyName: familyName,
+            surveyName: 'Family Annual Survey',
+            employeeId: userId,
+            answerText: answer.value.value
               ? answer.value.value.toString()
               : answer.value.toString(),
             questionId: fullSurvey[index].backend_id,
-            familyId: "ck9a3uqh384530874p5ws4zo8",
-            surveyId: "ck98pnlc17hmd0874rfdsxug0",
           },
         });
       } catch (error) {
         if (error.offline) {
           error
             .watchOfflineChange()
-            .then((res) => console.log("Offline result", res));
+            .then((res) => console.log('Offline result', res));
         }
         console.log(error);
       }
     });
 
-    props.navigation.navigate("Family", {
+    props.navigation.navigate('Family', {
       survey: answers,
       familyName: familyName,
     });
@@ -61,9 +66,9 @@ const SurveyCompletedScreen = (props) => {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "grey",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'grey',
   },
 });
 
