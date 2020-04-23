@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, StyleSheet, Text, View, Button } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  Alert,
+  TouchableOpacity,
+} from "react-native";
 import { useOfflineMutation } from "react-offix-hooks";
 import { addFamilyMutation } from "../Queries/queries";
 
@@ -45,16 +53,24 @@ const SurveyCompletedScreen = (props) => {
     });
   };
 
+  // Creates two different buttons depending on the survey taken
   let button;
   let text;
 
   if (type === "Family") {
-    button = <Button title="Go Home" onPress={() => handleSubmit(props)} />;
-    text = <Text>{familyName} Family</Text>;
+    button = (
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => handleSubmit(props)}
+      >
+        <Text style={styles.buttonText}>Submit</Text>
+      </TouchableOpacity>
+    );
+    text = <Text style={styles.title}>{familyName} Family</Text>;
   } else if (type === "Person") {
     button = (
-      <Button
-        title="Go Home"
+      <TouchableOpacity
+        style={styles.button}
         onPress={() =>
           props.navigation.navigate("FamilyMembers", {
             survey: answers,
@@ -62,26 +78,34 @@ const SurveyCompletedScreen = (props) => {
             personName: personName,
           })
         }
-      />
+      >
+        <Text style={styles.buttonText}>Submit</Text>
+      </TouchableOpacity>
     );
-    text = <Text>{personName}</Text>;
+    text = <Text style={styles.title}>{personName}</Text>;
   }
   return (
     <View style={styles.background}>
-      {text}
       <View style={styles.container}>
-        <ScrollView>
-          {answers.map((el) => (
-            // Here, I just used JavaScript to display the questionId and answer value
-            <Text key={Math.random()}>
-              {el.questionId.replace(/_/g, " ")}:{" "}
-              {el.value.value ? el.value.value : el.value}
-            </Text>
+        {text}
+        <ScrollView style={styles.scrollContainer}>
+          {answers.map((el, index) => (
+            <TouchableOpacity
+              onPress={() => Alert.alert("Edit function here")}
+              style={styles.answerContainer}
+              key={el.questionId}
+            >
+              <Text style={styles.question}>
+                {fullSurvey[index].questionText}
+              </Text>
+              <Text style={styles.answer}>
+                {el.value.value ? el.value.value : el.value}
+              </Text>
+            </TouchableOpacity>
           ))}
         </ScrollView>
-
-        {button}
       </View>
+      {button}
     </View>
   );
 };
@@ -89,22 +113,59 @@ const SurveyCompletedScreen = (props) => {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: "white",
   },
   container: {
-    minWidth: "70%",
-    maxWidth: "90%",
-    alignItems: "stretch",
+    width: "100%",
+    alignItems: "center",
     justifyContent: "center",
     backgroundColor: "white",
     elevation: 20,
-    borderRadius: 10,
-    maxHeight: "80%",
+    height: "90%",
   },
-  questionText: {
-    marginBottom: 20,
+  scrollContainer: {
+    // width: "95%",
+    // borderRadius: 5,
+    // borderWidth: 3,
+  },
+  title: {
+    textAlign: "center",
+    fontWeight: "bold",
+    padding: 5,
+    fontSize: 30,
+    width: "100%",
+    backgroundColor: "black",
+    color: "white",
+  },
+  answerContainer: {
+    width: "100%",
+    marginVertical: 5,
+    padding: 5,
+    borderBottomColor: "black",
+    borderBottomWidth: 2,
+  },
+  question: {
+    fontWeight: "bold",
+    fontSize: 20,
+    textAlign: "center",
+  },
+  answer: {
+    fontSize: 20,
+    marginTop: 10,
+    textAlign: "center",
+    color: "green",
+  },
+  button: {
+    width: "100%",
+    backgroundColor: "deepskyblue",
+    height: "10%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonText: {
+    fontWeight: "bold",
     fontSize: 20,
   },
 });
