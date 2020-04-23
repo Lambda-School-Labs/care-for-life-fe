@@ -184,7 +184,7 @@ export const annualSurvey = [
     ],
   },
   {
-    questionType: "TextInput",
+    questionType: "NumericInput",
     questionText: "If yes, how many orphans live in the home?",
     backend_id: "ck98qr96m7i6a0874wcb8kck1",
     questionId: "number_of_orphans",
