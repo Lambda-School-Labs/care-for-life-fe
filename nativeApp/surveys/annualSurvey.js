@@ -3,7 +3,7 @@
 export const annualSurvey = [
   {
     questionType: "Info",
-    questionText: "Welcome! To get started press next.",
+    questionText: "Welcome To The Annual SurveyPress Next to get started",
   },
   {
     questionType: "TextInput",
