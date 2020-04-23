@@ -25,14 +25,13 @@ export default class SurveyScreen extends Component {
       count: 0,
       progress: 0,
       survey: this.props.route.params.survey,
-      info: true,
+      start: true,
     };
   }
   //Filters "Info" questions out of survey
   //Allows for accurate Survey progress count
   filterSurvey = async (survey) => {
     //loops through survey and assigns questions that are not marked as "Info" type
-    console.log("Running Filter!");
     let filteredSurvey = [];
     await survey.forEach((question) => {
       if (question.questionType !== "Info") {
@@ -49,7 +48,6 @@ export default class SurveyScreen extends Component {
   componentDidMount = async () => {
     //runs filterSurvey function on component mount
     await this.filterSurvey(this.state.survey);
-    // console.log("Survey State Length:", this.state.survey);
   };
   onSurveyFinished(answers) {
     const infoQuestionsRemoved = [...answers];
@@ -83,10 +81,15 @@ export default class SurveyScreen extends Component {
         progress: this.state.count / this.state.survey.length,
       });
     }
-    // console.log("Previous Button Pressed! New Count:", this.state.count);
   }
   //Function That increments the question count and progress state.
   onNextButtonPress(answer) {
+    console.log(this.state.start);
+    if (this.state.start === true) {
+      console.log("toggling start", this.state.start);
+      this.setState({ ...this.state, start: false });
+      console.log("toggling now:", this.state.start);
+    }
     !answer.answered
       ? console.log("This Question Has Been Answered")
       : this.setState({
@@ -103,7 +106,6 @@ export default class SurveyScreen extends Component {
   //  is restricted (age, geo-fencing) from your app.
   onAnswerSubmitted(answer) {
     answer = { ...answer, answered: true };
-
     // console.log("Answer Submitted", answer);
     this.onNextButtonPress(answer);
     this.setState({
@@ -131,6 +133,7 @@ export default class SurveyScreen extends Component {
       //     />
       //   </TouchableOpacity>
       // </View>
+
       <TouchableOpacity
         onPress={() => this.onPreviousButtonPress(onPress)}
         title={"Previous"}
@@ -176,16 +179,27 @@ export default class SurveyScreen extends Component {
   //Button onPress handler sends you back to surveys screen
   renderFinishedButton(onPress, enabled) {
     return (
-      <View
-        style={{ flexGrow: 1, maxWidth: 100, marginTop: 10, marginBottom: 10 }}
+      // <View
+      //   style={{ flexGrow: 1, maxWidth: 100, marginTop: 10, marginBottom: 10 }}
+      // >
+      //   <Button
+      //     title={"Finished"}
+      //     onPress={onPress}
+      //     disabled={!enabled}
+      //     color="black"
+      //   />
+      // </View>
+      <TouchableOpacity
+        onPress={onPress}
+        title={"Finish"}
+        style={styles.button}
+        disabled={!enabled}
       >
-        <Button
-          title={"Finished"}
-          onPress={onPress}
-          disabled={!enabled}
-          color="black"
-        />
-      </View>
+        <Text style={styles.buttonText}>
+          Finish
+          <FontAwesome5 name="flag-checkered" size={30} color="white" />
+        </Text>
+      </TouchableOpacity>
     );
   }
 
@@ -218,6 +232,7 @@ export default class SurveyScreen extends Component {
   }
 
   renderTextBox(onChange, value, placeholder, onBlur) {
+    placeholder = `Answer Question Here...`;
     return (
       <View>
         <TextInput
@@ -238,6 +253,7 @@ export default class SurveyScreen extends Component {
   }
 
   renderNumericInput(onChange, value, placeholder, onBlur) {
+    placeholder = `Answer Question Here...`;
     return (
       <TextInput
         style={styles.numericInput}
