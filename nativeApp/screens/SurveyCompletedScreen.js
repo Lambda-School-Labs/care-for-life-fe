@@ -1,7 +1,8 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useOfflineMutation } from 'react-offix-hooks';
 import { addFamilyAndAnswersMutation } from '../Queries/queries';
+import SurveyReview from '../components/SurveyReview';
 
 const SurveyCompletedScreen = (props) => {
   const [addFamilyAndAnswers, state] = useOfflineMutation(
@@ -16,7 +17,7 @@ const SurveyCompletedScreen = (props) => {
   const personName = props.route.params.personName;
   const type = props.route.params.type;
 
-  const handleSubmit = async (props) => {
+  const annualSurveyHandler = async () => {
     console.log('Submitting Answers....', fullSurvey);
 
     await answers.forEach((answer, index) => {
@@ -50,43 +51,14 @@ const SurveyCompletedScreen = (props) => {
     });
   };
 
-  let button;
-  let text;
-
-  if (type === 'Family') {
-    button = <Button title="Go Home" onPress={() => handleSubmit(props)} />;
-    text = <Text>{familyName} Family</Text>;
-  } else if (type === 'Person') {
-    button = (
-      <Button
-        title="Go Home"
-        onPress={() =>
-          props.navigation.navigate('FamilyMembers', {
-            survey: answers,
-            familyName: familyName,
-            personName: personName,
-          })
-        }
-      />
-    );
-    text = <Text>{personName}</Text>;
-  }
   return (
     <View style={styles.background}>
-      {text}
-      <View style={styles.container}>
-        <ScrollView>
-          {answers.map((el) => (
-            // Here, I just used JavaScript to display the questionId and answer value
-            <Text key={Math.random()}>
-              {el.questionId.replace(/_/g, ' ')}:{' '}
-              {el.value.value ? el.value.value : el.value}
-            </Text>
-          ))}
-        </ScrollView>
-
-        {button}
-      </View>
+      <SurveyReview
+        name={familyName}
+        submitHandler={annualSurveyHandler}
+        answers={answers}
+        fullSurvey={fullSurvey}
+      />
     </View>
   );
 };
@@ -96,21 +68,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
-  },
-  container: {
-    minWidth: '70%',
-    maxWidth: '90%',
-    alignItems: 'stretch',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-    elevation: 20,
-    borderRadius: 10,
-    maxHeight: '80%',
-  },
-  questionText: {
-    marginBottom: 20,
-    fontSize: 20,
+    backgroundColor: 'grey',
   },
 });
 

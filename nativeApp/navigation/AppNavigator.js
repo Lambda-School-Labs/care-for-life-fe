@@ -44,9 +44,7 @@ export default function AppNavigator() {
         <Stack.Screen
           name="SurveyCompleted"
           component={SurveyCompletedScreen}
-          options={({ route }) => ({
-            title: `${route.params.type} Survey Results`,
-          })}
+          options={{ title: `Results` }}
         />
       </Stack.Navigator>
     </NavigationContainer>

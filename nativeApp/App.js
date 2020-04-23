@@ -11,7 +11,7 @@ import AuthNavigator from "./navigation/AuthNavigator";
 
 const App = () => {
   const [initialized, setInitialized] = useState(false);
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(true);
 
   // initialize the offix client and set the apollo client
   useEffect(() => {
@@ -20,24 +20,21 @@ const App = () => {
 
   useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
-    const getToken = async () => {
-      let userToken;
-
-      try {
-        userToken = await AsyncStorage.getItem("userToken");
-      } catch (e) {
-        // Restoring token failed
-        console.log(e);
-      }
-
-      // After restoring token, we may need to validate it in production apps
-
-      // This will switch to the App screen or Auth screen and this loading
-      // screen will be unmounted and thrown away.
-      setToken(userToken);
-    };
-
-    getToken();
+    // const getToken = async () => {
+    //   let userToken;
+    //   try {
+    //     userToken = await AsyncStorage.getItem("userToken");
+    //     console.log("userToken:", userToken);
+    //   } catch (e) {
+    //     // Restoring token failed
+    //     console.log(e);
+    //   }
+    //   // After restoring token, we may need to validate it in production apps
+    //   // This will switch to the App screen or Auth screen and this loading
+    //   // screen will be unmounted and thrown away.
+    //   setToken(userToken);
+    // };
+    // getToken();
   }, []);
 
   // load the app if the apolloClient is there, otherwise load the splash screen
