@@ -68,8 +68,8 @@ offlineClient.registerOfflineEventListener({
   },
   onOperationFailure: (operation, error) => {
     // called when the operation failed
-    console.log("onOperationFailure", error);
-    return;
+    // console.log("onOperationFailure", error);
+    // return;
   },
   onOperationSuccess: (operation) => {
     // called when the operation was fulfilled
