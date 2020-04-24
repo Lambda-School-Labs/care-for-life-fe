@@ -10,12 +10,15 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
+import { ISSUER } from "react-native-dotenv";
 import Card from "../components/Card";
 //Authentication Imports
 import * as AuthSession from "expo-auth-session";
 import * as WebBrowser from "expo-web-browser";
 import { Linking } from "expo";
 import config from "../api/oktaConfig.js";
+
+//configure as web platform to allow for Okta redirects
 if (Platform.OS === "web") {
   WebBrowser.maybeCompleteAuthSession();
 }
@@ -25,10 +28,9 @@ const useProxy = true;
 const LoginScreen = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const discovery = AuthSession.useAutoDiscovery(
-    "https://okta.careforlife.dev/oauth2/default"
-  );
+  const discovery = AuthSession.useAutoDiscovery(ISSUER);
   // Request
   const [request, response, promptAsync] = AuthSession.useAuthRequest(
     config,
@@ -37,7 +39,8 @@ const LoginScreen = (props) => {
 
   const handleSubmit = async () => {
     //Expo Authentication
-    promptAsync({ useProxy });
+    let res = await promptAsync({ useProxy });
+    console.log("Okta Response:", res);
   };
   // Endpoint
 
