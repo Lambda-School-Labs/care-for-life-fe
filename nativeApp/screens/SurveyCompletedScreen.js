@@ -117,9 +117,9 @@ const SurveyCompletedScreen = (props) => {
         fullSurvey={fullSurvey}
         handleEdit={handleEdit}
       />
-      <Modal isVisible={isModalVisible} backdropOpacity={0.8}>
+      <Modal isVisible={isModalVisible} backdropOpacity={0.9}>
         <View style={styles.modal}>
-          <Text style={styles.modalTitle}>Update Answer for {question}</Text>
+          <Text style={styles.modalTitle}>{question}</Text>
           <TextInput
             placeholder="answer here"
             value={answer.toString()}
@@ -132,7 +132,7 @@ const SurveyCompletedScreen = (props) => {
               <Button color="red" title="Cancel" onPress={toggleModal} />
             </View>
             <View style={styles.button}>
-              <Button title="Submit" onPress={handleSubmit} />
+              <Button title="Update" onPress={handleSubmit} />
             </View>
           </View>
         </View>
@@ -172,7 +172,6 @@ const styles = StyleSheet.create({
   },
   button: {
     width: 100,
-    backgroundColor: "white",
   },
 });
 
