@@ -1,8 +1,10 @@
-
 import React, { useState, useEffect } from "react";
 import { Text, View, TextInput, Button, Alert, StyleSheet } from "react-native";
 import { useOfflineMutation } from "react-offix-hooks";
-import { addFamilyAndAnswersMutation } from "../Queries/queries";
+import {
+  addFamilyAndAnswersMutation,
+  addIndividualAndAnswersMutation,
+} from "../Queries/queries";
 import SurveyReview from "../components/SurveyReview";
 import Modal from "react-native-modal";
 
@@ -18,6 +20,7 @@ const SurveyCompletedScreen = (props) => {
 
   const [addFamilyAndAnswers, state] = useOfflineMutation(
     addFamilyAndAnswersMutation
+  );
 
   const [addFamilyIndividualAndAnswers] = useOfflineMutation(
     addIndividualAndAnswersMutation
@@ -32,7 +35,6 @@ const SurveyCompletedScreen = (props) => {
   const type = props.route.params.type;
 
   const annualSurveyHandler = async () => {
-
     console.log("Submitting Answers....", answers);
 
     await answers.forEach((answer, index) => {
@@ -65,7 +67,6 @@ const SurveyCompletedScreen = (props) => {
       familyName: familyName,
     });
   };
-
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
@@ -112,6 +113,7 @@ const SurveyCompletedScreen = (props) => {
     setQuestion("");
     setAnswerIndex("");
     toggleModal();
+  };
 
   const individualSurveyHandler = async () => {
     console.log("Submitting Answers....", fullSurvey);
@@ -144,7 +146,6 @@ const SurveyCompletedScreen = (props) => {
     props.navigation.navigate("FamilyMembers", {
       survey: answers,
     });
-
   };
 
   return (

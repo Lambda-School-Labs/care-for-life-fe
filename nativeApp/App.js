@@ -10,7 +10,7 @@ import AuthNavigator from "./navigation/AuthNavigator";
 
 const App = () => {
   const [initialized, setInitialized] = useState(false);
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState("token");
 
   // const discovery = AuthSession.useAutoDiscovery({ ISSUER });
 

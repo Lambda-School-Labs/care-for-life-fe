@@ -18,8 +18,8 @@ const AllFamiliesScreen = ({ navigation }) => {
 
   const [families, setFamilies] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [familyName, setFamilyName] = useState({ name: "" });
-
+  const [familyName, setFamilyName] = useState({ name: "", members: [] });
+  console.log(families);
   // Gets data in async storage
   const retrieveData = async () => {
     try {
@@ -60,7 +60,7 @@ const AllFamiliesScreen = ({ navigation }) => {
   };
 
   const handleChange = (text) => {
-    setFamilyName({ ...familyName, name: text });
+    setFamilyName({ ...familyName, name: text, members: [] });
   };
 
   const handleSubmit = async () => {

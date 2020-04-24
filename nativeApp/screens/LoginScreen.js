@@ -30,10 +30,10 @@ const LoginScreen = (props) => {
     "https://okta.careforlife.dev/oauth2/default"
   );
   // Request
-  const [request, response, promptAsync] = AuthSession.useAuthRequest(
-    config,
-    discovery
-  );
+  // const [request, response, promptAsync] = AuthSession.useAuthRequest(
+  //   config,
+  //   discovery
+  // );
 
   const handleSubmit = async () => {
     //Expo Authentication

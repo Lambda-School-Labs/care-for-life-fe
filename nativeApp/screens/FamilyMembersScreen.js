@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Button,
   TextInput,
+  AsyncStorage,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import Card from "../components/Card";
@@ -18,6 +19,53 @@ const FamilyMembers = ({ navigation, route }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [memberName, setMemberName] = useState({ name: "" });
 
+  // Gets data in async storage
+  const retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("FAMILIES");
+
+      const parsedValue = JSON.parse(value).find(
+        (el) => el.name === route.params.familyName
+      );
+
+      if (parsedValue.members === null || parsedValue.members.length === 0) {
+        // No data, initialize familyMembers to an empty array
+        setFamilyMembers([]);
+        return;
+      } else {
+        // There is data, set it to state
+        console.log("You have family members", parsedValue);
+        setFamilyMembers(parsedValue.members);
+      }
+    } catch (error) {
+      // Error retrieving data
+      console.log(error);
+    }
+  };
+
+  // Sets data to async storage, expects an array
+  const setData = (familyMemberArr) => {
+    AsyncStorage.getItem("FAMILIES")
+      .then((res) => {
+        let newRes = JSON.parse(res).map((el) => {
+          if (el.name === route.params.familyName) {
+            el.members = familyMemberArr;
+          }
+        });
+        console.log("RES", newRes);
+        return newRes;
+      })
+      .catch((err) => console.log(err));
+    //   { name: route.params.familyName, members: familyMemberArr },
+
+    // AsyncStorage.setItem("FAMILIES", JSON.stringify(newArr));
+  };
+
+  // Runs when the app first starts and will add any families in storage to state so they will be displayed
+  useEffect(() => {
+    retrieveData();
+  }, []);
+
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
   };
@@ -26,12 +74,17 @@ const FamilyMembers = ({ navigation, route }) => {
     setMemberName({ ...memberName, name: text });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!memberName.name) {
       toggleModal();
       return;
     }
-    setFamilyMembers([...familyMembers, memberName]);
+    // Set async storage to the families already in state including the the family being added
+    await setData([...familyMembers, memberName]);
+
+    retrieveData();
+    // Try catch block below for mutation
+
     setMemberName({ name: "" });
     toggleModal();
   };
@@ -67,6 +120,19 @@ const FamilyMembers = ({ navigation, route }) => {
           title="ADD MEMBER"
           onPress={toggleModal}
           backdropOpacity={0.8}
+        />
+        <Button
+          title="remove all"
+          color="red"
+          onPress={async () => {
+            try {
+              await AsyncStorage.removeItem("FAMILY_MEMBERS");
+              retrieveData();
+              console.log("removed");
+            } catch (err) {
+              console.log(err);
+            }
+          }}
         />
         <Modal isVisible={isModalVisible}>
           <View style={styles.modal}>
