@@ -6,12 +6,23 @@ import { ApolloOfflineProvider } from "react-offix-hooks";
 import { offlineClient } from "./config/offix";
 import SplashScreen from "./screens/SpashScreen";
 import AppNavigator from "./navigation/AppNavigator";
-
 import AuthNavigator from "./navigation/AuthNavigator";
 
 const App = () => {
   const [initialized, setInitialized] = useState(false);
-  const [token, setToken] = useState(true);
+  const [token, setToken] = useState(null);
+
+  // const discovery = AuthSession.useAutoDiscovery({ ISSUER });
+
+  // // Create and load an auth request:
+  // const [request, result, promptAsync] = AuthSession.useAuthRequest(
+  //   {
+  //     clientId: { CLIENT_ID },
+  //     redirectUri: { DEV_URI },
+  //     scopes: ["openid", "profile", "email", "offline_access"],
+  //   },
+  //   discovery
+  // );
 
   // initialize the offix client and set the apollo client
   useEffect(() => {

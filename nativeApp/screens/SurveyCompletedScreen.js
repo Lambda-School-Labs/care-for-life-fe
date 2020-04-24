@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Text, View, TextInput, Button, Alert, StyleSheet } from "react-native";
 import { useOfflineMutation } from "react-offix-hooks";
@@ -17,6 +18,9 @@ const SurveyCompletedScreen = (props) => {
 
   const [addFamilyAndAnswers, state] = useOfflineMutation(
     addFamilyAndAnswersMutation
+
+  const [addFamilyIndividualAndAnswers] = useOfflineMutation(
+    addIndividualAndAnswersMutation
   );
 
   // need to store the backend ID returned during login/registration and set it to equal the userId variable on the line below
@@ -28,7 +32,8 @@ const SurveyCompletedScreen = (props) => {
   const type = props.route.params.type;
 
   const annualSurveyHandler = async () => {
-    console.log(answers);
+
+    console.log("Submitting Answers....", answers);
 
     await answers.forEach((answer, index) => {
       console.log("answer being mutated", answer.value);
@@ -60,6 +65,7 @@ const SurveyCompletedScreen = (props) => {
       familyName: familyName,
     });
   };
+
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
@@ -106,6 +112,39 @@ const SurveyCompletedScreen = (props) => {
     setQuestion("");
     setAnswerIndex("");
     toggleModal();
+
+  const individualSurveyHandler = async () => {
+    console.log("Submitting Answers....", fullSurvey);
+
+    await answers.forEach((answer, index) => {
+      console.log("answer being mutated", answer.value);
+      // console.log('answers backendID', fullSurvey[index].backend_id);
+      try {
+        addIndividualAndAnswers({
+          variables: {
+            personName: personName,
+            surveyName: "Individual Annual Survey",
+            employeeId: userId,
+            answerText: answer.value.value
+              ? answer.value.value.toString()
+              : answer.value.toString(),
+            questionId: fullSurvey[index].backend_id,
+          },
+        });
+      } catch (error) {
+        if (error.offline) {
+          error
+            .watchOfflineChange()
+            .then((res) => console.log("Offline result", res));
+        }
+        console.log(error);
+      }
+    });
+
+    props.navigation.navigate("FamilyMembers", {
+      survey: answers,
+    });
+
   };
 
   return (
