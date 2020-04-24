@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AsyncStorage,
   Alert,
@@ -29,6 +29,24 @@ const LoginScreen = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    // Fetch the token from storage then navigate to our appropriate place
+    const getToken = async () => {
+      let userToken;
+      try {
+        userToken = await AsyncStorage.getItem("TOKEN");
+        // console.log("userToken:", userToken);
+        setToken(userToken);
+      } catch (e) {
+        // Restoring token failed
+        console.log(e);
+      }
+    };
+    getToken();
+    props.navigation.navigate("Families", { setToken: setToken });
+  }, [token]);
 
   const discovery = AuthSession.useAutoDiscovery(ISSUER);
   // Request
@@ -41,6 +59,8 @@ const LoginScreen = (props) => {
     //Expo Authentication
     let res = await promptAsync({ useProxy });
     console.log("Okta Response:", res);
+    await AsyncStorage.setItem("TOKEN", res.params.code);
+    setToken(res.params.code);
   };
   // Endpoint
 
@@ -48,7 +68,7 @@ const LoginScreen = (props) => {
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
         <Card style={styles.card}>
-          <TextInput
+          {/* <TextInput
             placeholder="Username"
             value={username}
             onChangeText={setUsername}
@@ -58,7 +78,7 @@ const LoginScreen = (props) => {
             value={password}
             onChangeText={setPassword}
             secureTextEntry
-          />
+          /> */}
           <Button title="Log in" onPress={handleSubmit} />
           <View style={styles.footer}>
             <Text>Don't have an account?</Text>

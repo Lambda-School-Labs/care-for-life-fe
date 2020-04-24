@@ -11,6 +11,7 @@ import {
 import { FlatList } from "react-native-gesture-handler";
 import Card from "../components/Card";
 import Modal from "react-native-modal";
+import { ApolloConsumer } from "react-apollo";
 
 const AllFamiliesScreen = ({ navigation }) => {
   // Pull all families from the database and display them.
@@ -115,6 +116,13 @@ const AllFamiliesScreen = ({ navigation }) => {
       />
       <View style={styles.modalContainer}>
         <Button title="ADD FAMILY" onPress={toggleModal} />
+        <Button
+          title="Logout"
+          onPress={() => {
+            AsyncStorage.removeItem("TOKEN");
+            navigation.navigate("Login");
+          }}
+        />
         <Button
           title="remove all"
           color="red"
