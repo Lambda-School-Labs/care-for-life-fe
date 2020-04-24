@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button: {
-    height: 125,
+    height: 100,
     width: "100%",
     backgroundColor: "black",
     textAlign: "center",
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 10,
+    borderRadius: 0,
     margin: 5,
   },
   buttonText: {
