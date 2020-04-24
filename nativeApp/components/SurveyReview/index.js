@@ -4,7 +4,6 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
-  Alert,
   StyleSheet,
 } from "react-native";
 
@@ -15,7 +14,7 @@ const SurveyReview = (props) => {
       <ScrollView style={styles.scrollContainer}>
         {props.answers.map((el, index) => (
           <TouchableOpacity
-            onPress={() => Alert.alert("Edit function here")}
+            onPress={() => props.handleEdit(index)}
             style={styles.answerContainer}
             key={el.questionId}
           >
