@@ -9,7 +9,10 @@ import {
   Text,
   TouchableWithoutFeedback,
   Keyboard,
+  Image,
+  TouchableOpacity,
 } from "react-native";
+import logo from "../assets/images/CFL_logo.jpg";
 import { ISSUER } from "react-native-dotenv";
 import Card from "../components/Card";
 //Authentication Imports
@@ -55,12 +58,30 @@ const LoginScreen = (props) => {
     discovery
   );
 
-  const handleSubmit = async () => {
+  const handleLogin = async () => {
     //Expo Authentication
-    let res = await promptAsync({ useProxy });
-    console.log("Okta Response:", res);
-    await AsyncStorage.setItem("TOKEN", res.params.code);
-    setToken(res.params.code);
+    await promptAsync({ useProxy })
+      .then((res) => {
+        console.log("Okta Response:", res);
+        console.log("setting token to async storage:", res.params.code);
+        AsyncStorage.setItem("TOKEN", res.params.code);
+      })
+      .catch((e) => console.log(e));
+    console.log("Checking token in storage....");
+    const _retrieveToken = async () => {
+      try {
+        const token = await AsyncStorage.getItem("TOKEN");
+        if (token !== null) {
+          // We have data!!
+          console.log("token:", token);
+          //set Data to state
+          setToken(token);
+        }
+      } catch (error) {
+        // Error retrieving data
+      }
+    };
+    _retrieveToken();
   };
   // Endpoint
 
@@ -68,25 +89,21 @@ const LoginScreen = (props) => {
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
         <Card style={styles.card}>
-          {/* <TextInput
-            placeholder="Username"
-            value={username}
-            onChangeText={setUsername}
-          />
-          <TextInput
-            placeholder="Password"
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
-          /> */}
-          <Button title="Log in" onPress={handleSubmit} />
-          <View style={styles.footer}>
+          <View style={styles.logoWrapper}>
+            <Image style={styles.logo} source={logo} />
+          </View>
+          {/* <Button title="Log in" onPress={handleLogin} /> */}
+          <TouchableOpacity style={styles.button} onPress={handleLogin}>
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
+
+          {/* <View style={styles.footer}>
             <Text>Don't have an account?</Text>
             <Button
               title="Register"
               onPress={() => props.navigation.replace("Register")}
             />
-          </View>
+          </View> */}
         </Card>
       </View>
     </TouchableWithoutFeedback>
@@ -94,6 +111,16 @@ const LoginScreen = (props) => {
 };
 
 const styles = StyleSheet.create({
+  logoWrapper: {
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+  },
+  logo: {
+    width: "75%",
+    resizeMode: "contain",
+  },
   container: {
     flex: 1,
     justifyContent: "center",
@@ -106,6 +133,30 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+  },
+  button: {
+    height: 125,
+    width: "100%",
+    backgroundColor: "black",
+    textAlign: "center",
+    fontSize: 30,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+    margin: 5,
+  },
+  buttonText: {
+    fontSize: 25,
+    textTransform: "uppercase",
+    fontWeight: "bold",
+    color: "white",
+    display: "flex",
+    justifyContent: "space-around",
+  },
+  barContinerText: {
+    fontSize: 25,
+    padding: 5,
   },
 });
 
