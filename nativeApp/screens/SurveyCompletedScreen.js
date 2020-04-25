@@ -19,10 +19,6 @@ const SurveyCompletedScreen = (props) => {
     addFamilyAndAnswersMutation
   );
 
-  const [addFamilyIndividualAndAnswers] = useOfflineMutation(
-    addIndividualAndAnswersMutation
-  );
-
   // need to store the backend ID returned during login/registration and set it to equal the userId variable on the line below
   const userId = "Insert ID of the logged in user";
   let answers = props.route.params.surveyAnswers;
@@ -32,7 +28,7 @@ const SurveyCompletedScreen = (props) => {
   const type = props.route.params.type;
 
   const annualSurveyHandler = async () => {
-    console.log("Submitting Answers....", answers);
+    console.log(answers);
 
     await answers.forEach((answer, index) => {
       console.log("answer being mutated", answer.value);
@@ -110,105 +106,73 @@ const SurveyCompletedScreen = (props) => {
     setQuestion("");
     setAnswerIndex("");
     toggleModal();
-
-    const individualSurveyHandler = async () => {
-      console.log("Submitting Answers....", fullSurvey);
-
-      await answers.forEach((answer, index) => {
-        console.log("answer being mutated", answer.value);
-        // console.log('answers backendID', fullSurvey[index].backend_id);
-        try {
-          addIndividualAndAnswers({
-            variables: {
-              personName: personName,
-              surveyName: "Individual Annual Survey",
-              employeeId: userId,
-              answerText: answer.value.value
-                ? answer.value.value.toString()
-                : answer.value.toString(),
-              questionId: fullSurvey[index].backend_id,
-            },
-          });
-        } catch (error) {
-          if (error.offline) {
-            error
-              .watchOfflineChange()
-              .then((res) => console.log("Offline result", res));
-          }
-          console.log(error);
-        }
-      });
-
-      props.navigation.navigate("FamilyMembers", {
-        survey: answers,
-      });
-    };
-
-    return (
-      <View style={styles.background}>
-        <SurveyReview
-          name={familyName}
-          submitHandler={annualSurveyHandler}
-          answers={answers}
-          fullSurvey={fullSurvey}
-          handleEdit={handleEdit}
-        />
-        <Modal isVisible={isModalVisible} backdropOpacity={0.9}>
-          <View style={styles.modal}>
-            <Text style={styles.modalTitle}>{question}</Text>
-            <TextInput
-              placeholder="answer here"
-              value={answer.toString()}
-              onChangeText={handleChange}
-              name="answer"
-              style={styles.input}
-            />
-            <View style={styles.buttonContainer}>
-              <View style={styles.button}>
-                <Button color="red" title="Cancel" onPress={toggleModal} />
-              </View>
-              <View style={styles.button}>
-                <Button title="Update" onPress={handleSubmit} />
-              </View>
-            </View>
-          </View>
-        </Modal>
-      </View>
-    );
   };
 
-  const styles = StyleSheet.create({
-    background: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      backgroundColor: "grey",
-    },
-    modal: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    modalTitle: {
-      fontSize: 22,
-      color: "white",
-    },
-    input: {
-      borderBottomColor: "white",
-      borderBottomWidth: 1,
-      padding: 10,
-      width: "80%",
-      marginBottom: 10,
-      color: "white",
-    },
-    buttonContainer: {
-      flexDirection: "row",
-      width: "80%",
-      justifyContent: "space-between",
-    },
-    button: {
-      width: 100,
-    },
-  });
+  return (
+    <View style={styles.background}>
+      <SurveyReview
+        name={familyName}
+        submitHandler={annualSurveyHandler}
+        answers={answers}
+        fullSurvey={fullSurvey}
+        handleEdit={handleEdit}
+      />
+      <Modal isVisible={isModalVisible} backdropOpacity={0.9}>
+        <View style={styles.modal}>
+          <Text style={styles.modalTitle}>{question}</Text>
+          <TextInput
+            placeholder="answer here"
+            value={answer.toString()}
+            onChangeText={handleChange}
+            name="answer"
+            style={styles.input}
+          />
+          <View style={styles.buttonContainer}>
+            <View style={styles.button}>
+              <Button color="red" title="Cancel" onPress={toggleModal} />
+            </View>
+            <View style={styles.button}>
+              <Button title="Update" onPress={handleSubmit} />
+            </View>
+          </View>
+        </View>
+      </Modal>
+    </View>
+  );
 };
+
+const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "grey",
+  },
+  modal: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalTitle: {
+    fontSize: 22,
+    color: "white",
+  },
+  input: {
+    borderBottomColor: "white",
+    borderBottomWidth: 1,
+    padding: 10,
+    width: "80%",
+    marginBottom: 10,
+    color: "white",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    width: "80%",
+    justifyContent: "space-between",
+  },
+  button: {
+    width: 100,
+  },
+});
+
 export default SurveyCompletedScreen;

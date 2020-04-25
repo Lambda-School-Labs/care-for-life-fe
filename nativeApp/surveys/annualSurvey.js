@@ -11,412 +11,412 @@ export const annualSurvey = [
     backend_id: "ck98qj5nx7i1508746j1jiw7b",
     questionId: "community",
   },
-  {
-    questionType: "TextInput",
-    questionText: "Date:",
-    backend_id: "ck98qh33z7hzq0874n5l6tw3q",
-    questionId: "date",
-  },
-  {
-    questionType: "TextInput",
-    questionText: "Interviewer:",
-    backend_id: "ck9bk8sof8s2h0874wxstfee8",
-    questionId: "interviewer",
-  },
-  {
-    questionType: "NumericInput",
-    questionText: "Survey Number:",
-    backend_id: "ck98qi5lu7i0e0874arbcb3ql",
-    questionId: "survey_number",
-  },
-  {
-    questionType: "TextInput",
-    questionText: "Zone:",
-    backend_id: "ck98qim7w7i0q0874eeeyfrl5",
-    questionId: "zone",
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "New Family or Previously Surveyed?",
-    backend_id: "ck98qj5nx7i1508746j1jiw7b",
-    questionId: "check_new_family",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "New Family",
-        value: "true",
-      },
-      {
-        optionText: "Previously Surveyed",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "Own Home?",
-    backend_id: "ck98qlle27i2c0874yhf3lwjh",
-    questionId: "own_home",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "Rent?",
-    backend_id: "ck98qlwyq7i2o08748xavv0jl",
-    questionId: "rent",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "Guest?",
-    backend_id: "ck98qmt017i380874o6ttfl90",
-    questionId: "guest",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "NumericInput",
-    questionText: "FPP Identity Number",
-    backend_id: "ck98qnozv7i3s0874xvghbja1",
-    questionId: "fpp_id",
-  },
-  {
-    questionType: "TextInput",
-    questionText: "Family Name",
-    backend_id: "ck98qo7dd7i460874mezodzup",
-    questionId: "family_name",
-  },
-  {
-    questionType: "TextInput",
-    questionText: "Head of Household Name",
-    backend_id: "ck98qomn57i4i0874stk16vz2",
-    questionId: "head_of_household_name",
-  },
-  {
-    questionType: "NumericInput",
-    questionText: "Head of Household Age",
-    backend_id: "ck9bkdjgv8s4u0874bn52dl67",
-    questionId: "head_of_household_age",
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "Head of Household M or F",
-    backend_id: "ck98qozn97i4u0874cj69ge5r",
-    questionId: "head_of_household_sex",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Male",
-        value: "male",
-      },
-      {
-        optionText: "Female",
-        value: "female",
-      },
-    ],
-  },
-  {
-    questionType: "NumericInput",
-    questionText: "Total Number of People That Live In The House",
-    backend_id: "ck98qphmf7i5808744ldge0g3",
-    questionId: "people_in_household",
-  },
-  {
-    questionType: "Info",
-    questionText: "New Section: Family Profile",
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "Is it a family of orphans?",
-    backend_id: "ck98qqtlo7i5y0874adp0wmr0",
-    questionId: "orphans",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "NumericInput",
-    questionText: "If yes, how many orphans live in the home?",
-    backend_id: "ck98qr96m7i6a0874wcb8kck1",
-    questionId: "number_of_orphans",
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "Is it a family with vulnerable children?",
-    backend_id: "ck98qsgn97i76087445utuedk",
-    questionId: "vulnerable_children",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "Is the head of household a child (no adults)?",
-    backend_id: "ck98qtb7j7i7o087416g49csz",
-    questionId: "head_of_house_child",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "NumericInput",
-    questionText:
-      "Number of deaths of adults over 18 years since the last survey or within the last 12 months?",
-    backend_id: "ck98qtv3d7i840874tb22g4j2",
-    questionId: "number_of_deaths_adults",
-  },
-  {
-    questionType: "NumericInput",
-    questionText:
-      "Number of births since the last survey or within the last 12 months?",
-    backend_id: "ck98qujqt7i8k0874wsx704gp",
-    questionId: "number_of_births",
-  },
-  {
-    questionType: "NumericInput",
-    questionText:
-      "Number of infant deaths since the last survey or within the last 12 months?",
-    backend_id: "ck98qv7xk7i900874hzyh28f5",
-    questionId: "number_of_infant_deaths",
-  },
-  {
-    questionType: "NumericInput",
-    questionText: "Number of deaths of Children between 1-4 years of age?",
-    backend_id: "ck98qvogc7i9e08748cf40v1y",
-    questionId: "number_of_children_1_to_4",
-  },
-  {
-    questionType: "NumericInput",
-    questionText: "Number of deaths of Children older than 5?",
-    backend_id: "ck9bka8ps8s390874k1ys38tv",
-    questionId: "number_of_deaths_over_5yrs",
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText:
-      "Did the mother’s death happen during or as a result childbirth? ",
-    backend_id: "ck98qw6i47i9s08746kt2am1g",
-    questionId: "mother_died_childbirth",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "If yes, did it happen within 42 days of labor?",
-    backend_id: "ck98qxgh77iai0874j08e3mbf",
-    questionId: "mother_death_within_42_days",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "Info",
-    questionText: "New Section: \n\n Housing Improvement and Sanitation",
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "Does the house have electricity?",
-    backend_id: "ck98qygaa7ib20874c8kxreqp",
-    questionId: "electricity_in_home",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "Does the roof need repair?",
-    backend_id: "ck98qywrv7ibg0874qxvtcdg1",
-    questionId: "roof_needs_repair",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "Do the walls need repair?",
-    backend_id: "ck98qzp6h7iby08749772yic6",
-    questionId: "walls_needs_repair",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "Does the house have a secure door?",
-    backend_id: "ck98r09ic7icc0874kqlqehix",
-    questionId: "safe_door",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "Does the floor have cement or other covering?",
-    backend_id: "ck98r0ner7ico0874c5i0sank",
-    questionId: "floor_covered",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "Does the family have an improved latrine?",
-    backend_id: "ck98r16ml7id308748g3x71y2",
-    questionId: "has_improved_latrine",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
+  // {
+  //   questionType: "TextInput",
+  //   questionText: "Date:",
+  //   backend_id: "ck98qh33z7hzq0874n5l6tw3q",
+  //   questionId: "date",
+  // },
+  // {
+  //   questionType: "TextInput",
+  //   questionText: "Interviewer:",
+  //   backend_id: "ck9bk8sof8s2h0874wxstfee8",
+  //   questionId: "interviewer",
+  // },
+  // {
+  //   questionType: "NumericInput",
+  //   questionText: "Survey Number:",
+  //   backend_id: "ck98qi5lu7i0e0874arbcb3ql",
+  //   questionId: "survey_number",
+  // },
+  // {
+  //   questionType: "TextInput",
+  //   questionText: "Zone:",
+  //   backend_id: "ck98qim7w7i0q0874eeeyfrl5",
+  //   questionId: "zone",
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "New Family or Previously Surveyed?",
+  //   backend_id: "ck98qj5nx7i1508746j1jiw7b",
+  //   questionId: "check_new_family",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "New Family",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "Previously Surveyed",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "Own Home?",
+  //   backend_id: "ck98qlle27i2c0874yhf3lwjh",
+  //   questionId: "own_home",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "Rent?",
+  //   backend_id: "ck98qlwyq7i2o08748xavv0jl",
+  //   questionId: "rent",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "Guest?",
+  //   backend_id: "ck98qmt017i380874o6ttfl90",
+  //   questionId: "guest",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "NumericInput",
+  //   questionText: "FPP Identity Number",
+  //   backend_id: "ck98qnozv7i3s0874xvghbja1",
+  //   questionId: "fpp_id",
+  // },
+  // {
+  //   questionType: "TextInput",
+  //   questionText: "Family Name",
+  //   backend_id: "ck98qo7dd7i460874mezodzup",
+  //   questionId: "family_name",
+  // },
+  // {
+  //   questionType: "TextInput",
+  //   questionText: "Head of Household Name",
+  //   backend_id: "ck98qomn57i4i0874stk16vz2",
+  //   questionId: "head_of_household_name",
+  // },
+  // {
+  //   questionType: "NumericInput",
+  //   questionText: "Head of Household Age",
+  //   backend_id: "ck9bkdjgv8s4u0874bn52dl67",
+  //   questionId: "head_of_household_age",
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "Head of Household M or F",
+  //   backend_id: "ck98qozn97i4u0874cj69ge5r",
+  //   questionId: "head_of_household_sex",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Male",
+  //       value: "male",
+  //     },
+  //     {
+  //       optionText: "Female",
+  //       value: "female",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "NumericInput",
+  //   questionText: "Total Number of People That Live In The House",
+  //   backend_id: "ck98qphmf7i5808744ldge0g3",
+  //   questionId: "people_in_household",
+  // },
+  // {
+  //   questionType: "Info",
+  //   questionText: "New Section: Family Profile",
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "Is it a family of orphans?",
+  //   backend_id: "ck98qqtlo7i5y0874adp0wmr0",
+  //   questionId: "orphans",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "NumericInput",
+  //   questionText: "If yes, how many orphans live in the home?",
+  //   backend_id: "ck98qr96m7i6a0874wcb8kck1",
+  //   questionId: "number_of_orphans",
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "Is it a family with vulnerable children?",
+  //   backend_id: "ck98qsgn97i76087445utuedk",
+  //   questionId: "vulnerable_children",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "Is the head of household a child (no adults)?",
+  //   backend_id: "ck98qtb7j7i7o087416g49csz",
+  //   questionId: "head_of_house_child",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "NumericInput",
+  //   questionText:
+  //     "Number of deaths of adults over 18 years since the last survey or within the last 12 months?",
+  //   backend_id: "ck98qtv3d7i840874tb22g4j2",
+  //   questionId: "number_of_deaths_adults",
+  // },
+  // {
+  //   questionType: "NumericInput",
+  //   questionText:
+  //     "Number of births since the last survey or within the last 12 months?",
+  //   backend_id: "ck98qujqt7i8k0874wsx704gp",
+  //   questionId: "number_of_births",
+  // },
+  // {
+  //   questionType: "NumericInput",
+  //   questionText:
+  //     "Number of infant deaths since the last survey or within the last 12 months?",
+  //   backend_id: "ck98qv7xk7i900874hzyh28f5",
+  //   questionId: "number_of_infant_deaths",
+  // },
+  // {
+  //   questionType: "NumericInput",
+  //   questionText: "Number of deaths of Children between 1-4 years of age?",
+  //   backend_id: "ck98qvogc7i9e08748cf40v1y",
+  //   questionId: "number_of_children_1_to_4",
+  // },
+  // {
+  //   questionType: "NumericInput",
+  //   questionText: "Number of deaths of Children older than 5?",
+  //   backend_id: "ck9bka8ps8s390874k1ys38tv",
+  //   questionId: "number_of_deaths_over_5yrs",
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText:
+  //     "Did the mother’s death happen during or as a result childbirth? ",
+  //   backend_id: "ck98qw6i47i9s08746kt2am1g",
+  //   questionId: "mother_died_childbirth",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "If yes, did it happen within 42 days of labor?",
+  //   backend_id: "ck98qxgh77iai0874j08e3mbf",
+  //   questionId: "mother_death_within_42_days",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "Info",
+  //   questionText: "New Section: \n\n Housing Improvement and Sanitation",
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "Does the house have electricity?",
+  //   backend_id: "ck98qygaa7ib20874c8kxreqp",
+  //   questionId: "electricity_in_home",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "Does the roof need repair?",
+  //   backend_id: "ck98qywrv7ibg0874qxvtcdg1",
+  //   questionId: "roof_needs_repair",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "Do the walls need repair?",
+  //   backend_id: "ck98qzp6h7iby08749772yic6",
+  //   questionId: "walls_needs_repair",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "Does the house have a secure door?",
+  //   backend_id: "ck98r09ic7icc0874kqlqehix",
+  //   questionId: "safe_door",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "Does the floor have cement or other covering?",
+  //   backend_id: "ck98r0ner7ico0874c5i0sank",
+  //   questionId: "floor_covered",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "Does the family have an improved latrine?",
+  //   backend_id: "ck98r16ml7id308748g3x71y2",
+  //   questionId: "has_improved_latrine",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
   {
     questionType: "SelectionGroup",
     questionText: "Does the family have a bathroom?",
