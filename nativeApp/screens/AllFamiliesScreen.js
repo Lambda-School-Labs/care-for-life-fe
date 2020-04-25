@@ -54,10 +54,6 @@ const AllFamiliesScreen = ({ navigation }) => {
         AsyncStorage.setItem("FAMILIES", JSON.stringify(newFamiliesArr));
         retrieveData();
       })
-      // .then((res) => {
-      //   console.log("new family array", res);
-      //   console.log(res);
-      // })
       .catch((err) => console.log(err));
   };
 
