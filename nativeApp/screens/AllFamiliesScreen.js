@@ -11,6 +11,7 @@ import {
 import { FlatList } from "react-native-gesture-handler";
 import Card from "../components/Card";
 import Modal from "react-native-modal";
+import { ApolloConsumer } from "react-apollo";
 
 const AllFamiliesScreen = ({ navigation }) => {
   // Pull all families from the database and display them.
@@ -61,6 +62,22 @@ const AllFamiliesScreen = ({ navigation }) => {
 
   const handleChange = (text) => {
     setFamilyName({ ...familyName, name: text });
+  };
+  const handleLogout = async () => {
+    try {
+      const token = await AsyncStorage.getItem("TOKEN");
+      if (token !== null) {
+        // We have data!!
+        console.log("removing token:", token);
+        await AsyncStorage.removeItem("TOKEN")
+          .then((res) => console.log("removed token:", res))
+          .catch((err) => console.log(err));
+        //navigate to Login if token successfully removed
+        navigation.navigate("Login");
+      }
+    } catch (error) {
+      // Error retrieving data
+    }
   };
 
   const handleSubmit = async () => {
@@ -115,6 +132,7 @@ const AllFamiliesScreen = ({ navigation }) => {
       />
       <View style={styles.modalContainer}>
         <Button title="ADD FAMILY" onPress={toggleModal} />
+        <Button title="Logout" onPress={handleLogout} />
         <Button
           title="remove all"
           color="red"
