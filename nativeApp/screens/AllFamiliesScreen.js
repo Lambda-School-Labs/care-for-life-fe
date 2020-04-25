@@ -19,7 +19,7 @@ const AllFamiliesScreen = ({ navigation }) => {
   const [families, setFamilies] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [familyName, setFamilyName] = useState({ name: "", members: [] });
-  console.log(families);
+
   // Gets data in async storage
   const retrieveData = async () => {
     try {
@@ -40,19 +40,31 @@ const AllFamiliesScreen = ({ navigation }) => {
   };
 
   // Sets data to async storage, expects an array
-  const setData = async (familyArr) => {
-    try {
-      await AsyncStorage.setItem("FAMILIES", JSON.stringify(familyArr));
-      console.log("saved fam");
-    } catch (error) {
-      // Error saving data
-      console.log(error);
-    }
+  const setData = (familyArr) => {
+    let familyObj = { name: familyName.name, members: [] };
+    AsyncStorage.getItem("FAMILIES")
+      .then((res) => {
+        if (res === null) {
+          AsyncStorage.setItem("FAMILIES", JSON.stringify(familyArr));
+          setFamilies(familyArr);
+          return;
+        }
+        let fam = JSON.parse(res);
+        let newFamiliesArr = [...fam, familyObj];
+        AsyncStorage.setItem("FAMILIES", JSON.stringify(newFamiliesArr));
+        retrieveData();
+      })
+      // .then((res) => {
+      //   console.log("new family array", res);
+      //   console.log(res);
+      // })
+      .catch((err) => console.log(err));
   };
 
   // Runs when the app first starts and will add any families in storage to state so they will be displayed
   useEffect(() => {
     retrieveData();
+    console.log("HI CAM");
   }, []);
 
   const toggleModal = () => {
@@ -71,24 +83,23 @@ const AllFamiliesScreen = ({ navigation }) => {
     // Set async storage to the families already in state including the the family being added
     setData([...families, familyName]);
     // We
-    retrieveData();
 
-    try {
-      await addFamily({
-        variables: {
-          familyName: familyName.name,
-        },
-      });
-    } catch (error) {
-      if (error.offline) {
-        error
-          .watchOfflineChange()
-          .then((res) => console.log("Offline result", res));
-      }
-      console.log(error);
-    }
+    // try {
+    //   await addFamily({
+    //     variables: {
+    //       familyName: familyName.name,
+    //     },
+    //   });
+    // } catch (error) {
+    //   if (error.offline) {
+    //     error
+    //       .watchOfflineChange()
+    //       .then((res) => console.log("Offline result", res));
+    //   }
+    //   console.log(error);
+    // }
 
-    setFamilyName({ name: "" });
+    setFamilyName({ name: "", members: [] });
     toggleModal();
   };
 

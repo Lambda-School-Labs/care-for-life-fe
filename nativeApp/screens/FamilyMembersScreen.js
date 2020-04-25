@@ -13,7 +13,7 @@ import Card from "../components/Card";
 import { personSurvey } from "../surveys/personSurvey";
 import Modal from "react-native-modal";
 
-const FamilyMembers = ({ navigation, route }) => {
+const FamilyMembers = ({ navigation, route, setFamilies }) => {
   // Display all family members for the respective family
   const [familyMembers, setFamilyMembers] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -45,20 +45,20 @@ const FamilyMembers = ({ navigation, route }) => {
 
   // Sets data to async storage, expects an array
   const setData = (familyMemberArr) => {
+    let familyObj = { name: route.params.familyName, members: familyMemberArr };
     AsyncStorage.getItem("FAMILIES")
       .then((res) => {
-        let newRes = JSON.parse(res).map((el) => {
-          if (el.name === route.params.familyName) {
-            el.members = familyMemberArr;
-          }
-        });
-        console.log("RES", newRes);
-        return newRes;
+        let newFamiliesArr = JSON.parse(res).map((obj) =>
+          familyObj.name === obj.name ? familyObj : obj
+        );
+        return newFamiliesArr;
+      })
+      .then((res) => {
+        console.log("new family array", res);
+        AsyncStorage.setItem("FAMILIES", JSON.stringify(res));
+        retrieveData();
       })
       .catch((err) => console.log(err));
-    //   { name: route.params.familyName, members: familyMemberArr },
-
-    // AsyncStorage.setItem("FAMILIES", JSON.stringify(newArr));
   };
 
   // Runs when the app first starts and will add any families in storage to state so they will be displayed
@@ -74,15 +74,14 @@ const FamilyMembers = ({ navigation, route }) => {
     setMemberName({ ...memberName, name: text });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     if (!memberName.name) {
       toggleModal();
       return;
     }
-    // Set async storage to the families already in state including the the family being added
-    await setData([...familyMembers, memberName]);
 
-    retrieveData();
+    setData([...familyMembers, memberName]);
+
     // Try catch block below for mutation
 
     setMemberName({ name: "" });
