@@ -19,7 +19,11 @@ const AllFamiliesScreen = ({ navigation }) => {
 
   const [families, setFamilies] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [newFamily, setNewFamily] = useState({ name: "", members: [] });
+  const [newFamily, setNewFamily] = useState({
+    id: 0,
+    name: "",
+    members: [],
+  });
 
   const retrieveData = async () => {
     // Checks for families in async storage
@@ -70,7 +74,6 @@ const AllFamiliesScreen = ({ navigation }) => {
   // Runs when the app first starts and will add any families in storage to state so they will be displayed
   useEffect(() => {
     retrieveData();
-    console.log("HI CAM");
   }, []);
 
   const toggleModal = () => {
@@ -78,7 +81,7 @@ const AllFamiliesScreen = ({ navigation }) => {
   };
 
   const handleChange = (text) => {
-    setNewFamily({ ...newFamily, name: text, members: [] });
+    setNewFamily({ ...newFamily, id: Math.random(), name: text, members: [] });
   };
 
   const handleSubmit = async () => {
@@ -88,7 +91,6 @@ const AllFamiliesScreen = ({ navigation }) => {
     }
 
     setData([...families, newFamily]);
-    // We
 
     // try {
     //   await addFamily({
@@ -105,7 +107,7 @@ const AllFamiliesScreen = ({ navigation }) => {
     //   console.log(error);
     // }
 
-    setNewFamily({ name: "", members: [] });
+    setNewFamily({ ...newFamily, name: "", members: [] });
     toggleModal();
   };
 
@@ -118,7 +120,10 @@ const AllFamiliesScreen = ({ navigation }) => {
           return (
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate("Family", { familyName: data.item.name })
+                navigation.navigate("Family", {
+                  familyName: data.item.name,
+                  familyId: data.item.id,
+                })
               }
               activeOpacity={0.7}
               style={styles.cardContainer}

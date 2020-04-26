@@ -18,17 +18,18 @@ const FamilyMembers = ({ navigation, route }) => {
   // Display all family members for the respective family
   const [familyMembers, setFamilyMembers] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [member, setMember] = useState({ name: "" });
+  const [member, setMember] = useState({ id: 0, name: "" });
+
+  const familyId = route.params.familyId;
+  const familyName = route.params.familyName;
 
   const retrieveData = async () => {
     // Finds family in async storage
     try {
       // Get all families in async storage
       const value = await AsyncStorage.getItem("FAMILIES");
-      // Find the family with the same name as the one passed via params
-      const family = JSON.parse(value).find(
-        (obj) => obj.name === route.params.familyName
-      );
+      // Find the family with the same id as the one passed via params
+      const family = JSON.parse(value).find((obj) => obj.id === familyId);
 
       if (family.members === null || family.members.length === 0) {
         // No family members, initialize familyMembers state to an empty array
@@ -50,8 +51,9 @@ const FamilyMembers = ({ navigation, route }) => {
     // Sets data to async storage, expects an array
     // Create an updated family object with the new family members array
     let updatedFamily = {
-      name: route.params.familyName,
+      name: familyName,
       members: familyMemberArr,
+      id: familyId,
     };
     // Get all families in async storage
     AsyncStorage.getItem("FAMILIES")
@@ -82,7 +84,7 @@ const FamilyMembers = ({ navigation, route }) => {
   };
 
   const handleChange = (text) => {
-    setMember({ ...member, name: text });
+    setMember({ ...member, id: Math.random(), name: text });
   };
 
   const handleSubmit = () => {
@@ -112,7 +114,7 @@ const FamilyMembers = ({ navigation, route }) => {
                   personName: data.item.name,
                   survey: personSurvey,
                   type: "Person",
-                  familyName: route.params.familyName,
+                  familyName: familyName,
                 })
               }
               activeOpacity={0.7}
