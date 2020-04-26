@@ -71,6 +71,17 @@ const AllFamiliesScreen = ({ navigation }) => {
       .catch((err) => console.log(err));
   };
 
+  const removeFamily = (id) => {
+    AsyncStorage.getItem("FAMILIES")
+      .then((res) => {
+        let families = JSON.parse(res);
+        let newFamiliesArr = families.filter((obj) => obj.id !== id);
+        AsyncStorage.setItem("FAMILIES", JSON.stringify(newFamiliesArr));
+        setFamilies(newFamiliesArr);
+      })
+      .catch((err) => console.log(err));
+  };
+
   // Runs when the app first starts and will add any families in storage to state so they will be displayed
   useEffect(() => {
     retrieveData();

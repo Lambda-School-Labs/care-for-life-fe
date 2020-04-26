@@ -74,6 +74,11 @@ const FamilyMembers = ({ navigation, route }) => {
       .catch((err) => console.log(err));
   };
 
+  const removeFamilyMember = (id) => {
+    let updatedFamilyMembers = familyMembers.filter((obj) => obj.id !== id);
+    setData(updatedFamilyMembers);
+  };
+
   // Runs when the app first starts and will add any families in storage to state so they will be displayed
   useEffect(() => {
     retrieveData();
@@ -122,6 +127,9 @@ const FamilyMembers = ({ navigation, route }) => {
             >
               <Card style={styles.card}>
                 <Text>{data.item.name}</Text>
+                <Text onPress={() => removeFamilyMember(data.item.id)}>
+                  DELETE
+                </Text>
               </Card>
             </TouchableOpacity>
           );
