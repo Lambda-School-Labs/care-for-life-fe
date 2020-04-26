@@ -7,56 +7,67 @@ import {
   Button,
   TextInput,
   AsyncStorage,
+  Alert,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import Card from "../components/Card";
 import { personSurvey } from "../surveys/personSurvey";
 import Modal from "react-native-modal";
 
-const FamilyMembers = ({ navigation, route, setFamilies }) => {
+const FamilyMembers = ({ navigation, route }) => {
   // Display all family members for the respective family
   const [familyMembers, setFamilyMembers] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [memberName, setMemberName] = useState({ name: "" });
+  const [member, setMember] = useState({ name: "" });
 
-  // Gets data in async storage
   const retrieveData = async () => {
+    // Finds family in async storage
     try {
+      // Get all families in async storage
       const value = await AsyncStorage.getItem("FAMILIES");
-
-      const parsedValue = JSON.parse(value).find(
-        (el) => el.name === route.params.familyName
+      // Find the family with the same name as the one passed via params
+      const family = JSON.parse(value).find(
+        (obj) => obj.name === route.params.familyName
       );
 
-      if (parsedValue.members === null || parsedValue.members.length === 0) {
-        // No data, initialize familyMembers to an empty array
+      if (family.members === null || family.members.length === 0) {
+        // No family members, initialize familyMembers state to an empty array
         setFamilyMembers([]);
         return;
       } else {
-        // There is data, set it to state
-        console.log("You have family members", parsedValue);
-        setFamilyMembers(parsedValue.members);
+        // There are family members, set them to familyMembers state
+        console.log("You have family members", family.members);
+        setFamilyMembers(family.members);
       }
     } catch (error) {
       // Error retrieving data
       console.log(error);
+      Alert.alert("There has been an error retrieving data, please try again");
     }
   };
 
-  // Sets data to async storage, expects an array
   const setData = (familyMemberArr) => {
-    let familyObj = { name: route.params.familyName, members: familyMemberArr };
+    // Sets data to async storage, expects an array
+    // Create an updated family object with the new family members array
+    let updatedFamily = {
+      name: route.params.familyName,
+      members: familyMemberArr,
+    };
+    // Get all families in async storage
     AsyncStorage.getItem("FAMILIES")
       .then((res) => {
+        // Map through families and replace the old family object with the updated family object, return the updated array
         let newFamiliesArr = JSON.parse(res).map((obj) =>
-          familyObj.name === obj.name ? familyObj : obj
+          updatedFamily.name === obj.name ? updatedFamily : obj
         );
         return newFamiliesArr;
       })
       .then((res) => {
+        // Set the updated array of families to async storage
         console.log("new family array", res);
         AsyncStorage.setItem("FAMILIES", JSON.stringify(res));
-        retrieveData();
+        // Set updated family members array to state
+        setFamilyMembers(familyMemberArr);
       })
       .catch((err) => console.log(err));
   };
@@ -71,20 +82,20 @@ const FamilyMembers = ({ navigation, route, setFamilies }) => {
   };
 
   const handleChange = (text) => {
-    setMemberName({ ...memberName, name: text });
+    setMember({ ...member, name: text });
   };
 
   const handleSubmit = () => {
-    if (!memberName.name) {
+    if (!member.name) {
       toggleModal();
       return;
     }
 
-    setData([...familyMembers, memberName]);
+    setData([...familyMembers, member]);
 
     // Try catch block below for mutation
 
-    setMemberName({ name: "" });
+    setMember({ name: "" });
     toggleModal();
   };
 
@@ -138,7 +149,7 @@ const FamilyMembers = ({ navigation, route, setFamilies }) => {
             <Text style={styles.modalTitle}>Add Member</Text>
             <TextInput
               placeholder="name"
-              value={memberName.name}
+              value={member.name}
               onChangeText={(text) => handleChange(text)}
               name="name"
               style={styles.input}

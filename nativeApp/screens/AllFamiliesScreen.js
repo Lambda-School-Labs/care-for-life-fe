@@ -7,52 +7,62 @@ import {
   Button,
   TextInput,
   AsyncStorage,
+  Alert,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import Card from "../components/Card";
 import Modal from "react-native-modal";
 
 const AllFamiliesScreen = ({ navigation }) => {
-  // Pull all families from the database and display them.
-  // Selecting a family will take you to the family screen
+  // Pull all families from async storage and display them.
+  // Selecting a family will take you to the family members screen
 
   const [families, setFamilies] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [familyName, setFamilyName] = useState({ name: "", members: [] });
+  const [newFamily, setNewFamily] = useState({ name: "", members: [] });
 
-  // Gets data in async storage
   const retrieveData = async () => {
+    // Checks for families in async storage
     try {
       const value = await AsyncStorage.getItem("FAMILIES");
       if (value === null || value.length === 0) {
-        // No data, initialize families to an empty array
+        // If no families, initialize families state to an empty array
         setFamilies([]);
         return;
       } else {
-        // There is data, set it to state
+        // Else, there are families, set them to the families state
         console.log("You have families", value);
         setFamilies(JSON.parse(value));
       }
     } catch (error) {
       // Error retrieving data
       console.log(error);
+      Alert.alert("There has been an error retrieving data, please try again");
     }
   };
 
-  // Sets data to async storage, expects an array
-  const setData = (familyArr) => {
-    let familyObj = { name: familyName.name, members: [] };
+  const setData = () => {
+    // Sets a new family to async storage
+    // First check for families in async storage
     AsyncStorage.getItem("FAMILIES")
       .then((res) => {
         if (res === null) {
-          AsyncStorage.setItem("FAMILIES", JSON.stringify(familyArr));
-          setFamilies(familyArr);
+          // If no existing families initialize async storage "FAMILIES" to an array with first family inside
+          // AsyncStorage requires it to be stringified
+          AsyncStorage.setItem("FAMILIES", JSON.stringify([newFamily]));
+          // Set families state to an array with first family inside
+          setFamilies([newFamily]);
           return;
         }
-        let fam = JSON.parse(res);
-        let newFamiliesArr = [...fam, familyObj];
+        // If existing families:
+        // Parse result
+        let families = JSON.parse(res);
+        // Create a new array of the existing families, adding the new family
+        let newFamiliesArr = [...families, newFamily];
+        // Set updated families array to async storage
         AsyncStorage.setItem("FAMILIES", JSON.stringify(newFamiliesArr));
-        retrieveData();
+        // Set updated families array to state
+        setFamilies(newFamiliesArr);
       })
       .catch((err) => console.log(err));
   };
@@ -68,22 +78,22 @@ const AllFamiliesScreen = ({ navigation }) => {
   };
 
   const handleChange = (text) => {
-    setFamilyName({ ...familyName, name: text, members: [] });
+    setNewFamily({ ...newFamily, name: text, members: [] });
   };
 
   const handleSubmit = async () => {
-    if (!familyName.name) {
+    if (!newFamily.name) {
       toggleModal();
       return;
     }
-    // Set async storage to the families already in state including the the family being added
-    setData([...families, familyName]);
+
+    setData([...families, newFamily]);
     // We
 
     // try {
     //   await addFamily({
     //     variables: {
-    //       familyName: familyName.name,
+    //       newFamily: newFamily.name,
     //     },
     //   });
     // } catch (error) {
@@ -95,7 +105,7 @@ const AllFamiliesScreen = ({ navigation }) => {
     //   console.log(error);
     // }
 
-    setFamilyName({ name: "", members: [] });
+    setNewFamily({ name: "", members: [] });
     toggleModal();
   };
 
@@ -140,7 +150,7 @@ const AllFamiliesScreen = ({ navigation }) => {
             <Text style={styles.modalTitle}>Add Family</Text>
             <TextInput
               placeholder="name"
-              value={familyName.name}
+              value={newFamily.name}
               onChangeText={(text) => handleChange(text)}
               name="name"
               style={styles.input}
