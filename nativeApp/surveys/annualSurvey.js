@@ -8,15 +8,15 @@ export const annualSurvey = [
   {
     questionType: "TextInput",
     questionText: "Community:",
-    backend_id: "ck98qj5nx7i1508746j1jiw7b",
+    backend_id: "ck98qc54t7hxg08742092rxeq",
     questionId: "community",
   },
-  // {
-  //   questionType: "TextInput",
-  //   questionText: "Date:",
-  //   backend_id: "ck98qh33z7hzq0874n5l6tw3q",
-  //   questionId: "date",
-  // },
+  {
+    questionType: "TextInput",
+    questionText: "Date:",
+    backend_id: "ck98qh33z7hzq0874n5l6tw3q",
+    questionId: "date",
+  },
   // {
   //   questionType: "TextInput",
   //   questionText: "Interviewer:",
@@ -734,38 +734,38 @@ export const annualSurvey = [
   //     },
   //   ],
   // },
-  {
-    questionType: "SelectionGroup",
-    questionText:
-      "Are there people in the family who drink alcohol without moderation?",
-    backend_id: "ck98rbarh7ikg0874yladt0s5",
-    questionId: "alcohol_abuse",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "TextInput",
-    questionText:
-      "How do you think your family's life will be next year? \n\n(Worse, the same, better)",
-    backend_id: "ck98rc1a87iky0874y7isjwex",
-    questionId: "family_life_opinion",
-  },
-  {
-    questionType: "TextInput",
-    questionText:
-      "How do you think your community's life will be next year? \n\n(Worse, the same, better)",
-    backend_id: "ck98rdivd7ilq0874mzk722ub",
-    questionId: "community_life_opinion",
-  },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText:
+  //     "Are there people in the family who drink alcohol without moderation?",
+  //   backend_id: "ck98rbarh7ikg0874yladt0s5",
+  //   questionId: "alcohol_abuse",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "TextInput",
+  //   questionText:
+  //     "How do you think your family's life will be next year? \n\n(Worse, the same, better)",
+  //   backend_id: "ck98rc1a87iky0874y7isjwex",
+  //   questionId: "family_life_opinion",
+  // },
+  // {
+  //   questionType: "TextInput",
+  //   questionText:
+  //     "How do you think your community's life will be next year? \n\n(Worse, the same, better)",
+  //   backend_id: "ck98rdivd7ilq0874mzk722ub",
+  //   questionId: "community_life_opinion",
+  // },
 ];
