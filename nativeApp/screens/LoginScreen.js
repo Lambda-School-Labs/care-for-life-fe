@@ -25,31 +25,12 @@ import config from "../api/oktaConfig.js";
 if (Platform.OS === "web") {
   WebBrowser.maybeCompleteAuthSession();
 }
-
 const useProxy = true;
-
 const LoginScreen = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState(null);
-
-  useEffect(() => {
-    // Fetch the token from storage then navigate to our appropriate place
-    const getToken = async () => {
-      let userToken;
-      try {
-        userToken = await AsyncStorage.getItem("TOKEN");
-        // console.log("userToken:", userToken);
-        setToken(userToken);
-      } catch (e) {
-        // Restoring token failed
-        console.log(e);
-      }
-    };
-    getToken();
-    props.navigation.navigate("Families", { setToken: setToken });
-  }, [token]);
 
   const discovery = AuthSession.useAutoDiscovery(ISSUER);
   // Request
@@ -57,31 +38,56 @@ const LoginScreen = (props) => {
     config,
     discovery
   );
-
+  //Logout Logic
+  const handleLogout = async () => {
+    console.log("Logging out...");
+    Alert.alert(
+      "Logging Out",
+      "Are you sure you want to log out? \n You won't be able to sign back in OFFLINE!",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: () => {
+            AsyncStorage.removeItem("TOKEN");
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+  //Login Logic
   const handleLogin = async () => {
-    //Expo Authentication
-    await promptAsync({ useProxy })
-      .then((res) => {
-        console.log("Okta Response:", res);
-        console.log("setting token to async storage:", res.params.code);
-        AsyncStorage.setItem("TOKEN", res.params.code);
-      })
-      .catch((e) => console.log(e));
-    console.log("Checking token in storage....");
-    const _retrieveToken = async () => {
-      try {
-        const token = await AsyncStorage.getItem("TOKEN");
-        if (token !== null) {
-          // We have data!!
-          console.log("token:", token);
-          //set Data to state
-          setToken(token);
-        }
-      } catch (error) {
-        // Error retrieving data
-      }
+    console.log("loggin in...");
+    console.log("Token:", token);
+    const getToken = async () => {
+      await AsyncStorage.getItem("TOKEN")
+        .then((res) => {
+          console.log("Token In Async Storage:", res);
+          if (res !== null) {
+            props.navigation.replace("Families");
+          } else {
+            //Expo Authentication
+            promptAsync({ useProxy })
+              .then((res) => {
+                console.log("Okta Response:", res);
+                console.log("setting token to async storage:", res.params.code);
+                AsyncStorage.setItem("TOKEN", res.params.code);
+                setToken(res.params.code);
+                props.navigation.replace("Families");
+              })
+              .catch((err) =>
+                Alert.alert(`Could Not Log In, Error: \n ${err}`)
+              );
+          }
+        })
+        .catch((err) => console.log(err));
     };
-    _retrieveToken();
+    getToken();
   };
   // Endpoint
 
@@ -95,6 +101,9 @@ const LoginScreen = (props) => {
           {/* <Button title="Log in" onPress={handleLogin} /> */}
           <TouchableOpacity style={styles.button} onPress={handleLogin}>
             <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={handleLogout}>
+            <Text style={styles.buttonText}>Logout</Text>
           </TouchableOpacity>
 
           {/* <View style={styles.footer}>
