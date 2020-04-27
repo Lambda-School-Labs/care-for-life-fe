@@ -12,6 +12,7 @@ import {
 import { FlatList } from "react-native-gesture-handler";
 import Card from "../components/Card";
 import Modal from "react-native-modal";
+import { ApolloConsumer } from "react-apollo";
 
 const AllFamiliesScreen = ({ navigation }) => {
   // Pull all families from async storage and display them.
@@ -85,6 +86,8 @@ const AllFamiliesScreen = ({ navigation }) => {
   // Runs when the app first starts and will add any families in storage to state so they will be displayed
   useEffect(() => {
     retrieveData();
+    const token2 = AsyncStorage.getItem("TOKEN");
+    console.log("Token in async storage:", token2);
   }, []);
 
   const toggleModal = () => {
@@ -148,19 +151,6 @@ const AllFamiliesScreen = ({ navigation }) => {
       />
       <View style={styles.modalContainer}>
         <Button title="ADD FAMILY" onPress={toggleModal} />
-        <Button
-          title="remove all"
-          color="red"
-          onPress={async () => {
-            try {
-              await AsyncStorage.removeItem("FAMILIES");
-              retrieveData();
-              console.log("removed");
-            } catch (err) {
-              console.log(err);
-            }
-          }}
-        />
         <Modal isVisible={isModalVisible} backdropOpacity={0.8}>
           <View style={styles.modal}>
             <Text style={styles.modalTitle}>Add Family</Text>

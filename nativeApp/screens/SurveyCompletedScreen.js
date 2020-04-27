@@ -35,8 +35,8 @@ const SurveyCompletedScreen = (props) => {
   const type = props.route.params.type;
 
   const annualSurveyHandler = async () => {
-    console.log("Submitting Answers....", answers);
 
+    console.log("Submitting Answers....", answers);
     await answers.forEach((answer, index) => {
       console.log("answer being mutated", answer.value);
       console.log("answers backendID", fullSurvey[index].backend_id);

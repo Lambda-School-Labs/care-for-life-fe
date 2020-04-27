@@ -3,13 +3,14 @@ import React from "react";
 // Navigation imports
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-
+import { AsyncStorage } from "react-native";
 import SurveyScreen from "../screens/SurveyScreen";
 import SurveyCompletedScreen from "../screens/SurveyCompletedScreen";
 import Header from "../components/Header/index";
 import AllFamiliesScreen from "../screens/AllFamiliesScreen";
 import FamilyScreen from "../screens/FamilyScreen";
 import FamilyMembers from "../screens/FamilyMembersScreen";
+import Login from "../screens/LoginScreen";
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,11 @@ export default function AppNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ title: "Login" }}
+        />
         <Stack.Screen
           name="Families"
           component={AllFamiliesScreen}
