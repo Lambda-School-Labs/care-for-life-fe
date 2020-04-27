@@ -34,6 +34,7 @@ const LoginScreen = (props) => {
 
   const discovery = AuthSession.useAutoDiscovery(ISSUER);
   // Request
+
   const [request, response, promptAsync] = AuthSession.useAuthRequest(
     config,
     discovery
@@ -98,21 +99,12 @@ const LoginScreen = (props) => {
           <View style={styles.logoWrapper}>
             <Image style={styles.logo} source={logo} />
           </View>
-          {/* <Button title="Log in" onPress={handleLogin} /> */}
           <TouchableOpacity style={styles.button} onPress={handleLogin}>
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={handleLogout}>
             <Text style={styles.buttonText}>Logout</Text>
           </TouchableOpacity>
-
-          {/* <View style={styles.footer}>
-            <Text>Don't have an account?</Text>
-            <Button
-              title="Register"
-              onPress={() => props.navigation.replace("Register")}
-            />
-          </View> */}
         </Card>
       </View>
     </TouchableWithoutFeedback>

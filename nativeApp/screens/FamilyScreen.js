@@ -40,6 +40,7 @@ const FamilyScreen = ({ route, navigation }) => {
           onPress={() =>
             navigation.navigate("FamilyMembers", {
               familyName: route.params.familyName,
+              familyId: route.params.familyId,
             })
           }
         >

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, TextInput, Button, Alert, StyleSheet } from "react-native";
 import { useOfflineMutation } from "react-offix-hooks";
-import { addFamilyAndAnswersMutation } from "../Queries/queries";
+import {
+  addFamilyAndAnswersMutation,
+  addIndividualAndAnswersMutation,
+} from "../Queries/queries";
 import SurveyReview from "../components/SurveyReview";
 import Modal from "react-native-modal";
 
@@ -19,6 +22,10 @@ const SurveyCompletedScreen = (props) => {
     addFamilyAndAnswersMutation
   );
 
+  const [addFamilyIndividualAndAnswers] = useOfflineMutation(
+    addIndividualAndAnswersMutation
+  );
+
   // need to store the backend ID returned during login/registration and set it to equal the userId variable on the line below
   const userId = "Insert ID of the logged in user";
   let answers = props.route.params.surveyAnswers;
@@ -28,8 +35,8 @@ const SurveyCompletedScreen = (props) => {
   const type = props.route.params.type;
 
   const annualSurveyHandler = async () => {
-    console.log(answers);
 
+    console.log("Submitting Answers....", answers);
     await answers.forEach((answer, index) => {
       console.log("answer being mutated", answer.value);
       console.log("answers backendID", fullSurvey[index].backend_id);
@@ -106,6 +113,39 @@ const SurveyCompletedScreen = (props) => {
     setQuestion("");
     setAnswerIndex("");
     toggleModal();
+  };
+
+  const individualSurveyHandler = async () => {
+    console.log("Submitting Answers....", fullSurvey);
+
+    await answers.forEach((answer, index) => {
+      console.log("answer being mutated", answer.value);
+      // console.log('answers backendID', fullSurvey[index].backend_id);
+      try {
+        addIndividualAndAnswers({
+          variables: {
+            personName: personName,
+            surveyName: "Individual Annual Survey",
+            employeeId: userId,
+            answerText: answer.value.value
+              ? answer.value.value.toString()
+              : answer.value.toString(),
+            questionId: fullSurvey[index].backend_id,
+          },
+        });
+      } catch (error) {
+        if (error.offline) {
+          error
+            .watchOfflineChange()
+            .then((res) => console.log("Offline result", res));
+        }
+        console.log(error);
+      }
+    });
+
+    props.navigation.navigate("FamilyMembers", {
+      survey: answers,
+    });
   };
 
   return (

@@ -14,6 +14,7 @@ const App = () => {
   const [initialized, setInitialized] = useState(false);
   const [token, setToken] = useState(false);
 
+
   // initialize the offix client and set the apollo client
   useEffect(() => {
     const runApp = async () => {

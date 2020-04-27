@@ -6,3 +6,4 @@ export default {
   redirectUri: AuthSession.getRedirectUrl(),
   scopes: ["openid", "profile"],
 };
+
