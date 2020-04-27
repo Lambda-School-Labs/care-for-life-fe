@@ -417,323 +417,323 @@ export const annualSurvey = [
   //     },
   //   ],
   // },
-  {
-    questionType: "SelectionGroup",
-    questionText: "Does the family have a bathroom?",
-    backend_id: "ck98r1qa47idi0874ttji6gx7",
-    questionId: "has_bathroom",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "Is the yard clean?",
-    backend_id: "ck98r26mt7idu0874idkh223d",
-    questionId: "clean_yard",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "Does the family burn or bury all garbage?",
-    backend_id: "ck98r2kji7ie60874ni8y2m2v",
-    questionId: "garbage_disposal",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText:
-      "Does the home have some kind of plague \n\n(cockroaches, rats, worms, etc)?",
-    backend_id: "ck98r3j8q7ies0874o3lwwhjb",
-    questionId: "has_plagues",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "Does the family have a tarimba?",
-    backend_id: "ck98r3yne7if408746khekw9b",
-    questionId: "has_tarimba",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "Is the yard free of stagnant water?",
-    backend_id: "ck98r4eqe7ifi0874q41iblx0",
-    questionId: "has_stagnant_water",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "Does the home have a kitchen?",
-    backend_id: "ck98r4une7ifu0874sy9l17yn",
-    questionId: "has_kitchen",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "Is inside the home clean?",
-    backend_id: "ck98r5cqr7ig808743jxu4imj",
-    questionId: "clean_home",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "Info",
-    questionText: "New Section: Income Generation",
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "Does the family have a small business?",
-    backend_id: "ck98r5u6h7igm0874fa0ms1cw",
-    questionId: "has_small_business",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "Does family have income generation activity?",
-    backend_id: "ck98r6ilx7ih20874taacdwze",
-    questionId: "has_income",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText:
-      "Does the family participate in saving, agriculture, credit association (microcredit)?",
-    backend_id: "ck98r6x107ihe08747rtqyzlc",
-    questionId: "has_savings",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "Info",
-    questionText: "New Section: Food Security and Nutrition",
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText:
-      "At least one meal everyday have vegetable or eggs or fish or meat?",
-    backend_id: "ck98r7e497ihs0874872zzu5x",
-    questionId: "one_healthy_meal",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText:
-      "Has the family harvested some product from the garden in the last planting season?",
-    backend_id: "ck98r87257iia08746d47t5p6",
-    questionId: "did_harvest_farm",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText:
-      "Does the family have a vegetable garden or did they harvest any produce from the last planting season?",
-    backend_id: "ck98r8mqe7iim0874l1xn53h0",
-    questionId: "did_harvest_garden",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "TextInput",
-    questionText:
-      "How does the family treat drinking water? \n\n (Doesn’t treat, chlorine, boil, filter, other)",
-    backend_id: "ck98r91wd7ij00874dptqsk7h",
-    questionId: "drinking_water_treatment",
-  },
-  {
-    questionType: "TextInput",
-    questionText:
-      "Where does the family get their water? \n\n (Faucet, well, fountain, community cistern, river, other)",
-    backend_id: "ck98ra82u7ijo0874pqfebwgo",
-    questionId: "drinking_water_source",
-  },
-  {
-    questionType: "Info",
-    questionText: "New Section: Psycho-Social-Spiritual",
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText:
-      "Have there been any cases of physical violence within the family?",
-    backend_id: "ck98ratte7ik20874ye4m7ixf",
-    questionId: "physical_violence",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "Does the family have a bathroom?",
+  //   backend_id: "ck98r1qa47idi0874ttji6gx7",
+  //   questionId: "has_bathroom",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "Is the yard clean?",
+  //   backend_id: "ck98r26mt7idu0874idkh223d",
+  //   questionId: "clean_yard",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "Does the family burn or bury all garbage?",
+  //   backend_id: "ck98r2kji7ie60874ni8y2m2v",
+  //   questionId: "garbage_disposal",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText:
+  //     "Does the home have some kind of plague \n\n(cockroaches, rats, worms, etc)?",
+  //   backend_id: "ck98r3j8q7ies0874o3lwwhjb",
+  //   questionId: "has_plagues",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "Does the family have a tarimba?",
+  //   backend_id: "ck98r3yne7if408746khekw9b",
+  //   questionId: "has_tarimba",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "Is the yard free of stagnant water?",
+  //   backend_id: "ck98r4eqe7ifi0874q41iblx0",
+  //   questionId: "has_stagnant_water",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "Does the home have a kitchen?",
+  //   backend_id: "ck98r4une7ifu0874sy9l17yn",
+  //   questionId: "has_kitchen",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "Is inside the home clean?",
+  //   backend_id: "ck98r5cqr7ig808743jxu4imj",
+  //   questionId: "clean_home",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "Info",
+  //   questionText: "New Section: Income Generation",
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "Does the family have a small business?",
+  //   backend_id: "ck98r5u6h7igm0874fa0ms1cw",
+  //   questionId: "has_small_business",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "Does family have income generation activity?",
+  //   backend_id: "ck98r6ilx7ih20874taacdwze",
+  //   questionId: "has_income",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText:
+  //     "Does the family participate in saving, agriculture, credit association (microcredit)?",
+  //   backend_id: "ck98r6x107ihe08747rtqyzlc",
+  //   questionId: "has_savings",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "Info",
+  //   questionText: "New Section: Food Security and Nutrition",
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText:
+  //     "At least one meal everyday have vegetable or eggs or fish or meat?",
+  //   backend_id: "ck98r7e497ihs0874872zzu5x",
+  //   questionId: "one_healthy_meal",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText:
+  //     "Has the family harvested some product from the garden in the last planting season?",
+  //   backend_id: "ck98r87257iia08746d47t5p6",
+  //   questionId: "did_harvest_farm",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText:
+  //     "Does the family have a vegetable garden or did they harvest any produce from the last planting season?",
+  //   backend_id: "ck98r8mqe7iim0874l1xn53h0",
+  //   questionId: "did_harvest_garden",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "TextInput",
+  //   questionText:
+  //     "How does the family treat drinking water? \n\n (Doesn’t treat, chlorine, boil, filter, other)",
+  //   backend_id: "ck98r91wd7ij00874dptqsk7h",
+  //   questionId: "drinking_water_treatment",
+  // },
+  // {
+  //   questionType: "TextInput",
+  //   questionText:
+  //     "Where does the family get their water? \n\n (Faucet, well, fountain, community cistern, river, other)",
+  //   backend_id: "ck98ra82u7ijo0874pqfebwgo",
+  //   questionId: "drinking_water_source",
+  // },
+  // {
+  //   questionType: "Info",
+  //   questionText: "New Section: Psycho-Social-Spiritual",
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText:
+  //     "Have there been any cases of physical violence within the family?",
+  //   backend_id: "ck98ratte7ik20874ye4m7ixf",
+  //   questionId: "physical_violence",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
   {
     questionType: "SelectionGroup",
     questionText:
