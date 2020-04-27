@@ -54,6 +54,8 @@ const AllFamiliesScreen = ({ navigation }) => {
   // Runs when the app first starts and will add any families in storage to state so they will be displayed
   useEffect(() => {
     retrieveData();
+    const token2 = AsyncStorage.getItem("TOKEN");
+    console.log("Token in async storage:", token2);
   }, []);
 
   const toggleModal = () => {
@@ -62,22 +64,6 @@ const AllFamiliesScreen = ({ navigation }) => {
 
   const handleChange = (text) => {
     setFamilyName({ ...familyName, name: text });
-  };
-  const handleLogout = async () => {
-    try {
-      const token = await AsyncStorage.getItem("TOKEN");
-      if (token !== null) {
-        // We have data!!
-        console.log("removing token:", token);
-        await AsyncStorage.removeItem("TOKEN")
-          .then((res) => console.log("removed token:", res))
-          .catch((err) => console.log(err));
-        //navigate to Login if token successfully removed
-        navigation.navigate("Login");
-      }
-    } catch (error) {
-      // Error retrieving data
-    }
   };
 
   const handleSubmit = async () => {
@@ -132,20 +118,6 @@ const AllFamiliesScreen = ({ navigation }) => {
       />
       <View style={styles.modalContainer}>
         <Button title="ADD FAMILY" onPress={toggleModal} />
-        <Button title="Logout" onPress={handleLogout} />
-        <Button
-          title="remove all"
-          color="red"
-          onPress={async () => {
-            try {
-              await AsyncStorage.removeItem("FAMILIES");
-              retrieveData();
-              console.log("removed");
-            } catch (err) {
-              console.log(err);
-            }
-          }}
-        />
         <Modal isVisible={isModalVisible} backdropOpacity={0.8}>
           <View style={styles.modal}>
             <Text style={styles.modalTitle}>Add Family</Text>

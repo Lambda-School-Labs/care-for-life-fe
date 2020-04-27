@@ -3,7 +3,7 @@ import React from "react";
 // Navigation imports
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-
+import { AsyncStorage } from "react-native";
 import SurveyScreen from "../screens/SurveyScreen";
 import SurveyCompletedScreen from "../screens/SurveyCompletedScreen";
 import Header from "../components/Header/index";

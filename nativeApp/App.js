@@ -7,26 +7,28 @@ import { ApolloOfflineProvider } from "react-offix-hooks";
 import { offlineClient } from "./config/offix";
 import SplashScreen from "./screens/SpashScreen";
 import AppNavigator from "./navigation/AppNavigator";
+import AuthNavigator from "./navigation/AuthNavigator";
+import LoginScreen from "./screens/LoginScreen.js";
 
 const App = () => {
   const [initialized, setInitialized] = useState(false);
-
-  // const discovery = AuthSession.useAutoDiscovery({ ISSUER });
-
-  // // Create and load an auth request:
-  // const [request, result, promptAsync] = AuthSession.useAuthRequest(
-  //   {
-  //     clientId: { CLIENT_ID },
-  //     redirectUri: { DEV_URI },
-  //     scopes: ["openid", "profile", "email", "offline_access"],
-  //   },
-  //   discovery
-  // );
+  const [token, setToken] = useState(false);
 
   // initialize the offix client and set the apollo client
   useEffect(() => {
-    offlineClient.init().then(() => setInitialized(true));
-  }, []);
+    const runApp = async () => {
+      console.log("App Starting");
+      await offlineClient.init().then(() => setInitialized(true));
+      if (AsyncStorage.getItem("TOKEN").length === undefined) {
+        setToken(false);
+        console.log("State of Token:", token);
+      } else {
+        setToken(true);
+        console.log("State of Token:", token);
+      }
+    };
+    runApp();
+  }, [token]);
 
   // load the app if the apolloClient is there, otherwise load the splash screen
   if (initialized) {
