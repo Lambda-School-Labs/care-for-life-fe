@@ -150,7 +150,9 @@ const AllFamiliesScreen = ({ navigation }) => {
         }}
       />
       <View style={styles.modalContainer}>
-        <Button title="ADD FAMILY" onPress={toggleModal} />
+        <TouchableOpacity onPress={toggleModal} style={styles.addFamilyButton}>
+          <Text style={styles.addFamilyButtonText}>Add Family</Text>
+        </TouchableOpacity>
         <Modal isVisible={isModalVisible} backdropOpacity={0.8}>
           <View style={styles.modal}>
             <Text style={styles.modalTitle}>Add Family</Text>
@@ -177,6 +179,18 @@ const AllFamiliesScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  addFamilyButton: {
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 100,
+    color: "white",
+    backgroundColor: "black",
+  },
+  addFamilyButtonText: {
+    color: "white",
+    fontSize: 25,
+  },
   cardContainer: {
     alignItems: "center",
   },
@@ -186,7 +200,6 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     justifyContent: "flex-end",
-    backgroundColor: "#BADA22",
   },
   modal: {
     flex: 1,
