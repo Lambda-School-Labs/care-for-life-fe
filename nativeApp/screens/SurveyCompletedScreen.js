@@ -27,20 +27,28 @@ const SurveyCompletedScreen = (props) => {
   );
 
   // need to store the backend ID returned during login/registration and set it to equal the userId variable on the line below
-  const userId = "Insert ID of the logged in user";
+  const userId = "ck90eb2ce3vt40874lv2moncz"; //Update once login mutation works
   let answers = props.route.params.surveyAnswers;
   const fullSurvey = props.route.params.fullSurvey;
   const familyName = props.route.params.familyName;
   const personName = props.route.params.personName;
-  const type = props.route.params.type;
+  const surveyType = props.route.params.type;
 
   const annualSurveyHandler = async () => {
-
     console.log("Submitting Answers....", answers);
     await answers.forEach((answer, index) => {
-      console.log("answer being mutated", answer.value);
-      console.log("answers backendID", fullSurvey[index].backend_id);
+      // console.log("answer being mutated", answer.value);
+      // console.log("answers backendID", fullSurvey[index].backend_id);
       try {
+        console.log("logging mutation variables...");
+        console.log(
+          "Variables:",
+          answer.value,
+          answer.value.value,
+          familyName,
+          userId,
+          fullSurvey[index].backend_id
+        );
         addFamilyAndAnswers({
           variables: {
             familyName: familyName,
@@ -51,7 +59,9 @@ const SurveyCompletedScreen = (props) => {
               : answer.value.toString(),
             questionId: fullSurvey[index].backend_id,
           },
-        });
+        })
+          .then((res) => console.log("mutation response:", res))
+          .catch((err) => console.log("mutation error:", err));
       } catch (error) {
         if (error.offline) {
           error

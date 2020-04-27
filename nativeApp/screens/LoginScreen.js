@@ -20,7 +20,9 @@ import * as AuthSession from "expo-auth-session";
 import * as WebBrowser from "expo-web-browser";
 import { Linking } from "expo";
 import config from "../api/oktaConfig.js";
-
+import { useOfflineMutation } from "react-offix-hooks";
+//mutations
+import { loginMutation } from "../Queries/queries.js";
 //configure as web platform to allow for Okta redirects
 if (Platform.OS === "web") {
   WebBrowser.maybeCompleteAuthSession();
@@ -32,6 +34,8 @@ const LoginScreen = (props) => {
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState(null);
 
+  //Offline Mutation
+  const [login, state] = useOfflineMutation(loginMutation);
   const discovery = AuthSession.useAutoDiscovery(ISSUER);
   // Request
 
@@ -79,6 +83,13 @@ const LoginScreen = (props) => {
                 console.log("setting token to async storage:", res.params.code);
                 AsyncStorage.setItem("TOKEN", res.params.code);
                 setToken(res.params.code);
+
+                // login({
+                //   variables: {
+                //     //variables to match backend
+                //   },
+                // });
+
                 props.navigation.replace("Families");
               })
               .catch((err) =>

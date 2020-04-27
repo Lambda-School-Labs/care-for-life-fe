@@ -4,7 +4,7 @@ import { setContext } from "apollo-link-context";
 import { AsyncStorage } from "react-native";
 import { ApolloOfflineClient } from "offix-client";
 import { NetworkStatus } from "./NetworkStatus";
-import { APOLLO_TOKEN } from "react-native-dotenv";
+import { APOLLO_TOKEN, APOLLO_URI } from "react-native-dotenv";
 import "cross-fetch/polyfill";
 
 const cacheStorage = {
@@ -33,7 +33,7 @@ const cacheStorage = {
 const networkStatus = new NetworkStatus();
 
 const httpLink = new HttpLink({
-  uri: "https://apollo.careforlife.dev",
+  uri: APOLLO_URI,
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -68,8 +68,8 @@ offlineClient.registerOfflineEventListener({
   },
   onOperationFailure: (operation, error) => {
     // called when the operation failed
-    // console.log("onOperationFailure", error);
-    // return;
+    console.log("onOperationFailure", error);
+    return;
   },
   onOperationSuccess: (operation) => {
     // called when the operation was fulfilled
