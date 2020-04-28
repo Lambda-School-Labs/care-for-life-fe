@@ -34,43 +34,36 @@ const cacheStorage = {
 
 const networkStatus = new NetworkStatus();
 
-const token = getToken();
 const httpLink = new HttpLink({
   uri: APOLLO_URI,
-  request: (operation) => {
-    operation.setContext({
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
-  },
 });
 
-// const authLink = setContext((_, { headers }) => {
-//   // get the Apollo authentication token from async storage if it exists
-//   // console.log("APOLLO TOKEN IN ASYNC STORAGE:", token);
-//   getToken()
-//     .then((token) => {
-//       console.log("State of Token In Offix.js", token);
-//       return {
-//         headers: {
-//           ...headers,
-//           authorization: `Bearer ${token}`,
-//           // authorization:
-//           //   "Bearer eyJraWQiOiI0dFJQSzU1STVkaW9TYi1la2xEQW9Ba0Zpb0piNWlCSjJsU3k0Z0J0OHpvIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULkhPNTF0ZVp2alN2MkNqWXA2YkV3eS1vSFJYb2VQZVpoNHdJSnZFNmRVUXMiLCJpc3MiOiJodHRwczovL29rdGEuY2FyZWZvcmxpZmUuZGV2L29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTU4ODExMTgxMywiZXhwIjoxNTg4MTk4MjEzLCJjaWQiOiIwb2FhYmZocTZncGdVTGp6cjR4NiIsInVpZCI6IjAwdWE3cGY0NjdlQUNHdlFHNHg2Iiwic2NwIjpbIm9wZW5pZCIsInByb2ZpbGUiXSwic3ViIjoiYWxleGlzZGF2YWxvcy50ZWNoQGdtYWlsLmNvbSJ9.PEs6r00WnDST2kiZmoKAZwpv0p1GfYp2YCif4IQTi3qIRyLKbLK606I9d0L1Lv706AiCPmsJoGllQffmM5uS5liJ10pn5vVdhilllIthr2ux-e4aI2a53TkZO7NTvujgq0HPPxajqA86VJosV7HNyaGGeXdL4cc6G271_z6WqV_3TrCLzUjQAgqSppq7aYtZC4Q58_E-x1B-pjMLluGAsbMjgQVEbylv884X5hOz4_9Gw0HGDWqLBgkzUxOrGHxEMnjw-Wu55T-zLaIgxDnlzGe8YgHYDI5torbHd_245iktjJ7ZE-NW-mlF-7nCcArXsjv-zKT2Trggek9Pb0vpjw",
-//         },
-//       };
-//     })
-//     .catch();
-
-//   // return the headers to the context so httpLink can read them
-//   // console.log("HEADERS IN OFFIX.JS:");
-// });
+const authLink = setContext((_, { headers }) => {
+  // get the Apollo authentication token from async storage if it exists
+  // console.log("APOLLO TOKEN IN ASYNC STORAGE:", token);
+  // let AccessToken;
+  // getToken()
+  //   .then((token) => {
+  //     AccessToken = token;
+  //     // console.log("State of Token In Offix.js:", AccessToken);
+  //   })
+  //   .catch();
+  // return the headers to the context so httpLink can read them
+  // console.log("HEADERS IN OFFIX.JS:");
+  return {
+    headers: {
+      ...headers,
+      // authorization: `Bearer ${AccessToken}`,
+      authorization:
+        "Bearer eyJraWQiOiI0dFJQSzU1STVkaW9TYi1la2xEQW9Ba0Zpb0piNWlCSjJsU3k0Z0J0OHpvIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULkhPNTF0ZVp2alN2MkNqWXA2YkV3eS1vSFJYb2VQZVpoNHdJSnZFNmRVUXMiLCJpc3MiOiJodHRwczovL29rdGEuY2FyZWZvcmxpZmUuZGV2L29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTU4ODExMTgxMywiZXhwIjoxNTg4MTk4MjEzLCJjaWQiOiIwb2FhYmZocTZncGdVTGp6cjR4NiIsInVpZCI6IjAwdWE3cGY0NjdlQUNHdlFHNHg2Iiwic2NwIjpbIm9wZW5pZCIsInByb2ZpbGUiXSwic3ViIjoiYWxleGlzZGF2YWxvcy50ZWNoQGdtYWlsLmNvbSJ9.PEs6r00WnDST2kiZmoKAZwpv0p1GfYp2YCif4IQTi3qIRyLKbLK606I9d0L1Lv706AiCPmsJoGllQffmM5uS5liJ10pn5vVdhilllIthr2ux-e4aI2a53TkZO7NTvujgq0HPPxajqA86VJosV7HNyaGGeXdL4cc6G271_z6WqV_3TrCLzUjQAgqSppq7aYtZC4Q58_E-x1B-pjMLluGAsbMjgQVEbylv884X5hOz4_9Gw0HGDWqLBgkzUxOrGHxEMnjw-Wu55T-zLaIgxDnlzGe8YgHYDI5torbHd_245iktjJ7ZE-NW-mlF-7nCcArXsjv-zKT2Trggek9Pb0vpjw",
+    },
+  };
+});
 
 export const offlineClient = new ApolloOfflineClient({
   cache: new InMemoryCache(),
-  link: httpLink,
-  uri: APOLLO_URI,
+  link: authLink.concat(httpLink),
+  // uri: "https://apollo.careforlife.dev",
   // headers: {
   //   authorization: `Bearer ${token}`,
   // },
