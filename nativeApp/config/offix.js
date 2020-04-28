@@ -38,7 +38,8 @@ const httpLink = new HttpLink({
 
 const authLink = setContext((_, { headers }) => {
   // get the Apollo authentication token from async storage if it exists
-  const token = AsyncStorage.getItem("token") || APOLLO_TOKEN;
+  const token = AsyncStorage.getItem("apolloToken") || APOLLO_TOKEN;
+  // const token = APOLLO_TOKEN;
   // return the headers to the context so httpLink can read them
   return {
     headers: {

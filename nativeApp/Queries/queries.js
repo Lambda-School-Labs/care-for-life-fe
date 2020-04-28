@@ -28,17 +28,15 @@ const addFamilyAndAnswersMutation = gql`
     ) {
       id
       family_name
-      family_members
     }
   }
 `;
 
-// creates an individual family member and all of their solo survey answers in the database
-const addIndividualAndAnswersMutation = gql`
+const addPersonAndAnswersMutation = gql`
   mutation(
+    $employeeId: ID!
     $personName: String!
     $surveyName: String!
-    $employeeId: ID!
     $answerText: String!
     $questionId: ID!
   ) {
@@ -65,33 +63,33 @@ const addIndividualAndAnswersMutation = gql`
   }
 `;
 
-// adds a new user (aka a CFL employee) to the database, then returns a JWT token & the user's info
-const signUpMutation = gql`
-  mutation signUp($name: String!, $email: String!, $password: String!) {
-    signUp(name: $name, email: $email, password: $password) {
-      token
-      user {
-        id
-        name
-        email
-      }
-    }
-  }
-`;
+// // adds a new user (aka a CFL employee) to the database, then returns a JWT token & the user's info
+// const signUpMutation = gql`
+//   mutation signUp($name: String!, $email: String!, $password: String!) {
+//     signUp(name: $name, email: $email, password: $password) {
+//       token
+//       user {
+//         id
+//         name
+//         email
+//       }
+//     }
+//   }
+// `;
 
-// checks a user's credentials upon logging in, then returns a JWT token & the user's info
-const loginMutation = gql`
-  mutation login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      token
-      user {
-        id
-        name
-        email
-      }
-    }
-  }
-`;
+// // checks a user's credentials upon logging in, then returns a JWT token & the user's info
+// const loginMutation = gql`
+//   mutation login($email: String!, $password: String!) {
+//     login(email: $email, password: $password) {
+//       token
+//       user {
+//         id
+//         name
+//         email
+//       }
+//     }
+//   }
+// `;
 
 // const addFamilyMutation = gql`
 //   mutation($familyName: String!) {
@@ -120,8 +118,8 @@ const loginMutation = gql`
 // `;
 
 export {
+  addPersonAndAnswersMutation,
   addFamilyAndAnswersMutation,
-  addIndividualAndAnswersMutation,
-  signUpMutation,
-  loginMutation,
+  // signUpMutation,
+  // loginMutation,
 };
