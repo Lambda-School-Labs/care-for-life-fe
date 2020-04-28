@@ -19,16 +19,9 @@ const App = () => {
     const runApp = async () => {
       console.log("App Starting");
       await offlineClient.init().then(() => setInitialized(true));
-      if (AsyncStorage.getItem("TOKEN").length === undefined) {
-        setToken(false);
-        console.log("State of Token:", token);
-      } else {
-        setToken(true);
-        console.log("State of Token:", token);
-      }
     };
     runApp();
-  }, [token]);
+  }, []);
 
   // load the app if the apolloClient is there, otherwise load the splash screen
   if (initialized) {

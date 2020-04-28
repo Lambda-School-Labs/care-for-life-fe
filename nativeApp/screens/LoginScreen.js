@@ -43,6 +43,10 @@ const LoginScreen = (props) => {
     config,
     discovery
   );
+  //Get Token
+  const getToken = async () => {
+    return await AsyncStorage.getItem("access_token");
+  };
   //Logout Logic
   const handleLogout = async () => {
     console.log("Logging out...");
@@ -58,7 +62,7 @@ const LoginScreen = (props) => {
         {
           text: "OK",
           onPress: () => {
-            AsyncStorage.removeItem("TOKEN");
+            AsyncStorage.removeItem("access_token");
           },
         },
       ],
@@ -66,41 +70,26 @@ const LoginScreen = (props) => {
     );
   };
   //Login Logic
-  const handleLogin = async () => {
+  const handleLogin = () => {
     console.log("loggin in...");
-    console.log("Token:", token);
-    const getToken = async () => {
-      await AsyncStorage.getItem("TOKEN")
-        .then((res) => {
-          console.log("Token In Async Storage:", res);
-          if (res !== null) {
+    getToken()
+      .then(async (token) => {
+        if (token !== null) {
+          //Navigates to Families Screen
+          console.log("Token:", token);
+          props.navigation.replace("Families");
+        } else {
+          //Gets New Token
+          await promptAsync({ useProxy }).then((res) => {
+            AsyncStorage.setItem("access_token", response.params.access_token);
+            //navigates to families screen
             props.navigation.replace("Families");
-          } else {
-            //Expo Authentication
-            promptAsync({ useProxy })
-              .then((res) => {
-                console.log("Okta Response:", res);
-                console.log("setting token to async storage:", res.params.code);
-                AsyncStorage.setItem("TOKEN", res.params.code);
-                setToken(res.params.code);
-
-                // login({
-                //   variables: {
-                //     //variables to match backend
-                //   },
-                // });
-
-                props.navigation.replace("Families");
-              })
-              .catch((err) =>
-                Alert.alert(`Could Not Log In, Error: \n ${err}`)
-              );
-          }
-        })
-        .catch((err) => console.log(err));
-    };
-    getToken();
+          });
+        }
+      })
+      .catch();
   };
+
   // Endpoint
 
   return (

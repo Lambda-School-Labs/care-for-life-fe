@@ -19,7 +19,7 @@ const SurveyReview = (props) => {
             key={el.questionId}
           >
             <Text style={styles.question}>
-              {index + 1}: {props.fullSurvey[index].questionText}
+              {index + 1}: {props.survey[index].questionText}
             </Text>
             <Text style={styles.answer}>
               {el.value.value ? el.value.value : el.value}

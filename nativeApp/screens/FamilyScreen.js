@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, Button, TouchableOpacity } from 'react-native';
-import { annualSurvey } from '../surveys/annualSurvey.js';
+import React, { useState } from "react";
+import { StyleSheet, View, Text, Button, TouchableOpacity } from "react-native";
+import { annualSurvey } from "../surveys/annualSurvey.js";
 
 const FamilyScreen = ({ route, navigation }) => {
   // Displays the family name
@@ -12,10 +12,10 @@ const FamilyScreen = ({ route, navigation }) => {
         <TouchableOpacity
           style={styles.button}
           onPress={() =>
-            navigation.navigate('Survey', {
+            navigation.navigate("Survey", {
               familyName: route.params.familyName,
               survey: annualSurvey,
-              surveyName: 'Family Annual Survey',
+              surveyName: "Family Annual Survey",
             })
           }
         >
@@ -26,7 +26,7 @@ const FamilyScreen = ({ route, navigation }) => {
         <TouchableOpacity
           style={styles.buttonAlt}
           onPress={() =>
-            navigation.navigate('FamilyMembers', {
+            navigation.navigate("FamilyMembers", {
               familyName: route.params.familyName,
             })
           }
@@ -38,7 +38,7 @@ const FamilyScreen = ({ route, navigation }) => {
         <TouchableOpacity
           style={styles.buttonAlt}
           onPress={() =>
-            navigation.navigate('FamilyMembers', {
+            navigation.navigate("FamilyMembers", {
               familyName: route.params.familyName,
               familyId: route.params.familyId,
             })
@@ -54,29 +54,29 @@ const FamilyScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   buttonContainer: {
-    width: '80%',
-    justifyContent: 'space-around',
+    width: "80%",
+    justifyContent: "space-around",
     flex: 1,
   },
   button: {
-    width: '100%',
-    justifyContent: 'center',
+    width: "100%",
+    justifyContent: "center",
     height: 200,
-    backgroundColor: 'black',
+    backgroundColor: "black",
   },
   buttonAlt: {
-    width: '100%',
-    justifyContent: 'center',
+    width: "100%",
+    justifyContent: "center",
     height: 200,
-    backgroundColor: 'seagreen',
+    backgroundColor: "seagreen",
   },
   buttonText: {
-    textAlign: 'center',
-    color: 'white',
+    textAlign: "center",
+    color: "white",
     fontSize: 35,
   },
 });

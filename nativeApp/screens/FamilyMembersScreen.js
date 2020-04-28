@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -8,17 +8,17 @@ import {
   TextInput,
   AsyncStorage,
   Alert,
-} from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
-import Card from '../components/Card';
-import { personSurvey } from '../surveys/personSurvey';
-import Modal from 'react-native-modal';
+} from "react-native";
+import { FlatList } from "react-native-gesture-handler";
+import Card from "../components/Card";
+import { personSurvey } from "../surveys/personSurvey";
+import Modal from "react-native-modal";
 
 const FamilyMembers = ({ navigation, route }) => {
   // Display all family members for the respective family
   const [familyMembers, setFamilyMembers] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [member, setMember] = useState({ id: 0, name: '' });
+  const [member, setMember] = useState({ id: 0, name: "" });
 
   const familyId = route.params.familyId;
   const familyName = route.params.familyName;
@@ -27,7 +27,7 @@ const FamilyMembers = ({ navigation, route }) => {
     // Finds family in async storage
     try {
       // Get all families in async storage
-      const value = await AsyncStorage.getItem('FAMILIES');
+      const value = await AsyncStorage.getItem("FAMILIES");
       // Find the family with the same id as the one passed via params
       const family = JSON.parse(value).find((obj) => obj.id === familyId);
 
@@ -37,13 +37,13 @@ const FamilyMembers = ({ navigation, route }) => {
         return;
       } else {
         // There are family members, set them to familyMembers state
-        console.log('You have family members', family.members);
+        console.log("You have family members", family.members);
         setFamilyMembers(family.members);
       }
     } catch (error) {
       // Error retrieving data
       console.log(error);
-      Alert.alert('There has been an error retrieving data, please try again');
+      Alert.alert("There has been an error retrieving data, please try again");
     }
   };
 
@@ -56,7 +56,7 @@ const FamilyMembers = ({ navigation, route }) => {
       id: familyId,
     };
     // Get all families in async storage
-    AsyncStorage.getItem('FAMILIES')
+    AsyncStorage.getItem("FAMILIES")
       .then((res) => {
         // Map through families and replace the old family object with the updated family object, return the updated array
         let newFamiliesArr = JSON.parse(res).map((obj) =>
@@ -66,8 +66,8 @@ const FamilyMembers = ({ navigation, route }) => {
       })
       .then((res) => {
         // Set the updated array of families to async storage
-        console.log('new family array', res);
-        AsyncStorage.setItem('FAMILIES', JSON.stringify(res));
+        console.log("new family array", res);
+        AsyncStorage.setItem("FAMILIES", JSON.stringify(res));
         // Set updated family members array to state
         setFamilyMembers(familyMemberArr);
       })
@@ -102,12 +102,12 @@ const FamilyMembers = ({ navigation, route }) => {
 
     // Try catch block below for mutation
 
-    setMember({ name: '' });
+    setMember({ name: "" });
     toggleModal();
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center' }}>
+    <View style={{ flex: 1, justifyContent: "center" }}>
       <FlatList
         data={familyMembers}
         keyExtractor={(item, index) => index.toString()}
@@ -115,10 +115,10 @@ const FamilyMembers = ({ navigation, route }) => {
           return (
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate('Survey', {
+                navigation.navigate("Survey", {
                   personName: data.item.name,
                   survey: personSurvey,
-                  surveyName: 'Individual Annual Survey',
+                  surveyName: "Individual Annual Survey",
                   familyName: familyName,
                 })
               }
@@ -146,9 +146,9 @@ const FamilyMembers = ({ navigation, route }) => {
           color="red"
           onPress={async () => {
             try {
-              await AsyncStorage.removeItem('FAMILY_MEMBERS');
+              await AsyncStorage.removeItem("FAMILY_MEMBERS");
               retrieveData();
-              console.log('removed');
+              console.log("removed");
             } catch (err) {
               console.log(err);
             }
@@ -181,37 +181,37 @@ const FamilyMembers = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
   cardContainer: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   card: {
     marginVertical: 10,
-    width: '80%',
+    width: "80%",
   },
   modalContainer: {
-    justifyContent: 'flex-end',
-    backgroundColor: '#BADA22',
+    justifyContent: "flex-end",
+    backgroundColor: "#BADA22",
   },
   modal: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   modalTitle: {
     fontSize: 22,
-    color: 'white',
+    color: "white",
   },
   input: {
-    borderBottomColor: 'white',
+    borderBottomColor: "white",
     borderBottomWidth: 1,
     padding: 10,
-    width: '80%',
+    width: "80%",
     marginBottom: 10,
-    color: 'white',
+    color: "white",
   },
   buttonContainer: {
-    flexDirection: 'row',
-    width: '80%',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    width: "80%",
+    justifyContent: "space-between",
   },
   button: {
     width: 100,
