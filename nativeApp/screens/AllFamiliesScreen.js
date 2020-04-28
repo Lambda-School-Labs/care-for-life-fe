@@ -86,8 +86,6 @@ const AllFamiliesScreen = ({ navigation }) => {
   // Runs when the app first starts and will add any families in storage to state so they will be displayed
   useEffect(() => {
     retrieveData();
-    const token2 = AsyncStorage.getItem("TOKEN");
-    console.log("Token in async storage:", token2);
   }, []);
 
   const toggleModal = () => {

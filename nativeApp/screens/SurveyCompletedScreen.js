@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, TextInput, Button, Alert, StyleSheet } from 'react-native';
-import { useOfflineMutation } from 'react-offix-hooks';
+import React, { useState, useEffect } from "react";
+import { Text, View, TextInput, Button, Alert, StyleSheet } from "react-native";
+import { useOfflineMutation } from "react-offix-hooks";
 import {
   addFamilyAndAnswersMutation,
   addPersonAndAnswersMutation,
-} from '../Queries/queries';
-import SurveyReview from '../components/SurveyReview';
-import Modal from 'react-native-modal';
+} from "../Queries/queries";
+import SurveyReview from "../components/SurveyReview";
+import Modal from "react-native-modal";
 
 const SurveyCompletedScreen = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [answer, setAnswer] = useState('');
-  const [question, setQuestion] = useState('');
-  const [answerIndex, setAnswerIndex] = useState('');
+  const [answer, setAnswer] = useState("");
+  const [question, setQuestion] = useState("");
+  const [answerIndex, setAnswerIndex] = useState("");
   const [addFamilyAndAnswers] = useOfflineMutation(addFamilyAndAnswersMutation);
   const [addPersonAndAnswers] = useOfflineMutation(addPersonAndAnswersMutation);
 
   useEffect(() => {
-    Alert.alert('Press on any answer that needs editing');
+    Alert.alert("Press on any answer that needs editing");
   }, []);
 
   // need to store the backend ID returned during login/registration and set it to equal the userId variable on the line below
-  const userId = 'ck90eb2ce3vt40874lv2moncz'; //Update once login mutation works
+  const userId = "ck90eb2ce3vt40874lv2moncz"; //Update once login mutation works
   let answers = props.route.params.surveyAnswers;
   const survey = props.route.params.survey;
   const familyName = props.route.params.familyName;
@@ -29,12 +29,12 @@ const SurveyCompletedScreen = (props) => {
   const surveyName = props.route.params.surveyName;
 
   const familySurveyHandler = async () => {
-    console.log('Submitting Answers....', answers);
+    console.log("Submitting Answers....", answers);
     await answers.forEach((answer, index) => {
       try {
-        console.log('logging mutation variables...');
+        console.log("logging mutation variables...");
         console.log(
-          'Variables:',
+          "Variables:",
           answer.value,
           answer.value.value,
           familyName,
@@ -51,28 +51,28 @@ const SurveyCompletedScreen = (props) => {
               : answer.value.toString(),
             questionId: survey[index].backend_id,
           },
-        }).then((res) => console.log('mutation response:', res));
+        }).then((res) => console.log("mutation response:", res));
       } catch (error) {
         if (error.offline) {
           error
             .watchOfflineChange()
-            .then((res) => console.log('Offline result', res));
+            .then((res) => console.log("Offline result", res));
         }
         console.log(error);
       }
     });
 
-    props.navigation.navigate('Family', {
+    props.navigation.navigate("Family", {
       survey: answers,
       familyName: familyName,
     });
   };
 
   const personSurveyHandler = async () => {
-    console.log('Submitting Answers....', survey);
+    console.log("Submitting Answers....", survey);
 
     await answers.forEach((answer, index) => {
-      console.log('answer being mutated', answer.value);
+      console.log("answer being mutated", answer.value);
       // console.log('answers backendID', survey[index].backend_id);
       try {
         addPersonAndAnswers({
@@ -90,15 +90,16 @@ const SurveyCompletedScreen = (props) => {
         if (error.offline) {
           error
             .watchOfflineChange()
-            .then((res) => console.log('Offline result', res));
+            .then((res) => console.log("Offline result", res));
         }
         console.log(error);
       }
     });
 
-    props.navigation.navigate('FamilyMembers', {
-      survey: answers,
-    });
+    // props.navigation.navigate("FamilyMembers", {
+    //   survey: answers,
+    //   familyName: familyName,
+    // });
   };
 
   const toggleModal = () => {
@@ -142,15 +143,15 @@ const SurveyCompletedScreen = (props) => {
       answers[answerIndex].value = !isNaN(answer) ? parseInt(answer) : answer;
     }
 
-    setAnswer('');
-    setQuestion('');
-    setAnswerIndex('');
+    setAnswer("");
+    setQuestion("");
+    setAnswerIndex("");
     toggleModal();
   };
 
   return (
     <View style={styles.background}>
-      {surveyName === 'Family Annual Survey' ? (
+      {surveyName === "Family Annual Survey" ? (
         <SurveyReview
           name={familyName}
           submitHandler={familySurveyHandler}
@@ -194,31 +195,31 @@ const SurveyCompletedScreen = (props) => {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'grey',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "grey",
   },
   modal: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   modalTitle: {
     fontSize: 22,
-    color: 'white',
+    color: "white",
   },
   input: {
-    borderBottomColor: 'white',
+    borderBottomColor: "white",
     borderBottomWidth: 1,
     padding: 10,
-    width: '80%',
+    width: "80%",
     marginBottom: 10,
-    color: 'white',
+    color: "white",
   },
   buttonContainer: {
-    flexDirection: 'row',
-    width: '80%',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    width: "80%",
+    justifyContent: "space-between",
   },
   button: {
     width: 100,
