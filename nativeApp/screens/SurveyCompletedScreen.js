@@ -52,6 +52,7 @@ const SurveyCompletedScreen = (props) => {
         addFamilyAndAnswers({
           variables: {
             familyName: familyName,
+            family_members: ["some member", "some other member"],
             surveyName: "Family Annual Survey",
             employeeId: userId,
             answerText: answer.value.value
@@ -59,9 +60,7 @@ const SurveyCompletedScreen = (props) => {
               : answer.value.toString(),
             questionId: fullSurvey[index].backend_id,
           },
-        })
-          .then((res) => console.log("mutation response:", res))
-          .catch((err) => console.log("mutation error:", err));
+        }).then((res) => console.log("mutation response:", res));
       } catch (error) {
         if (error.offline) {
           error
