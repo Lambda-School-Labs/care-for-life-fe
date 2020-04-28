@@ -3,10 +3,6 @@ import { StyleSheet, View, ActivityIndicator, Image } from "react-native";
 import logo from "../assets/images/CFL_logo.jpg";
 const SplashScreen = () => (
   <View style={styles.container}>
-    <Image
-      source={require("../assets/images/CFL_logo.jpg")}
-      style={styles.image}
-    />
     <ActivityIndicator />
   </View>
 );

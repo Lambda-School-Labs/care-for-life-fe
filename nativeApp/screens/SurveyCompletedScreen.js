@@ -96,10 +96,10 @@ const SurveyCompletedScreen = (props) => {
       }
     });
 
-    // props.navigation.navigate("FamilyMembers", {
-    //   survey: answers,
-    //   familyName: familyName,
-    // });
+    props.navigation.navigate("FamilyScreen", {
+      survey: answers,
+      familyName: familyName,
+    });
   };
 
   const toggleModal = () => {
