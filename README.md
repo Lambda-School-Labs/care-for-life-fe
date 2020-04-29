@@ -20,9 +20,9 @@ You can find the deployed project at (URL Goes Here).
 ![Dependecy Status](https://david-dm.org/tterb/Hyde.svg)
 ![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-000.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-![GitHub contributors](https://img.shields.io/github/:variant/:user/:repo)
-![GitHub last commit](https://img.shields.io/github/commit-activity/:interval/:user/:repo)
-![GitHub commit activity the past week, 4 weeks](https://img.shields.io/github/commit-activity/y/eslint/eslint.svg?style=flat)
+![GitHub contributors](https://img.shields.io/github/contributors/Lambda-School-Labs/care-for-life-fe)
+![GitHub last commit](https://img.shields.io/github/last-commit/y/Lambda-School-Labs/care-for-life-fe)
+![GitHub commit activity the past year](https://img.shields.io/github/commit-activity/y/Lambda-School-Labs/care-for-life-fe)
 
 🚫 more info on using badges [here](https://github.com/badges/shields)
 
