@@ -3,7 +3,7 @@
 export const annualSurvey = [
   {
     questionType: "Info",
-    questionText: "Welcome To The Annual SurveyPress Next to get started",
+    questionText: "Welcome To The Annual Survey Press Next to get started",
   },
   {
     questionType: "TextInput",
@@ -17,18 +17,18 @@ export const annualSurvey = [
     backend_id: "ck98qh33z7hzq0874n5l6tw3q",
     questionId: "date",
   },
-  // {
-  //   questionType: "TextInput",
-  //   questionText: "Interviewer:",
-  //   backend_id: "ck9bk8sof8s2h0874wxstfee8",
-  //   questionId: "interviewer",
-  // },
-  // {
-  //   questionType: "NumericInput",
-  //   questionText: "Survey Number:",
-  //   backend_id: "ck98qi5lu7i0e0874arbcb3ql",
-  //   questionId: "survey_number",
-  // },
+  {
+    questionType: "TextInput",
+    questionText: "Interviewer:",
+    backend_id: "ck9bk8sof8s2h0874wxstfee8",
+    questionId: "interviewer",
+  },
+  {
+    questionType: "NumericInput",
+    questionText: "Survey Number:",
+    backend_id: "ck98qi5lu7i0e0874arbcb3ql",
+    questionId: "survey_number",
+  },
   // {
   //   questionType: "TextInput",
   //   questionText: "Zone:",

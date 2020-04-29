@@ -28,18 +28,6 @@ const FamilyScreen = ({ route, navigation }) => {
           onPress={() =>
             navigation.navigate("FamilyMembers", {
               familyName: route.params.familyName,
-            })
-          }
-        >
-          <Text style={styles.buttonText}>Some Other Survey</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.buttonAlt}
-          onPress={() =>
-            navigation.navigate("FamilyMembers", {
-              familyName: route.params.familyName,
               familyId: route.params.familyId,
             })
           }
@@ -47,6 +35,18 @@ const FamilyScreen = ({ route, navigation }) => {
           <Text style={styles.buttonText}>Individual Survey</Text>
         </TouchableOpacity>
       </View>
+      {/* <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() =>
+            navigation.navigate("FamilyMembers", {
+              familyName: route.params.familyName,
+            })
+          }
+        >
+          <Text style={styles.buttonText}>Some Other Survey</Text>
+        </TouchableOpacity>
+      </View> */}
     </View>
   );
 };
@@ -54,25 +54,34 @@ const FamilyScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
   },
   buttonContainer: {
     width: "80%",
-    justifyContent: "space-around",
+    justifyContent: "center",
     flex: 1,
   },
   button: {
     width: "100%",
     justifyContent: "center",
-    height: 200,
+    borderRadius: 5,
+    height: 150,
     backgroundColor: "black",
+    shadowColor: "black",
+    shadowOffset: {
+      width: 0,
+      height: 9,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 10.35,
+    elevation: 19,
   },
   buttonAlt: {
     width: "100%",
     justifyContent: "center",
-    height: 200,
-    backgroundColor: "seagreen",
+    height: 150,
+    backgroundColor: "crimson",
   },
   buttonText: {
     textAlign: "center",

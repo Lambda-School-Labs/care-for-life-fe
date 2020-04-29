@@ -329,7 +329,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderColor: "black",
     borderWidth: 1,
-    backgroundColor: "#333",
+    backgroundColor: "crimson",
   },
   answerButtonSelected: {
     width: "100%",

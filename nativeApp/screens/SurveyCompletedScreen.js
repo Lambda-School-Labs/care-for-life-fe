@@ -50,7 +50,9 @@ const SurveyCompletedScreen = (props) => {
               : answer.value.toString(),
             questionId: survey[index].backend_id,
           },
-        }).then((res) => console.log("mutation response:", res));
+        }).then((res) => {
+          console.log("mutation response:", res);
+        });
       } catch (error) {
         if (error.offline) {
           error

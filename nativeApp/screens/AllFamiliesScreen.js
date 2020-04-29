@@ -12,12 +12,11 @@ import {
 import { FlatList } from "react-native-gesture-handler";
 import Card from "../components/Card";
 import Modal from "react-native-modal";
-import { ApolloConsumer } from "react-apollo";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 const AllFamiliesScreen = ({ navigation }) => {
   // Pull all families from async storage and display them.
   // Selecting a family will take you to the family members screen
-
   const [families, setFamilies] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [newFamily, setNewFamily] = useState({
@@ -130,20 +129,36 @@ const AllFamiliesScreen = ({ navigation }) => {
         keyExtractor={(item, index) => index.toString()}
         renderItem={(data) => {
           return (
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate("Family", {
-                  familyName: data.item.name,
-                  familyId: data.item.id,
-                })
-              }
-              activeOpacity={0.7}
-              style={styles.cardContainer}
-            >
-              <Card style={styles.card}>
-                <Text>{data.item.name}</Text>
-              </Card>
-            </TouchableOpacity>
+            <View style={styles.container}>
+              <TouchableOpacity
+                activeOpacity={0.7}
+                style={styles.cardContainer}
+                onPress={() =>
+                  navigation.navigate("Family", {
+                    familyName: data.item.name,
+                    familyId: data.item.id,
+                  })
+                }
+              >
+                <Card style={styles.card}>
+                  <Text style={styles.cardText}>{data.item.name}</Text>
+                </Card>
+              </TouchableOpacity>
+              {/* <TouchableOpacity
+                activeOpacity={0.7}
+                style={styles.editContainer}
+                onPress={() => console.log("pressed")}
+              >
+                <FontAwesome5 name="edit" size={30} color="white" />
+              </TouchableOpacity> */}
+              <TouchableOpacity
+                activeOpacity={0.7}
+                style={styles.deleteContainer}
+                onPress={() => removeFamily(data.item.id)}
+              >
+                <FontAwesome5 name="trash" size={30} color="white" />
+              </TouchableOpacity>
+            </View>
           );
         }}
       />
@@ -151,12 +166,12 @@ const AllFamiliesScreen = ({ navigation }) => {
         <TouchableOpacity onPress={toggleModal} style={styles.addFamilyButton}>
           <Text style={styles.addFamilyButtonText}>Add Family</Text>
         </TouchableOpacity>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => AsyncStorage.removeItem("FAMILIES")}
           style={styles.addFamilyButton}
         >
           <Text style={styles.addFamilyButtonText}>Remove Families</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <Modal isVisible={isModalVisible} backdropOpacity={0.8}>
           <View style={styles.modal}>
             <Text style={styles.modalTitle}>Add Family</Text>
@@ -189,18 +204,49 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 100,
     color: "white",
-    backgroundColor: "black",
+    backgroundColor: "crimson",
   },
   addFamilyButtonText: {
     color: "white",
     fontSize: 25,
   },
+  container: {
+    width: "100%",
+    justifyContent: "center",
+    flexDirection: "row",
+  },
   cardContainer: {
     alignItems: "center",
+    width: "80%",
+    margin: 0,
+    padding: 0,
   },
   card: {
     marginVertical: 10,
-    width: "80%",
+    width: "100%",
+    height: 100,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 0,
+  },
+  cardText: {
+    fontSize: 25,
+  },
+  editContainer: {
+    backgroundColor: "black",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "15%",
+    height: 100,
+    marginTop: 10,
+  },
+  deleteContainer: {
+    backgroundColor: "crimson",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "15%",
+    height: 100,
+    marginTop: 10,
   },
   modalContainer: {
     justifyContent: "flex-end",
