@@ -5,6 +5,7 @@ import { AsyncStorage } from "react-native";
 import { ApolloOfflineClient } from "offix-client";
 import { NetworkStatus } from "./NetworkStatus";
 import { APOLLO_TOKEN, APOLLO_URI } from "react-native-dotenv";
+import { Alert } from "react-native";
 import "cross-fetch/polyfill";
 const getToken = async () => {
   return await AsyncStorage.getItem("access_token");
@@ -65,22 +66,22 @@ export const offlineClient = new ApolloOfflineClient({
 });
 
 offlineClient.registerOfflineEventListener({
-  onOperationEnqueued(operation) {
+  onOperationEnqueued(operation, error) {
     // called when operation was placed on the queue
-    console.log("onOperationEnqueued", operation);
+    console.log("onOperationEnqueued", operation, error);
   },
   onOperationFailure: (operation, error) => {
     // called when the operation failed
     console.log("onOperationFailure", error, operation);
   },
-  onOperationSuccess: (operation) => {
+  onOperationSuccess: (operation, error) => {
     // called when the operation was fulfilled
-    console.log("onOperationSuccess", operation);
+    console.log("onOperationSuccess", operation, error);
   },
-  onOperationRequeued: (operation) => {
+  onOperationRequeued: (operation, error) => {
     // called when an operation was loaded in from storage and placed back on the queue
     // This would happen across app restarts
-    console.log("onOperationRequeued", operation);
+    console.log("onOperationRequeued", operation, error);
   },
   queueCleared() {
     // called when all operations are fulfilled and the queue is cleared
