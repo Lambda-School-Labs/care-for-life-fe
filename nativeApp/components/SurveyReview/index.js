@@ -7,23 +7,26 @@ import {
   StyleSheet,
 } from "react-native";
 
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+
 const SurveyReview = (props) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{props.name}</Text>
       <ScrollView style={styles.scrollContainer}>
         {props.answers.map((el, index) => (
-          <TouchableOpacity
-            onPress={() => props.handleEdit(index)}
-            style={styles.answerContainer}
-            key={el.questionId}
-          >
-            <Text style={styles.question}>
-              {index + 1}: {props.survey[index].questionText}
-            </Text>
-            <Text style={styles.answer}>
-              {el.value.value ? el.value.value : el.value}
-            </Text>
+          <TouchableOpacity style={styles.answerContainer} key={el.questionId}>
+            <View>
+              <Text style={styles.question}>
+                {index + 1}: {props.survey[index].questionText}
+              </Text>
+              <Text style={styles.answer}>
+                {el.value.value ? el.value.value : el.value}
+              </Text>
+            </View>
+            <TouchableOpacity onPress={() => props.handleEdit(index)}>
+              <FontAwesome5 name="edit" size={30} color="black" />
+            </TouchableOpacity>
           </TouchableOpacity>
         ))}
       </ScrollView>
@@ -59,8 +62,11 @@ const styles = StyleSheet.create({
     width: "100%",
     marginVertical: 5,
     padding: 5,
-    // borderBottomColor: "black",
-    // borderBottomWidth: 2,
+    borderBottomColor: "black",
+    borderBottomWidth: 2,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   question: {
     fontWeight: "bold",
