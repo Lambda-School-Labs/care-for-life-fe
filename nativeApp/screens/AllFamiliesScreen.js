@@ -151,6 +151,12 @@ const AllFamiliesScreen = ({ navigation }) => {
         <TouchableOpacity onPress={toggleModal} style={styles.addFamilyButton}>
           <Text style={styles.addFamilyButtonText}>Add Family</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => AsyncStorage.removeItem("FAMILIES")}
+          style={styles.addFamilyButton}
+        >
+          <Text style={styles.addFamilyButtonText}>Remove Families</Text>
+        </TouchableOpacity>
         <Modal isVisible={isModalVisible} backdropOpacity={0.8}>
           <View style={styles.modal}>
             <Text style={styles.modalTitle}>Add Family</Text>

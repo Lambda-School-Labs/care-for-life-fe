@@ -19,6 +19,8 @@ const App = () => {
     const runApp = async () => {
       console.log("App Starting");
       await offlineClient.init().then(() => setInitialized(true));
+      //removes yellow errors/warnings
+      console.disableYellowBox = true;
     };
     runApp();
   }, []);

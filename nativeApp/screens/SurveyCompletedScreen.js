@@ -7,6 +7,7 @@ import {
 } from "../Queries/queries";
 import SurveyReview from "../components/SurveyReview";
 import Modal from "react-native-modal";
+import NetworkStatus from "../config/NetworkStatus.js";
 
 const SurveyCompletedScreen = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -16,9 +17,7 @@ const SurveyCompletedScreen = (props) => {
   const [addFamilyAndAnswers] = useOfflineMutation(addFamilyAndAnswersMutation);
   const [addPersonAndAnswers] = useOfflineMutation(addPersonAndAnswersMutation);
 
-  useEffect(() => {
-    Alert.alert("Press on any answer that needs editing");
-  }, []);
+  useEffect(() => {}, []);
 
   // need to store the backend ID returned during login/registration and set it to equal the userId variable on the line below
   const userId = "ck90eb2ce3vt40874lv2moncz"; //Update once login mutation works
@@ -27,7 +26,7 @@ const SurveyCompletedScreen = (props) => {
   const familyName = props.route.params.familyName;
   const personName = props.route.params.personName;
   const surveyName = props.route.params.surveyName;
-
+  console.log("Survey Name:", surveyName);
   const familySurveyHandler = async () => {
     console.log("Submitting Answers....", answers);
     await answers.forEach((answer, index) => {
@@ -61,11 +60,27 @@ const SurveyCompletedScreen = (props) => {
         console.log(error);
       }
     });
-
-    props.navigation.navigate("Family", {
-      survey: answers,
-      familyName: familyName,
-    });
+    Alert.alert(
+      `Thanks for submitting a ${surveyName}`,
+      "Your survey has been added to the Offline Queue",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: () => {
+            props.navigation.navigate("Family", {
+              survey: answers,
+              familyName: familyName,
+            });
+          },
+        },
+      ],
+      { cancelable: false }
+    );
   };
 
   const personSurveyHandler = async () => {
@@ -95,11 +110,27 @@ const SurveyCompletedScreen = (props) => {
         console.log(error);
       }
     });
-
-    props.navigation.navigate("FamilyScreen", {
-      survey: answers,
-      familyName: familyName,
-    });
+    Alert.alert(
+      `Thanks for submitting a ${surveyName}`,
+      "Your survey has been added to the Offline Queue",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: () => {
+            props.navigation.navigate("Family", {
+              survey: answers,
+              familyName: familyName,
+            });
+          },
+        },
+      ],
+      { cancelable: false }
+    );
   };
 
   const toggleModal = () => {

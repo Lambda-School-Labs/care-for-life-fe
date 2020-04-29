@@ -30,7 +30,7 @@ const FamilyMembers = ({ navigation, route }) => {
       const value = await AsyncStorage.getItem("FAMILIES");
       // Find the family with the same id as the one passed via params
       const family = JSON.parse(value).find((obj) => obj.id === familyId);
-
+      console.log("Family:", family);
       if (family.members === null || family.members.length === 0) {
         // No family members, initialize familyMembers state to an empty array
         setFamilyMembers([]);
@@ -43,7 +43,7 @@ const FamilyMembers = ({ navigation, route }) => {
     } catch (error) {
       // Error retrieving data
       console.log(error);
-      Alert.alert("There has been an error retrieving data, please try again");
+      // Alert.alert("There has been an error retrieving data, please try again");
     }
   };
 

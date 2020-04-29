@@ -75,6 +75,9 @@ const LoginScreen = (props) => {
     getToken()
       .then(async (token) => {
         if (token !== null) {
+          //Check if token is valid
+          //Ping Backend to validate token
+
           //Navigates to Families Screen
           console.log("Token:", token);
           props.navigation.replace("Families");
