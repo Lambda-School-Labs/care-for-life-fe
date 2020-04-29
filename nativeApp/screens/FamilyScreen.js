@@ -35,6 +35,33 @@ const FamilyScreen = ({ route, navigation }) => {
           <Text style={styles.buttonText}>Individual Survey</Text>
         </TouchableOpacity>
       </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() =>
+            navigation.navigate("Survey", {
+              familyName: route.params.familyName,
+              survey: annualSurvey,
+              surveyName: "Family Annual Survey",
+            })
+          }
+        >
+          <Text style={styles.buttonText}>5 Year Survey</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.buttonAlt}
+          onPress={() =>
+            navigation.navigate("FamilyMembers", {
+              familyName: route.params.familyName,
+              familyId: route.params.familyId,
+            })
+          }
+        >
+          <Text style={styles.buttonText}>Medical Survey</Text>
+        </TouchableOpacity>
+      </View>
       {/* <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.button}
@@ -67,7 +94,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 5,
     height: 150,
-    backgroundColor: "black",
+    backgroundColor: "#333",
     shadowColor: "black",
     shadowOffset: {
       width: 0,
@@ -81,7 +108,7 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     height: 150,
-    backgroundColor: "crimson",
+    backgroundColor: "#9F1B37",
   },
   buttonText: {
     textAlign: "center",

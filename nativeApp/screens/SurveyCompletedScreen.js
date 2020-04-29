@@ -26,6 +26,7 @@ const SurveyCompletedScreen = (props) => {
   const familyName = props.route.params.familyName;
   const personName = props.route.params.personName;
   const surveyName = props.route.params.surveyName;
+  const surveyId = "ck9k5ohh9ciew0874lmqhbsnv";
   console.log("Survey Name:", surveyName);
   const familySurveyHandler = async () => {
     console.log("Submitting Answers....", answers);
@@ -43,7 +44,7 @@ const SurveyCompletedScreen = (props) => {
         addFamilyAndAnswers({
           variables: {
             familyName: familyName,
-            surveyName: surveyName,
+            surveyId: surveyId,
             employeeId: userId,
             answerText: answer.value.value
               ? answer.value.value.toString()
@@ -213,10 +214,14 @@ const SurveyCompletedScreen = (props) => {
           />
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
-              <Button color="red" title="Cancel" onPress={toggleModal} />
+              <Button color="#9F1B37" title="Cancel" onPress={toggleModal} />
             </View>
             <View style={styles.button}>
-              <Button title="Update" onPress={handleSubmit} />
+              <Button
+                color="forestgreen"
+                title="Update"
+                onPress={handleSubmit}
+              />
             </View>
           </View>
         </View>

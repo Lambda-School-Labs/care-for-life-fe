@@ -171,10 +171,14 @@ const FamilyMembers = ({ navigation, route }) => {
             />
             <View style={styles.buttonContainer}>
               <View style={styles.button}>
-                <Button color="red" title="Cancel" onPress={toggleModal} />
+                <Button color="#9F1B37" title="Cancel" onPress={toggleModal} />
               </View>
               <View style={styles.button}>
-                <Button title="Submit" onPress={handleSubmit} />
+                <Button
+                  color="forestgreen"
+                  title="Submit"
+                  onPress={handleSubmit}
+                />
               </View>
             </View>
           </View>
@@ -191,7 +195,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 100,
     color: "white",
-    backgroundColor: "crimson",
+    backgroundColor: "#9F1B37",
   },
   AddFamilyMemberText: {
     color: "white",
@@ -228,7 +232,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   deleteContainer: {
-    backgroundColor: "crimson",
+    backgroundColor: "#9F1B37",
     justifyContent: "center",
     alignItems: "center",
     width: "15%",

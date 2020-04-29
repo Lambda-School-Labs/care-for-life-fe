@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginTop: 10,
     textAlign: "left",
-    color: "green",
+    color: "#9F1B37",
+    fontWeight: "bold",
   },
   button: {
     width: "95%",

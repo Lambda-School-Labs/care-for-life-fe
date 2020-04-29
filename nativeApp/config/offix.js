@@ -42,7 +42,7 @@ const httpLink = new HttpLink({
 const authLink = setContext(async (_, { headers }) => {
   // get the Apollo authentication token from async storage if it exists
   const token = await AsyncStorage.getItem("access_token");
-  // console.log("Token In AuthLink:", token);
+  console.log("Pinging....");
   // return the headers to the context so httpLink can read them
   return {
     headers: {
@@ -55,11 +55,6 @@ const authLink = setContext(async (_, { headers }) => {
 export const offlineClient = new ApolloOfflineClient({
   cache: new InMemoryCache(),
   link: authLink.concat(httpLink),
-  // uri: "https://apollo.careforlife.dev",
-  // headers: {
-  //   authorization: `Bearer ${token}`,
-  // },
-  // }),
   offlineStorage: cacheStorage,
   cacheStorage,
   networkStatus,

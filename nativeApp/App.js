@@ -24,7 +24,7 @@ const App = () => {
       console.disableYellowBox = true;
     };
     runApp();
-
+    //Offix Event Listeners
     offlineClient.registerOfflineEventListener({
       onOperationEnqueued(operation, error) {
         // called when operation was placed on the queue
@@ -44,7 +44,7 @@ const App = () => {
       },
       queueCleared() {
         // called when all operations are fulfilled and the queue is cleared
-        console.log("queuecleared");
+        // console.log("queuecleared");
         Alert.alert(
           `Upload Success`,
           `All Survey Data Uploaded Successfully: Queue Is Empty`,
@@ -56,7 +56,7 @@ const App = () => {
             },
             {
               text: "OK",
-              onPress: () => console.log("Okay Pressed"),
+              // onPress: () => console.log("Okay Pressed"),
             },
           ],
           { cancelable: false }

@@ -156,7 +156,7 @@ const AllFamiliesScreen = ({ navigation }) => {
                 style={styles.deleteContainer}
                 onPress={() => removeFamily(data.item.id)}
               >
-                <FontAwesome5 name="trash" size={30} color="white" />
+                <FontAwesome5 name="trash" size={30} color="#9F1B37" />
               </TouchableOpacity>
             </View>
           );
@@ -184,10 +184,14 @@ const AllFamiliesScreen = ({ navigation }) => {
             />
             <View style={styles.buttonContainer}>
               <View style={styles.button}>
-                <Button color="red" title="Cancel" onPress={toggleModal} />
+                <Button color="#9F1B37" title="Cancel" onPress={toggleModal} />
               </View>
               <View style={styles.button}>
-                <Button title="Submit" onPress={handleSubmit} />
+                <Button
+                  color="forestgreen"
+                  title="Submit"
+                  onPress={handleSubmit}
+                />
               </View>
             </View>
           </View>
@@ -204,7 +208,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 100,
     color: "white",
-    backgroundColor: "crimson",
+    backgroundColor: "#9F1B37",
   },
   addFamilyButtonText: {
     color: "white",
@@ -225,12 +229,21 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     width: "100%",
     height: 100,
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "center",
     borderRadius: 0,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.32,
+    shadowRadius: 5.46,
+    elevation: 9,
   },
   cardText: {
     fontSize: 25,
+    marginLeft: 10,
   },
   editContainer: {
     backgroundColor: "black",
@@ -241,12 +254,20 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   deleteContainer: {
-    backgroundColor: "crimson",
+    backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
     width: "15%",
     height: 100,
     marginTop: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.32,
+    shadowRadius: 5.46,
+    elevation: 9,
   },
   modalContainer: {
     justifyContent: "flex-end",
@@ -275,7 +296,6 @@ const styles = StyleSheet.create({
   },
   button: {
     width: 100,
-    backgroundColor: "white",
   },
 });
 

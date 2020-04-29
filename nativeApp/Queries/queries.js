@@ -1,10 +1,10 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 // creates a family and all of their survey answers in the database
 const addFamilyAndAnswersMutation = gql`
   mutation(
     $familyName: String!
-    $surveyName: String!
+    $surveyId: ID!
     $employeeId: ID!
     $answerText: String!
     $questionId: ID!
@@ -12,9 +12,9 @@ const addFamilyAndAnswersMutation = gql`
     createFamily(
       data: {
         family_name: $familyName
-        surveys: {
+        completed_surveys: {
           create: {
-            survey_name: $surveyName
+            originalSurvey: { connect: { id: $surveyId } }
             employee: { connect: { id: $employeeId } }
             answers: {
               create: {
@@ -78,18 +78,13 @@ const addPersonAndAnswersMutation = gql`
 // `;
 
 // // checks a user's credentials upon logging in, then returns a JWT token & the user's info
-// const loginMutation = gql`
-//   mutation login($email: String!, $password: String!) {
-//     login(email: $email, password: $password) {
-//       token
-//       user {
-//         id
-//         name
-//         email
-//       }
-//     }
-//   }
-// `;
+const loginQuery = gql`
+  query {
+    families {
+      id
+    }
+  }
+`;
 
 // const addFamilyMutation = gql`
 //   mutation($familyName: String!) {
@@ -121,5 +116,5 @@ export {
   addPersonAndAnswersMutation,
   addFamilyAndAnswersMutation,
   // signUpMutation,
-  // loginMutation,
+  loginQuery,
 };
