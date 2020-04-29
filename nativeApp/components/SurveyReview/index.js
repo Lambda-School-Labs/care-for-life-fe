@@ -15,7 +15,7 @@ const SurveyReview = (props) => {
       <Text style={styles.title}>{props.name}</Text>
       <ScrollView style={styles.scrollContainer}>
         {props.answers.map((el, index) => (
-          <TouchableOpacity style={styles.answerContainer} key={el.questionId}>
+          <View style={styles.answerContainer} key={el.questionId}>
             <View>
               <Text style={styles.question}>
                 {index + 1}: {props.survey[index].questionText}
@@ -27,7 +27,7 @@ const SurveyReview = (props) => {
             <TouchableOpacity onPress={() => props.handleEdit(index)}>
               <FontAwesome5 name="edit" size={30} color="black" />
             </TouchableOpacity>
-          </TouchableOpacity>
+          </View>
         ))}
       </ScrollView>
       <TouchableOpacity style={styles.button} onPress={props.submitHandler}>
