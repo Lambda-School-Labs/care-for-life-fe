@@ -48,7 +48,7 @@ const FamilyMembers = ({ navigation, route }) => {
   };
 
   const setData = (familyMemberArr) => {
-    // Sets data to async storage, expects an array
+    // Sets data to async storage, expects an array of family members
     // Create an updated family object with the new family members array
     let updatedFamily = {
       name: familyName,
@@ -75,12 +75,14 @@ const FamilyMembers = ({ navigation, route }) => {
   };
 
   const removeFamilyMember = (id) => {
+    // Filters out the family member to be removed
     let updatedFamilyMembers = familyMembers.filter((obj) => obj.id !== id);
+    // Sets async state and state to updated array of family members
     setData(updatedFamilyMembers);
   };
 
-  // Runs when the app first starts and will add any families in storage to state so they will be displayed
   useEffect(() => {
+    // Runs when the app first starts and will add any families in storage to state so they will be displayed
     retrieveData();
   }, []);
 
@@ -89,6 +91,7 @@ const FamilyMembers = ({ navigation, route }) => {
   };
 
   const handleChange = (text) => {
+    // Updates the family member name in state
     setMember({ ...member, id: Math.random(), name: text });
   };
 
@@ -98,6 +101,7 @@ const FamilyMembers = ({ navigation, route }) => {
       return;
     }
 
+    // Pass in and array of family members including the one just created
     setData([...familyMembers, member]);
 
     // Try catch block below for mutation
@@ -108,11 +112,15 @@ const FamilyMembers = ({ navigation, route }) => {
 
   return (
     <View style={{ flex: 1, justifyContent: "center" }}>
+      {/* Lists out all the family member names */}
       <FlatList
         data={familyMembers}
         keyExtractor={(item, index) => index.toString()}
         renderItem={(data) => {
           return (
+            // On press takes you to the survey screen
+            // Passes the person name, family name, type of survey and the survey
+            // Survey screen will display the individual survey
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate("Survey", {

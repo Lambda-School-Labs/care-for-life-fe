@@ -67,39 +67,32 @@ const LoginScreen = (props) => {
   };
   //Login Logic
   const handleLogin = async () => {
-    console.log("loggin in...");
-    console.log("Token:", token);
-    const getToken = async () => {
-      await AsyncStorage.getItem("TOKEN")
-        .then((res) => {
-          console.log("Token In Async Storage:", res);
-          if (res !== null) {
-            props.navigation.replace("Families");
-          } else {
-            //Expo Authentication
-            promptAsync({ useProxy })
-              .then((res) => {
-                console.log("Okta Response:", res);
-                console.log("setting token to async storage:", res.params.code);
-                AsyncStorage.setItem("TOKEN", res.params.code);
-                setToken(res.params.code);
+    await AsyncStorage.getItem("TOKEN")
+      .then((res) => {
+        console.log("Token In Async Storage:", res);
+        if (res !== null) {
+          props.navigation.replace("Families");
+        } else {
+          //Expo Authentication
+          promptAsync({ useProxy })
+            .then((res) => {
+              console.log("Okta Response:", res);
+              console.log("setting token to async storage:", res.params.code);
+              AsyncStorage.setItem("TOKEN", res.params.code);
+              setToken(res.params.code);
 
-                // login({
-                //   variables: {
-                //     //variables to match backend
-                //   },
-                // });
+              // login({
+              //   variables: {
+              //     //variables to match backend
+              //   },
+              // });
 
-                props.navigation.replace("Families");
-              })
-              .catch((err) =>
-                Alert.alert(`Could Not Log In, Error: \n ${err}`)
-              );
-          }
-        })
-        .catch((err) => console.log(err));
-    };
-    getToken();
+              props.navigation.replace("Families");
+            })
+            .catch((err) => Alert.alert(`Could Not Log In, Error: \n ${err}`));
+        }
+      })
+      .catch((err) => console.log(err));
   };
   // Endpoint
 

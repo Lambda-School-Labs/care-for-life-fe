@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
     width: "100%",
     marginVertical: 5,
     padding: 5,
-    // borderBottomColor: "black",
-    // borderBottomWidth: 2,
+    borderBottomColor: "black",
+    borderBottomWidth: 2,
   },
   question: {
     fontWeight: "bold",

@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 // creates a family and all of their survey answers in the database
 const addFamilyAndAnswersMutation = gql`
@@ -93,14 +93,14 @@ const loginMutation = gql`
   }
 `;
 
-// const addFamilyMutation = gql`
-//   mutation($familyName: String!) {
-//     createFamily(data: { family_name: $familyName }) {
-//       id
-//       family_name
-//     }
-//   }
-// `;
+const addFamilyMutation = gql`
+  mutation($familyName: String!) {
+    createFamily(data: { family_name: $familyName }) {
+      id
+      family_name
+    }
+  }
+`;
 
 // const addAnswersMutation = gql`
 //   mutation($answer: String!, $questionId: ID!, $familyId: ID!, $surveyId: ID!) {
@@ -124,4 +124,5 @@ export {
   addIndividualAndAnswersMutation,
   signUpMutation,
   loginMutation,
+  addFamilyMutation,
 };

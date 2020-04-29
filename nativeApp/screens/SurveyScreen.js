@@ -59,7 +59,7 @@ export default class SurveyScreen extends Component {
 
     // Here we can manipulate the survey results to send them as an array (infoQuestionsRemoved) or an object (answersAsObj)
 
-    // Send to SurveyCompletedScreen with the survey answers, name (of family or person), and the survey type
+    // Send to SurveyCompletedScreen with the survey answers, name (of family or person), the survey type and the survey
     this.props.navigation.navigate("SurveyCompleted", {
       surveyAnswers: infoQuestionsRemoved,
       familyName: this.props.route.params.familyName,

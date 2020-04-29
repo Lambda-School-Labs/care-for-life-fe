@@ -44,7 +44,6 @@ const SurveyCompletedScreen = (props) => {
         console.log(
           "Variables:",
           answer.value,
-          answer.value.value,
           familyName,
           userId,
           fullSurvey[index].backend_id
@@ -59,9 +58,7 @@ const SurveyCompletedScreen = (props) => {
               : answer.value.toString(),
             questionId: fullSurvey[index].backend_id,
           },
-        })
-          .then((res) => console.log("mutation response:", res))
-          .catch((err) => console.log("mutation error:", err));
+        });
       } catch (error) {
         if (error.offline) {
           error

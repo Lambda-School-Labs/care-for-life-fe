@@ -64,7 +64,7 @@ export const offlineClient = new ApolloOfflineClient({
 offlineClient.registerOfflineEventListener({
   onOperationEnqueued(operation) {
     // called when operation was placed on the queue
-    // console.log("onOperationEnqueued", operation);
+    console.log("onOperationEnqueued", operation);
   },
   onOperationFailure: (operation, error) => {
     // called when the operation failed
@@ -73,15 +73,15 @@ offlineClient.registerOfflineEventListener({
   },
   onOperationSuccess: (operation) => {
     // called when the operation was fulfilled
-    // console.log("onOperationSuccess", operation);
+    console.log("onOperationSuccess", operation);
   },
   onOperationRequeued: (operation) => {
     // called when an operation was loaded in from storage and placed back on the queue
     // This would happen across app restarts
-    // console.log("onOperationRequeued", operation);
+    console.log("onOperationRequeued", operation);
   },
   queueCleared() {
     // called when all operations are fulfilled and the queue is cleared
-    // console.log("queuecleared");
+    console.log("queuecleared");
   },
 });
