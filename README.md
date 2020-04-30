@@ -1,5 +1,9 @@
 # Care For Life - Native App/FrontEnd
 
+We've built an offline-first React Native app using Expo and Offix.
+
+Our team consists of a group of seven students from Lambda School's full stack web and UX design cohorts. We've built this app, along with a backend using the Apollo-GraphQL-Prisma-Postgres-Docker stack, for the [Care For Life organization](https://careforlife.org/) as our LABS22 project.
+
 ## Contributors
 
 |                                           [Leslie Thompson](https://github.com/LCRT215)                                           |                                         [KJ Magill](https://github.com/kjmagill)                                          |                                       [Cameron Hawley](http://github.com/CAM603)                                       |                                       [Alexis Davalos](http://github.com/alexisdavalos)                                       |                                                            [Peter Gambino](http://github.com/pgambino5851)                                                            |                                     [Nicholas Sandomeno](https://github.com/Nsandomeno)                                     |                                          [Nabia M.](https://www.figma.com/file/03cS98yh1fSK5Ai95jPoyy/Care-For-Life-Nabia?node-id=202%3A2)                                          |
