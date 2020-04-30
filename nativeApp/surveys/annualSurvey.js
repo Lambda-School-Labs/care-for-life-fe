@@ -17,81 +17,81 @@ export const annualSurvey = [
     backend_id: "ck98qh33z7hzq0874n5l6tw3q",
     questionId: "date",
   },
-  {
-    questionType: "TextInput",
-    questionText: "Interviewer:",
-    backend_id: "ck9bk8sof8s2h0874wxstfee8",
-    questionId: "interviewer",
-  },
-  {
-    questionType: "NumericInput",
-    questionText: "Survey Number:",
-    backend_id: "ck98qi5lu7i0e0874arbcb3ql",
-    questionId: "survey_number",
-  },
-  {
-    questionType: "TextInput",
-    questionText: "Zone:",
-    backend_id: "ck98qim7w7i0q0874eeeyfrl5",
-    questionId: "zone",
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "New Family or Previously Surveyed?",
-    backend_id: "ck98qj5nx7i1508746j1jiw7b",
-    questionId: "check_new_family",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "New Family",
-        value: "true",
-      },
-      {
-        optionText: "Previously Surveyed",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "Own Home?",
-    backend_id: "ck98qlle27i2c0874yhf3lwjh",
-    questionId: "own_home",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
-  {
-    questionType: "SelectionGroup",
-    questionText: "Rent?",
-    backend_id: "ck98qlwyq7i2o08748xavv0jl",
-    questionId: "rent",
-    questionSettings: {
-      autoAdvance: true,
-    },
-    options: [
-      {
-        optionText: "Yes",
-        value: "true",
-      },
-      {
-        optionText: "No",
-        value: "false",
-      },
-    ],
-  },
+  // {
+  //   questionType: "TextInput",
+  //   questionText: "Interviewer:",
+  //   backend_id: "ck9bk8sof8s2h0874wxstfee8",
+  //   questionId: "interviewer",
+  // },
+  // {
+  //   questionType: "NumericInput",
+  //   questionText: "Survey Number:",
+  //   backend_id: "ck98qi5lu7i0e0874arbcb3ql",
+  //   questionId: "survey_number",
+  // },
+  // {
+  //   questionType: "TextInput",
+  //   questionText: "Zone:",
+  //   backend_id: "ck98qim7w7i0q0874eeeyfrl5",
+  //   questionId: "zone",
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "New Family or Previously Surveyed?",
+  //   backend_id: "ck98qj5nx7i1508746j1jiw7b",
+  //   questionId: "check_new_family",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "New Family",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "Previously Surveyed",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "Own Home?",
+  //   backend_id: "ck98qlle27i2c0874yhf3lwjh",
+  //   questionId: "own_home",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
+  // {
+  //   questionType: "SelectionGroup",
+  //   questionText: "Rent?",
+  //   backend_id: "ck98qlwyq7i2o08748xavv0jl",
+  //   questionId: "rent",
+  //   questionSettings: {
+  //     autoAdvance: true,
+  //   },
+  //   options: [
+  //     {
+  //       optionText: "Yes",
+  //       value: "true",
+  //     },
+  //     {
+  //       optionText: "No",
+  //       value: "false",
+  //     },
+  //   ],
+  // },
   // {
   //   questionType: "SelectionGroup",
   //   questionText: "Guest?",

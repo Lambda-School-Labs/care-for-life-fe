@@ -29,40 +29,37 @@ const SurveyCompletedScreen = (props) => {
   const surveyId = "ck9k5ohh9ciew0874lmqhbsnv";
   console.log("Survey Name:", surveyName);
   const familySurveyHandler = async () => {
-    console.log("Submitting Answers....", answers);
-    await answers.forEach((answer, index) => {
-      try {
-        console.log("logging mutation variables...");
-        console.log(
-          "Variables:",
-          answer.value,
-          answer.value.value,
-          familyName,
-          userId,
-          survey[index].backend_id
-        );
-        addFamilyAndAnswers({
-          variables: {
-            familyName: familyName,
-            surveyId: surveyId,
-            employeeId: userId,
-            answerText: answer.value.value
-              ? answer.value.value.toString()
-              : answer.value.toString(),
-            questionId: survey[index].backend_id,
-          },
-        }).then((res) => {
-          console.log("mutation response:", res);
-        });
-      } catch (error) {
-        if (error.offline) {
-          error
-            .watchOfflineChange()
-            .then((res) => console.log("Offline result", res));
-        }
-        console.log(error);
+    console.log("Submitting Answers....", survey);
+
+    try {
+      console.log("logging mutation variables...");
+      console.log(
+        "Variables:",
+        answer.value,
+        answer.value.value,
+        familyName,
+        userId,
+        survey[index].backend_id
+      );
+      addFamilyAndAnswers({
+        variables: {
+          familyName: familyName,
+          surveyId: surveyId,
+          employeeId: userId,
+          answerArray: survey,
+          questionId: survey[index].backend_id,
+        },
+      }).then((res) => {
+        console.log("mutation response:", res);
+      });
+    } catch (error) {
+      if (error.offline) {
+        error
+          .watchOfflineChange()
+          .then((res) => console.log("Offline result", res));
       }
-    });
+      console.log(error);
+    }
     Alert.alert(
       `Thanks for submitting a ${surveyName}`,
       "Your survey has been added to the Offline Queue",
@@ -89,30 +86,29 @@ const SurveyCompletedScreen = (props) => {
   const personSurveyHandler = async () => {
     console.log("Submitting Answers....", survey);
 
-    await answers.forEach((answer, index) => {
-      console.log("answer being mutated", answer.value);
-      // console.log('answers backendID', survey[index].backend_id);
-      try {
-        addPersonAndAnswers({
-          variables: {
-            personName: personName,
-            surveyName: surveyName,
-            employeeId: userId,
-            answerText: answer.value.value
-              ? answer.value.value.toString()
-              : answer.value.toString(),
-            questionId: survey[index].backend_id,
-          },
-        });
-      } catch (error) {
-        if (error.offline) {
-          error
-            .watchOfflineChange()
-            .then((res) => console.log("Offline result", res));
-        }
-        console.log(error);
+    console.log("answer being mutated", answer.value);
+    // console.log('answers backendID', survey[index].backend_id);
+    try {
+      await addPersonAndAnswers({
+        variables: {
+          personName: personName,
+          surveyName: surveyName,
+          employeeId: userId,
+          answerArray: answers
+            ? answers.value.value.toString()
+            : answers.value.toString(),
+          questionId: survey[index].backend_id,
+        },
+      });
+    } catch (error) {
+      if (error.offline) {
+        error
+          .watchOfflineChange()
+          .then((res) => console.log("Offline result", res));
       }
-    });
+      console.log(error);
+    }
+
     Alert.alert(
       `Thanks for submitting a ${surveyName}`,
       "Your survey has been added to the Offline Queue",
