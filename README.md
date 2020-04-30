@@ -15,15 +15,12 @@ You can find the deployed project at (URL Goes Here).
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/ad7ff8fa08379149e254/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/care-for-life-fe/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/ad7ff8fa08379149e254/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/care-for-life-fe/test_coverage)
-[![Build Status](https://travis-ci.org/Lambda-School-Labs/care-for-life-fe.png?branch=master)](https://travis-ci.org/Lambda-School-Labs/care-for-life-fe)
 [![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)](https://opensource.org/licenses/MIT)
-[![](https://badge.fury.io/js/care-for-life-fe.svg)](https://david-dm.org/Lambda-School-Labs/care-for-life-fe)
-[![Dependecy Status](https://david-dm.org/Lambda-School-Labs/care-for-life-fe.svg)](https://david-dm.org/Lambda-School-Labs/care-for-life-fe)
-[![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-000.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://docs.expo.io/)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![GitHub contributors](https://img.shields.io/github/contributors/Lambda-School-Labs/care-for-life-fe)](https://github.com/Lambda-School-Labs/care-for-life-fe/commits/)
-[![GitHub last commit](https://img.shields.io/github/last-commit/y/Lambda-School-Labs/care-for-life-fe.svg)](https://github.com/Lambda-School-Labs/care-for-life-fe/commits/)
-[![GitHub commit activity the past year](https://img.shields.io/github/commit-activity/y/Lambda-School-Labs/care-for-life-fe.svg)](https://github.com/Lambda-School-Labs/care-for-life-fe/commits/)
+[![github-last-commit-image](https://img.shields.io/github/last-commit/Lambda-School-Labs/care-for-life-fe.svg?style=flat-square)](https://github.com/Lambda-School-Labs/care-for-life-fe/commits/)
+[![github-commit-activity-image](https://img.shields.io/github/commit-activity/y/Lambda-School-Labs/care-for-life-fe.svg?style=flat-square)](https://github.com/Lambda-School-Labs/care-for-life-fe/commits/)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-000.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://docs.expo.io/)
 
 🚫 more info on using badges [here](https://github.com/badges/shields)
 
