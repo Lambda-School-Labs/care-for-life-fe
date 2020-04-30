@@ -1,7 +1,5 @@
 # Care For Life - Native App/FrontEnd
 
-You can find the deployed project at (URL Goes Here).
-
 ## Contributors
 
 |                                           [Leslie Thompson](https://github.com/LCRT215)                                           |                                         [KJ Magill](https://github.com/kjmagill)                                          |                                       [Cameron Hawley](http://github.com/CAM603)                                       |                                       [Alexis Davalos](http://github.com/alexisdavalos)                                       |                                                            [Peter Gambino](http://github.com/pgambino5851)                                                            |                                     [Nicholas Sandomeno](https://github.com/Nsandomeno)                                     |                                          [Nabia M.](https://www.figma.com/file/03cS98yh1fSK5Ai95jPoyy/Care-For-Life-Nabia?node-id=202%3A2)                                          |
@@ -18,7 +16,7 @@ You can find the deployed project at (URL Goes Here).
 [![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)](https://opensource.org/licenses/MIT)
 [![GitHub contributors](https://img.shields.io/github/contributors/Lambda-School-Labs/care-for-life-fe)](https://github.com/Lambda-School-Labs/care-for-life-fe/commits/)
 [![github-last-commit-image](https://img.shields.io/github/last-commit/Lambda-School-Labs/care-for-life-fe.svg?style=flat-square)](https://github.com/Lambda-School-Labs/care-for-life-fe/commits/)
-[![github-commit-activity-image](https://img.shields.io/github/commit-activity/y/Lambda-School-Labs/care-for-life-fe.svg?style=flat-square)](https://github.com/Lambda-School-Labs/care-for-life-fe/commits/)
+[![github-commit-activity-image](https://img.shields.io/github/commit-activity/m/Lambda-School-Labs/care-for-life-fe.svg?style=flat-square)](https://github.com/Lambda-School-Labs/care-for-life-fe/commits/)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-000.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://docs.expo.io/)
 
