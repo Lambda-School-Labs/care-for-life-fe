@@ -3,42 +3,34 @@ import { Text, View, TextInput, Button, Alert, StyleSheet } from "react-native";
 import { useOfflineMutation } from "react-offix-hooks";
 import {
   addFamilyAndAnswersMutation,
-  addIndividualAndAnswersMutation,
+  addPersonAndAnswersMutation,
 } from "../Queries/queries";
 import SurveyReview from "../components/SurveyReview";
 import Modal from "react-native-modal";
+import NetworkStatus from "../config/NetworkStatus.js";
 
 const SurveyCompletedScreen = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [answer, setAnswer] = useState("");
   const [question, setQuestion] = useState("");
   const [answerIndex, setAnswerIndex] = useState("");
+  const [addFamilyAndAnswers] = useOfflineMutation(addFamilyAndAnswersMutation);
+  const [addPersonAndAnswers] = useOfflineMutation(addPersonAndAnswersMutation);
 
-  useEffect(() => {
-    Alert.alert("Press on any answer that needs editing");
-  }, []);
-
-  const [addFamilyAndAnswers, state] = useOfflineMutation(
-    addFamilyAndAnswersMutation
-  );
-
-  const [addFamilyIndividualAndAnswers] = useOfflineMutation(
-    addIndividualAndAnswersMutation
-  );
+  useEffect(() => {}, []);
 
   // need to store the backend ID returned during login/registration and set it to equal the userId variable on the line below
   const userId = "ck90eb2ce3vt40874lv2moncz"; //Update once login mutation works
   let answers = props.route.params.surveyAnswers;
-  const fullSurvey = props.route.params.fullSurvey;
+  const survey = props.route.params.survey;
   const familyName = props.route.params.familyName;
   const personName = props.route.params.personName;
-  const surveyType = props.route.params.type;
-
-  const annualSurveyHandler = async () => {
+  const surveyName = props.route.params.surveyName;
+  const surveyId = "ck9k5ohh9ciew0874lmqhbsnv";
+  console.log("Survey Name:", surveyName);
+  const familySurveyHandler = async () => {
     console.log("Submitting Answers....", answers);
     await answers.forEach((answer, index) => {
-      // console.log("answer being mutated", answer.value);
-      // console.log("answers backendID", fullSurvey[index].backend_id);
       try {
         console.log("logging mutation variables...");
         console.log(
@@ -46,17 +38,69 @@ const SurveyCompletedScreen = (props) => {
           answer.value,
           familyName,
           userId,
-          fullSurvey[index].backend_id
+          survey[index].backend_id
         );
         addFamilyAndAnswers({
           variables: {
             familyName: familyName,
-            surveyName: "Family Annual Survey",
+            surveyId: surveyId,
             employeeId: userId,
             answerText: answer.value.value
               ? answer.value.value.toString()
               : answer.value.toString(),
-            questionId: fullSurvey[index].backend_id,
+            questionId: survey[index].backend_id,
+          },
+        }).then((res) => {
+          console.log("mutation response:", res);
+        });
+      } catch (error) {
+        if (error.offline) {
+          error
+            .watchOfflineChange()
+            .then((res) => console.log("Offline result", res));
+        }
+        console.log(error);
+      }
+    });
+    Alert.alert(
+      `Thanks for submitting a ${surveyName}`,
+      "Your survey has been added to the Offline Queue",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: () => {
+            props.navigation.navigate("Family", {
+              survey: answers,
+              familyName: familyName,
+            });
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
+  const personSurveyHandler = async () => {
+    console.log("Submitting Answers....", survey);
+
+    await answers.forEach((answer, index) => {
+      console.log("answer being mutated", answer.value);
+      // console.log('answers backendID', survey[index].backend_id);
+      try {
+        addPersonAndAnswers({
+          variables: {
+            personName: personName,
+            surveyName: surveyName,
+            employeeId: userId,
+            answerText: answer.value.value
+              ? answer.value.value.toString()
+              : answer.value.toString(),
+            questionId: survey[index].backend_id,
           },
         });
       } catch (error) {
@@ -68,11 +112,27 @@ const SurveyCompletedScreen = (props) => {
         console.log(error);
       }
     });
-
-    props.navigation.navigate("Family", {
-      survey: answers,
-      familyName: familyName,
-    });
+    Alert.alert(
+      `Thanks for submitting a ${surveyName}`,
+      "Your survey has been added to the Offline Queue",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: () => {
+            props.navigation.navigate("Family", {
+              survey: answers,
+              familyName: familyName,
+            });
+          },
+        },
+      ],
+      { cancelable: false }
+    );
   };
 
   const toggleModal = () => {
@@ -89,7 +149,7 @@ const SurveyCompletedScreen = (props) => {
         ? answers[index].value.value
         : answers[index].value
     );
-    setQuestion(fullSurvey[index].questionText);
+    setQuestion(survey[index].questionText);
     setAnswerIndex(index);
     toggleModal();
   };
@@ -122,48 +182,25 @@ const SurveyCompletedScreen = (props) => {
     toggleModal();
   };
 
-  const individualSurveyHandler = async () => {
-    console.log("Submitting Answers....", fullSurvey);
-
-    await answers.forEach((answer, index) => {
-      console.log("answer being mutated", answer.value);
-      // console.log('answers backendID', fullSurvey[index].backend_id);
-      try {
-        addIndividualAndAnswers({
-          variables: {
-            personName: personName,
-            surveyName: "Individual Annual Survey",
-            employeeId: userId,
-            answerText: answer.value.value
-              ? answer.value.value.toString()
-              : answer.value.toString(),
-            questionId: fullSurvey[index].backend_id,
-          },
-        });
-      } catch (error) {
-        if (error.offline) {
-          error
-            .watchOfflineChange()
-            .then((res) => console.log("Offline result", res));
-        }
-        console.log(error);
-      }
-    });
-
-    props.navigation.navigate("FamilyMembers", {
-      survey: answers,
-    });
-  };
-
   return (
     <View style={styles.background}>
-      <SurveyReview
-        name={familyName}
-        submitHandler={annualSurveyHandler}
-        answers={answers}
-        fullSurvey={fullSurvey}
-        handleEdit={handleEdit}
-      />
+      {surveyName === "Family Annual Survey" ? (
+        <SurveyReview
+          name={familyName}
+          submitHandler={familySurveyHandler}
+          answers={answers}
+          survey={survey}
+          handleEdit={handleEdit}
+        />
+      ) : (
+        <SurveyReview
+          name={personName}
+          submitHandler={personSurveyHandler}
+          answers={answers}
+          survey={survey}
+          handleEdit={handleEdit}
+        />
+      )}
       <Modal isVisible={isModalVisible} backdropOpacity={0.9}>
         <View style={styles.modal}>
           <Text style={styles.modalTitle}>{question}</Text>
@@ -176,10 +213,14 @@ const SurveyCompletedScreen = (props) => {
           />
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
-              <Button color="red" title="Cancel" onPress={toggleModal} />
+              <Button color="#9F1B37" title="Cancel" onPress={toggleModal} />
             </View>
             <View style={styles.button}>
-              <Button title="Update" onPress={handleSubmit} />
+              <Button
+                color="forestgreen"
+                title="Update"
+                onPress={handleSubmit}
+              />
             </View>
           </View>
         </View>

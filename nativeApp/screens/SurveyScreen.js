@@ -1,20 +1,16 @@
 import React, { Component } from "react";
 import {
   StyleSheet,
-  Button,
   Text,
   TextInput,
   View,
   TouchableWithoutFeedback,
   TouchableOpacity,
   Keyboard,
-  Alert,
 } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { SimpleSurvey } from "react-native-simple-survey";
-import Card from "../components/Card";
 import { Bar } from "react-native-progress";
-import back from "../assets/images/back.png";
 
 export default class SurveyScreen extends Component {
   constructor(props) {
@@ -63,9 +59,9 @@ export default class SurveyScreen extends Component {
     this.props.navigation.navigate("SurveyCompleted", {
       surveyAnswers: infoQuestionsRemoved,
       familyName: this.props.route.params.familyName,
-      fullSurvey: this.state.survey,
+      survey: this.state.survey,
       personName: this.props.route.params.personName,
-      type: this.props.route.params.type,
+      surveyName: this.props.route.params.surveyName,
     });
   }
 
@@ -125,7 +121,7 @@ export default class SurveyScreen extends Component {
       // <View style={{ flexGrow: 1, width: "45%" }}>
       //   <TouchableOpacity style={styles.button} onPress={() => this.onPreviousButtonPress()}>
       //     <Button
-      //       color="crimson"
+      //       color="#9F1B37"
       //       onPress={onPress}
       //       disabled={!enabled}
       //       title={"Previous"}
@@ -137,8 +133,8 @@ export default class SurveyScreen extends Component {
       <TouchableOpacity
         onPress={() => this.onPreviousButtonPress(onPress)}
         title={"Previous"}
-        color="crimson"
-        style={styles.button}
+        color="#9F1B37"
+        style={styles.previousButton}
         disabled={!enabled}
       >
         <Text style={styles.buttonText}>
@@ -165,7 +161,7 @@ export default class SurveyScreen extends Component {
         onPress={onPress}
         title={"Next"}
         color="deepskyblue"
-        style={styles.button}
+        style={styles.nextButton}
         disabled={!enabled}
       >
         <Text style={styles.buttonText}>
@@ -283,11 +279,14 @@ export default class SurveyScreen extends Component {
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.background}>
           <View style={styles.barContiner}>
+            <Text style={styles.barContinerText}>
+              Progress: {Math.round(this.state.progress * 100)} %
+            </Text>
             <Bar
               progress={this.state.progress}
-              width={400}
+              width={600}
               height={20}
-              color={"#333"}
+              color={"#9F1B37"}
               borderWidth={3}
               borderColor={"black"}
             />
@@ -323,6 +322,11 @@ const styles = StyleSheet.create({
     padding: 30,
     alignItems: "center",
   },
+  barContinerText: {
+    fontSize: 25,
+    padding: 5,
+    fontWeight: "bold",
+  },
   answerButtonContainer: {
     width: "100%",
   },
@@ -331,7 +335,7 @@ const styles = StyleSheet.create({
     height: 200,
     justifyContent: "center",
     alignItems: "center",
-    borderColor: "black",
+    borderColor: "white",
     borderWidth: 1,
     backgroundColor: "#333",
   },
@@ -365,7 +369,35 @@ const styles = StyleSheet.create({
   button: {
     height: 150,
     width: "45%",
-    backgroundColor: "black",
+    backgroundColor: "#EE7822",
+    textAlign: "center",
+    flexGrow: 1,
+    flex: 1,
+    fontSize: 30,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+    margin: 5,
+  },
+  nextButton: {
+    height: 150,
+    width: "45%",
+    backgroundColor: "#333",
+    textAlign: "center",
+    flexGrow: 1,
+    flex: 1,
+    fontSize: 30,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+    margin: 5,
+  },
+  previousButton: {
+    height: 150,
+    width: "45%",
+    backgroundColor: "#333",
     textAlign: "center",
     flexGrow: 1,
     flex: 1,
@@ -432,17 +464,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   questionWrapper: {
-    height: 200,
+    height: 100,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "black",
+    // backgroundColor: "#9F1B37",
   },
   questionText: {
     marginBottom: 20,
-    fontSize: 30,
+    fontSize: 35,
+    fontWeight: "bold",
     textAlign: "center",
     textTransform: "uppercase",
-    color: "white",
+    color: "black",
   },
   textBox: {
     borderWidth: 1,
@@ -481,7 +514,7 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     fontWeight: "bold",
-    backgroundColor: "black",
+    backgroundColor: "#9F1B37",
     padding: 20,
     textTransform: "capitalize",
   },

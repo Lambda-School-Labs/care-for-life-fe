@@ -12,12 +12,11 @@ import {
 import { FlatList } from "react-native-gesture-handler";
 import Card from "../components/Card";
 import Modal from "react-native-modal";
-import { ApolloConsumer } from "react-apollo";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 const AllFamiliesScreen = ({ navigation }) => {
   // Pull all families from async storage and display them.
   // Selecting a family will take you to the family members screen
-
   const [families, setFamilies] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [newFamily, setNewFamily] = useState({
@@ -89,8 +88,6 @@ const AllFamiliesScreen = ({ navigation }) => {
   useEffect(() => {
     // Runs when the app first starts and will add any families in storage to state so they will be displayed
     retrieveData();
-    const token2 = AsyncStorage.getItem("TOKEN");
-    console.log("Token in async storage:", token2);
   }, []);
 
   const toggleModal = () => {
@@ -127,20 +124,36 @@ const AllFamiliesScreen = ({ navigation }) => {
         keyExtractor={(item, index) => index.toString()}
         renderItem={(data) => {
           return (
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate("Family", {
-                  familyName: data.item.name,
-                  familyId: data.item.id,
-                })
-              }
-              activeOpacity={0.7}
-              style={styles.cardContainer}
-            >
-              <Card style={styles.card}>
-                <Text>{data.item.name}</Text>
-              </Card>
-            </TouchableOpacity>
+            <View style={styles.container}>
+              <TouchableOpacity
+                activeOpacity={0.7}
+                style={styles.cardContainer}
+                onPress={() =>
+                  navigation.navigate("Family", {
+                    familyName: data.item.name,
+                    familyId: data.item.id,
+                  })
+                }
+              >
+                <Card style={styles.card}>
+                  <Text style={styles.cardText}>{data.item.name}</Text>
+                </Card>
+              </TouchableOpacity>
+              {/* <TouchableOpacity
+                activeOpacity={0.7}
+                style={styles.editContainer}
+                onPress={() => console.log("pressed")}
+              >
+                <FontAwesome5 name="edit" size={30} color="white" />
+              </TouchableOpacity> */}
+              <TouchableOpacity
+                activeOpacity={0.7}
+                style={styles.deleteContainer}
+                onPress={() => removeFamily(data.item.id)}
+              >
+                <FontAwesome5 name="trash" size={30} color="#9F1B37" />
+              </TouchableOpacity>
+            </View>
           );
         }}
       />
@@ -148,6 +161,12 @@ const AllFamiliesScreen = ({ navigation }) => {
         <TouchableOpacity onPress={toggleModal} style={styles.addFamilyButton}>
           <Text style={styles.addFamilyButtonText}>Add Family</Text>
         </TouchableOpacity>
+        {/* <TouchableOpacity
+          onPress={() => AsyncStorage.removeItem("FAMILIES")}
+          style={styles.addFamilyButton}
+        >
+          <Text style={styles.addFamilyButtonText}>Remove Families</Text>
+        </TouchableOpacity> */}
         <Modal isVisible={isModalVisible} backdropOpacity={0.8}>
           <View style={styles.modal}>
             <Text style={styles.modalTitle}>Add Family</Text>
@@ -160,10 +179,14 @@ const AllFamiliesScreen = ({ navigation }) => {
             />
             <View style={styles.buttonContainer}>
               <View style={styles.button}>
-                <Button color="red" title="Cancel" onPress={toggleModal} />
+                <Button color="#9F1B37" title="Cancel" onPress={toggleModal} />
               </View>
               <View style={styles.button}>
-                <Button title="Submit" onPress={handleSubmit} />
+                <Button
+                  color="forestgreen"
+                  title="Submit"
+                  onPress={handleSubmit}
+                />
               </View>
             </View>
           </View>
@@ -180,18 +203,66 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 100,
     color: "white",
-    backgroundColor: "black",
+    backgroundColor: "#9F1B37",
   },
   addFamilyButtonText: {
     color: "white",
     fontSize: 25,
   },
+  container: {
+    width: "100%",
+    justifyContent: "center",
+    flexDirection: "row",
+  },
   cardContainer: {
     alignItems: "center",
+    width: "80%",
+    margin: 0,
+    padding: 0,
   },
   card: {
     marginVertical: 10,
-    width: "80%",
+    width: "100%",
+    height: 100,
+    alignItems: "flex-start",
+    justifyContent: "center",
+    borderRadius: 0,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.32,
+    shadowRadius: 5.46,
+    elevation: 9,
+  },
+  cardText: {
+    fontSize: 25,
+    marginLeft: 10,
+  },
+  editContainer: {
+    backgroundColor: "black",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "15%",
+    height: 100,
+    marginTop: 10,
+  },
+  deleteContainer: {
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "15%",
+    height: 100,
+    marginTop: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.32,
+    shadowRadius: 5.46,
+    elevation: 9,
   },
   modalContainer: {
     justifyContent: "flex-end",
@@ -220,7 +291,6 @@ const styles = StyleSheet.create({
   },
   button: {
     width: 100,
-    backgroundColor: "white",
   },
 });
 

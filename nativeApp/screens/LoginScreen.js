@@ -22,7 +22,9 @@ import { Linking } from "expo";
 import config from "../api/oktaConfig.js";
 import { useOfflineMutation } from "react-offix-hooks";
 //mutations
-import { loginMutation } from "../Queries/queries.js";
+import { useQuery } from "@apollo/react-hooks";
+import { Query } from "react-apollo";
+import { loginQuery } from "../Queries/queries.js";
 //configure as web platform to allow for Okta redirects
 if (Platform.OS === "web") {
   WebBrowser.maybeCompleteAuthSession();
@@ -31,11 +33,11 @@ const useProxy = true;
 const LoginScreen = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
   const [token, setToken] = useState(null);
+  const { loading, error, data } = useQuery(loginQuery);
 
   //Offline Mutation
-  const [login, state] = useOfflineMutation(loginMutation);
+  const [login, state] = useOfflineMutation(loginQuery);
   const discovery = AuthSession.useAutoDiscovery(ISSUER);
   // Request
 
@@ -43,6 +45,13 @@ const LoginScreen = (props) => {
     config,
     discovery
   );
+  //Get Token
+  const removeToken = async () => {
+    return await AsyncStorage.removeItem("access_token");
+  };
+  const getToken = async () => {
+    return await AsyncStorage.getItem("access_token");
+  };
   //Logout Logic
   const handleLogout = async () => {
     console.log("Logging out...");
@@ -57,43 +66,38 @@ const LoginScreen = (props) => {
         },
         {
           text: "OK",
-          onPress: () => {
-            AsyncStorage.removeItem("TOKEN");
-          },
+          onPress: () => removeToken(),
         },
       ],
       { cancelable: false }
     );
   };
   //Login Logic
-  const handleLogin = async () => {
-    await AsyncStorage.getItem("TOKEN")
-      .then((res) => {
-        console.log("Token In Async Storage:", res);
-        if (res !== null) {
+  const handleLogin = () => {
+    console.log("loggin in...");
+    getToken()
+      .then(async (token) => {
+        console.log("Got Token:", token);
+        if (token !== null) {
+          //Check if token is valid
+          //Ping Backend to validate token
+
+          // console.log("Token:", token);
+          // console.log("Apollo Hook Data", data);
+          //Navigates to Families Screen
           props.navigation.replace("Families");
         } else {
-          //Expo Authentication
-          promptAsync({ useProxy })
-            .then((res) => {
-              console.log("Okta Response:", res);
-              console.log("setting token to async storage:", res.params.code);
-              AsyncStorage.setItem("TOKEN", res.params.code);
-              setToken(res.params.code);
-
-              // login({
-              //   variables: {
-              //     //variables to match backend
-              //   },
-              // });
-
-              props.navigation.replace("Families");
-            })
-            .catch((err) => Alert.alert(`Could Not Log In, Error: \n ${err}`));
+          //Gets New Token
+          await promptAsync({ useProxy }).then((res) => {
+            AsyncStorage.setItem("access_token", res.params.access_token);
+            //navigates to families screen
+            props.navigation.replace("Families");
+          });
         }
       })
       .catch((err) => console.log(err));
   };
+
   // Endpoint
 
   return (

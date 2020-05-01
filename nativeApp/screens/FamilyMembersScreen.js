@@ -13,6 +13,7 @@ import { FlatList } from "react-native-gesture-handler";
 import Card from "../components/Card";
 import { personSurvey } from "../surveys/personSurvey";
 import Modal from "react-native-modal";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 const FamilyMembers = ({ navigation, route }) => {
   // Display all family members for the respective family
@@ -30,7 +31,7 @@ const FamilyMembers = ({ navigation, route }) => {
       const value = await AsyncStorage.getItem("FAMILIES");
       // Find the family with the same id as the one passed via params
       const family = JSON.parse(value).find((obj) => obj.id === familyId);
-
+      console.log("Family:", family);
       if (family.members === null || family.members.length === 0) {
         // No family members, initialize familyMembers state to an empty array
         setFamilyMembers([]);
@@ -43,7 +44,7 @@ const FamilyMembers = ({ navigation, route }) => {
     } catch (error) {
       // Error retrieving data
       console.log(error);
-      Alert.alert("There has been an error retrieving data, please try again");
+      // Alert.alert("There has been an error retrieving data, please try again");
     }
   };
 
@@ -121,35 +122,39 @@ const FamilyMembers = ({ navigation, route }) => {
             // On press takes you to the survey screen
             // Passes the person name, family name, type of survey and the survey
             // Survey screen will display the individual survey
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate("Survey", {
-                  personName: data.item.name,
-                  survey: personSurvey,
-                  type: "Person",
-                  familyName: familyName,
-                })
-              }
-              activeOpacity={0.7}
-              style={styles.cardContainer}
-            >
-              <Card style={styles.card}>
-                <Text>{data.item.name}</Text>
-                <Text onPress={() => removeFamilyMember(data.item.id)}>
-                  DELETE
-                </Text>
-              </Card>
-            </TouchableOpacity>
+            <View style={styles.container}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("Survey", {
+                    personName: data.item.name,
+                    survey: personSurvey,
+                    surveyName: "Individual Annual Survey",
+                    familyName: familyName,
+                  })
+                }
+                activeOpacity={0.7}
+                style={styles.cardContainer}
+              >
+                <Card style={styles.card}>
+                  <Text style={styles.cardText}>{data.item.name}</Text>
+                </Card>
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={0.7}
+                style={styles.deleteContainer}
+                onPress={() => removeFamilyMember(data.item.id)}
+              >
+                <FontAwesome5 name="trash" size={30} color="white" />
+              </TouchableOpacity>
+            </View>
           );
         }}
       />
       <View style={styles.modalContainer}>
-        <Button
-          title="ADD MEMBER"
-          onPress={toggleModal}
-          backdropOpacity={0.8}
-        />
-        <Button
+        <TouchableOpacity onPress={toggleModal} style={styles.AddFamilyMember}>
+          <Text style={styles.AddFamilyMemberText}>Add Family Member</Text>
+        </TouchableOpacity>
+        {/* <Button
           title="remove all"
           color="red"
           onPress={async () => {
@@ -161,7 +166,7 @@ const FamilyMembers = ({ navigation, route }) => {
               console.log(err);
             }
           }}
-        />
+        /> */}
         <Modal isVisible={isModalVisible}>
           <View style={styles.modal}>
             <Text style={styles.modalTitle}>Add Member</Text>
@@ -174,10 +179,14 @@ const FamilyMembers = ({ navigation, route }) => {
             />
             <View style={styles.buttonContainer}>
               <View style={styles.button}>
-                <Button color="red" title="Cancel" onPress={toggleModal} />
+                <Button color="#9F1B37" title="Cancel" onPress={toggleModal} />
               </View>
               <View style={styles.button}>
-                <Button title="Submit" onPress={handleSubmit} />
+                <Button
+                  color="forestgreen"
+                  title="Submit"
+                  onPress={handleSubmit}
+                />
               </View>
             </View>
           </View>
@@ -188,16 +197,58 @@ const FamilyMembers = ({ navigation, route }) => {
 };
 
 const styles = StyleSheet.create({
+  AddFamilyMember: {
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 100,
+    color: "white",
+    backgroundColor: "#9F1B37",
+  },
+  AddFamilyMemberText: {
+    color: "white",
+    fontSize: 25,
+  },
+  container: {
+    width: "100%",
+    justifyContent: "center",
+    flexDirection: "row",
+  },
   cardContainer: {
     alignItems: "center",
+    width: "80%",
+    margin: 0,
+    padding: 0,
   },
   card: {
     marginVertical: 10,
-    width: "80%",
+    width: "100%",
+    height: 100,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 0,
+  },
+  cardText: {
+    fontSize: 25,
+  },
+  editContainer: {
+    backgroundColor: "black",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "15%",
+    height: 100,
+    marginTop: 10,
+  },
+  deleteContainer: {
+    backgroundColor: "#9F1B37",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "15%",
+    height: 100,
+    marginTop: 10,
   },
   modalContainer: {
     justifyContent: "flex-end",
-    backgroundColor: "#BADA22",
   },
   modal: {
     flex: 1,

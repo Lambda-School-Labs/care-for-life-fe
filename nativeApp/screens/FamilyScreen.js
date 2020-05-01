@@ -19,7 +19,7 @@ const FamilyScreen = ({ route, navigation }) => {
             navigation.navigate("Survey", {
               familyName: route.params.familyName,
               survey: annualSurvey,
-              type: "Family",
+              surveyName: "Family Annual Survey",
             })
           }
         >
@@ -33,10 +33,25 @@ const FamilyScreen = ({ route, navigation }) => {
           onPress={() =>
             navigation.navigate("FamilyMembers", {
               familyName: route.params.familyName,
+              familyId: route.params.familyId,
             })
           }
         >
-          <Text style={styles.buttonText}>Some Other Survey</Text>
+          <Text style={styles.buttonText}>Individual Survey</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() =>
+            navigation.navigate("Survey", {
+              familyName: route.params.familyName,
+              survey: annualSurvey,
+              surveyName: "Family Annual Survey",
+            })
+          }
+        >
+          <Text style={styles.buttonText}>5 Year Survey</Text>
         </TouchableOpacity>
       </View>
       {/* Button for the individual survey
@@ -55,9 +70,21 @@ const FamilyScreen = ({ route, navigation }) => {
             })
           }
         >
-          <Text style={styles.buttonText}>Individual Survey</Text>
+          <Text style={styles.buttonText}>Medical Survey</Text>
         </TouchableOpacity>
       </View>
+      {/* <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() =>
+            navigation.navigate("FamilyMembers", {
+              familyName: route.params.familyName,
+            })
+          }
+        >
+          <Text style={styles.buttonText}>Some Other Survey</Text>
+        </TouchableOpacity>
+      </View> */}
     </View>
   );
 };
@@ -65,25 +92,34 @@ const FamilyScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
   },
   buttonContainer: {
     width: "80%",
-    justifyContent: "space-around",
+    justifyContent: "center",
     flex: 1,
   },
   button: {
     width: "100%",
     justifyContent: "center",
-    height: 200,
-    backgroundColor: "black",
+    borderRadius: 5,
+    height: 150,
+    backgroundColor: "#333",
+    shadowColor: "black",
+    shadowOffset: {
+      width: 0,
+      height: 9,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 10.35,
+    elevation: 19,
   },
   buttonAlt: {
     width: "100%",
     justifyContent: "center",
-    height: 200,
-    backgroundColor: "seagreen",
+    height: 150,
+    backgroundColor: "#9F1B37",
   },
   buttonText: {
     textAlign: "center",

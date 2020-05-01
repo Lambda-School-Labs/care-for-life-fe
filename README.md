@@ -1,6 +1,8 @@
 # Care For Life - Native App/FrontEnd
 
-You can find the deployed project at (URL Goes Here).
+We've built an offline-first React Native app using Expo and Offix.
+
+Our team consists of a group of seven students from Lambda School's full stack web and UX design cohorts. We've built this app, along with a backend using the Apollo-GraphQL-Prisma-Postgres-Docker stack, for the [Care For Life organization](https://careforlife.org/) as our LABS22 project.
 
 ## Contributors
 
@@ -15,14 +17,12 @@ You can find the deployed project at (URL Goes Here).
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/ad7ff8fa08379149e254/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/care-for-life-fe/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/ad7ff8fa08379149e254/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/care-for-life-fe/test_coverage)
-![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
-![NPM Version](https://img.shields.io/npm/v/npm.svg?style=flat)
-![Dependecy Status](https://david-dm.org/tterb/Hyde.svg)
-![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-000.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)
+[![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)](https://opensource.org/licenses/MIT)
+[![GitHub contributors](https://img.shields.io/github/contributors/Lambda-School-Labs/care-for-life-fe)](https://github.com/Lambda-School-Labs/care-for-life-fe/commits/)
+[![github-last-commit-image](https://img.shields.io/github/last-commit/Lambda-School-Labs/care-for-life-fe.svg?style=flat-square)](https://github.com/Lambda-School-Labs/care-for-life-fe/commits/)
+[![github-commit-activity-image](https://img.shields.io/github/commit-activity/m/Lambda-School-Labs/care-for-life-fe.svg?style=flat-square)](https://github.com/Lambda-School-Labs/care-for-life-fe/commits/)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-![GitHub contributors](https://img.shields.io/github/contributors/cdnjs/cdnjs.svg?style=flat)
-![GitHub last commit](https://img.shields.io/github/last-commit/google/skia.svg?style=flat)
-![GitHub commit activity the past week, 4 weeks](https://img.shields.io/github/commit-activity/y/eslint/eslint.svg?style=flat)
+[![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-000.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://docs.expo.io/)
 
 🚫 more info on using badges [here](https://github.com/badges/shields)
 
