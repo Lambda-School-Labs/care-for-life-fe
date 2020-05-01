@@ -9,6 +9,10 @@ const FamilyScreen = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
+        {/* Button for the anuual survey
+        Takes you to the survey screen
+        Passes the family name, the survey and the survey type as params
+        Will display the annual survey that is passed as params  */}
         <TouchableOpacity
           style={styles.button}
           onPress={() =>
@@ -22,6 +26,7 @@ const FamilyScreen = ({ route, navigation }) => {
           <Text style={styles.buttonText}>Annual Survey</Text>
         </TouchableOpacity>
       </View>
+      {/* Button for a future survey. Just a placeholder */}
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.buttonAlt}
@@ -49,6 +54,12 @@ const FamilyScreen = ({ route, navigation }) => {
           <Text style={styles.buttonText}>5 Year Survey</Text>
         </TouchableOpacity>
       </View>
+      {/* Button for the individual survey
+      Takes you to the family member screen so you can choose 
+      who is taking the survey 
+      passes the family name and id
+      */}
+
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.buttonAlt}

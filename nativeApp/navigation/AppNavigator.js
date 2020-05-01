@@ -58,11 +58,13 @@ export default function AppNavigator(props) {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        {/* Defaults to first screen in stack. Login screen */}
         <Stack.Screen
           name="Login"
           component={Login}
           options={{ title: "Login" }}
         />
+        {/* Lists out all families */}
         <Stack.Screen
           name="Families"
           component={AllFamiliesScreen}
@@ -73,6 +75,7 @@ export default function AppNavigator(props) {
             headerTitleStyle: { color: "white" },
           })}
         />
+        {/* Family screen displays buttons to take surveys */}
         <Stack.Screen
           name="Family"
           component={FamilyScreen}
@@ -83,6 +86,7 @@ export default function AppNavigator(props) {
             headerTitleStyle: { color: "white" },
           })}
         />
+        {/* Lists out all family members */}
         <Stack.Screen
           name="FamilyMembers"
           component={FamilyMembers}
@@ -93,6 +97,7 @@ export default function AppNavigator(props) {
             headerTitleStyle: { color: "white" },
           })}
         />
+        {/* Displays the survey being taken */}
         <Stack.Screen
           name="Survey"
           component={SurveyScreen}
@@ -103,6 +108,7 @@ export default function AppNavigator(props) {
             headerTitleStyle: { color: "white" },
           })}
         />
+        {/* Displays survey results */}
         <Stack.Screen
           name="SurveyCompleted"
           component={SurveyCompletedScreen}

@@ -72,8 +72,11 @@ const AllFamiliesScreen = ({ navigation }) => {
   };
 
   const removeFamily = (id) => {
+    // Gets all families in async storage
     AsyncStorage.getItem("FAMILIES")
       .then((res) => {
+        // Filter out the family being removed
+        // Set updated families to async storage and state
         let families = JSON.parse(res);
         let newFamiliesArr = families.filter((obj) => obj.id !== id);
         AsyncStorage.setItem("FAMILIES", JSON.stringify(newFamiliesArr));
@@ -82,48 +85,40 @@ const AllFamiliesScreen = ({ navigation }) => {
       .catch((err) => console.log(err));
   };
 
-  // Runs when the app first starts and will add any families in storage to state so they will be displayed
   useEffect(() => {
+    // Runs when the app first starts and will add any families in storage to state so they will be displayed
     retrieveData();
   }, []);
 
   const toggleModal = () => {
+    // Sets whether the modal is visible or not
     setIsModalVisible(!isModalVisible);
   };
 
   const handleChange = (text) => {
+    // Updates the family name in state
     setNewFamily({ ...newFamily, id: Math.random(), name: text, members: [] });
   };
 
   const handleSubmit = async () => {
+    // If submited with no text, close modal
     if (!newFamily.name) {
       toggleModal();
       return;
     }
-
+    // Adds the new family to async storage and state
     setData([...families, newFamily]);
-
-    // try {
-    //   await addFamily({
-    //     variables: {
-    //       newFamily: newFamily.name,
-    //     },
-    //   });
-    // } catch (error) {
-    //   if (error.offline) {
-    //     error
-    //       .watchOfflineChange()
-    //       .then((res) => console.log("Offline result", res));
-    //   }
-    //   console.log(error);
-    // }
-
+    // Reset family info in state
     setNewFamily({ ...newFamily, name: "", members: [] });
+    // Close modal
     toggleModal();
   };
 
   return (
     <View style={{ flex: 1 }}>
+      {/* Lists out family names
+      On press takes you to the family screen
+      Passes the family name and family id as params */}
       <FlatList
         data={families}
         keyExtractor={(item, index) => index.toString()}

@@ -36,7 +36,6 @@ const SurveyCompletedScreen = (props) => {
         console.log(
           "Variables:",
           answer.value,
-          answer.value.value,
           familyName,
           userId,
           survey[index].backend_id
