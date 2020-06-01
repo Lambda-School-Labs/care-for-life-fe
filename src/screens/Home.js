@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, Button } from "react-native";
 import styles from "../styles";
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({ route, navigation }) {
+
+  const { idToken } = route.params;
+
+  useEffect(() => {
+    console.log("***id token ***", idToken)
+  }, [])
+
   return (
     <View style={styles.screen}>
       <Text>Home Screen</Text>

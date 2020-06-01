@@ -14,6 +14,8 @@ const useProxy = true;
 export default function App({ navigation }) {
 
     const [validToken, setValidToken] = useState(false);
+    const [idToken, setIdToken] = useState('');
+    const [user, setUser] = useState({});
 
     const discovery = AuthSession.useAutoDiscovery(ISSUER);
 
@@ -42,15 +44,17 @@ export default function App({ navigation }) {
                     console.log('already logged in');
                     setValidToken(true);
                     //Navigates to Home Screen
-                    navigation.navigate('Home');
+                    navigation.navigate('Home', { idToken: idToken });
                 } else {
                     //Gets New Token
-                    console.log('config', config)
+                    console.log('config', config);
                     await promptAsync({ useProxy }).then((res) => {
+                        console.log('res', res)
                         AsyncStorage.setItem("access_token", res.params.access_token);
                         setValidToken(true);
+                        setIdToken(JSON.stringify(res.params.id_token));
                         //navigates to home screen
-                        navigation.navigate('Home');
+                        navigation.navigate('Home', { idToken: idToken });
                     });
                 }
             })
