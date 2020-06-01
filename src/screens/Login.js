@@ -48,6 +48,7 @@ export default function App({ navigation }) {
                     console.log('config', config)
                     await promptAsync({ useProxy }).then((res) => {
                         AsyncStorage.setItem("access_token", res.params.access_token);
+                        console.log('access token', res.params.access_token)
                         setValidToken(true);
                         //navigates to home screen
                         navigation.navigate('Home');
