@@ -1,9 +1,9 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import Login from '../screens/Login';
-import HomeScreen from "../screens/Home";
-import DetailsScreen from "../screens/Details";
+import Login from "../screens/Login";
+import Home from "../screens/Home";
+import Details from "../screens/Details";
 
 const Stack = createStackNavigator();
 
@@ -18,12 +18,12 @@ export default function Routes() {
         />
         <Stack.Screen
           name="Home"
-          component={HomeScreen}
+          component={Home}
           options={{ title: "Home Screen" }}
         />
         <Stack.Screen
           name="Details"
-          component={DetailsScreen}
+          component={Details}
           options={{ title: "Details Screen" }}
         />
       </Stack.Navigator>
