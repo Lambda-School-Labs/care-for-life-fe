@@ -10,7 +10,14 @@ const Stack = createStackNavigator();
 export default function Routes() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: "skyblue",
+          },
+          headerTitleAlign: "center",
+        }}
+      >
         <Stack.Screen
           name="Login"
           component={Login}
