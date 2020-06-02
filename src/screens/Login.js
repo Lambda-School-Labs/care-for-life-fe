@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Button, AsyncStorage, Alert } from "react-native";
+import { View, Button, AsyncStorage, Alert } from "react-native";
 import * as AuthSession from "expo-auth-session";
 import * as WebBrowser from "expo-web-browser";
 import { ISSUER } from "react-native-dotenv";
@@ -84,12 +84,12 @@ export default function Login({ navigation }) {
     <View style={styles.screen}>
       {validToken ? (
         <View>
-          <Button title="logout" onPress={handleLogout} />
+          <Button title="Logout" onPress={handleLogout} />
           <Button title="Go to Home" onPress={() => navigation.push("Home")} />
         </View>
       ) : (
         <View>
-          <Button style={styles.button} title="login" onPress={handleLogin} />
+          <Button style={styles.button} title="Login" onPress={handleLogin} />
         </View>
       )}
     </View>
