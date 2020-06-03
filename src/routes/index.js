@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Login from '../screens/Login';
 import HomeScreen from "../screens/Home";
 import DetailsScreen from "../screens/Details";
+import FamiliesScreen from "../screens/Families";
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,11 @@ export default function Routes() {
           name="Details"
           component={DetailsScreen}
           options={{ title: "Details Screen" }}
+        />
+        <Stack.Screen
+          name="Families"
+          component={FamiliesScreen}
+          options={{ title: "Families Screen" }}
         />
       </Stack.Navigator>
     </NavigationContainer>
