@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Button } from "react-native";
-import { createConfig, signIn, signOut, isAuthenticated, getUser, getUserFromIdToken, EventEmitter } from "@okta/okta-react-native";
+import { createConfig, isAuthenticated, getUser, getUserFromIdToken } from "@okta/okta-react-native";
 import config from '../okta/index'
 import styles from "../styles";
 import { ISSUER, REDIRECT_URI } from 'react-native-dotenv'
 
 export default function HomeScreen({ route, navigation }) {
 
-  const [authenticated, setAuthenticated] = useState(false)
+  // const [authenticated, setAuthenticated] = useState(false)
 
   //const { idToken } = route.params;
 
   const getUserInfo = async () => {
     let user = await getUser()
-    console.log(JSON.stringify(user))
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+    console.log('****', JSON.stringify(user))
   }
 
   useEffect(() => {
@@ -26,6 +28,7 @@ export default function HomeScreen({ route, navigation }) {
       scopes: config.scopes,
       requreHardwareBacedKeyStore: false,
     });
+    // checkAuthentication();
     getUserInfo();
 
   }, [])
