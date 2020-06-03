@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Login from "../screens/Login";
 import Home from "../screens/Home";
 import Details from "../screens/Details";
+import FamilyForm from "../forms/FamilyForm";
 
 const Stack = createStackNavigator();
 
@@ -32,6 +33,11 @@ export default function Routes() {
           name="Details"
           component={Details}
           options={{ title: "Details Screen" }}
+        />
+        <Stack.Screen
+          name="FamilyForm"
+          component={FamilyForm}
+          options={{ title: "Family Form Survey" }}
         />
       </Stack.Navigator>
     </NavigationContainer>

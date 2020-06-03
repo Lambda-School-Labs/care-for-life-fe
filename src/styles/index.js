@@ -6,4 +6,9 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  textInput: {
+    borderWidth: 1,
+    width: 200,
+    marginBottom: 10,
+  },
 });
