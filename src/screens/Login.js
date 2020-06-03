@@ -4,6 +4,7 @@ import * as AuthSession from 'expo-auth-session';
 import * as WebBrowser from 'expo-web-browser';
 import { ISSUER } from 'react-native-dotenv';
 import config from '../okta/index';
+import { getUserFromIdToken } from "@okta/okta-react-native";
 
 //configure as web platform to allow for Okta redirects
 if (Platform.OS === "web") {
@@ -11,7 +12,7 @@ if (Platform.OS === "web") {
 }
 const useProxy = true;
 
-export default function App({ navigation }) {
+export default function Login({ navigation }) {
 
     const [validToken, setValidToken] = useState(false);
     const [idToken, setIdToken] = useState('');
@@ -23,6 +24,14 @@ export default function App({ navigation }) {
         config,
         discovery
     );
+
+    const getUserInfo = (idToken) => {
+        getUserFromIdToken(idToken)
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => console.log(err))
+    }
 
     //  Get Token
     const removeToken = async () => {
