@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Button } from "react-native";
 import styles from "../styles";
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as Actions from '../actions/familyActions';
+import axios from "axios";
 
-export default function DetailsScreen({ navigation }) {
+function DetailsScreen({ navigation }) {
+
   return (
     <View style={styles.screen}>
       <Text>Details Screen</Text>
@@ -24,3 +29,5 @@ export default function DetailsScreen({ navigation }) {
     </View>
   );
 }
+
+export default connect(null, null)(DetailsScreen)
