@@ -16,7 +16,6 @@ export default function Login({ navigation }) {
 
     const [validToken, setValidToken] = useState(false);
     const [idToken, setIdToken] = useState('');
-    const [user, setUser] = useState({});
 
     const discovery = AuthSession.useAutoDiscovery(ISSUER);
 
@@ -25,13 +24,13 @@ export default function Login({ navigation }) {
         discovery
     );
 
-    const getUserInfo = (idToken) => {
-        getUserFromIdToken(idToken)
-            .then(res => {
-                console.log(res)
-            })
-            .catch(err => console.log(err))
-    }
+    // const getUserInfo = (idToken) => {
+    //     getUserFromIdToken(idToken)
+    //         .then(res => {
+    //             console.log(res)
+    //         })
+    //         .catch(err => console.log(err))
+    // }
 
     //  Get Token
     const removeToken = async () => {
