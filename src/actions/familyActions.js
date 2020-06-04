@@ -23,11 +23,11 @@ export function getFamilies() {
 
         return axios.get(`https://care-for-life.herokuapp.com/api/families`)
             .then(response => {
-                console.log("families", response.data);
+                // console.log("families", response.data);
                 dispatch(getFamiliesSuccess(response.data)) /// Successfully got data
             })
             .catch(error => {
-                console.log("the data was not return", error);
+                // console.log("the data was not return", error);
                 dispatch(getFamiliesFailure(error));
             });
     }

@@ -5,9 +5,11 @@ import { connect } from 'react-redux';
 import { getFamilies } from '../actions/familyActions';
 
 const mapStateToProps = (state) => {
-    console.log("state", state.familyReducer)
+    // console.log("family state", state.familyReducer.families)
     return {
-        families: state.familyReducer
+        families: state.familyReducer.families,
+        isLoading: state.familyReducer.isLoading,
+        error: state.familyReducer.error
     }
 }
 
@@ -15,18 +17,17 @@ function FamiliesScreen(props) {
 
     useEffect(() => {
         props.getFamilies();
-        console.log('prop', props)
     }, [])
 
     return (
         <View style={styles.screen}>
             {props.isLoading && <Text>Loading...</Text>}
-            {props.error && <Text>{props.error.message}</Text>}
-            {/* {props.families.map(i => {
+            {props.error && <Text>{props.error}</Text>}
+            {props.families ? props.families.map(i => {
                 return (
-                    <Button title={i.family_name} />
+                    <Button key={i.id} title={i.family_name} />
                 )
-            })} */}
+            }) : null}
         </View>
     );
 }

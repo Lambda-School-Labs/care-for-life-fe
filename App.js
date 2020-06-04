@@ -12,7 +12,7 @@ import familyReducer from "./src/reducers/familiesReducer";
 
 const store = createStore(
   combineReducers({ userReducer, familyReducer }),
-  applyMiddleware(thunk, logger)
+  applyMiddleware(thunk)
 );
 
 export default function App() {

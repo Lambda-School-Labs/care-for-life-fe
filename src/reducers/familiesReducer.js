@@ -10,15 +10,17 @@ let initialState = {
     isLoading: false
 };
 
-export default async (state = initialState, action) => {
+export default familyReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_FAMILIES_LOADING:
+            console.log("loading")
             return {
                 ...state,
                 isLoading: true,
                 error: null
             }
         case GET_FAMILIES_SUCCESS:
+            console.log("loading success")
             return {
                 ...state,
                 families: action.payload,
@@ -26,6 +28,7 @@ export default async (state = initialState, action) => {
                 error: null
             }
         case GET_FAMILIES_FAILURE:
+            console.log("loading failed")
             return {
                 ...state,
                 families: [],
