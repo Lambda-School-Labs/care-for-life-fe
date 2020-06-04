@@ -9,8 +9,9 @@ import { connect } from 'react-redux';
 import * as Actions from '../actions/userActions';
 
 const mapStateToProps = (state) => {
+    console.log("user state", state)
     return {
-        user: state.userReducer.user
+        user: state.user
     }
 }
 
