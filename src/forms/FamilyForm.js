@@ -13,7 +13,7 @@ const Fields = ({ label }) => {
 };
 
 const onSubmit = (values) => {
-  alert("PlaceHolder");
+  alert(values);
 };
 
 const FamilyForm = (props) => {
