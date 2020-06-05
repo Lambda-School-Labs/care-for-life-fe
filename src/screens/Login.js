@@ -16,6 +16,7 @@ export default function Login({ navigation }) {
 
     const [validToken, setValidToken] = useState(false);
     const [idToken, setIdToken] = useState('');
+    const [accessToken, setAccessToken] = useState('');
 
     const discovery = AuthSession.useAutoDiscovery(ISSUER);
 
@@ -58,11 +59,13 @@ export default function Login({ navigation }) {
                     console.log('config', config);
                     await promptAsync({ useProxy }).then((res) => {
                         console.log('res', res)
-                        AsyncStorage.setItem("access_token", res.params.access_token);
+                        AsyncStorage.setItem("id_token", res.params.id_token);
                         setValidToken(true);
-                        setIdToken(JSON.stringify(res.params.id_token));
+                        setIdToken(res.params.id_token);
+                        setAccessToken(res.params.access_token)
+                        console.log(accessToken)
                         //navigates to home screen
-                        navigation.navigate('Home', { idToken: idToken });
+                        navigation.navigate('Home', { idToken: idToken, accessToken: accessToken });
                     });
                 }
             })
