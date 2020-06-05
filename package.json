@@ -20,6 +20,7 @@
     "expo-web-browser": "~8.2.1",
     "fs": "0.0.1-security",
     "install": "^0.13.0",
+    "logkitty": "^0.7.1",
     "lstat": "^1.0.0",
     "main": "^1000.0.1",
     "mem": "^6.1.0",
