@@ -3,7 +3,7 @@ import { View, Text, Button } from "react-native";
 //import { createConfig, isAuthenticated, getUser, getUserFromIdToken } from "@okta/okta-react-native";
 import config from '../okta/index';
 import styles from "../styles";
-import { CLIENT_ID, ISSUER, REDIRECT_URI } from 'react-native-dotenv';
+import { CLIENT_ID, ISSUER, REDIRECT_URI, IP } from 'react-native-dotenv';
 import axios from 'axios';
 
 export default function HomeScreen({ route, navigation }) {
@@ -24,15 +24,13 @@ export default function HomeScreen({ route, navigation }) {
     //   }
     // })
     // axios.get('https://care-for-life.herokuapp.com/api/zones')
-    axios.get('https://dev-815303.okta.com/oauth2/v1/userinfo', {
+    axios.get(`http://${IP}:5600/login`, {
       headers: {
-        'Authorization': `Bearer ${accessToken}`,
-        'X-Okta-Request-Id': 'XtmUZJqmOF6LIYZZZQ7uaAAAAAY'
+        Authorization: `${idToken}`
       }
     })
       .then(res => console.log(res.data))
       .catch(err => console.log(err))
-    //console.log('****', JSON.stringify(user))
   }
 
   useEffect(() => {
