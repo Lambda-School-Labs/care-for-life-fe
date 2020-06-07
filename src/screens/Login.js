@@ -53,7 +53,7 @@ export default function Login({ navigation }) {
                     console.log('already logged in');
                     setValidToken(true);
                     //Navigates to Home Screen
-                    navigation.navigate('Home', { idToken: idToken });
+                    navigation.navigate('Home', { idToken: idToken, accessToken: accessToken });
                 } else {
                     //Gets New Token
                     console.log('config', config);
