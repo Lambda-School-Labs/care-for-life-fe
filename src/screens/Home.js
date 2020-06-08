@@ -14,7 +14,7 @@ export default function HomeScreen({ route, navigation }) {
     console.log('access token', accessToken)
     axios.get(`https://care-for-life.herokuapp.com/auth/login`, {
       headers: {
-        Authorization: `${accessToken}`
+        Authorization: `${idToken}`
       }
     })
       .then(res => console.log(res.data))
