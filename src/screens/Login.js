@@ -8,6 +8,7 @@ import styles from "../styles";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as Actions from "../actions/userActions";
+import CustomButton from "../components/Button";
 
 const mapStateToProps = (state) => {
   return {
@@ -97,12 +98,19 @@ function Login({ navigation }) {
     <View style={styles.screen}>
       {validToken ? (
         <View>
-          <Button title="Logout" onPress={handleLogout} />
-          <Button title="Go to Home" onPress={() => navigation.push("Home")} />
+          <CustomButton
+            title="Go to Home"
+            onPress={() => navigation.push("Home")}
+          />
+          <CustomButton title="Logout" onPress={handleLogout} />
         </View>
       ) : (
         <View>
-          <Button style={styles.button} title="Login" onPress={handleLogin} />
+          <CustomButton
+            style={styles.button}
+            title="Login"
+            onPress={handleLogin}
+          />
         </View>
       )}
     </View>

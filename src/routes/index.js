@@ -1,4 +1,5 @@
 import React from "react";
+import { View, Button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Login from "../screens/Login";
@@ -32,12 +33,22 @@ export default function Routes() {
         <Stack.Screen
           name="Families"
           component={Families}
-          options={{ title: "Families Screen" }}
+          options={({ navigation, route }) => ({
+            title: "Families Screen",
+            headerRight: () => (
+              <View style={{ margin: 5 }}>
+                <Button
+                  title="Add Family"
+                  onPress={() => navigation.navigate("FamilyForm")}
+                />
+              </View>
+            ),
+          })}
         />
         <Stack.Screen
           name="FamilyForm"
           component={FamilyForm}
-          options={{ title: "Family Form Survey" }}
+          options={{ title: "Add Family" }}
         />
       </Stack.Navigator>
     </NavigationContainer>
