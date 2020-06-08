@@ -13,9 +13,9 @@ export default function HomeScreen({ route, navigation }) {
   const getUserInfo = () => {
     console.log('id token', idToken)
     console.log('access token', accessToken)
-    axios.get(`http://${IP}:5600/auth/login`, {
+    axios.get(`https://care-for-life.herokuapp.com/auth/login`, {
       headers: {
-        Authorization: `${idToken}`
+        Authorization: `${accessToken}`
       }
     })
       .then(res => console.log(res.data))
