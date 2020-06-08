@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Button, TextInput } from "react-native";
 import { Field, reduxForm } from "redux-form";
 import styles from "../styles";
+import CustomButton from "../components/Button";
 
 const Fields = ({ label }) => {
   return (
@@ -19,9 +20,8 @@ const onSubmit = (values) => {
 const FamilyForm = (props) => {
   return (
     <View style={styles.screen}>
-      <Field name="firstName" component={Fields} label="First Name" />
-      <Field name="lastName" component={Fields} label="Last Name" />
-      <Button title="submit" onPress={onSubmit} />
+      <Field name="familyName" component={Fields} label="Family Name" />
+      <CustomButton title="submit" onPress={onSubmit} />
     </View>
   );
 };

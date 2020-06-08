@@ -1,11 +1,12 @@
 import React from "react";
 import { View, Text, Button } from "react-native";
 import styles from "../styles";
+import CustomButton from "../components/Button";
 
 export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.screen}>
-      <Button
+      <CustomButton
         title="Go to Families"
         onPress={() => navigation.navigate("Families")}
       />
