@@ -106,11 +106,7 @@ function Login({ navigation }) {
         </View>
       ) : (
         <View>
-          <CustomButton
-            style={styles.button}
-            title="Login"
-            onPress={handleLogin}
-          />
+          <CustomButton title="Login" onPress={handleLogin} />
         </View>
       )}
     </View>
