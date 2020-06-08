@@ -6,6 +6,7 @@ import Login from "../screens/Login";
 import Home from "../screens/Home";
 import FamilyForm from "../forms/FamilyForm";
 import Families from "../screens/Families";
+import Chosen from "../screens/Chosen"
 
 const Stack = createStackNavigator();
 
@@ -49,6 +50,11 @@ export default function Routes() {
           name="FamilyForm"
           component={FamilyForm}
           options={{ title: "Add Family" }}
+        />
+        <Stack.Screen
+          name="Chosen Families"
+          component={Chosen}
+          options={{ title: "Chosen Families" }}
         />
       </Stack.Navigator>
     </NavigationContainer>
