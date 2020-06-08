@@ -56,7 +56,7 @@ function Login({ navigation }) {
           console.log("already logged in");
           setValidToken(true);
           //Navigates to Home Screen
-          navigation.navigate("Home");
+          //navigation.navigate("Home");
         } else {
           //Gets New Token
           console.log("config", config);
@@ -64,7 +64,7 @@ function Login({ navigation }) {
             AsyncStorage.setItem("access_token", res.params.access_token);
             setValidToken(true);
             //navigates to home screen
-            navigation.navigate("Home");
+            //navigation.navigate("Home");
           });
         }
       })
