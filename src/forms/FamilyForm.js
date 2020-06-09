@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { postFamily } from "../actions/familyFormAction";
 import styles from "../styles";
 import CustomButton from "../components/Button";
+import textInputStyles from "../styles/TextInput";
 
 const mapStateToProps = (state) => {
   return {
@@ -20,13 +21,10 @@ const FamilyForm = ({ postFamily }) => {
   });
 
   const onSubmit = (values) => {
-    console.log(values);
     postFamily(values);
   };
 
   const handleChangeName = (e) => {
-    console.log(e);
-
     setFamily({
       ...family,
       family_name: e,
@@ -34,8 +32,6 @@ const FamilyForm = ({ postFamily }) => {
   };
 
   const handleChangeZone = (e) => {
-    console.log(e);
-
     setFamily({
       ...family,
       zone_id: e,
@@ -43,8 +39,6 @@ const FamilyForm = ({ postFamily }) => {
   };
 
   const handleChangeCommunity = (e) => {
-    console.log(e);
-
     setFamily({
       ...family,
       community_id: e,
@@ -57,21 +51,21 @@ const FamilyForm = ({ postFamily }) => {
       <TextInput
         onChangeText={handleChangeName}
         name="family_name"
-        style={styles.textInput}
+        style={textInputStyles.textInput}
         label="Family Name"
       />
       <Text>Zone ID</Text>
       <TextInput
         onChangeText={handleChangeZone}
         name="zone_id"
-        style={styles.textInput}
+        style={textInputStyles.textInput}
         label="Zone ID"
       />
       <Text>Community ID</Text>
       <TextInput
         onChangeText={handleChangeCommunity}
         name="community_id"
-        style={styles.textInput}
+        style={textInputStyles.textInput}
         label="Community ID"
       />
       <CustomButton title="submit" onPress={() => onSubmit(family)} />
