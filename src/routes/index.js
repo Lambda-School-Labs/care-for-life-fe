@@ -6,6 +6,7 @@ import Login from "../screens/Login";
 import Home from "../screens/Home";
 import FamilyForm from "../forms/FamilyForm";
 import Families from "../screens/Families";
+import Register from '../forms/RegisterForm';
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,11 @@ export default function Routes() {
           name="Home"
           component={Home}
           options={{ title: "Home Screen" }}
+        />
+        <Stack.Screen
+          name="Register"
+          component={Register}
+          options={{ title: "Registration" }}
         />
         <Stack.Screen
           name="Families"

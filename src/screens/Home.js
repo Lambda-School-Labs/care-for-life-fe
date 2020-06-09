@@ -17,7 +17,13 @@ export default function HomeScreen({ route, navigation }) {
         Authorization: `${idToken}`
       }
     })
-      .then(res => console.log(res.data))
+      .then(res => {
+        console.log(res.data)
+        if (!res.data.isRegistered) {
+          navigation.navigate('Register', { userInfo: res.data })
+        }
+        //navigation.navigate(next page, { user = res.data })
+      })
       .catch(err => console.log(err.message))
   }
 
