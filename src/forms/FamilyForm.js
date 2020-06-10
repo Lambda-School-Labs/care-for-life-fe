@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, Button, TextInput } from "react-native";
+import { View } from "react-native";
 import { connect } from "react-redux";
 import { postFamily } from "../actions/familyFormAction";
 import styles from "../styles";
 import CustomButton from "../components/Button";
-import textInputStyles from "../styles/TextInput";
+import CustomTextInput from "../components/TextInput";
+import DismissKeyboard from "../components/DismissKeyboard";
 
 const mapStateToProps = (state) => {
   return {
@@ -46,30 +47,32 @@ const FamilyForm = ({ postFamily }) => {
   };
 
   return (
-    <View style={styles.screen}>
-      <Text>Family Name</Text>
-      <TextInput
-        onChangeText={handleChangeName}
-        name="family_name"
-        style={textInputStyles.textInput}
-        label="Family Name"
-      />
-      <Text>Zone ID</Text>
-      <TextInput
-        onChangeText={handleChangeZone}
-        name="zone_id"
-        style={textInputStyles.textInput}
-        label="Zone ID"
-      />
-      <Text>Community ID</Text>
-      <TextInput
-        onChangeText={handleChangeCommunity}
-        name="community_id"
-        style={textInputStyles.textInput}
-        label="Community ID"
-      />
-      <CustomButton title="submit" onPress={() => onSubmit(family)} />
-    </View>
+    <DismissKeyboard>
+      <View style={styles.screen}>
+        <CustomTextInput
+          title="Family Name"
+          onChangeText={handleChangeName}
+          name="family_name"
+          label="Family Name"
+          placeholder="Family Name"
+        />
+        <CustomTextInput
+          title="Zone ID"
+          onChangeText={handleChangeZone}
+          name="zone_id"
+          label="Zone ID"
+          placeholder="Zone ID"
+        />
+        <CustomTextInput
+          title="Community ID"
+          onChangeText={handleChangeCommunity}
+          name="community_id"
+          label="Community ID"
+          placeholder="Community ID"
+        />
+        <CustomButton title="submit" onPress={() => onSubmit(family)} />
+      </View>
+    </DismissKeyboard>
   );
 };
 
