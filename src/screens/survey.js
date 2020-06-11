@@ -13,8 +13,6 @@ const mapStateToProps = (state) => {
 
 function Survey({ navigation, fetchSurvey, survey_questions }) {
 
-    const [count, setCount] = useState(0)
-
     useEffect(() => {
         console.log("on survey page")
         console.log("survey questions are here", survey_questions)
@@ -26,7 +24,6 @@ function Survey({ navigation, fetchSurvey, survey_questions }) {
         <ScrollView>
             <View style={styles.screen}>
                 <View>
-                    <CustomButton onPress={() => setCount(count + 1)} title={"press me"} />
                     {survey_questions.map(i => {
                         return (
                             <View>
