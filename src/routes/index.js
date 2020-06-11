@@ -6,8 +6,8 @@ import Login from "../screens/Login";
 import Home from "../screens/Home";
 import FamilyForm from "../forms/FamilyForm";
 import Families from "../screens/Families";
-import Register from '../forms/RegisterForm';
-import Register2 from '../forms/Register2';
+import Register from "../forms/RegisterForm";
+import Register2 from "../forms/Register2";
 
 const Stack = createStackNavigator();
 
@@ -38,7 +38,7 @@ export default function Routes() {
           options={{ title: "Registration" }}
         />
         <Stack.Screen
-          name='Register2'
+          name="Register2"
           component={Register2}
           options={{ title: "Registration" }}
         />
