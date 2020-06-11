@@ -10,7 +10,7 @@ import Register from '../forms/RegisterForm';
 import Register2 from '../forms/Register2';
 import Chosen from "../screens/Chosen";
 import FamilyMembers from "../screens/FamilyMembers";
-import Survey from "../screens/Survey";
+import Survey from "../screens/survey";
 
 const Stack = createStackNavigator();
 
