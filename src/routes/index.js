@@ -8,6 +8,9 @@ import FamilyForm from "../forms/FamilyForm";
 import Families from "../screens/Families";
 import Register from '../forms/RegisterForm';
 import Register2 from '../forms/Register2';
+import Chosen from "../screens/Chosen";
+import FamilyMembers from "../screens/FamilyMembers";
+import Survey from "../screens/Survey";
 
 const Stack = createStackNavigator();
 
@@ -61,6 +64,21 @@ export default function Routes() {
           name="FamilyForm"
           component={FamilyForm}
           options={{ title: "Add Family" }}
+        />
+        <Stack.Screen
+          name="Chosen Families"
+          component={Chosen}
+          options={{ title: "Chosen Families" }}
+        />
+        <Stack.Screen
+          name="Family Members"
+          component={FamilyMembers}
+          options={{ title: "Family Members" }}
+        />
+        <Stack.Screen
+          name="Survey"
+          component={Survey}
+          options={{ title: "Survey" }}
         />
       </Stack.Navigator>
     </NavigationContainer>
