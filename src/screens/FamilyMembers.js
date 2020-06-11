@@ -11,9 +11,12 @@ const mapStateToProps = (state) => {
     };
 };
 
-function FamilyMembers({ navigation, members, famId }) {
+function FamilyMembers({ navigation, route }) {
 
     const [family, setFamily] = useState({})
+
+    const { members } = route.params;
+    const { famId } = route.params;
 
     useEffect(() => {
         console.log("famId:", AsyncStorage.getItem('famId'))
