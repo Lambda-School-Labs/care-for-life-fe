@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Button, AsyncStorage, ScrollView } from "react-native";
+import { View, Text, Button, AsyncStorage, ScrollView, TextInput } from "react-native";
 import styles from "../styles";
 import { connect } from "react-redux";
 import { fetchSurvey } from "../actions/surveyActions";
@@ -29,7 +29,10 @@ function Survey({ navigation, fetchSurvey, survey_questions }) {
                     <CustomButton onPress={() => setCount(count + 1)} title={"press me"} />
                     {survey_questions.map(i => {
                         return (
-                            <Text>{i.question}?</Text>
+                            <View>
+                                <Text>{i.question}?</Text>
+                                <TextInput style={styles.textInput} />
+                            </View>
                         )
                     })}
                 </View>
