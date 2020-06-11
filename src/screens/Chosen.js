@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Button, ScrollView } from "react-native";
+import { View, Text, Button, AsyncStorage, ScrollView } from "react-native";
 import styles from "../styles";
 import { connect } from "react-redux";
 import { getFamilies, setChosenFamilies } from "../actions/familyActions";
@@ -12,12 +12,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-function Chosen({ navigation, setChosenFamilies, chosenFamilies }) {
-
-    const nextScreen = () => {
-        setChosenFamilies(chosen)
-        navigation.navigate('Chosen Families')
-    }
+function Chosen({ navigation, chosenFamilies }) {
 
     useEffect(() => {
         console.log(chosenFamilies)
@@ -30,7 +25,10 @@ function Chosen({ navigation, setChosenFamilies, chosenFamilies }) {
                     <Text>Chosen Families:</Text>
                     {chosenFamilies.map(i => {
                         return (
-                            <CustomButton key={i.id} title={i.family_name} />
+                            <CustomButton key={i.id} title={i.family_name} onPress={() => {
+                                AsyncStorage.setItem('famId', i.id),
+                                    navigation.navigate('Family Members', { famId: i.id, members: i.members })
+                            }} />
                         )
                     })}
                 </View>
