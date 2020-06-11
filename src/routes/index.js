@@ -41,7 +41,7 @@ export default function Routes() {
           options={{ title: "Registration" }}
         />
         <Stack.Screen
-          name='Register2'
+          name="Register2"
           component={Register2}
           options={{ title: "Registration" }}
         />
