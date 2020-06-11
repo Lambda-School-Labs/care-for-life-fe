@@ -1,17 +1,18 @@
 import React, { useEffect } from "react";
-import { View, Text, Button } from "react-native";
+import { View, AsyncStorage } from "react-native";
 import styles from "../styles";
 import axios from 'axios';
 import CustomButton from "../components/Button";
 
-export default function HomeScreen({ route, navigation }) {
+export default function HomeScreen({ navigation }) {
 
-  const { idToken } = route.params;
-  const { accessToken } = route.params;
+  const getIdToken = async () => {
+    return await AsyncStorage.getItem('id_token')
+  }
 
-  const getUserInfo = () => {
+  const getUserInfo = async () => {
+    const idToken = await getIdToken()
     console.log('id token', idToken)
-    console.log('access token', accessToken)
     axios.get(`https://care-for-life.herokuapp.com/auth/login`, {
       headers: {
         Authorization: `${idToken}`
