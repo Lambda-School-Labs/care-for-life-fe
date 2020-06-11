@@ -16,9 +16,8 @@ function Survey({ navigation, fetchSurvey, survey_questions }) {
     useEffect(() => {
         console.log("on survey page")
         console.log("survey questions are here", survey_questions)
-        // console.log(survey_questions)
         fetchSurvey()
-    }, [count])
+    }, [])
 
     return (
         <ScrollView>
