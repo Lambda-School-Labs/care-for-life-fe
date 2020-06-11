@@ -27,7 +27,7 @@ function Chosen({ navigation, chosenFamilies }) {
                         return (
                             <CustomButton key={i.id} title={i.family_name} onPress={() => {
                                 AsyncStorage.setItem('famId', i.id),
-                                    navigation.navigate('Family Members', { famId: i.id, members: i.members })
+                                    navigation.navigate('Family Members', { famId: i.id, members: i.members, name: i.family_name })
                             }} />
                         )
                     })}

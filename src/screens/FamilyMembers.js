@@ -16,11 +16,11 @@ function FamilyMembers({ navigation, route }) {
     const [family, setFamily] = useState({})
 
     const { members } = route.params;
-    const { famId } = route.params;
+    const { name } = route.params;
 
     useEffect(() => {
         console.log("famId:", AsyncStorage.getItem('famId'))
-        console.log("family:", family)
+        console.log("family name:", name)
         // console.log("family set", family)
         // chosenFamilies.map(i => {
         //     if (i.id === AsyncStorage.getItem('famId')) {
@@ -40,7 +40,7 @@ function FamilyMembers({ navigation, route }) {
         <ScrollView>
             <View style={styles.screen}>
                 <View>
-                    {/* <Text>{family.family_name} Family Members:</Text> */}
+                    <Text>{name} Family Members:</Text>
                     {members.map(i => {
                         return (
                             <CustomButton key={i.id} onPress={() => handleChange(i)} title={`${i.first_name} ${i.last_name}`} />
