@@ -14,6 +14,7 @@ const mapStateToProps = (state) => {
 function FamilyMembers({ navigation, route }) {
 
     const [family, setFamily] = useState({})
+    const [member, setMember] = useState({})
 
     const { members } = route.params;
     const { name } = route.params;
@@ -32,8 +33,9 @@ function FamilyMembers({ navigation, route }) {
         // console.log(chosenFamilies)
     }, [family])
 
-    const handleChange = () => {
-        console.log("button hit")
+    const handleChange = (e) => {
+        setMember(e)
+        navigation.navigate("Survey")
     }
 
     return (
