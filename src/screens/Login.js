@@ -28,8 +28,6 @@ const useProxy = true;
 
 function Login({ navigation }) {
     const [validToken, setValidToken] = useState();
-    const [idToken, setIdToken] = useState('');
-    const [accessToken, setAccessToken] = useState('');
 
     const discovery = AuthSession.useAutoDiscovery(ISSUER);
 
@@ -40,6 +38,7 @@ function Login({ navigation }) {
 
     //  Get Token
     const removeToken = async () => {
+        await AsyncStorage.removeItem('id_token')
         return await AsyncStorage.removeItem("access_token");
     };
     const getToken = async () => {
@@ -58,19 +57,17 @@ function Login({ navigation }) {
                     console.log('already logged in');
                     setValidToken(true);
                     //Navigates to Home Screen
-                    navigation.navigate('Home', { idToken: idToken, accessToken: accessToken });
+                    navigation.navigate('Home');
                 } else {
                     //Gets New Token
                     console.log('config', config);
                     await promptAsync({ useProxy }).then((res) => {
                         console.log('res', res)
                         AsyncStorage.setItem("id_token", res.params.id_token);
+                        AsyncStorage.setItem("access_token", res.params.access_token)
                         setValidToken(true);
-                        setIdToken(res.params.id_token);
-                        setAccessToken(res.params.access_token)
-                        console.log(accessToken)
                         //navigates to home screen
-                        navigation.navigate('Home', { idToken: idToken, accessToken: accessToken });
+                        navigation.navigate('Home');
                     });
                 }
             })
