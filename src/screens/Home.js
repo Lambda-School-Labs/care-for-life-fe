@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { View, AsyncStorage } from "react-native";
 import styles from "../styles";
 import axios from 'axios';
@@ -6,8 +6,21 @@ import CustomButton from "../components/Button";
 
 export default function HomeScreen({ navigation }) {
 
+  const [email, setEmail] = useState('')
+  const [user, setUser] = useState({})
+
   const getIdToken = async () => {
     return await AsyncStorage.getItem('id_token')
+  }
+
+  const getRegisteredUserInfo = () => {
+    axios.get('https://care-for-life.herokuapp.com/api/workers')
+      .then(res => {
+        const currentUser = res.data.filter((e, i) => e.email === email)
+        setUser(currentUser[0])
+        console.log('CURRENTUSER', currentUser)
+      })
+      .catch(err => console.log(err))
   }
 
   const getUserInfo = async () => {
@@ -20,10 +33,13 @@ export default function HomeScreen({ navigation }) {
     })
       .then(res => {
         console.log(res.data)
+        setEmail(res.data.email)
         if (!res.data.isRegistered) {
           navigation.navigate('Register', { userInfo: res.data })
+        } else {
+          getRegisteredUserInfo()
+          console.log('already registered')
         }
-        //navigation.navigate(next page, { user = res.data })
       })
       .catch(err => console.log(err.message))
   }
