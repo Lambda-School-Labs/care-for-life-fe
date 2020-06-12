@@ -14,7 +14,7 @@ const Register = ({ route, navigation }) => {
 
     const [userInfo, setUserInfo] = useState(user);
 
-    const storedUser = useSelector(state => state.user);
+    const storedUser = useSelector(state => state.userReducer);
     const dispatch = useDispatch();
 
     // useEffect(() => {
@@ -29,7 +29,8 @@ const Register = ({ route, navigation }) => {
         axios
             .post("https://care-for-life.herokuapp.com/api/workers", user)
             .then((res) => {
-                console.log(res);
+                console.log('from the post request', res.data);
+                // add res.data.id to redux
             })
             .catch((err) => console.log(err.message));
     };

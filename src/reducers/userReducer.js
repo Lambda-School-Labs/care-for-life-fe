@@ -6,8 +6,8 @@ let initialState = {
     validToken: false,
     email: '',
     zone_id: 0,
-    community_id: 0
-  },
+    community_id: 0,
+  }
 };
 
 export default (state = initialState, action) => {
@@ -20,11 +20,11 @@ export default (state = initialState, action) => {
       return state;
     case SAVE_USER:
       return {
-        ...state,
+        ...state.user,
         email: action.payload.email,
         zone_id: action.payload.zone_id,
         community_id: action.payload.community_id
-      }
+      };
     default:
       return state;
   }
