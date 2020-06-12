@@ -6,7 +6,7 @@ import axios from "axios";
 import styles from "../styles";
 import pickerStyles from "../styles/Picker";
 import { useSelector, useDispatch } from "react-redux";
-import { saveUser } from '../actions/userActions';
+import { saveUser, saveId } from '../actions/userActions';
 
 const Register = ({ route, navigation }) => {
     const { user } = route.params;
@@ -24,13 +24,20 @@ const Register = ({ route, navigation }) => {
     // }, []);
 
     const handleSubmit = (user) => {
-        dispatch(saveUser(userInfo))
-        console.log('stored user from redux', storedUser)
+        // dispatch(saveUser(userInfo))
+        // console.log('stored user from redux', storedUser)
         axios
             .post("https://care-for-life.herokuapp.com/api/workers", user)
             .then((res) => {
                 console.log('from the post request', res.data);
-                // add res.data.id to redux
+                dispatch(saveUser({
+                    id: res.data.id,
+                    community_id: res.data.community_id,
+                    zone_id: res.data.zone_id,
+                    email: res.data.email
+                }))
+                // dispatch(saveId(res.data.id))
+                console.log('stored user from redux with id', storedUser)
             })
             .catch((err) => console.log(err.message));
     };
@@ -50,7 +57,7 @@ const Register = ({ route, navigation }) => {
             <Button
                 title="submit"
                 onPress={() => {
-                    console.log("*********", userInfo);
+                    // console.log("*********", userInfo);
                     handleSubmit(userInfo);
                     navigation.navigate("Home")
                 }}

@@ -18,7 +18,7 @@ const Register = ({ route, navigation }) => {
         email: userInfo.email,
         role_name: "",
         zone_id: 0,
-        community_id: 0,
+        community_id: 0
     });
 
     const getRegisterInfo = () => {

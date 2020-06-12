@@ -3,11 +3,16 @@ import { View, AsyncStorage } from "react-native";
 import styles from "../styles";
 import axios from 'axios';
 import CustomButton from "../components/Button";
+import { useSelector, useDispatch } from 'react-redux';
+import { saveUser } from '../actions/userActions'
 
 export default function HomeScreen({ navigation }) {
 
   const [email, setEmail] = useState('')
   const [user, setUser] = useState({})
+
+  const storedUser = useSelector(state => state.userReducer)
+  const dispatch = useDispatch();
 
   const getIdToken = async () => {
     return await AsyncStorage.getItem('id_token')
@@ -18,7 +23,7 @@ export default function HomeScreen({ navigation }) {
       .then(res => {
         const currentUser = res.data.filter((e, i) => e.email === email)
         setUser(currentUser[0])
-        console.log('CURRENTUSER', currentUser)
+        console.log('CURRENTUSER', user)
       })
       .catch(err => console.log(err))
   }
