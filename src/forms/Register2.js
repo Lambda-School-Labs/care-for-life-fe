@@ -24,19 +24,16 @@ const Register = ({ route, navigation }) => {
     // }, []);
 
     const handleSubmit = (user) => {
-        // dispatch(saveUser(userInfo))
-        // console.log('stored user from redux', storedUser)
         axios
             .post("https://care-for-life.herokuapp.com/api/workers", user)
             .then((res) => {
-                console.log('from the post request', res.data);
+                // console.log('from the post request', res.data);
                 dispatch(saveUser({
                     id: res.data.id,
                     community_id: res.data.community_id,
                     zone_id: res.data.zone_id,
                     email: res.data.email
                 }))
-                // dispatch(saveId(res.data.id))
                 console.log('stored user from redux with id', storedUser)
             })
             .catch((err) => console.log(err.message));

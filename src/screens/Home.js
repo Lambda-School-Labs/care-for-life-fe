@@ -23,7 +23,14 @@ export default function HomeScreen({ navigation }) {
       .then(res => {
         const currentUser = res.data.filter((e, i) => e.email === email)
         setUser(currentUser[0])
-        console.log('CURRENTUSER', user)
+        // console.log('CURRENTUSER', user)
+        dispatch(saveUser({
+          id: user.id,
+          community_id: user.community_id,
+          zone_id: user.zone_id,
+          email: user.email
+        }))
+        console.log('stored user from redux *', storedUser)
       })
       .catch(err => console.log(err))
   }
