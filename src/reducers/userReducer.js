@@ -1,9 +1,12 @@
-import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from "../actions/userActions.js";
+import { LOGIN_SUCCESS, LOGOUT_SUCCESS, SAVE_USER } from "../actions/userActions.js";
 
 let initialState = {
   user: {
     loggedIn: false,
     validToken: false,
+    email: '',
+    zone_id: 0,
+    community_id: 0
   },
 };
 
@@ -15,6 +18,13 @@ export default (state = initialState, action) => {
     case LOGOUT_SUCCESS:
       console.log("logging out");
       return state;
+    case SAVE_USER:
+      return {
+        ...state,
+        email: action.payload.email,
+        zone_id: action.payload.zone_id,
+        community_id: action.payload.community_id
+      }
     default:
       return state;
   }

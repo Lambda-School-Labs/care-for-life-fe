@@ -5,6 +5,8 @@ import Button from "../components/Button";
 import axios from "axios";
 import styles from "../styles";
 import pickerStyles from "../styles/Picker";
+import { useSelector, useDispatch } from "react-redux";
+import { saveUser } from '../actions/userActions';
 
 const Register = ({ route, navigation }) => {
     const { user } = route.params;
@@ -12,12 +14,18 @@ const Register = ({ route, navigation }) => {
 
     const [userInfo, setUserInfo] = useState(user);
 
-    useEffect(() => {
-        console.log("***user", user);
-        console.log("***zones", zones);
-    }, []);
+    const storedUser = useSelector(state => state.user);
+    const dispatch = useDispatch();
+
+    // useEffect(() => {
+    //     console.log("***user", user);
+    //     console.log("***zones", zones);
+
+    // }, []);
 
     const handleSubmit = (user) => {
+        dispatch(saveUser(userInfo))
+        console.log('stored user from redux', storedUser)
         axios
             .post("https://care-for-life.herokuapp.com/api/workers", user)
             .then((res) => {
@@ -43,6 +51,7 @@ const Register = ({ route, navigation }) => {
                 onPress={() => {
                     console.log("*********", userInfo);
                     handleSubmit(userInfo);
+                    navigation.navigate("Home")
                 }}
             />
         </View>
