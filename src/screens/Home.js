@@ -1,36 +1,40 @@
 import React, { useEffect } from "react";
-import { View, AsyncStorage } from "react-native";
+import { View, Text, AsyncStorage } from "react-native";
 import styles from "../styles";
-import axios from 'axios';
+import axios from "axios";
 import CustomButton from "../components/Button";
+import { useSelector } from "react-redux";
 
 export default function HomeScreen({ navigation }) {
-
   const getIdToken = async () => {
-    return await AsyncStorage.getItem('id_token')
-  }
+    return await AsyncStorage.getItem("id_token");
+  };
+
+  const chosenFamilies = useSelector((state) => state);
 
   const getUserInfo = async () => {
-    const idToken = await getIdToken()
-    console.log('id token', idToken)
-    axios.get(`https://care-for-life.herokuapp.com/auth/login`, {
-      headers: {
-        Authorization: `${idToken}`
-      }
-    })
-      .then(res => {
-        console.log(res.data)
+    const idToken = await getIdToken();
+    console.log("id token", idToken);
+    axios
+      .get(`https://care-for-life.herokuapp.com/auth/login`, {
+        headers: {
+          Authorization: `${idToken}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
         if (!res.data.isRegistered) {
-          navigation.navigate('Register', { userInfo: res.data })
+          navigation.navigate("Register", { userInfo: res.data });
         }
         //navigation.navigate(next page, { user = res.data })
       })
-      .catch(err => console.log(err.message))
-  }
+      .catch((err) => console.log(err.message));
+  };
 
   useEffect(() => {
+    console.log("*****************", chosenFamilies);
     getUserInfo();
-  }, [])
+  }, []);
 
   return (
     <View style={styles.screen}>
