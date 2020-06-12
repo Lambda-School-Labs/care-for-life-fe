@@ -1,4 +1,3 @@
-import { reducer as formReducer } from "redux-form";
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import userReducer from "../reducers/userReducer";
@@ -7,7 +6,12 @@ import familyFormReducer from "../reducers/familyFormReducer";
 import surveyReducer from "../reducers/surveyReducer";
 
 const store = createStore(
-  combineReducers({ userReducer, familyReducer, familyFormReducer, formReducer, surveyReducer }),
+  combineReducers({
+    userReducer,
+    familyReducer,
+    familyFormReducer,
+    surveyReducer,
+  }),
   applyMiddleware(thunk)
 );
 
