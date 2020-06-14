@@ -7,11 +7,12 @@ import CustomButton from "../components/Button";
 const mapStateToProps = (state) => {
     // console.log("family state", state.familyReducer.families)
     return {
-        chosenFamilies: state.familyReducer.chosenFamilies
+        chosenFamilies: state.familyReducer.chosenFamilies,
+        stagedResponses: state.surveyReducer.stagedResponses
     };
 };
 
-function FamilyMembers({ navigation, route }) {
+function FamilyMembers({ navigation, route, stagedResponses }) {
 
     const [family, setFamily] = useState({})
     const [member, setMember] = useState({})
@@ -20,18 +21,8 @@ function FamilyMembers({ navigation, route }) {
     const { name } = route.params;
 
     useEffect(() => {
-        console.log("famId:", AsyncStorage.getItem('famId'))
-        console.log("family name:", name)
-        // console.log("family set", family)
-        // chosenFamilies.map(i => {
-        //     if (i.id === AsyncStorage.getItem('famId')) {
-        //         setFamily(i);
-        //     } else {
-        //         return null
-        //     }
-        // })
-        // console.log(chosenFamilies)
-    }, [family])
+        console.log("staged responses:", stagedResponses)
+    }, [])
 
     const handleChange = (e) => {
         setMember(e)
@@ -45,7 +36,10 @@ function FamilyMembers({ navigation, route }) {
                     <Text>{name} Family Members:</Text>
                     {members.map(i => {
                         return (
-                            <CustomButton key={i.id} onPress={() => handleChange(i)} title={`${i.first_name} ${i.last_name}`} />
+                            <CustomButton key={i.id} onPress={() => {
+                                AsyncStorage.setItem('individual_id', i.id)
+                                navigation.navigate("Survey")
+                            }} title={`${i.first_name} ${i.last_name}`} />
                         )
                     })}
                 </View>

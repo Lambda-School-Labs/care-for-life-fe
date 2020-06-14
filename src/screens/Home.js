@@ -12,18 +12,16 @@ export default function HomeScreen({ navigation }) {
 
   const getUserInfo = async () => {
     const idToken = await getIdToken()
-    console.log('id token', idToken)
     axios.get(`https://care-for-life.herokuapp.com/auth/login`, {
       headers: {
         Authorization: `${idToken}`
       }
     })
       .then(res => {
-        console.log(res.data)
-        if (!res.data.isRegistered) {
-          navigation.navigate('Register', { userInfo: res.data })
-        }
-        //navigation.navigate(next page, { user = res.data })
+        // if (!res.data.isRegistered) {
+        //   navigation.navigate('Register', { userInfo: res.data })
+        // }
+        // navigation.navigate(next page, { user = res.data })
       })
       .catch(err => console.log(err.message))
   }

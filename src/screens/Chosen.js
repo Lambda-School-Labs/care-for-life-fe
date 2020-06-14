@@ -15,7 +15,7 @@ const mapStateToProps = (state) => {
 function Chosen({ navigation, chosenFamilies }) {
 
     useEffect(() => {
-        console.log(chosenFamilies)
+
     }, [])
 
     return (

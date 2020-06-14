@@ -3,6 +3,8 @@ import axios from "axios";
 export const GET_SURVEY_LOADING = 'GET_SURVEY_LOADING';
 export const GET_SURVEY_SUCCESS = 'GET_SURVEY_SUCCESS';
 export const GET_SURVEY_FAILURE = 'GET_SURVEY_FAILURE';
+export const ADD_RESPONSE = 'ADD_RESPONSE';
+export const STAGE_RESPONSES = 'STAGE_RESPONSES';
 
 export const getSurveyLoading = () => ({
     type: GET_SURVEY_LOADING
@@ -15,6 +17,16 @@ export const getSurveySuccess = (data) => ({
 
 export const getSurveyFailure = () => ({
     type: GET_SURVEY_FAILURE
+})
+
+export const addResponse = (response) => ({
+    type: ADD_RESPONSE,
+    payload: response
+})
+
+export const stageResponses = (responses) => ({
+    type: STAGE_RESPONSES,
+    payload: responses
 })
 
 export function fetchSurvey() {
