@@ -34,9 +34,9 @@ export const stageResponses = (responses) => ({
     payload: responses
 })
 
-export const setCurrentFam = (famId) => ({
+export const setCurrentFam = (fam) => ({
     type: SET_CURRENT_FAM,
-    payload: famId
+    payload: fam
 })
 
 export const setCurrentIndividual = (indiId) => ({
@@ -45,16 +45,16 @@ export const setCurrentIndividual = (indiId) => ({
 })
 
 export const createCompSurveyLoading = () => ({
-    type: CREATE_COOMPLETED_SURVEY_LOADING
+    type: CREATE_COMPLETED_SURVEY_LOADING
 })
 
 export const createCompSurveySuccess = (data) => ({
-    type: CREATE_COOMPLETED_SURVEY_SUCCESS,
+    type: CREATE_COMPLETED_SURVEY_SUCCESS,
     payload: data
 })
 
 export const createCompSurveyFailure = (err) => ({
-    type: CREATE_COOMPLETED_SURVEY_FAILURE,
+    type: CREATE_COMPLETED_SURVEY_FAILURE,
     payload: err
 })
 
@@ -82,7 +82,6 @@ export function fetchSurvey() {
         return axios
             .get(`https://care-for-life.herokuapp.com/api/surveys/1/questions`)
             .then((response) => {
-                // console.log("questions", response.data);
                 dispatch(getSurveySuccess(response.data.sq)); /// Successfully got data
             })
             .catch((error) => {

@@ -29,7 +29,6 @@ export function getFamilies() {
             .get(`https://care-for-life.herokuapp.com/api/families/zone/1`)
             .then((response) => {
                 // console.log("families", response.data);
-                console.log(response.data)
                 dispatch(getFamiliesSuccess(response.data)); /// Successfully got data
             })
             .catch((error) => {

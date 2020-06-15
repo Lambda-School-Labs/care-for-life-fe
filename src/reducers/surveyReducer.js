@@ -4,6 +4,8 @@ import {
     GET_SURVEY_FAILURE,
     ADD_RESPONSE,
     STAGE_RESPONSES,
+    SET_CURRENT_FAM,
+    SET_CURRENT_INDIVIDUAL,
     CREATE_COMPLETED_SURVEY_LOADING,
     CREATE_COMPLETED_SURVEY_SUCCESS,
     CREATE_COMPLETED_SURVEY_FAILURE,
@@ -58,6 +60,18 @@ export default surveyReducer = (state = initialState, action) => {
                 ...state,
                 stagedResponses: [...state.stagedResponses, ...state.responses],
                 responses: []
+            };
+        case SET_CURRENT_FAM:
+            console.log("staging responses");
+            return {
+                ...state,
+                currentFamily: action.payload
+            };
+        case SET_CURRENT_INDIVIDUAL:
+            console.log("staging responses");
+            return {
+                ...state,
+                currentIndividual: action.payload
             };
         case CREATE_COMPLETED_SURVEY_LOADING:
             console.log("creating completed survey")

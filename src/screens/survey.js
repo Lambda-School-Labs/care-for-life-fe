@@ -13,13 +13,16 @@ const mapStateToProps = (state) => {
         responses: state.surveyReducer.responses,
         user_id: state.userReducer.user.id,
         currentFamily: state.surveyReducer.currentFamily,
-        currentCompSurvey: state.surveyReducer.currentCompSurvey
+        currentCompSurvey: state.surveyReducer.currentCompSurvey,
+        currentIndividual: state.surveyReducer.currentIndividual
     };
 };
 
-function Survey({ navigation, fetchSurvey, responses, survey_questions, addResponse, stageResponses, createCompletedSurvey, user_id, currentFamily, currentCompSurvey }) {
+function Survey({ navigation, fetchSurvey, responses, survey_questions, addResponse, stageResponses, createCompletedSurvey, user_id, currentFamily, currentCompSurvey, currentIndividual }) {
 
     useEffect(() => {
+        console.log("survey_questions", survey_questions)
+        console.log("current individual", currentIndividual)
         createCompletedSurvey({
             survey_id: 1,
             supervisor_id: user_id,

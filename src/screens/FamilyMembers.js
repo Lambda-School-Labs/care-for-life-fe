@@ -9,14 +9,19 @@ const mapStateToProps = (state) => {
     // console.log("family state", state.familyReducer.families)
     return {
         chosenFamilies: state.familyReducer.chosenFamilies,
-        stagedResponses: state.surveyReducer.stagedResponses
+        stagedResponses: state.surveyReducer.stagedResponses,
+        currentFam: state.surveyReducer.currentFamily
     };
 };
 
-function FamilyMembers({ navigation, route, setCurrentIndividual }) {
+function FamilyMembers({ navigation, route, setCurrentIndividual, currentFam }) {
 
     const { members } = route.params;
     const { name } = route.params;
+
+    useEffect(() => {
+        console.log("current family", currentFam.family_name)
+    }, [])
 
     return (
         <ScrollView>
