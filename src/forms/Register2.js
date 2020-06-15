@@ -5,6 +5,8 @@ import Button from "../components/Button";
 import axios from "axios";
 import styles from "../styles";
 import pickerStyles from "../styles/Picker";
+import { useDispatch } from "react-redux";
+import { saveUser } from '../actions/userActions';
 
 const Register = ({ route, navigation }) => {
   const { user } = route.params;
@@ -12,43 +14,40 @@ const Register = ({ route, navigation }) => {
 
   const [userInfo, setUserInfo] = useState(user);
 
-  const [zone, setZone] = useState(0);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log("***user", user);
-    console.log("***zones", zones);
-  }, []);
 
   const handleSubmit = (user) => {
-    axios
-      .post("https://care-for-life.herokuapp.com/api/workers", user)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err.message));
-  };
+        axios
+            .post("https://care-for-life.herokuapp.com/api/workers", user)
+            .then((res) => {
+                console.log('from the post request', res.data);
+                dispatch(saveUser(res.data))
+            })
+            .catch((err) => console.log(err.message));
+    };
 
-  return (
-    <View style={styles.screen}>
-      <Text>Select Your Zone:</Text>
-      <Picker
-        style={pickerStyles.picker}
-        selectedValue={user.zone_id}
-        onValueChange={(item) => setUserInfo({ ...user, zone_id: item })}
-      >
-        {zones[0].zones.map((e, i) => {
-          return <Picker.Item key={i} label={e.zone_letter} value={e.id} />;
-        })}
-      </Picker>
-      <Button
-        title="submit"
-        onPress={() => {
-          console.log("*********", userInfo);
-          handleSubmit(userInfo);
-        }}
-      />
-    </View>
-  );
+    return (
+        <View style={styles.screen}>
+            <Text>Select Your Zone:</Text>
+            <Picker
+                style={pickerStyles.picker}
+                selectedValue={user.zone_id}
+                onValueChange={(item) => setUserInfo({ ...user, zone_id: item })}
+            >
+                {zones[0].zones.map((e, i) => {
+                    return <Picker.Item key={i} label={e.zone_letter} value={e.id} />;
+                })}
+            </Picker>
+            <Button
+                title="submit"
+                onPress={() => {
+                    handleSubmit(userInfo);
+                    navigation.navigate("Home")
+                }}
+            />
+        </View>
+    );
 };
 
 export default Register;
