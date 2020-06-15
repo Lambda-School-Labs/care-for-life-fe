@@ -1,32 +1,56 @@
-import React, { useEffect } from "react";
-import { View, Text, AsyncStorage } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, AsyncStorage } from "react-native";
 import styles from "../styles";
 import axios from "axios";
 import CustomButton from "../components/Button";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
+import { saveUser } from '../actions/userActions'
 
 export default function HomeScreen({ navigation }) {
+
+  const [email, setEmail] = useState('')
+  const [user, setUser] = useState({})
+
+  const storedUser = useSelector(state => state.userReducer)
+  const dispatch = useDispatch();
+
   const getIdToken = async () => {
     return await AsyncStorage.getItem("id_token");
   };
 
   const chosenFamilies = useSelector((state) => state);
 
-  const getUserInfo = async () => {
-    const idToken = await getIdToken();
-    console.log("id token", idToken);
-    axios
-      .get(`https://care-for-life.herokuapp.com/auth/login`, {
-        headers: {
-          Authorization: `${idToken}`,
-        },
+  const getRegisteredUserInfo = () => {
+    axios.get('https://care-for-life.herokuapp.com/api/workers')
+      .then(res => {
+        console.log('****')
+        console.log('array of users', res.data)
+        const currentUser = res.data.filter((e, i) => e.email === email)
+        setUser(currentUser[0])
+        console.log('CURRENTUSER', currentUser)
+        dispatch(saveUser(user))
+        console.log('stored user from redux *', storedUser)
       })
-      .then((res) => {
-        console.log(res.data);
+      .catch(err => console.log(err))
+  }
+
+  const getUserInfo = async () => {
+    const idToken = await getIdToken()
+    console.log('id token', idToken)
+    axios.get(`https://care-for-life.herokuapp.com/auth/login`, {
+      headers: {
+        Authorization: `${idToken}`
+      }
+    })
+      .then(res => {
+        console.log(res.data)
+        setEmail(res.data.email)
         if (!res.data.isRegistered) {
-          navigation.navigate("Register", { userInfo: res.data });
+          navigation.navigate('Register', { userInfo: res.data })
+        } else {
+          getRegisteredUserInfo()
+          console.log('already registered')
         }
-        //navigation.navigate(next page, { user = res.data })
       })
       .catch((err) => console.log(err.message));
   };
