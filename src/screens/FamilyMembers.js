@@ -21,7 +21,7 @@ function FamilyMembers({ navigation, route, setCurrentIndividual, currentFam, st
 
     useEffect(() => {
         console.log("current family", currentFam.family_name)
-        console.log("staged responses", stagedResponses)
+
     }, [])
 
     return (

@@ -55,13 +55,13 @@ export default surveyReducer = (state = initialState, action) => {
                 ...state,
                 responses: [...state.responses, action.payload]
             };
-        case STAGE_RESPONSES:
-            console.log("staging responses");
-            return {
-                ...state,
-                stagedResponses: state.responses,
-                responses: []
-            };
+        // case STAGE_RESPONSES:
+        //     console.log("staging responses");
+        //     return {
+        //         ...state,
+        //         stagedResponses: state.responses,
+        //         responses: []
+        //     };
         case SET_CURRENT_FAM:
             console.log("setting current fam");
             return {
@@ -77,7 +77,9 @@ export default surveyReducer = (state = initialState, action) => {
         case CREATE_COMPLETED_SURVEY_LOADING:
             console.log("creating completed survey")
             return {
-
+                ...state,
+                compSurveyLoading: true,
+                compSurveyError: null
             }
         case CREATE_COMPLETED_SURVEY_SUCCESS:
             console.log("created completed survey")
