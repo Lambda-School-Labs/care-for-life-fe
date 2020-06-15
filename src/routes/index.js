@@ -1,13 +1,14 @@
 import React from "react";
-import { View, Button } from "react-native";
+import { View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { MaterialIcons } from "@expo/vector-icons";
 import Login from "../screens/Login";
 import Home from "../screens/Home";
 import FamilyForm from "../forms/FamilyForm";
 import Families from "../screens/Families";
-import Register from '../forms/RegisterForm';
-import Register2 from '../forms/Register2';
+import Register from "../forms/RegisterForm";
+import Register2 from "../forms/Register2";
 import Chosen from "../screens/Chosen";
 import FamilyMembers from "../screens/FamilyMembers";
 import Survey from "../screens/survey";
@@ -20,7 +21,7 @@ export default function Routes() {
       <Stack.Navigator
         screenOptions={{
           headerStyle: {
-            backgroundColor: "skyblue",
+            backgroundColor: "white",
           },
           headerTitleAlign: "center",
         }}
@@ -48,12 +49,13 @@ export default function Routes() {
         <Stack.Screen
           name="Families"
           component={Families}
-          options={({ navigation, route }) => ({
+          options={({ navigation }) => ({
             title: "Families Screen",
             headerRight: () => (
-              <View style={{ margin: 5 }}>
-                <Button
-                  title="Add Family"
+              <View style={{ marginRight: 25 }}>
+                <MaterialIcons
+                  name="add"
+                  size={25}
                   onPress={() => navigation.navigate("FamilyForm")}
                 />
               </View>
