@@ -4,7 +4,7 @@ import styles from "../styles";
 import { connect } from "react-redux";
 import { getFamilies, setChosenFamilies } from "../actions/familyActions";
 import CustomButton from "../components/Button";
-import CustomCardFamily from "../components/CardFamily";
+import CustomCard from "../components/Card";
 
 const mapStateToProps = (state) => {
   // console.log("family state", state.familyReducer.families)
@@ -56,10 +56,11 @@ function Families({
           <Text>Families:</Text>
           {families.map((i) => {
             return (
-              <CustomCardFamily
+              <CustomCard
                 key={i.id}
                 onPress={() => handleChange(i)}
                 title={i.family_name}
+                source={require("../images/family.png")}
               />
             );
           })}
@@ -68,10 +69,11 @@ function Families({
           <Text>Chosen Families:</Text>
           {chosen.map((i) => {
             return (
-              <CustomCardFamily
+              <CustomCard
                 key={i.id}
                 onPress={() => handleUnchange(i)}
                 title={i.family_name}
+                source={require("../images/family.png")}
               />
             );
           })}

@@ -3,7 +3,7 @@ import { View, Text, AsyncStorage, ScrollView } from "react-native";
 import styles from "../styles";
 import { connect } from "react-redux";
 import { setChosenFamilies } from "../actions/familyActions";
-import CustomCardFamily from "../components/CardFamily";
+import CustomCard from "../components/Card";
 
 const mapStateToProps = (state) => {
   // console.log("family state", state.familyReducer.families)
@@ -24,9 +24,10 @@ function Chosen({ navigation, chosenFamilies }) {
           <Text>Chosen Families:</Text>
           {chosenFamilies.map((i) => {
             return (
-              <CustomCardFamily
+              <CustomCard
                 key={i.id}
                 title={i.family_name}
+                source={require("../images/family.png")}
                 onPress={() => {
                   AsyncStorage.setItem("famId", i.id),
                     navigation.navigate("Family Members", {

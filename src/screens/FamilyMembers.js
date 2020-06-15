@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, Button, AsyncStorage, ScrollView } from "react-native";
 import styles from "../styles";
 import { connect } from "react-redux";
-import CustomCardPerson from "../components/CardPerson";
+import CustomCard from "../components/Card";
 
 const mapStateToProps = (state) => {
   // console.log("family state", state.familyReducer.families)
@@ -44,10 +44,11 @@ function FamilyMembers({ navigation, route }) {
           <Text>{name} Family Members:</Text>
           {members.map((i) => {
             return (
-              <CustomCardPerson
+              <CustomCard
                 key={i.id}
                 onPress={() => handleChange(i)}
                 title={`${i.first_name} ${i.last_name}`}
+                source={require("../images/person.png")}
               />
             );
           })}
