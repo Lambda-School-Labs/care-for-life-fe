@@ -3,6 +3,7 @@ import { View, Text, Button, AsyncStorage, ScrollView } from "react-native";
 import styles from "../styles";
 import { connect } from "react-redux";
 import CustomButton from "../components/Button";
+import { setCurrentIndividual } from "../actions/surveyActions";
 
 const mapStateToProps = (state) => {
     // console.log("family state", state.familyReducer.families)
@@ -12,22 +13,10 @@ const mapStateToProps = (state) => {
     };
 };
 
-function FamilyMembers({ navigation, route, stagedResponses }) {
-
-    const [family, setFamily] = useState({})
-    const [member, setMember] = useState({})
+function FamilyMembers({ navigation, route, setCurrentIndividual }) {
 
     const { members } = route.params;
     const { name } = route.params;
-
-    useEffect(() => {
-        console.log("staged responses:", stagedResponses)
-    }, [])
-
-    const handleChange = (e) => {
-        setMember(e)
-        navigation.navigate("Survey")
-    }
 
     return (
         <ScrollView>
@@ -37,7 +26,7 @@ function FamilyMembers({ navigation, route, stagedResponses }) {
                     {members.map(i => {
                         return (
                             <CustomButton key={i.id} onPress={() => {
-                                AsyncStorage.setItem('individual_id', i.id)
+                                setCurrentIndividual(i)
                                 navigation.navigate("Survey")
                             }} title={`${i.first_name} ${i.last_name}`} />
                         )
@@ -48,4 +37,4 @@ function FamilyMembers({ navigation, route, stagedResponses }) {
     );
 }
 
-export default connect(mapStateToProps, {})(FamilyMembers);
+export default connect(mapStateToProps, { setCurrentIndividual })(FamilyMembers);

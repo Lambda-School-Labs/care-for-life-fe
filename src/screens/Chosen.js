@@ -3,6 +3,7 @@ import { View, Text, Button, AsyncStorage, ScrollView } from "react-native";
 import styles from "../styles";
 import { connect } from "react-redux";
 import { getFamilies, setChosenFamilies } from "../actions/familyActions";
+import { setCurrentFam } from "../actions/surveyActions";
 import CustomButton from "../components/Button";
 
 const mapStateToProps = (state) => {
@@ -12,7 +13,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-function Chosen({ navigation, chosenFamilies }) {
+function Chosen({ navigation, chosenFamilies, setCurrentFam }) {
 
     useEffect(() => {
 
@@ -26,8 +27,8 @@ function Chosen({ navigation, chosenFamilies }) {
                     {chosenFamilies.map(i => {
                         return (
                             <CustomButton key={i.id} title={i.family_name} onPress={() => {
-                                AsyncStorage.setItem('famId', i.id),
-                                    navigation.navigate('Family Members', { famId: i.id, members: i.members, name: i.family_name })
+                                navigation.navigate('Family Members', { members: i.members, name: i.family_name });
+                                setCurrentFam(i)
                             }} />
                         )
                     })}
@@ -37,4 +38,4 @@ function Chosen({ navigation, chosenFamilies }) {
     );
 }
 
-export default connect(mapStateToProps, { setChosenFamilies })(Chosen);
+export default connect(mapStateToProps, { setChosenFamilies, setCurrentFam })(Chosen);

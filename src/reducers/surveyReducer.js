@@ -3,15 +3,23 @@ import {
     GET_SURVEY_LOADING,
     GET_SURVEY_FAILURE,
     ADD_RESPONSE,
-    STAGE_RESPONSES
+    STAGE_RESPONSES,
+    CREATE_COMPLETED_SURVEY_LOADING,
+    CREATE_COMPLETED_SURVEY_SUCCESS,
+    CREATE_COMPLETED_SURVEY_FAILURE,
 } from "../actions/surveyActions.js";
 
 let initialState = {
+    currentFamily: null,
+    currentIndividual: null,
+    currentCompSurvey: null,
     survey_questions: [],
     stagedResponses: [],
     responses: [],
-    error: null,
-    isLoading: false
+    surveyError: null,
+    loadingSurvey: false,
+    compSurveyLoading: false,
+    compSurveyError: null
 };
 
 export default surveyReducer = (state = initialState, action) => {
@@ -20,23 +28,23 @@ export default surveyReducer = (state = initialState, action) => {
             console.log("loading survey");
             return {
                 ...state,
-                // isLoading: true,
-                // error: null,
+                loadingSurvey: true,
+                surveyError: null,
             };
         case GET_SURVEY_SUCCESS:
             console.log("loading survey success");
             return {
                 ...state,
                 survey_questions: action.payload,
-                isLoading: false,
-                error: null,
+                loadingSurvey: false,
+                surveyError: null,
             };
         case GET_SURVEY_FAILURE:
             console.log("loading survey failed");
             return {
                 ...state,
-                // isLoading: false,
-                // error: action.payload,
+                loadingSurvey: false,
+                surveyError: action.payload,
             };
         case ADD_RESPONSE:
             console.log("adding responses");
@@ -51,6 +59,26 @@ export default surveyReducer = (state = initialState, action) => {
                 stagedResponses: [...state.stagedResponses, ...state.responses],
                 responses: []
             };
+        case CREATE_COMPLETED_SURVEY_LOADING:
+            console.log("creating completed survey")
+            return {
+
+            }
+        case CREATE_COMPLETED_SURVEY_SUCCESS:
+            console.log("creating completed survey")
+            return {
+                ...state,
+                currentCompSurvey: action.payload,
+                compSurveyLoading: false,
+                compSurveyError: null,
+            }
+        case CREATE_COMPLETED_SURVEY_FAILURE:
+            console.log("creating completed survey")
+            return {
+                ...state,
+                compSurveyLoading: false,
+                CompSurveyError: action.payload
+            }
         default:
             return state;
     }
