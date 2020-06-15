@@ -9,15 +9,15 @@ import { useDispatch } from "react-redux";
 import { saveUser } from '../actions/userActions';
 
 const Register = ({ route, navigation }) => {
-    const { user } = route.params;
-    const { zones } = route.params;
+  const { user } = route.params;
+  const { zones } = route.params;
 
-    const [userInfo, setUserInfo] = useState(user);
+  const [userInfo, setUserInfo] = useState(user);
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
 
-    const handleSubmit = (user) => {
+  const handleSubmit = (user) => {
         axios
             .post("https://care-for-life.herokuapp.com/api/workers", user)
             .then((res) => {

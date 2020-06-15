@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, AsyncStorage } from "react-native";
 import styles from "../styles";
-import axios from 'axios';
+import axios from "axios";
 import CustomButton from "../components/Button";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveUser } from '../actions/userActions'
@@ -15,8 +15,10 @@ export default function HomeScreen({ navigation }) {
   const dispatch = useDispatch();
 
   const getIdToken = async () => {
-    return await AsyncStorage.getItem('id_token')
-  }
+    return await AsyncStorage.getItem("id_token");
+  };
+
+  const chosenFamilies = useSelector((state) => state);
 
   const getRegisteredUserInfo = () => {
     axios.get('https://care-for-life.herokuapp.com/api/workers')
@@ -50,12 +52,13 @@ export default function HomeScreen({ navigation }) {
           console.log('already registered')
         }
       })
-      .catch(err => console.log(err.message))
-  }
+      .catch((err) => console.log(err.message));
+  };
 
   useEffect(() => {
-    getUserInfo()
-  }, [])
+    console.log("*****************", chosenFamilies);
+    getUserInfo();
+  }, []);
 
   return (
     <View style={styles.screen}>
