@@ -9,7 +9,6 @@ import { saveUser } from '../actions/userActions'
 export default function HomeScreen({ navigation }) {
 
   const [email, setEmail] = useState('')
-  const [user, setUser] = useState({})
 
   const dispatch = useDispatch();
 
