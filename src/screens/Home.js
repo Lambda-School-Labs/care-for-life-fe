@@ -23,13 +23,9 @@ export default function HomeScreen({ navigation }) {
   const getRegisteredUserInfo = () => {
     axios.get('https://care-for-life.herokuapp.com/api/workers')
       .then(res => {
-        console.log('****')
-        console.log('array of users', res.data)
         const currentUser = res.data.filter((e, i) => e.email === email)
         setUser(currentUser[0])
-        console.log('CURRENTUSER', currentUser)
         dispatch(saveUser(user))
-        console.log('stored user from redux *', storedUser)
       })
       .catch(err => console.log(err))
   }
