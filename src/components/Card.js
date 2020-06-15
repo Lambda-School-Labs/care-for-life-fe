@@ -2,14 +2,11 @@ import React from "react";
 import { TouchableOpacity, Image, Text, View } from "react-native";
 import cardStyles from "../styles/Card";
 
-export default function CustomCardFamily({ title, onPress }) {
+export default function CustomCard({ title, onPress, source }) {
   return (
     <View style={cardStyles.cardContainer}>
       <TouchableOpacity onPress={onPress} style={cardStyles.card}>
-        <Image
-          style={cardStyles.cardImage}
-          source={require("../images/family.png")}
-        />
+        <Image style={cardStyles.cardImage} source={source} />
         <Text style={cardStyles.cardText}>{title}</Text>
       </TouchableOpacity>
     </View>
