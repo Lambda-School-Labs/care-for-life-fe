@@ -11,7 +11,6 @@ export default function HomeScreen({ navigation }) {
   const [email, setEmail] = useState('')
   const [user, setUser] = useState({})
 
-  const storedUser = useSelector(state => state.userReducer)
   const dispatch = useDispatch();
 
   const getIdToken = async () => {
@@ -22,11 +21,11 @@ export default function HomeScreen({ navigation }) {
 
   const getRegisteredUserInfo = () => {
     axios.get('https://care-for-life.herokuapp.com/api/workers')
-      .then(res => {
-        const currentUser = res.data.filter((e, i) => e.email === email)
-        setUser(currentUser[0])
-        dispatch(saveUser(user))
+      .then(async res => {
+        const currentUser = await res.data.filter((e, i) => e.email === email)
+        await dispatch(saveUser(currentUser[0]))
       })
+
       .catch(err => console.log(err))
   }
 
