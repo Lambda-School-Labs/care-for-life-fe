@@ -21,15 +21,12 @@ export default function HomeScreen({ navigation }) {
   const getRegisteredUserInfo = () => {
     axios.get('https://care-for-life.herokuapp.com/api/workers')
       .then(res => {
+        console.log('****')
+        console.log('array of users', res.data)
         const currentUser = res.data.filter((e, i) => e.email === email)
         setUser(currentUser[0])
-        // console.log('CURRENTUSER', user)
-        dispatch(saveUser({
-          id: user.id,
-          community_id: user.community_id,
-          zone_id: user.zone_id,
-          email: user.email
-        }))
+        console.log('CURRENTUSER', currentUser)
+        dispatch(saveUser(user))
         console.log('stored user from redux *', storedUser)
       })
       .catch(err => console.log(err))
@@ -57,7 +54,7 @@ export default function HomeScreen({ navigation }) {
   }
 
   useEffect(() => {
-    getUserInfo();
+    getUserInfo()
   }, [])
 
   return (

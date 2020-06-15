@@ -5,8 +5,8 @@ import Button from "../components/Button";
 import axios from "axios";
 import styles from "../styles";
 import pickerStyles from "../styles/Picker";
-import { useSelector, useDispatch } from "react-redux";
-import { saveUser, saveId } from '../actions/userActions';
+import { useDispatch } from "react-redux";
+import { saveUser } from '../actions/userActions';
 
 const Register = ({ route, navigation }) => {
     const { user } = route.params;
@@ -14,27 +14,15 @@ const Register = ({ route, navigation }) => {
 
     const [userInfo, setUserInfo] = useState(user);
 
-    const storedUser = useSelector(state => state.userReducer);
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     console.log("***user", user);
-    //     console.log("***zones", zones);
-
-    // }, []);
 
     const handleSubmit = (user) => {
         axios
             .post("https://care-for-life.herokuapp.com/api/workers", user)
             .then((res) => {
-                // console.log('from the post request', res.data);
-                dispatch(saveUser({
-                    id: res.data.id,
-                    community_id: res.data.community_id,
-                    zone_id: res.data.zone_id,
-                    email: res.data.email
-                }))
-                console.log('stored user from redux with id', storedUser)
+                console.log('from the post request', res.data);
+                dispatch(saveUser(res.data))
             })
             .catch((err) => console.log(err.message));
     };
@@ -54,7 +42,6 @@ const Register = ({ route, navigation }) => {
             <Button
                 title="submit"
                 onPress={() => {
-                    // console.log("*********", userInfo);
                     handleSubmit(userInfo);
                     navigation.navigate("Home")
                 }}

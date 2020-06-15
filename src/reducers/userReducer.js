@@ -20,6 +20,7 @@ export default (state = initialState, action) => {
       console.log("logging out");
       return state;
     case SAVE_USER:
+      console.log('action.payload', action.payload)
       return {
         ...state.user,
         email: action.payload.email,
@@ -27,11 +28,6 @@ export default (state = initialState, action) => {
         community_id: action.payload.community_id,
         user_id: action.payload.id
       };
-    // case SAVE_ID:
-    //   return {
-    //     ...state.user,
-    //     user_id: action.payload
-    //   }
     default:
       return state;
   }
