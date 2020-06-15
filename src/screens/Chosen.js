@@ -9,14 +9,15 @@ import CustomButton from "../components/Button";
 const mapStateToProps = (state) => {
     // console.log("family state", state.familyReducer.families)
     return {
-        chosenFamilies: state.familyReducer.chosenFamilies
+        chosenFamilies: state.familyReducer.chosenFamilies,
+        stagedResponses: state.surveyReducer.stagedResponses
     };
 };
 
-function Chosen({ navigation, chosenFamilies, setCurrentFam }) {
+function Chosen({ navigation, chosenFamilies, setCurrentFam, stagedResponses }) {
 
     useEffect(() => {
-
+        console.log("staged responses", stagedResponses)
     }, [])
 
     return (

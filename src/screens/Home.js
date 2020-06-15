@@ -22,10 +22,9 @@ export default function HomeScreen({ navigation }) {
 
   const getRegisteredUserInfo = () => {
     axios.get('https://care-for-life.herokuapp.com/api/workers')
-      .then(res => {
-        const currentUser = res.data.filter((e, i) => e.email === email)
-        setUser(currentUser[0])
-        dispatch(saveUser(user))
+      .then(async res => {
+        const currentUser = await res.data.filter((e, i) => e.email === email)
+        await dispatch(saveUser(currentUser[0]))
       })
       .catch(err => console.log(err))
   }
@@ -38,13 +37,7 @@ export default function HomeScreen({ navigation }) {
       }
     })
       .then(res => {
-<<<<<<< HEAD
-        // if (!res.data.isRegistered) {
-        //   navigation.navigate('Register', { userInfo: res.data })
-        // }
-        // navigation.navigate(next page, { user = res.data })
-=======
-        console.log(res.data)
+        // console.log(res.data)
         setEmail(res.data.email)
         if (!res.data.isRegistered) {
           navigation.navigate('Register', { userInfo: res.data })
@@ -52,7 +45,6 @@ export default function HomeScreen({ navigation }) {
           getRegisteredUserInfo()
           console.log('already registered')
         }
->>>>>>> master
       })
       .catch((err) => console.log(err.message));
   };

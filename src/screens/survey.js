@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
     return {
         survey_questions: state.surveyReducer.survey_questions,
         responses: state.surveyReducer.responses,
-        user_id: state.userReducer.user.id,
+        user_id: state.userReducer.user_id,
         currentFamily: state.surveyReducer.currentFamily,
         currentCompSurvey: state.surveyReducer.currentCompSurvey,
         currentIndividual: state.surveyReducer.currentIndividual
@@ -21,8 +21,10 @@ const mapStateToProps = (state) => {
 function Survey({ navigation, fetchSurvey, responses, survey_questions, addResponse, stageResponses, createCompletedSurvey, user_id, currentFamily, currentCompSurvey, currentIndividual }) {
 
     useEffect(() => {
-        console.log("survey_questions", survey_questions)
+        // console.log("survey_questions", survey_questions)
         console.log("current individual", currentIndividual)
+        console.log("responses at start", responses)
+
         createCompletedSurvey({
             survey_id: 1,
             supervisor_id: user_id,
@@ -30,10 +32,11 @@ function Survey({ navigation, fetchSurvey, responses, survey_questions, addRespo
         })
             .then(res => {
                 fetchSurvey()
-                    .then(res => {
+                    .then(async res => {
                         console.log("in the .then")
-                        survey_questions.map(i => {
-                            console.log("survey_question", i)
+                        survey_questions && survey_questions.map(async i => {
+                            // console.log("survey_question", i)
+                            console.log("adding response")
                             addResponse({
                                 question_id: i.id,
                                 response: "Latests and greatest",
@@ -43,12 +46,29 @@ function Survey({ navigation, fetchSurvey, responses, survey_questions, addRespo
                             })
                         })
                     })
+                    .then(res => {
+                        console.log("All responses", responses)
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+            })
+            .catch(err => {
+                console.log(err)
             })
     }, [])
 
     const submit = (e) => {
-        console.log("staging responses")
-        stageResponses(responses);
+        responses.map(i => {
+            axios
+                .post(`https://care-for-life.herokuapp.com/api/responses`, i)
+                .then(res => {
+                    console.log("Its working!", res)
+                })
+                .catch(err => {
+                    console.log("Nope!", err)
+                })
+        })
         navigation.navigate('Chosen Families')
     }
 
@@ -56,14 +76,14 @@ function Survey({ navigation, fetchSurvey, responses, survey_questions, addRespo
         <ScrollView>
             <View style={styles.screen}>
                 <View>
-                    {survey_questions.map(i => {
+                    {survey_questions ? survey_questions.map(i => {
                         return (
                             <View key={i.id}>
                                 <Text>{i.question}?</Text>
                                 <TextInput style={styles.textInput} />
                             </View>
                         )
-                    })}
+                    }) : null}
                     <CustomButton onPress={() => {
                         submit()
                     }} title={"Submit"} />

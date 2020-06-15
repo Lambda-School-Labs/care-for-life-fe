@@ -14,13 +14,14 @@ const mapStateToProps = (state) => {
     };
 };
 
-function FamilyMembers({ navigation, route, setCurrentIndividual, currentFam }) {
+function FamilyMembers({ navigation, route, setCurrentIndividual, currentFam, stagedResponses }) {
 
     const { members } = route.params;
     const { name } = route.params;
 
     useEffect(() => {
         console.log("current family", currentFam.family_name)
+        console.log("staged responses", stagedResponses)
     }, [])
 
     return (

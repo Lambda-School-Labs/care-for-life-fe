@@ -50,6 +50,7 @@ export default surveyReducer = (state = initialState, action) => {
             };
         case ADD_RESPONSE:
             console.log("adding responses");
+            console.log("this is payload response", action.payload)
             return {
                 ...state,
                 responses: [...state.responses, action.payload]
@@ -58,17 +59,17 @@ export default surveyReducer = (state = initialState, action) => {
             console.log("staging responses");
             return {
                 ...state,
-                stagedResponses: [...state.stagedResponses, ...state.responses],
+                stagedResponses: state.responses,
                 responses: []
             };
         case SET_CURRENT_FAM:
-            console.log("staging responses");
+            console.log("setting current fam");
             return {
                 ...state,
                 currentFamily: action.payload
             };
         case SET_CURRENT_INDIVIDUAL:
-            console.log("staging responses");
+            console.log("setting current individual");
             return {
                 ...state,
                 currentIndividual: action.payload
@@ -79,7 +80,8 @@ export default surveyReducer = (state = initialState, action) => {
 
             }
         case CREATE_COMPLETED_SURVEY_SUCCESS:
-            console.log("creating completed survey")
+            console.log("created completed survey")
+            console.log("comp survey payload:", action.payload)
             return {
                 ...state,
                 currentCompSurvey: action.payload,
@@ -87,7 +89,7 @@ export default surveyReducer = (state = initialState, action) => {
                 compSurveyError: null,
             }
         case CREATE_COMPLETED_SURVEY_FAILURE:
-            console.log("creating completed survey")
+            console.log("creating completed survey failed")
             return {
                 ...state,
                 compSurveyLoading: false,

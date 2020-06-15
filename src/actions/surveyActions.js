@@ -59,16 +59,18 @@ export const createCompSurveyFailure = (err) => ({
 })
 
 export function createCompletedSurvey(data) {
-    console.log("using fetchSurvey")
     return function (dispatch) {
         dispatch(createCompSurveyLoading()); ///Loading
+        console.log("post data:", data)
 
         return axios
-            .get(`https://care-for-life.herokuapp.com/api/completedSurveys`, data)
+            .post(`https://care-for-life.herokuapp.com/api/completedSurveys`, data)
             .then((response) => {
+                console.log("created successfully")
                 dispatch(createCompSurveySuccess(response.data)); /// Successfully got data
             })
             .catch((error) => {
+                console.log("not created", error)
                 dispatch(createCompSurveyFailure(error));
             });
     };
