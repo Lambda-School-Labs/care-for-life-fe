@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Button, ScrollView } from "react-native";
 import styles from "../styles";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { getFamilies, setChosenFamilies } from "../actions/familyActions";
 import CustomButton from "../components/Button";
 
@@ -10,13 +10,15 @@ const mapStateToProps = (state) => {
     return {
         families: state.familyReducer.families,
         isLoading: state.familyReducer.isLoading,
-        error: state.familyReducer.error,
+        error: state.familyReducer.error
     };
 };
 
 function Families({ navigation, getFamilies, isLoading, error, families, setChosenFamilies }) {
 
     const [chosen, setChosen] = useState([])
+
+    const responses = useSelector(state => state.surveyReducer.responses);
 
     useEffect(() => {
         getFamilies();

@@ -1,5 +1,7 @@
 import axios from "axios";
 
+export const CHANGE_RESPONSE = 'CHANGE_RESPONSE';
+export const RESET_RESPONSES = 'RESET_RESPONSES';
 export const GET_SURVEY_LOADING = 'GET_SURVEY_LOADING';
 export const GET_SURVEY_SUCCESS = 'GET_SURVEY_SUCCESS';
 export const GET_SURVEY_FAILURE = 'GET_SURVEY_FAILURE';
@@ -10,6 +12,13 @@ export const SET_CURRENT_INDIVIDUAL = 'SET_CURRENT_INDIVIDUAL';
 export const CREATE_COMPLETED_SURVEY_LOADING = 'CREATE_COMPLETED_SURVEY_LOADING';
 export const CREATE_COMPLETED_SURVEY_SUCCESS = 'CREATE_COMPLETED_SURVEY_SUCCESS';
 export const CREATE_COMPLETED_SURVEY_FAILURE = 'CREATE_COMPLETED_SURVEY_FAILURE';
+
+/////////////////////// RESETS  /////////////////////////////////
+
+export const resetResponses = () => ({
+    type: RESET_RESPONSES,
+    payload: []
+})
 
 export const getSurveyLoading = () => ({
     type: GET_SURVEY_LOADING

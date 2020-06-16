@@ -1,4 +1,5 @@
 import {
+    RESET_RESPONSES,
     GET_SURVEY_SUCCESS,
     GET_SURVEY_LOADING,
     GET_SURVEY_FAILURE,
@@ -15,10 +16,10 @@ let initialState = {
     currentFamily: null,
     currentIndividual: null,
     currentCompSurvey: null,
-    survey_questions: [],
     stagedResponses: [],
-    responses: [],
+    survey_questions: [],
     surveyError: null,
+    responses: [],
     loadingSurvey: false,
     compSurveyLoading: false,
     compSurveyError: null
@@ -26,20 +27,24 @@ let initialState = {
 
 export default surveyReducer = (state = initialState, action) => {
     switch (action.type) {
+        case RESET_RESPONSES:
+            console.log("resetting responses");
+            return {
+                ...state,
+                responses: action.payload
+            };
         case GET_SURVEY_LOADING:
             console.log("loading survey");
             return {
                 ...state,
-                loadingSurvey: true,
-                surveyError: null,
+                loadingSurvey: true
             };
         case GET_SURVEY_SUCCESS:
             console.log("loading survey success");
             return {
                 ...state,
                 survey_questions: action.payload,
-                loadingSurvey: false,
-                surveyError: null,
+                loadingSurvey: false
             };
         case GET_SURVEY_FAILURE:
             console.log("loading survey failed");
@@ -55,13 +60,12 @@ export default surveyReducer = (state = initialState, action) => {
                 ...state,
                 responses: [...state.responses, action.payload]
             };
-        // case STAGE_RESPONSES:
-        //     console.log("staging responses");
-        //     return {
-        //         ...state,
-        //         stagedResponses: state.responses,
-        //         responses: []
-        //     };
+        case STAGE_RESPONSES:
+            console.log("staging responses");
+            return {
+                ...state,
+                stagedResponses: [...state.stagedResponses, ...action.payload]
+            };
         case SET_CURRENT_FAM:
             console.log("setting current fam");
             return {

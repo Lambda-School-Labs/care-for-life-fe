@@ -3,7 +3,7 @@ import { View, Text, Button, AsyncStorage, ScrollView } from "react-native";
 import styles from "../styles";
 import { connect } from "react-redux";
 import { getFamilies, setChosenFamilies } from "../actions/familyActions";
-import { setCurrentFam } from "../actions/surveyActions";
+import { setCurrentFam, resetResponses } from "../actions/surveyActions";
 import CustomButton from "../components/Button";
 
 const mapStateToProps = (state) => {
@@ -14,10 +14,10 @@ const mapStateToProps = (state) => {
     };
 };
 
-function Chosen({ navigation, chosenFamilies, setCurrentFam, stagedResponses }) {
+function Chosen({ navigation, chosenFamilies, setCurrentFam, stagedResponses, resetResponses }) {
 
     useEffect(() => {
-        console.log("staged responses", stagedResponses)
+
     }, [])
 
     return (
@@ -39,4 +39,4 @@ function Chosen({ navigation, chosenFamilies, setCurrentFam, stagedResponses }) 
     );
 }
 
-export default connect(mapStateToProps, { setChosenFamilies, setCurrentFam })(Chosen);
+export default connect(mapStateToProps, { resetResponses, setChosenFamilies, setCurrentFam })(Chosen);

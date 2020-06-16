@@ -4,13 +4,12 @@ import { View, Text, Button, AsyncStorage, ScrollView, TextInput } from "react-n
 import { Picker } from "@react-native-community/picker";
 import styles from "../styles";
 import { connect } from "react-redux";
-import { fetchSurvey, addResponse, stageResponses, createCompletedSurvey } from "../actions/surveyActions";
+import { fetchSurvey, addResponse, stageResponses, createCompletedSurvey, resetResponses } from "../actions/surveyActions";
 import CustomButton from "../components/Button";
 
 const mapStateToProps = (state) => {
     return {
         survey_questions: state.surveyReducer.survey_questions,
-        responses: state.surveyReducer.responses,
         user_id: state.userReducer.user_id,
         currentFamily: state.surveyReducer.currentFamily,
         currentCompSurvey: state.surveyReducer.currentCompSurvey,
@@ -18,12 +17,14 @@ const mapStateToProps = (state) => {
     };
 };
 
-function Survey({ navigation, fetchSurvey, responses, survey_questions, addResponse, stageResponses, createCompletedSurvey, user_id, currentFamily, currentCompSurvey, currentIndividual }) {
+function Survey({ navigation, fetchSurvey, survey_questions, stageResponses, createCompletedSurvey, user_id, currentFamily, currentCompSurvey, currentIndividual }) {
+
+    const [responses, setResponses] = useState([])
 
     useEffect(() => {
-        // console.log("survey_questions", survey_questions)
         console.log("current individual", currentIndividual)
-        console.log("responses at start", responses)
+        let resp = [];
+
 
         createCompletedSurvey({
             survey_id: 1,
@@ -37,17 +38,21 @@ function Survey({ navigation, fetchSurvey, responses, survey_questions, addRespo
                         survey_questions && survey_questions.map(async i => {
                             // console.log("survey_question", i)
                             console.log("adding response")
-                            addResponse({
-                                question_id: i.id,
-                                response: "Latests and greatest",
-                                completed_survey_id: currentCompSurvey.id,
-                                family_id: currentFamily.id,
-                                individual_id: currentIndividual ? currentIndividual.id : null
-                            })
+                            // console.log(resp)
+                            return resp.push(
+                                {
+                                    question_id: i.id,
+                                    response: "",
+                                    completed_survey_id: currentCompSurvey.id,
+                                    family_id: currentFamily.id,
+                                    individual_id: currentIndividual ? currentIndividual.id : null
+                                })
+
                         })
+
                     })
                     .then(res => {
-                        console.log("All responses", responses)
+                        setResponses(resp)
                     })
                     .catch(err => {
                         console.log(err)
@@ -58,17 +63,8 @@ function Survey({ navigation, fetchSurvey, responses, survey_questions, addRespo
             })
     }, [])
 
-    const submit = (e) => {
-        responses.map(i => {
-            axios
-                .post(`https://care-for-life.herokuapp.com/api/responses`, i)
-                .then(res => {
-                    console.log("Its working!", res)
-                })
-                .catch(err => {
-                    console.log("Nope!", err)
-                })
-        })
+    const submit = async (e) => {
+        stageResponses(responses)
         navigation.navigate('Chosen Families')
     }
 
@@ -76,11 +72,21 @@ function Survey({ navigation, fetchSurvey, responses, survey_questions, addRespo
         <ScrollView>
             <View style={styles.screen}>
                 <View>
-                    {survey_questions ? survey_questions.map(i => {
+                    {survey_questions ? survey_questions.map((i, index) => {
                         return (
                             <View key={i.id}>
                                 <Text>{i.question}?</Text>
-                                <TextInput style={styles.textInput} />
+                                <TextInput style={styles.textInput} onChangeText={(e) => {
+                                    // array[index].response = e
+                                    console.log("target: ", responses[index])
+                                    setResponses([
+                                        ...responses,
+                                        responses[index].response = e
+                                    ])
+
+                                    // console.log("current state:", array[index].response)
+                                    console.log("value:", e)
+                                }} />
                             </View>
                         )
                     }) : null}
@@ -93,4 +99,4 @@ function Survey({ navigation, fetchSurvey, responses, survey_questions, addRespo
     );
 }
 
-export default connect(mapStateToProps, { fetchSurvey, addResponse, stageResponses, createCompletedSurvey })(Survey);
+export default connect(mapStateToProps, { fetchSurvey, addResponse, stageResponses, createCompletedSurvey, resetResponses })(Survey);
