@@ -16,7 +16,7 @@ const mapStateToProps = (state) => {
 function FamilySurvey({ fetchSurvey, survey_questions, role }) {
 
     // const role = useSelector((state) => console.log(state));
-
+    // role names need updating
     useEffect(() => {
       console.log("on survey page");
       console.log("survey questions are here", survey_questions);
