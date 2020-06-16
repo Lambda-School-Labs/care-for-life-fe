@@ -4,65 +4,49 @@ import styles from "../styles";
 import { connect } from "react-redux";
 import CustomCard from "../components/Card";
 import CustomButton from "../components/Button";
+import { setCurrentIndividual, resetResponses } from "../actions/surveyActions";
 
 const mapStateToProps = (state) => {
-  // console.log("family state", state.familyReducer.families)
-  return {
-    chosenFamilies: state.familyReducer.chosenFamilies,
-  };
+    // console.log("family state", state.familyReducer.families)
+    return {
+        chosenFamilies: state.familyReducer.chosenFamilies,
+        stagedResponses: state.surveyReducer.stagedResponses,
+        currentFam: state.surveyReducer.currentFamily,
+        responses: state.surveyReducer.responses
+    };
 };
 
-function FamilyMembers({ navigation, route }) {
-  const [family, setFamily] = useState({});
-  const [member, setMember] = useState({});
+function FamilyMembers({ navigation, route, setCurrentIndividual, responses, currentFam, stagedResponses, resetResponses }) {
 
-  const { members } = route.params;
-  const { name } = route.params;
+    const { members } = route.params;
+    const { name } = route.params;
 
-  useEffect(() => {
-    console.log("famId:", AsyncStorage.getItem("famId"));
-    console.log("family name:", name);
-    // console.log("family set", family)
-    // chosenFamilies.map(i => {
-    //     if (i.id === AsyncStorage.getItem('famId')) {
-    //         setFamily(i);
-    //     } else {
-    //         return null
-    //     }
-    // })
-    // console.log(chosenFamilies)
-  }, [family]);
+    useEffect(() => {
+        resetResponses()
+        console.log("staged responses:", stagedResponses.length);
+    }, [])
 
-  const handleChange = (e) => {
-    setMember(e);
-    navigation.navigate("Survey");
-  };
+    useEffect(() => {
+        console.log("responses:", responses.length)
+    }, [responses])
 
-  const famSurvey = () => {
-    console.log(family, '<-- family');
-    navigation.navigate("famSurvey");
-  };
-
-  return (
-    <ScrollView>
-      <View style={styles.screen}>
-      <CustomButton onPress={famSurvey} title={"Family Survey"} /> {/* family specific surveys */}
-        <View>
-          <Text>{name} Family Members:</Text>
-          {members.map((i) => {
-            return (
-              <CustomCard
-                key={i.id}
-                onPress={() => handleChange(i)}
-                title={`${i.first_name} ${i.last_name}`}
-                source={require("../images/person.png")}
-              />
-            );
-          })}
-        </View>
-      </View>
-    </ScrollView>
-  );
+    return (
+        <ScrollView>
+            <View style={styles.screen}>
+                <View>
+                    <Text>{name} Family Members:</Text>
+                    {members.map(i => {
+                        return (
+                            <CustomButton key={i.id} onPress={() => {
+                                setCurrentIndividual(i)
+                                navigation.navigate("Survey")
+                            }} title={`${i.first_name} ${i.last_name}`} />
+                        )
+                    })}
+                </View>
+            </View>
+        </ScrollView>
+    );
 }
 
-export default connect(mapStateToProps, {})(FamilyMembers);
+export default connect(mapStateToProps, { setCurrentIndividual, resetResponses })(FamilyMembers);

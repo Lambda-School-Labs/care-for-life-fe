@@ -30,14 +30,13 @@ export default function HomeScreen({ navigation }) {
 
   const getUserInfo = async () => {
     const idToken = await getIdToken()
-    console.log('id token', idToken)
     axios.get(`https://care-for-life.herokuapp.com/auth/login`, {
       headers: {
         Authorization: `${idToken}`
       }
     })
       .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         setEmail(res.data.email)
         if (!res.data.isRegistered) {
           navigation.navigate('Register', { userInfo: res.data })
