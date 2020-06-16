@@ -16,7 +16,7 @@ function Survey({ fetchSurvey, survey_questions }) {
   useEffect(() => {
     console.log("on survey page");
     console.log("survey questions are here", survey_questions);
-    fetchSurvey();
+    fetchSurvey(1);
   }, []);
 
   return (

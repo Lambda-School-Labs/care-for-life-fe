@@ -17,13 +17,13 @@ export const getSurveyFailure = () => ({
     type: GET_SURVEY_FAILURE
 })
 
-export function fetchSurvey() {
+export function fetchSurvey(survey_id) {
     console.log("using fetchSurvey")
     return function (dispatch) {
         dispatch(getSurveyLoading()); ///Loading
 
         return axios
-            .get(`https://care-for-life.herokuapp.com/api/surveys/1/questions`)
+            .get(`https://care-for-life.herokuapp.com/api/surveys/${survey_id}/questions`)
             .then((response) => {
                 // console.log("questions", response.data);
                 dispatch(getSurveySuccess(response.data.sq)); /// Successfully got data

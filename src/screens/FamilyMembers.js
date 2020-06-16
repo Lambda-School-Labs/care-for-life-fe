@@ -3,6 +3,7 @@ import { View, Text, Button, AsyncStorage, ScrollView } from "react-native";
 import styles from "../styles";
 import { connect } from "react-redux";
 import CustomCard from "../components/Card";
+import CustomButton from "../components/Button";
 
 const mapStateToProps = (state) => {
   // console.log("family state", state.familyReducer.families)
@@ -37,9 +38,15 @@ function FamilyMembers({ navigation, route }) {
     navigation.navigate("Survey");
   };
 
+  const famSurvey = () => {
+    console.log(family, '<-- family');
+    navigation.navigate("famSurvey");
+  };
+
   return (
     <ScrollView>
       <View style={styles.screen}>
+      <CustomButton onPress={famSurvey} title={"Family Survey"} /> {/* family specific surveys */}
         <View>
           <Text>{name} Family Members:</Text>
           {members.map((i) => {

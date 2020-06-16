@@ -12,6 +12,7 @@ import Register2 from "../forms/Register2";
 import Chosen from "../screens/Chosen";
 import FamilyMembers from "../screens/FamilyMembers";
 import Survey from "../screens/survey";
+import FamilySurveys from "../screens/FamilySurvey.js";
 
 const Stack = createStackNavigator();
 
@@ -80,6 +81,11 @@ export default function Routes() {
         <Stack.Screen
           name="Survey"
           component={Survey}
+          options={{ title: "Survey" }}
+        />
+        <Stack.Screen
+          name="famSurvey"
+          component={FamilySurveys}
           options={{ title: "Survey" }}
         />
       </Stack.Navigator>
