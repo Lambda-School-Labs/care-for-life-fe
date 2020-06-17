@@ -5,9 +5,8 @@ import * as WebBrowser from "expo-web-browser";
 import { ISSUER } from "react-native-dotenv";
 import config from "../okta/index";
 import styles from "../styles";
-import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import * as Actions from "../actions/userActions";
+import { resetResponses } from "../actions/surveyActions";
 import CustomButton from "../components/Button";
 
 const mapStateToProps = (state) => {
@@ -16,17 +15,13 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators(Actions, dispatch);
-};
-
 //configure as web platform to allow for Okta redirects
 if (Platform.OS === "web") {
     WebBrowser.maybeCompleteAuthSession();
 }
 const useProxy = true;
 
-function Login({ navigation }) {
+function Login({ navigation, resetResponses }) {
     const [validToken, setValidToken] = useState();
     const [idToken, setIdToken] = useState('');
     const [accessToken, setAccessToken] = useState('');
@@ -54,21 +49,20 @@ function Login({ navigation }) {
                 if (token !== null) {
                     //Check if token is valid
                     //Ping Backend to validate token
-
                     console.log('already logged in');
                     setValidToken(true);
                     //Navigates to Home Screen
                     navigation.navigate('Home', { idToken: idToken, accessToken: accessToken });
                 } else {
                     //Gets New Token
-                    // console.log('config', config);
+                    // console.log('config:', config);
                     await promptAsync({ useProxy }).then((res) => {
                         console.log('res', res)
                         AsyncStorage.setItem("id_token", res.params.id_token);
                         setValidToken(true);
                         setIdToken(res.params.id_token);
                         setAccessToken(res.params.access_token)
-                        // console.log(accessToken)
+                        // console.log("access token:", accessToken)
                         //navigates to home screen
                         navigation.navigate('Home', { idToken: idToken, accessToken: accessToken });
                     });
@@ -79,6 +73,7 @@ function Login({ navigation }) {
 
     const handleLogout = () => {
         console.log("logging out");
+        resetResponses();
         Alert.alert(
             "Logging Out",
             "Are you sure you want to log out? \n You won't be able to sign back in while offline.",
@@ -119,4 +114,4 @@ function Login({ navigation }) {
     );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, { resetResponses })(Login);

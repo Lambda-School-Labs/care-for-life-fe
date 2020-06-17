@@ -5,7 +5,6 @@ import familyReducer from "../reducers/familiesReducer";
 import familyFormReducer from "../reducers/familyFormReducer";
 import surveyReducer from "../reducers/surveyReducer";
 import { persistReducer } from "redux-persist";
-import { createLogger } from "redux-logger";
 import AsyncStorage from "@react-native-community/async-storage";
 
 const rootReducer = combineReducers({
@@ -30,7 +29,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = createStore(
   persistedReducer,
-  applyMiddleware(thunk, createLogger())
+  applyMiddleware(thunk)
 );
 
 export default store;

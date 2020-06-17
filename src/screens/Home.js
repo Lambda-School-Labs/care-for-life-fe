@@ -16,8 +16,6 @@ export default function HomeScreen({ navigation }) {
     return await AsyncStorage.getItem("id_token");
   };
 
-  const chosenFamilies = useSelector((state) => state);
-
   const getRegisteredUserInfo = () => {
     axios.get('https://care-for-life.herokuapp.com/api/workers')
       .then(async res => {
@@ -30,14 +28,12 @@ export default function HomeScreen({ navigation }) {
 
   const getUserInfo = async () => {
     const idToken = await getIdToken()
-    console.log('id token', idToken)
     axios.get(`https://care-for-life.herokuapp.com/auth/login`, {
       headers: {
         Authorization: `${idToken}`
       }
     })
       .then(res => {
-        console.log(res.data)
         setEmail(res.data.email)
         if (!res.data.isRegistered) {
           navigation.navigate('Register', { userInfo: res.data })
@@ -50,7 +46,7 @@ export default function HomeScreen({ navigation }) {
   };
 
   useEffect(() => {
-    console.log("*****************", chosenFamilies);
+    /// gets all of the users info
     getUserInfo();
   }, []);
 
