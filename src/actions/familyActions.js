@@ -7,34 +7,34 @@ export const SET_CHOSEN_FAMILIES = "SET_CHOSEN_FAMILIES";
 export const familiesLoading = () => ({ type: GET_FAMILIES_LOADING });
 
 export const getFamiliesSuccess = (data) => ({
-    type: GET_FAMILIES_SUCCESS,
-    payload: data,
+  type: GET_FAMILIES_SUCCESS,
+  payload: data,
 });
 
 export const getFamiliesFailure = (error) => ({
-    type: GET_FAMILIES_FAILURE,
-    payload: error,
+  type: GET_FAMILIES_FAILURE,
+  payload: error,
 });
 
 export const setChosenFamilies = (families) => ({
-    type: SET_CHOSEN_FAMILIES,
-    payload: families
-})
+  type: SET_CHOSEN_FAMILIES,
+  payload: families,
+});
 
 export function getFamilies() {
-    return function (dispatch) {
-        dispatch(familiesLoading()); ///Loading
+  return function (dispatch) {
+    dispatch(familiesLoading()); ///Loading
 
-        return axios
-            .get(`https://care-for-life.herokuapp.com/api/families/zone/1`)
-            .then((response) => {
-                // console.log("families", response.data);
-                console.log(response.data)
-                dispatch(getFamiliesSuccess(response.data)); /// Successfully got data
-            })
-            .catch((error) => {
-                // console.log("the data was not return", error);
-                dispatch(getFamiliesFailure(error));
-            });
-    };
+    return axios
+      .get(`https://care-for-life.herokuapp.com/api/families/zone/1`)
+      .then((response) => {
+        // console.log("families", response.data);
+        console.log(response.data);
+        dispatch(getFamiliesSuccess(response.data)); /// Successfully got data
+      })
+      .catch((error) => {
+        // console.log("the data was not return", error);
+        dispatch(getFamiliesFailure(error));
+      });
+  };
 }

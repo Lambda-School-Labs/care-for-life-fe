@@ -11,6 +11,7 @@ import Register from "../forms/RegisterForm";
 import Register2 from "../forms/Register2";
 import Chosen from "../screens/Chosen";
 import FamilyMembers from "../screens/FamilyMembers";
+import MemberForm from "../forms/MemberForm";
 import Survey from "../screens/survey";
 
 const Stack = createStackNavigator();
@@ -75,7 +76,23 @@ export default function Routes() {
         <Stack.Screen
           name="Family Members"
           component={FamilyMembers}
-          options={{ title: "Family Members" }}
+          options={({ navigation }) => ({
+            title: "Family Members Screen",
+            headerRight: () => (
+              <View style={{ marginRight: 25 }}>
+                <MaterialIcons
+                  name="add"
+                  size={25}
+                  onPress={() => navigation.navigate("MemberForm")}
+                />
+              </View>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="MemberForm"
+          component={MemberForm}
+          options={{ title: "Add Family Member" }}
         />
         <Stack.Screen
           name="Survey"
