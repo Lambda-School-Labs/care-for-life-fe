@@ -1,24 +1,42 @@
 import React, { useEffect } from "react";
 import { View, Text, AsyncStorage, ScrollView } from "react-native";
+import axios from "axios";
 import styles from "../styles";
 import { connect } from "react-redux";
 import { getFamilies, setChosenFamilies } from "../actions/familyActions";
-import { setCurrentFam, resetResponses } from "../actions/surveyActions";
+import { setCurrentFam, resetResponses, resetStagedResponses } from "../actions/surveyActions";
 import CustomButton from "../components/Button";
 
 const mapStateToProps = (state) => {
-    // console.log("family state", state.familyReducer.families)
     return {
         chosenFamilies: state.familyReducer.chosenFamilies,
         stagedResponses: state.surveyReducer.stagedResponses
     };
 };
 
-function Chosen({ navigation, chosenFamilies, setCurrentFam, stagedResponses, resetResponses }) {
+function Chosen({ navigation, chosenFamilies, setCurrentFam, stagedResponses, resetResponses, resetStagedResponses }) {
 
     useEffect(() => {
-
+        resetResponses();
     }, [])
+
+    const submitAllResponses = async () => {
+        await stagedResponses.map(i => {
+            axios
+                .post(`https://care-for-life.herokuapp.com/api/responses`, i)
+                .then(res => {
+                    console.log("response submitted")
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        })
+    }
+
+    const reset = () => {
+        resetStagedResponses()
+        console.log("Staged Responses:", stagedResponses)
+    }
 
     return (
         <ScrollView>
@@ -34,9 +52,11 @@ function Chosen({ navigation, chosenFamilies, setCurrentFam, stagedResponses, re
                         )
                     })}
                 </View>
+                <CustomButton title={"Submit All"} onPress={submitAllResponses} />
+                <CustomButton title={"Reset Staged Responses"} onPress={reset} />
             </View>
         </ScrollView>
     );
 }
 
-export default connect(mapStateToProps, { resetResponses, setChosenFamilies, setCurrentFam })(Chosen);
+export default connect(mapStateToProps, { resetResponses, setChosenFamilies, setCurrentFam, resetStagedResponses })(Chosen);

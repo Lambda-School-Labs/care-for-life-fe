@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const CHANGE_RESPONSE = 'CHANGE_RESPONSE';
 export const RESET_RESPONSES = 'RESET_RESPONSES';
+export const RESET_STAGED_RESPONSES = 'RESET_STAGED_RESPONSES';
 export const GET_SURVEY_LOADING = 'GET_SURVEY_LOADING';
 export const GET_SURVEY_SUCCESS = 'GET_SURVEY_SUCCESS';
 export const GET_SURVEY_FAILURE = 'GET_SURVEY_FAILURE';
@@ -17,6 +18,11 @@ export const CREATE_COMPLETED_SURVEY_FAILURE = 'CREATE_COMPLETED_SURVEY_FAILURE'
 
 export const resetResponses = () => ({
     type: RESET_RESPONSES,
+    payload: []
+})
+
+export const resetStagedResponses = () => ({
+    type: RESET_STAGED_RESPONSES,
     payload: []
 })
 
