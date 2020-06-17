@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { Picker } from "@react-native-community/picker";
 import Button from "../components/Button";
@@ -9,15 +9,15 @@ import { useDispatch } from "react-redux";
 import { saveUser } from '../actions/userActions';
 
 const Register = ({ route, navigation }) => {
-  const { user } = route.params;
-  const { zones } = route.params;
+    const { user } = route.params;
+    const { zones } = route.params;
 
-  const [userInfo, setUserInfo] = useState(user);
+    const [userInfo, setUserInfo] = useState(user);
 
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
 
-  const handleSubmit = (user) => {
+    const handleSubmit = (user) => {
         axios
             .post("https://care-for-life.herokuapp.com/api/workers", user)
             .then((res) => {
@@ -42,6 +42,7 @@ const Register = ({ route, navigation }) => {
             <Button
                 title="submit"
                 onPress={() => {
+                    // post new user to backend 
                     handleSubmit(userInfo);
                     navigation.navigate("Home")
                 }}

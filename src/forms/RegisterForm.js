@@ -39,7 +39,8 @@ const Register = ({ route, navigation }) => {
     };
 
     useEffect(() => {
-        console.log("user", userInfo);
+        // console.log("user", userInfo);
+        // fetch data to populate registration forms
         getRegisterInfo();
     }, []);
 
@@ -71,6 +72,7 @@ const Register = ({ route, navigation }) => {
             <Button
                 title="Next"
                 onPress={() =>
+                    // pass info to next page as route params
                     navigation.navigate("Register2", { zones: zones, user: user })
                 }
             />
@@ -79,7 +81,3 @@ const Register = ({ route, navigation }) => {
 };
 
 export default Register;
-
-// get user info in props
-// collect role_name, community, then zone
-// store all in a state object to post to backend e
