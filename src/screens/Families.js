@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Button, ScrollView } from "react-native";
 import styles from "../styles";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { getFamilies, setChosenFamilies } from "../actions/familyActions";
 import CustomButton from "../components/Button";
 import CustomCard from "../components/Card";
 
 const mapStateToProps = (state) => {
-    // console.log("family state", state.familyReducer.families)
     return {
         families: state.familyReducer.families,
         isLoading: state.familyReducer.isLoading,
@@ -23,21 +22,20 @@ function Families({
     families,
     setChosenFamilies,
 }) {
+    /// temporary local state for chosen families
     const [chosen, setChosen] = useState([]);
 
     useEffect(() => {
+        /// gets all families in users zone
         getFamilies();
     }, []);
 
+    /// change handler for selecting a family
     const handleChange = (obj) => {
         chosen.includes(obj) ? null : setChosen([...chosen, obj]);
     };
-    const responses = useSelector(state => state.surveyReducer.responses);
 
-    useEffect(() => {
-        getFamilies();
-    }, []);
-
+    /// change handler for unselecting a family
     const handleUnchange = (obj) => {
         setChosen([
             ...chosen.filter((i) => {
@@ -47,6 +45,7 @@ function Families({
     };
 
     const nextScreen = () => {
+        /// stores chosen families in redux store
         setChosenFamilies(chosen);
         navigation.navigate("Chosen Families");
     };

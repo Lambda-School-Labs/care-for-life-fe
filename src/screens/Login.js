@@ -49,21 +49,20 @@ function Login({ navigation, resetResponses }) {
                 if (token !== null) {
                     //Check if token is valid
                     //Ping Backend to validate token
-
                     console.log('already logged in');
                     setValidToken(true);
                     //Navigates to Home Screen
                     navigation.navigate('Home', { idToken: idToken, accessToken: accessToken });
                 } else {
                     //Gets New Token
-                    // console.log('config', config);
+                    // console.log('config:', config);
                     await promptAsync({ useProxy }).then((res) => {
                         console.log('res', res)
                         AsyncStorage.setItem("id_token", res.params.id_token);
                         setValidToken(true);
                         setIdToken(res.params.id_token);
                         setAccessToken(res.params.access_token)
-                        // console.log(accessToken)
+                        // console.log("access token:", accessToken)
                         //navigates to home screen
                         navigation.navigate('Home', { idToken: idToken, accessToken: accessToken });
                     });

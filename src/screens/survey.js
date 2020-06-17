@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios"
+import axios from "axios";
 import { View, Text, Button, AsyncStorage, ScrollView, TextInput } from "react-native";
 import { Picker } from "@react-native-community/picker";
 import styles from "../styles";
@@ -17,21 +17,23 @@ const mapStateToProps = (state) => {
     };
 };
 
-function Survey({ navigation, fetchSurvey, survey_questions, stageResponses, createCompletedSurvey, user_id, currentFamily, currentCompSurvey, currentIndividual, resetResponses }) {
+function Survey({ navigation, fetchSurvey, survey_questions, stageResponses, createCompletedSurvey, user_id, currentFamily, currentCompSurvey, currentIndividual }) {
 
+    /// local state for responses
     const [responses, setResponses] = useState([])
 
     useEffect(() => {
-        console.log("current individual", currentIndividual)
+        /// temporary array for responses
         let resp = [];
 
-
+        /// creating a completed survey to post the responses to
         createCompletedSurvey({
             survey_id: 1,
             supervisor_id: user_id,
             family_id: currentFamily.id
         })
             .then(res => {
+                ///getting survey questions and info
                 fetchSurvey()
                     .then(async res => {
                         console.log("in the .then")
@@ -39,6 +41,7 @@ function Survey({ navigation, fetchSurvey, survey_questions, stageResponses, cre
                             // console.log("survey_question", i)
                             console.log("adding response")
                             // console.log(resp)
+                            /// pushing a response to the temporary response array
                             return resp.push(
                                 {
                                     question_id: i.id,
@@ -52,6 +55,7 @@ function Survey({ navigation, fetchSurvey, survey_questions, stageResponses, cre
 
                     })
                     .then(res => {
+                        /// setting temporary response array to local response state
                         setResponses(resp)
                     })
                     .catch(err => {
@@ -64,6 +68,7 @@ function Survey({ navigation, fetchSurvey, survey_questions, stageResponses, cre
     }, [])
 
     const submit = async (e) => {
+        /// pushes all the local responses to the staged response array
         stageResponses(responses)
         navigation.navigate('Chosen Families')
     }
@@ -77,7 +82,7 @@ function Survey({ navigation, fetchSurvey, survey_questions, stageResponses, cre
                             <View key={i.id}>
                                 <Text>{i.question}?</Text>
                                 <TextInput style={styles.textInput} onChangeText={(e) => {
-                                    console.log("target: ", responses[index])
+                                    /// change handler for responses
                                     setResponses([
                                         ...responses,
                                         responses[index].response = e

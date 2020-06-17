@@ -14,16 +14,21 @@ import {
 } from "../actions/surveyActions.js";
 
 let initialState = {
+    /// current dependant state
     currentFamily: null,
     currentIndividual: null,
     currentCompSurvey: null,
-    stagedResponses: [],
+    /// created completed survey to post responses to
+    compSurveyLoading: false,
+    compSurveyError: null,
+    /// survey questions loaded
     survey_questions: [],
     surveyError: null,
-    responses: [],
     loadingSurvey: false,
-    compSurveyLoading: false,
-    compSurveyError: null
+    /// responses before they are staged
+    responses: [],
+    /// staged responses/ready for map and post
+    stagedResponses: []
 };
 
 export default surveyReducer = (state = initialState, action) => {
@@ -47,28 +52,27 @@ export default surveyReducer = (state = initialState, action) => {
                 loadingSurvey: true
             };
         case GET_SURVEY_SUCCESS:
-            console.log("loading survey success");
+            console.log("survey loaded successfully");
             return {
                 ...state,
                 survey_questions: action.payload,
                 loadingSurvey: false
             };
         case GET_SURVEY_FAILURE:
-            console.log("loading survey failed");
+            console.log("survey failed to load");
             return {
                 ...state,
                 loadingSurvey: false,
                 surveyError: action.payload,
             };
         case ADD_RESPONSE:
-            console.log("adding responses");
-            console.log("this is payload response", action.payload)
+            console.log("adding response");
             return {
                 ...state,
                 responses: [...state.responses, action.payload]
             };
         case STAGE_RESPONSES:
-            console.log("staging responses");
+            console.log("staging response");
             return {
                 ...state,
                 stagedResponses: [...state.stagedResponses, ...action.payload]
@@ -93,7 +97,7 @@ export default surveyReducer = (state = initialState, action) => {
                 compSurveyError: null
             }
         case CREATE_COMPLETED_SURVEY_SUCCESS:
-            console.log("created completed survey")
+            console.log("created completed survey successfully")
             console.log("comp survey payload:", action.payload)
             return {
                 ...state,
@@ -102,7 +106,7 @@ export default surveyReducer = (state = initialState, action) => {
                 compSurveyError: null,
             }
         case CREATE_COMPLETED_SURVEY_FAILURE:
-            console.log("creating completed survey failed")
+            console.log("failed to create completed survey")
             return {
                 ...state,
                 compSurveyLoading: false,

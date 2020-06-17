@@ -16,12 +16,13 @@ const mapStateToProps = (state) => {
     };
 };
 
-function FamilyMembers({ navigation, route, setCurrentIndividual, responses, currentFam, stagedResponses, resetResponses }) {
+function FamilyMembers({ navigation, route, setCurrentIndividual, responses, stagedResponses, resetResponses }) {
 
     const { members } = route.params;
     const { name } = route.params;
 
     useEffect(() => {
+        /// resets the response array to an empty array
         resetResponses()
         console.log("staged responses:", stagedResponses.length);
     }, [])
@@ -38,6 +39,7 @@ function FamilyMembers({ navigation, route, setCurrentIndividual, responses, cur
                     {members.map(i => {
                         return (
                             <CustomButton key={i.id} onPress={() => {
+                                /// sets the individual to whoever is clicked
                                 setCurrentIndividual(i)
                                 navigation.navigate("Survey")
                             }} title={`${i.first_name} ${i.last_name}`} />
