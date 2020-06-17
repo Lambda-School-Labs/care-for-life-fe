@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-function Survey({ navigation, fetchSurvey, survey_questions, stageResponses, createCompletedSurvey, user_id, currentFamily, currentCompSurvey, currentIndividual }) {
+function Survey({ navigation, fetchSurvey, survey_questions, stageResponses, createCompletedSurvey, user_id, currentFamily, currentCompSurvey, currentIndividual, resetResponses }) {
 
     const [responses, setResponses] = useState([])
 
@@ -77,15 +77,11 @@ function Survey({ navigation, fetchSurvey, survey_questions, stageResponses, cre
                             <View key={i.id}>
                                 <Text>{i.question}?</Text>
                                 <TextInput style={styles.textInput} onChangeText={(e) => {
-                                    // array[index].response = e
                                     console.log("target: ", responses[index])
                                     setResponses([
                                         ...responses,
                                         responses[index].response = e
                                     ])
-
-                                    // console.log("current state:", array[index].response)
-                                    console.log("value:", e)
                                 }} />
                             </View>
                         )

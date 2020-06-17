@@ -1,5 +1,6 @@
 import {
     RESET_RESPONSES,
+    RESET_STAGED_RESPONSES,
     GET_SURVEY_SUCCESS,
     GET_SURVEY_LOADING,
     GET_SURVEY_FAILURE,
@@ -32,6 +33,12 @@ export default surveyReducer = (state = initialState, action) => {
             return {
                 ...state,
                 responses: action.payload
+            };
+        case RESET_STAGED_RESPONSES:
+            console.log("resetting staged responses");
+            return {
+                ...state,
+                stagedResponses: action.payload
             };
         case GET_SURVEY_LOADING:
             console.log("loading survey");
