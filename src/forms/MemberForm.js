@@ -48,7 +48,7 @@ const MemberForm = ({ postFamilyMember, navigation }) => {
   const handleChangeFamilyID = (e) => {
     setFamilyMember({
       ...familyMember,
-      first_id: e,
+      family_id: e,
     });
   };
 
