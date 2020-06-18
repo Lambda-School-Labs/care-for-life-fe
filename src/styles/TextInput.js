@@ -5,9 +5,14 @@ export default StyleSheet.create({
     borderWidth: 1,
     width: 200,
     marginBottom: 10,
-    textAlign: "center",
+    textAlign: "left",
+    borderRadius: 1,
   },
   textTitle: {
     textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 20,
+    lineHeight: 30,
+    color: "#626262",
   },
 });

@@ -31,6 +31,11 @@ function Chosen({
     resetResponses();
   }, []);
 
+  useEffect(() => {
+    /// resets the response array to an empty array
+    resetResponses();
+  }, []);
+
   const submitAllResponses = async () => {
     /// mapping over staged responses and posting them to the backend
     await stagedResponses.map((i) => {

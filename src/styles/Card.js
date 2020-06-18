@@ -6,17 +6,22 @@ export default StyleSheet.create({
     marginBottom: 10,
   },
   cardContainer: {
-    marginTop: 20,
+    width: 400,
+    marginTop: 0,
     backgroundColor: "#F5FCFF",
   },
   cardImage: {
-    width: 200,
-    height: 120,
+    width: 159,
+    height: 98.77,
+    borderRadius: 20,
     resizeMode: "contain",
+    marginTop: 25
   },
   cardText: {
     fontSize: 16,
-    textAlign: "center",
-    padding: 10,
+    textAlign: "right",
+    padding: 0,
+
+    
   },
 });

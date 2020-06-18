@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Button, AsyncStorage, Alert, StyleSheet } from "react-native";
+import {
+  View,
+  Button,
+  AsyncStorage,
+  Alert,
+  StyleSheet,
+  Image,
+} from "react-native";
 import * as AuthSession from "expo-auth-session";
 import * as WebBrowser from "expo-web-browser";
 import { ISSUER } from "react-native-dotenv";
@@ -22,9 +29,7 @@ if (Platform.OS === "web") {
 const useProxy = true;
 
 function Login({ navigation, resetResponses }) {
-  const [validToken, setValidToken] = useState();
-  const [idToken, setIdToken] = useState("");
-  const [accessToken, setAccessToken] = useState("");
+  const [validToken, setValidToken] = useState(false);
 
   const discovery = AuthSession.useAutoDiscovery(ISSUER);
 
@@ -47,30 +52,20 @@ function Login({ navigation, resetResponses }) {
       .then(async (token) => {
         console.log("Got Token:", token);
         if (token !== null) {
-          //Check if token is valid
-          //Ping Backend to validate token
+          //check for token
           console.log("already logged in");
           setValidToken(true);
           //Navigates to Home Screen
-          navigation.navigate("Home", {
-            idToken: idToken,
-            accessToken: accessToken,
-          });
+          navigation.navigate("Home");
         } else {
           //Gets New Token
-          // console.log('config:', config);
           await promptAsync({ useProxy }).then((res) => {
+            // response from Okta
             console.log("res", res);
             AsyncStorage.setItem("id_token", res.params.id_token);
             setValidToken(true);
-            setIdToken(res.params.id_token);
-            setAccessToken(res.params.access_token);
-            // console.log("access token:", accessToken)
             //navigates to home screen
-            navigation.navigate("Home", {
-              idToken: idToken,
-              accessToken: accessToken,
-            });
+            navigation.navigate("Home");
           });
         }
       })
@@ -105,6 +100,13 @@ function Login({ navigation, resetResponses }) {
     <View style={styles.screen}>
       {validToken ? (
         <View>
+          <Image
+            source={require("../images/Care4Life.png")}
+            style={{
+              left: 25,
+              bottom: 220,
+            }}
+          />
           <CustomButton
             title="Go to Home"
             onPress={() => navigation.push("Home")}
@@ -113,6 +115,13 @@ function Login({ navigation, resetResponses }) {
         </View>
       ) : (
         <View>
+          <Image
+            source={require("../images/Care4Life.png")}
+            style={{
+              left: 25,
+              bottom: 250,
+            }}
+          />
           <CustomButton title="Login" onPress={handleLogin} />
         </View>
       )}

@@ -14,6 +14,7 @@ import FamilyMembers from "../screens/FamilyMembers";
 import MemberForm from "../forms/MemberForm";
 import Survey from "../screens/survey";
 import FamilySurveys from "../screens/FamilySurvey.js";
+import { Entypo } from "@expo/vector-icons";
 
 const Stack = createStackNavigator();
 
@@ -55,9 +56,10 @@ export default function Routes() {
             title: "Families Screen",
             headerRight: () => (
               <View style={{ marginRight: 25 }}>
-                <MaterialIcons
-                  name="add"
-                  size={25}
+                <Entypo
+                  name="add-user"
+                  size={24}
+                  color="black"
                   onPress={() => navigation.navigate("FamilyForm")}
                 />
               </View>

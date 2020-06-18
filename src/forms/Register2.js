@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { Picker } from "@react-native-community/picker";
 import Button from "../components/Button";
@@ -41,6 +41,7 @@ const Register = ({ route, navigation }) => {
       <Button
         title="submit"
         onPress={() => {
+          // post new user to backend
           handleSubmit(userInfo);
           navigation.navigate("Home");
         }}
