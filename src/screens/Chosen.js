@@ -60,7 +60,12 @@ function Chosen({
     <ScrollView>
       <View style={styles.screen}>
         <View>
-          <Text>Chosen Families:</Text>
+          <Text style={{
+            fontWeight: "bold",
+            fontSize: 20,
+        textAlign: "center",
+            color: "#626262"
+          }}>Chosen Families:</Text>
           {chosenFamilies.map((i) => {
             return (
               <CustomButton

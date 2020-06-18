@@ -18,9 +18,11 @@ export default StyleSheet.create({
     marginTop: 25
   },
   cardText: {
-    fontSize: 16,
+    fontSize: 24,
     textAlign: "right",
     padding: 0,
+    color:"#626262",
+    fontWeight: "bold"
 
     
   },

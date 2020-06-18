@@ -40,7 +40,12 @@ function FamilyMembers({
     <ScrollView>
       <View style={styles.screen}>
         <View>
-          <Text>{name} Family Members:</Text>
+        <Text style={{
+            fontWeight: "bold",
+            fontSize: 20,
+        textAlign: "center",
+            color: "#626262"
+          }}>{name} Family Members:</Text>
           {members.map((i) => {
             return (
               <CustomCard

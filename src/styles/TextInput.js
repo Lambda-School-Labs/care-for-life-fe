@@ -11,7 +11,7 @@ export default StyleSheet.create({
   textTitle: {
     textAlign: "center",
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 14,
     lineHeight: 30,
     color: "#626262",
   },
