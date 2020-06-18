@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { setChosenFamilies } from "../actions/familyActions";
 import { setCurrentFam, resetResponses, resetStagedResponses } from "../actions/surveyActions";
 import CustomButton from "../components/Button";
-import NetInfo from '@react-native-community/netinfo';
 
 const mapStateToProps = (state) => {
   return {
@@ -34,10 +33,6 @@ function Chosen({ navigation, chosenFamilies, setCurrentFam, stagedResponses, re
           console.log(err)
         })
     })
-    // NetInfo.fetch()
-    //   .then(res => {
-    //     console.log('is connected?', res.isConnected)
-    //   })
   }
 
   const reset = () => {
