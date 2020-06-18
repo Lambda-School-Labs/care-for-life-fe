@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Button, AsyncStorage, Alert, StyleSheet } from "react-native";
+import { View, Button, AsyncStorage, Alert, StyleSheet, Image } from "react-native";
 import * as AuthSession from "expo-auth-session";
 import * as WebBrowser from "expo-web-browser";
 import { ISSUER } from "react-native-dotenv";
@@ -93,6 +93,13 @@ function Login({ navigation, resetResponses }) {
         <View style={styles.screen}>
             {validToken ? (
                 <View>
+                     <Image 
+                     source={require('../images/Care4Life.png')}
+                     style={{
+                        left: 25,
+                        bottom:220
+                     }}
+                      />
                     <CustomButton
                         title="Go to Home"
                         onPress={() => navigation.push("Home")}
@@ -101,6 +108,13 @@ function Login({ navigation, resetResponses }) {
                 </View>
             ) : (
                     <View>
+                           <Image 
+                     source={require('../images/Care4Life.png')}
+                     style={{
+                        left: 25,
+                        bottom:250
+                     }}
+                      />
                         <CustomButton title="Login" onPress={handleLogin} />
                     </View>
                 )}
