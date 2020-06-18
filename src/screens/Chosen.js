@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { setChosenFamilies } from "../actions/familyActions";
 import { setCurrentFam, resetResponses, resetStagedResponses } from "../actions/surveyActions";
 import CustomButton from "../components/Button";
-import NetInfo from '@react-native-community/netinfo';
 
 const mapStateToProps = (state) => {
   return {
