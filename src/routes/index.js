@@ -2,7 +2,6 @@ import React from "react";
 import { View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { MaterialIcons } from "@expo/vector-icons";
 import Login from "../screens/Login";
 import Home from "../screens/Home";
 import FamilyForm from "../forms/FamilyForm";
@@ -83,7 +82,7 @@ export default function Routes() {
             title: "Family Members Screen",
             headerRight: () => (
               <View style={{ marginRight: 25 }}>
-                  <Entypo
+                <Entypo
                   name="add-user"
                   size={25}
                   color="black"

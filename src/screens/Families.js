@@ -57,12 +57,16 @@ function Families({
         {error && <Text>{error}</Text>}
         <CustomButton onPress={nextScreen} title={"NEXT"} />
         <View>
-          <Text style={{
-            fontWeight: "bold",
-            fontSize: 20,
-        textAlign: "center",
-            color: "#626262"
-          }}>Families:</Text>
+          <Text
+            style={{
+              fontWeight: "bold",
+              fontSize: 20,
+              textAlign: "center",
+              color: "#626262",
+            }}
+          >
+            Families:
+          </Text>
           {families.map((i) => {
             return (
               <CustomCard
@@ -75,12 +79,16 @@ function Families({
           })}
         </View>
         <View>
-          <Text style= {{
-            fontWeight: "bold",
-            fontSize: 20,
-        textAlign: "center",
-            color: "#626262"
-          }}>Chosen Families:</Text>
+          <Text
+            style={{
+              fontWeight: "bold",
+              fontSize: 20,
+              textAlign: "center",
+              color: "#626262",
+            }}
+          >
+            Chosen Families:
+          </Text>
           {chosen.map((i) => {
             return (
               <CustomCard
