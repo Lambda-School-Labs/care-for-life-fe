@@ -6,8 +6,13 @@ export default StyleSheet.create({
     width: 200,
     marginBottom: 10,
     textAlign: "left",
+    borderRadius: 1,
   },
   textTitle: {
     textAlign: "center",
+fontWeight: "bold",
+fontSize: 20,
+lineHeight: 30,
+color: "#626262"
   },
 });
