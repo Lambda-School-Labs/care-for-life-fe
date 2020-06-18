@@ -10,9 +10,9 @@ export default StyleSheet.create({
   },
   textTitle: {
     textAlign: "center",
-fontWeight: "bold",
-fontSize: 20,
-lineHeight: 30,
-color: "#626262"
+    fontWeight: "bold",
+    fontSize: 20,
+    lineHeight: 30,
+    color: "#626262",
   },
 });

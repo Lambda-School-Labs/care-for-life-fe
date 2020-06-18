@@ -14,7 +14,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const FamilyForm = ({ postFamily }) => {
+const FamilyForm = ({ postFamily, navigation }) => {
   const [family, setFamily] = useState({
     family_name: "",
     zone_id: null,
@@ -23,6 +23,7 @@ const FamilyForm = ({ postFamily }) => {
 
   const onSubmit = (values) => {
     postFamily(values);
+    navigation.navigate("Families");
   };
 
   const handleChangeName = (e) => {
