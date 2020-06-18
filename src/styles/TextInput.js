@@ -5,7 +5,7 @@ export default StyleSheet.create({
     borderWidth: 1,
     width: 200,
     marginBottom: 10,
-    textAlign: "left",
+    textAlign: "center",
   },
   textTitle: {
     textAlign: "center",

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, Picker } from "react-native";
 import { connect } from "react-redux";
 import { postFamilyMember } from "../actions/MemberAction";
 import styles from "../styles";
@@ -11,20 +11,23 @@ const mapStateToProps = (state) => {
   return {
     isLoading: state.familyFormReducer.isLoading,
     error: state.familyFormReducer.error,
+    currentFamily: state.surveyReducer.currentFamily,
   };
 };
 
-const MemberForm = ({ postFamilyMember, navigation }) => {
+const MemberForm = ({ postFamilyMember, navigation, currentFamily }) => {
   const [familyMember, setFamilyMember] = useState({
     first_name: "",
     last_name: "",
-    family_id: null,
+    family_id: currentFamily.id,
     date_of_birth: "",
     gender: "",
-    hoh: false,
+    hoh: null,
     relation_to_hoh: "",
     marital_status: "",
   });
+
+  // const [selectedValue, setSelectedValue] = useState(false);
 
   const onSubmit = (values) => {
     postFamilyMember(values);
@@ -45,13 +48,6 @@ const MemberForm = ({ postFamilyMember, navigation }) => {
     });
   };
 
-  const handleChangeFamilyID = (e) => {
-    setFamilyMember({
-      ...familyMember,
-      family_id: e,
-    });
-  };
-
   const handleChangeDateOfBirth = (e) => {
     setFamilyMember({
       ...familyMember,
@@ -67,6 +63,12 @@ const MemberForm = ({ postFamilyMember, navigation }) => {
   };
 
   const handleChangeHeadOfHouseHold = (e) => {
+    if (e === "Yes" || e === "yes" || e === "Y" || e === "y") {
+      e = true;
+    } else if (e === "No" || e === "no" || e === "N" || e === "n") {
+      e = false;
+    }
+
     setFamilyMember({
       ...familyMember,
       hoh: e,
@@ -106,13 +108,6 @@ const MemberForm = ({ postFamilyMember, navigation }) => {
             placeholder="Last Name"
           />
           <CustomTextInput
-            title="Family ID"
-            onChangeText={handleChangeFamilyID}
-            name="family_id"
-            label="Family ID"
-            placeholder="Family ID"
-          />
-          <CustomTextInput
             title="Date Of Birth"
             onChangeText={handleChangeDateOfBirth}
             name="date_of_birth"
@@ -126,8 +121,19 @@ const MemberForm = ({ postFamilyMember, navigation }) => {
             label="Gender"
             placeholder="Gender"
           />
+          {/* <Picker
+            selectedValue={selectedValue}
+            style={{ height: 50, width: 150 }}
+            onValueChange={(itemValue, itemIndex) =>
+              setSelectedValue(itemValue)
+            }
+            onChangeText={handleChangeHeadOfHouseHold}
+          >
+            <Picker.Item label="Yes" value={true} />
+            <Picker.Item label="No" value={false} />
+          </Picker> */}
           <CustomTextInput
-            title="Head Of House Hold"
+            title="Head Of House Hold (Yes or No)"
             onChangeText={handleChangeHeadOfHouseHold}
             name="head_of_house_hold"
             label="Head Of House Hold"

@@ -14,23 +14,22 @@ const mapStateToProps = (state) => {
 };
 
 function FamilySurvey({ fetchSurvey, survey_questions, role }) {
-
-    // const role = useSelector((state) => console.log(state));
-    // role names need updating
-    useEffect(() => {
-      console.log("on survey page");
-      console.log("survey questions are here", survey_questions);
-      if (role === 'field_officer'){
-        fetchSurvey(1);
-      } else if ( role === 'agriculture supervisor'){
-        fetchSurvey(2);
-      } else if ( role === 'health supervisor'){
-        fetchSurvey(4);
-      } else if ( role === 'income generation supervisor'){
-        fetchSurvey(3);
-      }
+  // const role = useSelector((state) => console.log(state));
+  // role names need updating
+  useEffect(() => {
+    console.log("on survey page");
+    console.log("survey questions are here", survey_questions);
+    if (role === "field_officer") {
       fetchSurvey(1);
-    }, []);
+    } else if (role === "agriculture supervisor") {
+      fetchSurvey(2);
+    } else if (role === "health supervisor") {
+      fetchSurvey(4);
+    } else if (role === "income generation supervisor") {
+      fetchSurvey(3);
+    }
+    fetchSurvey(1);
+  }, []);
 
   return (
     <ScrollView>

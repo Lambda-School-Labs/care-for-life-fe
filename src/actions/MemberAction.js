@@ -23,6 +23,7 @@ export function postFamilyMember(values) {
     return axios
       .post("https://care-for-life.herokuapp.com/api/individuals", values)
       .then(() => {
+        console.log("***FAMILY MEMBER VALUES**** \n", values);
         dispatch(postFamilyMemberSuccess());
       })
       .catch((error) => {
