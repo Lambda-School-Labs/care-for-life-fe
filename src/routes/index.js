@@ -58,7 +58,7 @@ export default function Routes() {
               <View style={{ marginRight: 25 }}>
                 <Entypo
                   name="add-user"
-                  size={24}
+                  size={25}
                   color="black"
                   onPress={() => navigation.navigate("FamilyForm")}
                 />
@@ -83,9 +83,10 @@ export default function Routes() {
             title: "Family Members Screen",
             headerRight: () => (
               <View style={{ marginRight: 25 }}>
-                <MaterialIcons
-                  name="add"
+                  <Entypo
+                  name="add-user"
                   size={25}
+                  color="black"
                   onPress={() => navigation.navigate("MemberForm")}
                 />
               </View>

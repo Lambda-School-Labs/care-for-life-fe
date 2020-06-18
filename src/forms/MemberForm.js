@@ -121,17 +121,6 @@ const MemberForm = ({ postFamilyMember, navigation, currentFamily }) => {
             label="Gender"
             placeholder="Gender"
           />
-          {/* <Picker
-            selectedValue={selectedValue}
-            style={{ height: 50, width: 150 }}
-            onValueChange={(itemValue, itemIndex) =>
-              setSelectedValue(itemValue)
-            }
-            onChangeText={handleChangeHeadOfHouseHold}
-          >
-            <Picker.Item label="Yes" value={true} />
-            <Picker.Item label="No" value={false} />
-          </Picker> */}
           <CustomTextInput
             title="Head Of House Hold (Yes or No)"
             onChangeText={handleChangeHeadOfHouseHold}
@@ -144,7 +133,7 @@ const MemberForm = ({ postFamilyMember, navigation, currentFamily }) => {
             onChangeText={handleChangeRelationToHOH}
             name="relation_to_head_of_house_hold"
             label="Relation To Head Of House Hold"
-            placeholder="Relation To Head Of House Hold"
+            placeholder="Relation To HOH"
           />
           <CustomTextInput
             title="Marital Status"
