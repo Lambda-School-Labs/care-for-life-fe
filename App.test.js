@@ -38,7 +38,12 @@ import App from './App';
 
 import renderer from 'react-test-renderer';
 
-test('renders correctly', () => {
+jest.useFakeTimers();
+
+test('renders correctly', async () => {
     const tree = renderer.create(<App />).toJSON();
+
+    renderer.act(() => jest.advanceTimersByTime(1000))
+
     expect(tree).toMatchSnapshot();
 });
