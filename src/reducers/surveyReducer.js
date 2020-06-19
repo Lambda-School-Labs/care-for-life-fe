@@ -31,7 +31,7 @@ let initialState = {
   stagedResponses: [],
 };
 
-export default surveyReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case RESET_RESPONSES:
       console.log("resetting responses");

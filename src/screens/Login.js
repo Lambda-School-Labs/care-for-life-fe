@@ -23,9 +23,9 @@ const mapStateToProps = (state) => {
 };
 
 //configure as web platform to allow for Okta redirects
-if (Platform.OS === "web") {
-  WebBrowser.maybeCompleteAuthSession();
-}
+// if (Platform.OS === "web") {
+//   WebBrowser.maybeCompleteAuthSession();
+// }
 const useProxy = true;
 
 function Login({ navigation, resetResponses }) {
@@ -114,17 +114,17 @@ function Login({ navigation, resetResponses }) {
           <CustomButton title="Logout" onPress={handleLogout} />
         </View>
       ) : (
-        <View>
-          <Image
-            source={require("../images/Care4Life.png")}
-            style={{
-              left: 25,
-              bottom: 250,
-            }}
-          />
-          <CustomButton title="Login" onPress={handleLogin} />
-        </View>
-      )}
+          <View>
+            <Image
+              source={require("../images/Care4Life.png")}
+              style={{
+                left: 25,
+                bottom: 250,
+              }}
+            />
+            <CustomButton title="Login" onPress={handleLogin} />
+          </View>
+        )}
     </View>
   );
 }

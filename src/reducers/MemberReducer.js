@@ -9,7 +9,7 @@ let initialState = {
   isLoading: false,
 };
 
-export default familyMemberReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case POST_FAMILY_MEMBER:
       console.log("loading");

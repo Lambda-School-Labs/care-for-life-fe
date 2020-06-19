@@ -15,7 +15,7 @@ let initialState = {
   chosenFamilies: [],
 };
 
-export default familyReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case GET_FAMILIES_LOADING:
       console.log("loading families");
