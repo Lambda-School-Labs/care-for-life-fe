@@ -9,7 +9,7 @@ export default StyleSheet.create({
     borderRadius: 1,
   },
   textTitle: {
-    textAlign: "center",
+    textAlign: "left",
     fontWeight: "bold",
     fontSize: 14,
     lineHeight: 30,

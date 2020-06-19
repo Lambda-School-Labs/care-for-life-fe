@@ -3,6 +3,7 @@ import { View, Text, TextInput } from "react-native";
 import textInputStyles from "../styles/TextInput";
 
 export default function CustomTextInput({
+  key,
   title,
   onChangeText,
   name,
@@ -10,7 +11,7 @@ export default function CustomTextInput({
   placeholder,
 }) {
   return (
-    <View>
+    <View key={key}>
       <Text style={textInputStyles.textTitle}>{title}</Text>
       <TextInput
         style={textInputStyles.textInput}

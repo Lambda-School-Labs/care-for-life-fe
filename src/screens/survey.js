@@ -94,9 +94,10 @@ function Survey({
           {survey_questions
             ? survey_questions.map((i, index) => {
                 return (
-                  <View key={i.id}>
-                    <Text>{i.question}?</Text>
+                  <View>
                     <CustomTextInput
+                      key={i.id}
+                      title={i.question}
                       style={styles.textInput}
                       onChangeText={(e) => {
                         /// change handler for responses
