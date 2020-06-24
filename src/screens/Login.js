@@ -15,6 +15,7 @@ import styles from "../styles";
 import { connect } from "react-redux";
 import { resetResponses } from "../actions/surveyActions";
 import CustomButton from "../components/Button";
+import Logo from '../images/Care4Life.png';
 
 const mapStateToProps = (state) => {
   return {
@@ -101,7 +102,7 @@ function Login({ navigation, resetResponses }) {
       {validToken ? (
         <View>
           <Image
-            source={require("../images/Care4Life.png")}
+            source={Logo}
             style={{
               left: 25,
               bottom: 220,
@@ -116,7 +117,7 @@ function Login({ navigation, resetResponses }) {
       ) : (
           <View>
             <Image
-              source={require("../images/Care4Life.png")}
+              source={Logo}
               style={{
                 left: 25,
                 bottom: 250,

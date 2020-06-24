@@ -4,6 +4,7 @@ import styles from "../styles";
 import { connect } from "react-redux";
 import CustomCard from "../components/Card";
 import { setCurrentIndividual, resetResponses } from "../actions/surveyActions";
+import Person from "../images/person.png";
 
 const mapStateToProps = (state) => {
   //console.log("family state", state.familyReducer.families)
@@ -50,7 +51,7 @@ function FamilyMembers({
                   setCurrentIndividual(i);
                   navigation.navigate("Survey");
                 }}
-                source={require("../images/person.png")}
+                source={Person}
                 title={`${i.first_name} ${i.last_name}`}
               />
             );
