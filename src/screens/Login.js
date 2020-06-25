@@ -23,10 +23,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-//configure as web platform to allow for Okta redirects
-// if (Platform.OS === "web") {
-//   WebBrowser.maybeCompleteAuthSession();
-// }
+configure as web platform to allow for Okta redirects
+if (Platform.OS === "web") {
+    WebBrowser.maybeCompleteAuthSession();
+  }
 const useProxy = true;
 
 function Login({ navigation, resetResponses }) {
@@ -34,15 +34,16 @@ function Login({ navigation, resetResponses }) {
 
   const discovery = AuthSession.useAutoDiscovery(ISSUER);
 
+  // bridge between app -> okta
   const [request, response, promptAsync] = AuthSession.useAuthRequest(
     config,
     discovery
   );
 
-  //  Get Token
   const removeToken = async () => {
     return await AsyncStorage.removeItem("access_token");
   };
+
   const getToken = async () => {
     return await AsyncStorage.getItem("access_token");
   };
@@ -82,7 +83,7 @@ function Login({ navigation, resetResponses }) {
       [
         {
           text: "Cancel",
-          onPress: () => console.log("Canceled"),
+          onPress: () => console.log("Cancelled"),
           style: "cancel",
         },
         {
