@@ -75,5 +75,12 @@
 4. On this same page you will also see your client ID, set this as an environment variable in your .env as CLIENT_ID
 5. The 6 digit number in your redirect URI is your organization ID. set the ISSUER in your .env to
    https://dev-<{ORG_ID>.okta.com/oauth2/default
-6. In the backend, the auth-router contains an endpoint that is calling an Okta api. The URL contains the org ID so that will need to be updated with your new org ID
-7. In Login.js, there is currently a console.log of the response object coming from Okta. This contains the redirect URI that you will need to allow in your general settings in your Okta developer account. Each team member's machines will create a different redirect URI so each one will need to be added to the list of allowed redirect URIs.
+6. In the okta config file, /okta/index.js replace the org ID in the redirect URI
+7. In the backend, the auth-router contains an endpoint that is calling an Okta api. The URL contains the org ID so that will need to be updated with your new org ID
+8. In Login.js, there is currently a console.log of the response object coming from Okta. This contains the redirect URI that you will need to allow in your general settings in your Okta developer account. Each team member's machines will create a different redirect URI so each one will need to be added to the list of allowed redirect URIs.
+
+## General
+
+1. Using Okta for authentication, expo-auth-session as the portal to Okta
+2. The endpoint in the Login page passes the login ID token through the backend, sends a request to the Okta API and returns the user's name and email address. It then query's our databse to check if we have information stored on that user. If the user does not exist in our database, it will return an isRegistered: false property which renders a form for the user to fill out the rest of the information we need to store in the database. This form is only rendered if the isRegistered: false flag is returned on login.
+3. Redux for state management, Redux Persist to persist data offline. Redux persist is configured in src/store/index.js
